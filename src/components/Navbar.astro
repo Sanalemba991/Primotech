@@ -1,0 +1,287 @@
+---
+// filepath: c:\Users\LENOVO\primotechllc\src\components\Navbar.astro
+const categories = [
+  {
+    name: "Wi-Fi Camera",
+    href: "/wifi-camera",
+    product: {
+      image: "/wifi-camera.png",
+      title: "Wi-Fi Camera",
+      desc: "Smart wireless cameras for home and business security."
+    }
+  },
+  {
+    name: "IP Cameras & NVRs",
+    href: "/ip-cameras-nvrs",
+    product: {
+      image: "/ip-camera.png",
+      title: "IP Cameras & NVRs",
+      desc: "Professional IP surveillance and network video recorders."
+    }
+  },
+  {
+    name: "Transmission",
+    href: "/transmission",
+    product: {
+      image: "/switch.png",
+      title: "Switch",
+      desc: "Experience seamless data transfer, high security of data, and reliable connections, ensuring optimal performance."
+    }
+  },
+  {
+    name: "Dedicated Products",
+    href: "/dedicated-products",
+    product: {
+      image: "/dedicated.png",
+      title: "Dedicated Products",
+      desc: "Specialized solutions for unique security needs."
+    }
+  },
+  {
+    name: "Accessories",
+    href: "/accessories",
+    product: {
+      image: "/accessories.png",
+      title: "Accessories",
+      desc: "Mounts, adapters, and more for your system."
+    }
+  }
+];
+---
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50 w-full">
+  <div class="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
+    <!-- Logo -->
+    <a href="/" class="flex items-center space-x-2">
+      <img src="/favicon.svg" alt="Logo" class="h-8 w-8" />
+      <span class="text-2xl font-bold text-cyan-700">PrimoTech LLC</span>
+    </a>
+    <!-- Main Nav -->
+    <div class="hidden md:flex items-center space-x-8">
+      <div class="relative" id="products-menu">
+        <button
+          id="products-toggle"
+          class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200"
+          type="button"
+          aria-expanded="false"
+        >
+          Products
+          <svg class="ml-1 w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+      </div>
+      <a href="/support" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Support</a>
+      <a href="/partner" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Partner</a>
+      <a href="/tips-guides" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Tips & Guides</a>
+    </div>
+    <a href="/contact" class="nav-link hidden md:inline-block text-cyan-700 hover:text-cyan-900 px-4 py-2 font-medium">Contact Us</a>
+    <button class="md:hidden p-2 text-gray-500 hover:text-cyan-600">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mega Menu: shown below navbar, toggled by Products button -->
+<div id="mega-menu"
+  class="w-full bg-white border-b border-gray-100 shadow fixed left-0 top-16 pointer-events-none opacity-0 invisible transition-all duration-300 z-40"
+>
+  <div class="container mx-auto flex pointer-events-auto" id="mega-menu-area">
+    <!-- Sidebar -->
+    <div class="w-80 bg-gray-50 border-r border-gray-100 flex flex-col py-10" id="category-list">
+      {categories.map((cat, idx) => (
+        <button
+          type="button"
+          class={[
+            "category-btn flex items-center justify-between px-8 py-5 text-lg w-full text-left transition-colors rounded-none",
+            idx === 0 ? "bg-gradient-to-r from-cyan-400 to-green-200 text-white font-semibold" : "hover:bg-cyan-100 text-gray-700"
+          ].join(" ")}
+          data-idx={idx}
+          tabindex="0"
+        >
+          <span>{cat.name}</span>
+          <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      ))}
+    </div>
+    <!-- Product Panel -->
+    <div class="flex-1 flex items-center justify-center p-20 relative min-h-[340px]" id="product-panel-area">
+      {categories.map((cat, idx) => (
+        <div id={`panel-${idx}`} class={`product-panel group absolute inset-0 flex flex-col items-center justify-center transition-all duration-200 cursor-pointer ${idx === 0 ? '' : 'hidden'}`}>
+          <img src={cat.product.image} alt={cat.product.title} class="w-60 h-40 object-contain bg-gray-100 rounded-lg mb-8 shadow transition-all duration-200 group-hover:ring-4 group-hover:ring-cyan-200" />
+          <h2 class="text-2xl font-semibold text-gray-900 mb-3 transition-colors duration-200 group-hover:text-cyan-700">{cat.product.title}</h2>
+          <p class="text-gray-600 text-center max-w-lg text-lg transition-colors duration-200">{cat.product.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Track menu state
+  let isMenuOpen = false;
+  let hasUserHoveredProducts = false; // Track if user has manually hovered Products
+  let hideMenuTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  // Get DOM elements
+  const productsMenu = document.getElementById('products-menu');
+  const productsToggle = document.getElementById('products-toggle');
+  const megaMenu = document.getElementById('mega-menu');
+  const megaMenuArea = document.getElementById('mega-menu-area');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Only run if all elements exist
+  if (productsMenu && megaMenu && megaMenuArea && productsToggle) {
+    
+    // Show menu function - only if user has hovered Products first
+    const showMenu = () => {
+      clearTimeout(hideMenuTimeout); // Cancel any pending hide
+      if (hasUserHoveredProducts && !isMenuOpen) {
+        isMenuOpen = true;
+        // Keep products button highlighted while menu is open
+        productsToggle.classList.add('text-cyan-600');
+        productsToggle.classList.remove('text-gray-700');
+        megaMenu.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
+        megaMenu.classList.add('opacity-100', 'visible');
+      }
+    };
+
+    // Hide menu function - immediate
+    const hideMenuImmediate = () => {
+      clearTimeout(hideMenuTimeout);
+      if (isMenuOpen) {
+        isMenuOpen = false;
+        hasUserHoveredProducts = false; // Reset the flag
+        // Remove highlight from products button
+        productsToggle.classList.remove('text-cyan-600');
+        productsToggle.classList.add('text-gray-700');
+        megaMenu.classList.remove('opacity-100', 'visible');
+        megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+        
+        // Reset category buttons to default state
+        resetToDefault();
+      }
+    };
+
+    // Hide menu function - with 0.1 second delay
+    const hideMenuDelayed = () => {
+      clearTimeout(hideMenuTimeout);
+      hideMenuTimeout = setTimeout(() => {
+        if (isMenuOpen) {
+          isMenuOpen = false;
+          hasUserHoveredProducts = false; // Reset the flag
+          // Remove highlight from products button
+          productsToggle.classList.remove('text-cyan-600');
+          productsToggle.classList.add('text-gray-700');
+          megaMenu.classList.remove('opacity-100', 'visible');
+          megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+          
+          // Reset category buttons to default state
+          resetToDefault();
+        }
+      }, 100); // 0.1 second delay (100ms)
+    };
+
+    // Reset categories to default state
+    const resetToDefault = () => {
+      const btns = megaMenu.querySelectorAll('.category-btn');
+      const panels = megaMenu.querySelectorAll('.product-panel');
+      
+      btns.forEach((b, i) => {
+        b.classList.remove(
+          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'text-white', 'font-semibold'
+        );
+        // Set default to index 0 (Wi-Fi Camera)
+        if (i === 0) {
+          b.classList.add(
+            'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+            'text-white', 'font-semibold'
+          );
+        }
+      });
+      
+      panels.forEach((p, i) => {
+        if (i === 0) p.classList.remove('hidden');
+        else p.classList.add('hidden');
+      });
+    };
+
+    // Event listener for Products menu - ONLY this enables the dropdown
+    productsMenu.addEventListener('mouseenter', () => {
+      hasUserHoveredProducts = true; // Enable dropdown functionality
+      showMenu();
+    });
+    
+    productsMenu.addEventListener('mouseleave', hideMenuDelayed); // Use delayed hide
+    
+    // Mega menu area only responds if user hovered Products first
+    megaMenuArea.addEventListener('mouseenter', showMenu);
+    megaMenuArea.addEventListener('mouseleave', hideMenuDelayed); // Use delayed hide
+
+    // Event listeners for other nav links - close menu immediately and reset flag
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        hasUserHoveredProducts = false; // Reset flag
+        hideMenuImmediate(); // Immediate hide for other nav links
+      });
+    });
+
+    // Click outside handler
+    document.addEventListener('click', (e) => {
+      if (!productsMenu.contains(e.target as Node) && !megaMenu.contains(e.target as Node)) {
+        hasUserHoveredProducts = false; // Reset flag
+        hideMenuImmediate();
+      }
+    });
+
+    // Keyboard navigation handler
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        hasUserHoveredProducts = false; // Reset flag
+        hideMenuImmediate();
+        productsToggle.focus();
+      }
+    });
+
+    // Category switching functionality
+    const btns = megaMenu.querySelectorAll('.category-btn');
+    const panels = megaMenu.querySelectorAll('.product-panel');
+
+    btns.forEach((btn, idx) => {
+      btn.addEventListener('mouseenter', () => {
+        btns.forEach(b => b.classList.remove(
+          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'text-white', 'font-semibold'
+        ));
+        btn.classList.add(
+          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'text-white', 'font-semibold'
+        );
+        panels.forEach(p => p.classList.add('hidden'));
+        panels[idx].classList.remove('hidden');
+      });
+
+      btn.addEventListener('focus', () => {
+        btns.forEach(b => b.classList.remove(
+          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'text-white', 'font-semibold'
+        ));
+        btn.classList.add(
+          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'text-white', 'font-semibold'
+        );
+        panels.forEach(p => p.classList.add('hidden'));
+        panels[idx].classList.remove('hidden');
+      });
+    });
+
+    // When leaving the mega menu area, reset to default
+    megaMenu.addEventListener('mouseleave', () => {
+      resetToDefault();
+    });
+  }
+</script>

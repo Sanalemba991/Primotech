@@ -1,0 +1,547 @@
+---
+// filepath: c:\Users\LENOVO\primotechllc\src\components\Banner.astro
+const banners = [
+  {
+    id: 1,
+    title: "Wi-Fi Camera Solutions",
+    subtitle: "Wireless Security Made Simple",
+    description: "Experience seamless wireless surveillance with our advanced Wi-Fi cameras featuring HD video quality, night vision, and smartphone connectivity for complete peace of mind.",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    buttonText: "Explore Wi-Fi Cameras",
+    buttonLink: "/wifi-camera"
+  },
+  {
+    id: 2,
+    title: "IP Cameras & NVRs",
+    subtitle: "Professional Network Surveillance",
+    description: "Advanced IP camera systems with Network Video Recorders for enterprise-grade security. High-resolution recording, remote monitoring, and scalable solutions.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    buttonText: "View IP Solutions",
+    buttonLink: "/ip-cameras"
+  },
+  {
+    id: 3,
+    title: "Transmission Equipment",
+    subtitle: "Reliable Data Transmission",
+    description: "High-performance transmission solutions ensuring stable and secure data transfer for your surveillance network with cutting-edge technology and reliability.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    buttonText: "Discover Transmission",
+    buttonLink: "/transmission"
+  },
+  {
+    id: 4,
+    title: "Dedicated Products",
+    subtitle: "Specialized Security Solutions",
+    description: "Custom-built security products designed for specific applications and unique requirements. Professional-grade equipment for specialized surveillance needs.",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    buttonText: "View Dedicated Products",
+    buttonLink: "/dedicated-products"
+  },
+  {
+    id: 5,
+    title: "Security Accessories",
+    subtitle: "Complete Your Security Setup",
+    description: "Essential accessories and components to enhance your security system. From mounts and cables to power supplies and storage solutions for optimal performance.",
+    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80",
+    buttonText: "Shop Accessories",
+    buttonLink: "/accessories"
+  }
+];
+---
+
+<section class="relative w-full h-[calc(100vh-3rem)] overflow-hidden bg-gray-900 group banner-container banner-animation" data-banner-reveal>
+  <!-- Banner Container -->
+  <div class="relative w-full h-full">
+    {banners.map((banner, index) => (
+      <div 
+        class={`banner-slide absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${index === 0 ? 'opacity-100 z-10 active' : 'opacity-0 z-0'}`}
+        data-slide={index}
+      >
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 banner-image-reveal">
+          <img 
+            src={banner.image} 
+            alt={banner.title}
+            class="w-full h-full object-cover banner-img-scale"
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-transparent banner-overlay-fade"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-teal-900/80 to-transparent banner-overlay-fade"></div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="relative z-10 flex items-center h-full">
+          <div class="container mx-auto px-6 lg:px-8">
+            <div class="max-w-3xl banner-content-reveal">
+              <!-- Subtitle -->
+              <p class="text-cyan-400 font-semibold text-lg md:text-xl tracking-wide uppercase mb-4 banner-subtitle-animate">
+                {banner.subtitle}
+              </p>
+              
+              <!-- Main Title -->
+              <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 banner-title-animate">
+                {banner.title}
+              </h1>
+              
+              <!-- Description -->
+              <p class="text-gray-200 text-lg md:text-xl leading-relaxed max-w-2xl mb-8 banner-description-animate">
+                {banner.description}
+              </p>
+              
+              <!-- CTA Text with Arrow -->
+              <a 
+                href={banner.buttonLink}
+                class="inline-flex items-center text-sky-300 hover:text-sky-200 font-semibold text-lg cursor-pointer transition-all duration-300 cta-button banner-button-animate"
+              >
+                {banner.buttonText}
+                <span class="ml-2 arrow-icon transition-transform duration-300">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Navigation Dots - Bottom Left in a Row -->
+  <div class="absolute left-8 bottom-8 z-20 banner-dots-reveal">
+    <div class="flex space-x-3">
+      {banners.map((_, index) => (
+        <button
+          class={`nav-dot w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-white' : 'bg-white/30 hover:bg-white/60'}`}
+          data-slide={index}
+          aria-label={`Go to slide ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="nav-arrow nav-prev absolute left-6 top-[calc(50%-4rem)] transform -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 banner-arrow-reveal" aria-label="Previous slide">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+  
+  <button class="nav-arrow nav-next absolute right-6 top-[calc(50%-4rem)] transform -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 banner-arrow-reveal" aria-label="Next slide">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+</section>
+
+<style>
+  /* Initial state - Banner is hidden */
+  .banner-animation {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Banner reveal animation */
+  .banner-animation.banner-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Image scale and fade animation */
+  .banner-img-scale {
+    transform: scale(1.1);
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .banner-animation.banner-revealed .banner-img-scale {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.3s;
+  }
+
+  /* Overlay fade animation */
+  .banner-overlay-fade {
+    opacity: 0;
+    transition: opacity 1.2s ease-out;
+  }
+
+  .banner-animation.banner-revealed .banner-overlay-fade {
+    opacity: 1;
+    transition-delay: 0.5s;
+  }
+
+  /* Content reveal animations */
+  .banner-content-reveal {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .banner-animation.banner-revealed .banner-content-reveal {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.7s;
+  }
+
+  /* Staggered text animations */
+  .banner-subtitle-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .banner-title-animate {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .banner-description-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .banner-button-animate {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Animate text elements when banner is revealed */
+  .banner-animation.banner-revealed .banner-subtitle-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1s;
+  }
+
+  .banner-animation.banner-revealed .banner-title-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 1.2s;
+  }
+
+  .banner-animation.banner-revealed .banner-description-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.4s;
+  }
+
+  .banner-animation.banner-revealed .banner-button-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 1.6s;
+  }
+
+  /* Dots and arrows reveal */
+  .banner-dots-reveal,
+  .banner-arrow-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .banner-animation.banner-revealed .banner-dots-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.8s;
+  }
+
+  .banner-animation.banner-revealed .banner-arrow-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 2s;
+  }
+
+  /* Arrow animation only on CTA button hover */
+  .cta-button:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+
+  /* Ensure slides are properly layered */
+  .banner-slide {
+    pointer-events: none;
+  }
+
+  .banner-slide.active {
+    pointer-events: auto;
+  }
+
+  /* Fallback styling to prevent blank states */
+  .banner-container {
+    min-height: calc(100vh - 3rem);
+  }
+
+  .banner-slide.opacity-100 {
+    display: block !important;
+  }
+
+  .banner-slide.opacity-0 {
+    display: block !important;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .banner-content-reveal {
+      transform: translateY(40px);
+    }
+    
+    .banner-animation.banner-revealed .banner-content-reveal {
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  class BannerSlider {
+    currentSlide: number;
+    slides: NodeListOf<Element>;
+    dots: NodeListOf<Element>;
+    prevBtn: Element | null;
+    nextBtn: Element | null;
+    autoPlayInterval: ReturnType<typeof setInterval> | null;
+    autoPlayDuration: number;
+    totalSlides: number;
+    isTransitioning: boolean;
+
+    constructor() {
+      this.currentSlide = 0;
+      this.slides = document.querySelectorAll('.banner-slide');
+      this.dots = document.querySelectorAll('.nav-dot');
+      this.prevBtn = document.querySelector('.nav-prev');
+      this.nextBtn = document.querySelector('.nav-next');
+      this.autoPlayInterval = null;
+      this.autoPlayDuration = 4000; // 4 seconds
+      this.totalSlides = this.slides.length;
+      this.isTransitioning = false;
+      
+      if (this.totalSlides === 0) {
+        console.error('No banner slides found');
+        return;
+      }
+      
+      this.init();
+    }
+
+    init() {
+      // Ensure first slide is visible immediately
+      this.forceShowFirstSlide();
+      this.setupEventListeners();
+      this.initScrollAnimation();
+      this.startAutoPlay();
+    }
+
+    initScrollAnimation() {
+      // Enhanced intersection observer for banner reveal
+      const bannerObserverOptions = {
+        threshold: [0, 0.1, 0.3],
+        rootMargin: '0px 0px -200px 0px'
+      };
+
+      const bannerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const banner = entry.target;
+          
+          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+            // Add reveal animation with delay
+            setTimeout(() => {
+              banner.classList.add('banner-revealed');
+            }, 200);
+            
+            // Stop observing once animated
+            bannerObserver.unobserve(banner);
+          }
+        });
+      }, bannerObserverOptions);
+
+      // Start observing the banner
+      const bannerContainer = document.querySelector('.banner-animation');
+      if (bannerContainer) {
+        bannerObserver.observe(bannerContainer);
+      }
+    }
+
+    forceShowFirstSlide() {
+      // Force show the first slide to prevent blank state
+      if (this.slides.length > 0) {
+        this.slides[0].classList.add('opacity-100', 'z-10', 'active');
+        this.slides[0].classList.remove('opacity-0', 'z-0');
+        
+        // Hide all other slides
+        for (let i = 1; i < this.slides.length; i++) {
+          this.slides[i].classList.remove('opacity-100', 'z-10', 'active');
+          this.slides[i].classList.add('opacity-0', 'z-0');
+        }
+        
+        // Update first dot
+        if (this.dots.length > 0) {
+          this.dots[0].classList.add('bg-white');
+          this.dots[0].classList.remove('bg-white/30');
+          
+          // Update other dots
+          for (let i = 1; i < this.dots.length; i++) {
+            this.dots[i].classList.remove('bg-white');
+            this.dots[i].classList.add('bg-white/30');
+          }
+        }
+      }
+    }
+
+    updateSlideDisplay() {
+      if (this.isTransitioning) return;
+      
+      this.isTransitioning = true;
+      
+      // Normalize currentSlide to valid range
+      if (this.currentSlide >= this.totalSlides) {
+        this.currentSlide = 0;
+      } else if (this.currentSlide < 0) {
+        this.currentSlide = this.totalSlides - 1;
+      }
+      
+      console.log(`Switching to slide ${this.currentSlide + 1} of ${this.totalSlides}`);
+      
+      // Update slides
+      this.slides.forEach((slide: Element, index: number) => {
+        const isActive = index === this.currentSlide;
+        
+        if (isActive) {
+          slide.classList.add('opacity-100', 'z-10', 'active');
+          slide.classList.remove('opacity-0', 'z-0');
+        } else {
+          slide.classList.remove('opacity-100', 'z-10', 'active');
+          slide.classList.add('opacity-0', 'z-0');
+        }
+      });
+
+      // Update dots
+      this.dots.forEach((dot: Element, index: number) => {
+        const isActive = index === this.currentSlide;
+        
+        if (isActive) {
+          dot.classList.add('bg-white');
+          dot.classList.remove('bg-white/30');
+        } else {
+          dot.classList.remove('bg-white');
+          dot.classList.add('bg-white/30');
+        }
+      });
+      
+      // Reset transition flag after animation completes
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 500);
+    }
+
+    setupEventListeners() {
+      // Navigation arrows
+      this.prevBtn?.addEventListener('click', () => {
+        if (!this.isTransitioning) {
+          this.prevSlide();
+          this.resetAutoPlay();
+        }
+      });
+
+      this.nextBtn?.addEventListener('click', () => {
+        if (!this.isTransitioning) {
+          this.nextSlide();
+          this.resetAutoPlay();
+        }
+      });
+
+      // Navigation dots
+      this.dots.forEach((dot: Element, index: number) => {
+        dot.addEventListener('click', () => {
+          if (!this.isTransitioning) {
+            this.goToSlide(index);
+            this.resetAutoPlay();
+          }
+        });
+      });
+
+      // Pause on hover
+      const banner = document.querySelector('.banner-container');
+      banner?.addEventListener('mouseenter', () => this.pauseAutoPlay());
+      banner?.addEventListener('mouseleave', () => this.startAutoPlay());
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!this.isTransitioning) {
+          if (e.key === 'ArrowLeft') {
+            this.prevSlide();
+            this.resetAutoPlay();
+          } else if (e.key === 'ArrowRight') {
+            this.nextSlide();
+            this.resetAutoPlay();
+          }
+        }
+      });
+
+      // Visibility change detection
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          this.pauseAutoPlay();
+        } else {
+          this.startAutoPlay();
+        }
+      });
+    }
+
+    goToSlide(index: number) {
+      if (index >= 0 && index < this.totalSlides && index !== this.currentSlide) {
+        this.currentSlide = index;
+        this.updateSlideDisplay();
+      }
+    }
+
+    prevSlide() {
+      this.currentSlide = this.currentSlide - 1;
+      if (this.currentSlide < 0) {
+        this.currentSlide = this.totalSlides - 1;
+      }
+      this.updateSlideDisplay();
+    }
+
+    nextSlide() {
+      this.currentSlide = this.currentSlide + 1;
+      if (this.currentSlide >= this.totalSlides) {
+        this.currentSlide = 0;
+      }
+      this.updateSlideDisplay();
+    }
+
+    startAutoPlay() {
+      this.pauseAutoPlay(); // Clear any existing interval
+      
+      this.autoPlayInterval = setInterval(() => {
+        if (!this.isTransitioning) {
+          this.nextSlide();
+        }
+      }, this.autoPlayDuration);
+    }
+
+    pauseAutoPlay() {
+      if (this.autoPlayInterval) {
+        clearInterval(this.autoPlayInterval);
+        this.autoPlayInterval = null;
+      }
+    }
+
+    resetAutoPlay() {
+      this.pauseAutoPlay();
+      setTimeout(() => {
+        this.startAutoPlay();
+      }, 100);
+    }
+  }
+
+  // Initialize banner slider when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new BannerSlider();
+  });
+
+  // Also initialize on window load as backup
+  window.addEventListener('load', () => {
+    if (!document.querySelector('.banner-slide.active')) {
+      new BannerSlider();
+    }
+  });
+</script>

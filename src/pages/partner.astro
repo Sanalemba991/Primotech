@@ -1,0 +1,547 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Partner - PrimoTech LLC";
+const description = "Join our partner network and grow your business with PrimoTech security solutions. Become an authorized distributor today.";
+---
+
+<Layout title={title} description={description}>
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative h-[70vh] overflow-hidden partner-hero">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img 
+          src="/images/partner-banner.jpg" 
+          alt="Business partners discussing partnership" 
+          class="w-full h-full object-cover hero-image-reveal"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-transparent hero-overlay-fade"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="relative z-10 flex items-center h-full">
+        <div class="container mx-auto px-6 lg:px-8">
+          <div class="max-w-3xl hero-content-reveal">
+            <h1 class="text-6xl lg:text-8xl font-bold text-white mb-8 hero-title-animate">
+              Our Partners
+            </h1>
+            
+            <!-- Join Us Button -->
+           <div class="hero-button-animate">
+ <a 
+  href="mailto:info@primotechllc.com"
+  class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-teal-500 hover:text-white hover:border-teal-500 font-semibold text-base rounded-full transition-all duration-300 group"
+>
+  Contact Us
+  <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Grid Section (placeholder for future content) -->
+    <section class="py-16 bg-gray-50 partners-grid-section">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="text-center partners-content-reveal">
+          <p class="text-lg text-gray-600 mb-8">
+            Partner listings will be displayed here based on selected filters.
+          </p>
+          
+          <!-- Partnership Information -->
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">
+              Become Our Partner
+            </h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-8">
+              Join our growing network of trusted partners and distributors. We offer comprehensive support, 
+              training programs, and marketing resources to help you succeed in the security technology market.
+            </p>
+            
+            <!-- Partnership Benefits -->
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+              <div class="text-center benefit-card-animate">
+                <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Competitive Margins</h3>
+                <p class="text-gray-600">Attractive profit margins and volume-based incentives</p>
+              </div>
+              
+              <div class="text-center benefit-card-animate">
+                <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Training & Support</h3>
+                <p class="text-gray-600">Comprehensive training programs and technical support</p>
+              </div>
+              
+              <div class="text-center benefit-card-animate">
+                <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Quality Products</h3>
+                <p class="text-gray-600">Access to cutting-edge security technology solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Listing Section -->
+    <section class="py-10 bg-white partners-listing-section">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="grid gap-6 max-w-5xl mx-auto">
+          
+          <!-- Partner 1: PT. Adsec Global Indonesia -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden partner-card partner-card-animate border border-gray-200">
+            <div class="flex flex-col md:flex-row">
+              <!-- Logo Section -->
+              <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6 border-r border-gray-200">
+                <img src="/images/company1.png" alt="Adsec Global Indonesia Logo" class="w-full h-32 object-contain">
+              </div>
+              
+              <!-- Content Section -->
+              <div class="flex-1 p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">PT. Adsec Global Indonesia</h3>
+                
+                <!-- Contact Information in Columns -->
+                <div class="space-y-3 mb-4">
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-24 text-sm">Tel :</span>
+                    <span class="text-gray-800">+62 (21) 6009855</span>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-24 text-sm">Email :</span>
+                    <a href="mailto:info@adsec.id" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      info@adsec.id
+                    </a>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-24 text-sm">Web site :</span>
+                    <a href="https://adsec.id/" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      https://adsec.id/
+                    </a>
+                  </div>
+                </div>
+                
+                <!-- Company Profile -->
+                <div class="flex flex-col">
+                  <span class="font-medium text-gray-600 mb-2 text-sm">Company Profile :</span>
+                  <p class="text-gray-700 leading-relaxed text-sm">
+                    Adsec who is a part of P.T. Pasifik Internusa, is a well known distribution partner for IT products in Indonesia.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partner 2: Eltcrac System Sp. z o.o. -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden partner-card partner-card-animate border border-gray-200">
+            <div class="flex flex-col md:flex-row">
+              <!-- Logo Section -->
+              <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6 border-r border-gray-200">
+                <div class="w-full h-32 bg-white border border-gray-300 rounded flex items-center justify-center">
+                  <img src="/images/company2.png" alt="Eltcrac System Logo" class="max-w-full h-full object-contain">
+                </div>
+              </div>
+              
+              <!-- Content Section -->
+              <div class="flex-1 p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Eltcrac System Sp. z o.o.</h3>
+                
+                <!-- Contact Information in Columns -->
+                <div class="space-y-3 mb-4">
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-32 text-sm">Tel :</span>
+                    <span class="text-gray-800">+48 12 292 48 61</span>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-32 text-sm">Email :</span>
+                    <a href="mailto:esklep@ecsystem.pl" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      esklep@ecsystem.pl
+                    </a>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-32 text-sm">Web site :</span>
+                    <a href="https://sklep-ecsystem.pl/" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      https://sklep-ecsystem.pl/
+                    </a>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="font-medium text-gray-600 w-32 text-sm">Company Address :</span>
+                    <span class="text-gray-800">ul. Ruciana 3, 30-803 Kraków</span>
+                  </div>
+                </div>
+                
+                <!-- Company Profile -->
+                <div class="flex flex-col">
+                  <span class="font-medium text-gray-600 mb-2 text-sm">Company Profile :</span>
+                  <p class="text-gray-700 leading-relaxed text-sm">
+                    Eltcrac System is a leading technology distributor specializing in security and surveillance solutions across Poland and Central Europe.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-gray-50 contact-section" id="partner-form">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-xl lg:text-3xl font-bold text-gray-900 mb-12 contact-title-animate">
+            INTERESTED IN PARTNERSHIP?
+          </h2>
+          
+          <div class="max-w-3xl mx-auto mb-12 contact-description-animate">
+            <p class="text-base lg:text-lg text-gray-600 leading-relaxed mb-6">
+              Ready to join our partner network? Contact us today to learn more about partnership opportunities 
+              and how we can help grow your business together.
+            </p>
+          </div>
+          
+          <div class="contact-button-animate">
+            <a 
+              href="mailto:partners@primotechllc.com"
+              class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group"
+            >
+              Contact Partnership Team
+              <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Hero animations */
+  .partner-hero {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partner-hero.hero-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-image-reveal {
+    transform: scale(1.1);
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partner-hero.hero-revealed .hero-image-reveal {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+
+  .hero-overlay-fade {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
+
+  .partner-hero.hero-revealed .hero-overlay-fade {
+    opacity: 1;
+    transition-delay: 0.4s;
+  }
+
+  .hero-content-reveal {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partner-hero.hero-revealed .hero-content-reveal {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.6s;
+  }
+
+  .hero-title-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hero-button-animate {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .partner-hero.hero-revealed .hero-title-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.8s;
+  }
+
+  .partner-hero.hero-revealed .hero-button-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 1s;
+  }
+
+  /* Partners grid animations */
+  .partners-grid-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partners-grid-section.partners-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .partners-content-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partners-grid-section.partners-revealed .partners-content-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+  }
+
+  .benefit-card-animate {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partners-grid-section.partners-revealed .benefit-card-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Partners listing animations */
+  .partners-listing-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partners-listing-section.partners-listing-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .partner-card-animate {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partners-listing-section.partners-listing-revealed .partner-card-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Partner card hover effects */
+  .partner-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .partner-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15), 0 8px 12px -3px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Contact section animations */
+  .contact-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-section.contact-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-title-animate,
+  .contact-description-animate,
+  .contact-button-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-section.contact-revealed .contact-title-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+  }
+
+  .contact-section.contact-revealed .contact-description-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.6s;
+  }
+
+  .contact-section.contact-revealed .contact-button-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.9s;
+  }
+
+  /* Logo section styling */
+  .partner-card .md\\:w-72 {
+    min-height: 160px;
+  }
+
+  /* Professional link styling */
+  .partner-card a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .partner-card a:hover {
+    text-decoration: underline;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .partner-card .md\\:w-72 {
+      width: 100%;
+      min-height: 120px;
+    }
+    
+    .partner-card .flex-col.md\\:flex-row {
+      flex-direction: column;
+    }
+    
+    .partner-card h3 {
+      font-size: 1.25rem;
+    }
+    
+    .partner-card .border-r {
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .hero-title-animate {
+      font-size: 3rem;
+    }
+  }
+</style>
+
+<script>
+  // Enhanced intersection observer options for slower animations
+  const observerOptions = {
+    threshold: [0, 0.2, 0.4],
+    rootMargin: '0px 0px -150px 0px'
+  };
+
+  // Hero section observer
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+        entry.target.classList.add('hero-revealed');
+        heroObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Partners grid observer
+  const partnersObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+        entry.target.classList.add('partners-revealed');
+        
+        // Stagger benefit card animations with longer delays
+        const cards = entry.target.querySelectorAll('.benefit-card-animate');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            (card as HTMLElement).style.transitionDelay = `${0.8 + (index * 0.3)}s`;
+          }, 100);
+        });
+        
+        partnersObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Partners listing observer - separate class and longer animations
+  const partnersListingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+        entry.target.classList.add('partners-listing-revealed');
+        
+        // Stagger partner card animations with longer delays
+        const cards = entry.target.querySelectorAll('.partner-card-animate');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            (card as HTMLElement).style.transitionDelay = `${0.5 + (index * 0.4)}s`;
+          }, 200);
+        });
+        
+        partnersListingObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: [0, 0.2, 0.4],
+    rootMargin: '0px 0px -120px 0px'
+  });
+
+  // Contact section observer
+  const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+        entry.target.classList.add('contact-revealed');
+        contactObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Initialize animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.querySelector('.partner-hero');
+    const partnersSection = document.querySelector('.partners-grid-section');
+    const partnersListingSection = document.querySelector('.partners-listing-section');
+    const contactSection = document.querySelector('.contact-section');
+    
+    if (heroSection) {
+      heroObserver.observe(heroSection);
+    }
+    
+    if (partnersSection) {
+      partnersObserver.observe(partnersSection);
+    }
+
+    if (partnersListingSection) {
+      partnersListingObserver.observe(partnersListingSection);
+    }
+
+    if (contactSection) {
+      contactObserver.observe(contactSection);
+    }
+  });
+</script>

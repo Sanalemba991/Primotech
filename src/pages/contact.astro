@@ -1,0 +1,987 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Contact Us - PrimoTech LLC";
+const description = "Get in touch with PrimoTech LLC for all your security technology needs. Contact our sales team or technical support.";
+---
+
+<Layout title={title} description={description}>
+<main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden contact-hero">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img 
+                src="/images/contactus.png" 
+                alt="Modern office space with people working" 
+                class="w-full h-full object-cover hero-image-reveal"
+            />
+            <div class="absolute inset-0 bg-black/40 hero-overlay-fade"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-transparent hero-overlay-fade"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 flex items-center h-full">
+            <div class="container mx-auto px-6 lg:px-8">
+                <div class="max-w-2xl hero-content-reveal">
+                    <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 hero-title-animate">
+                        CONTACT US
+                    </h1>
+                    <p class="text-xl lg:text-2xl text-gray-200 mb-4 hero-subtitle-animate">
+                        We'd like to hear from you,
+                    </p>
+                    <p class="text-lg lg:text-xl text-gray-300 mb-8 hero-description-animate">
+                        ready to transform your business with cutting-edge technology solutions.
+                    </p>
+                    
+                    <!-- Professional Contact Button -->
+                    <div class="hero-button-animate">
+                        <a 
+                            href="#contact-form"
+                            class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg"
+                        >
+                            Contact Us
+                            <svg class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Options Section -->
+    <section class="py-16 bg-gradient-to-b from-white to-slate-50 contact-options-section">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center px-3 py-1.5 bg-teal-100 text-teal-800 rounded-full text-sm font-medium mb-3 contact-badge-animate">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    Multiple Ways to Connect
+                </div>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 contact-title-animate">
+                    Talk to Sales
+                </h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto contact-description-animate">
+                    Choose the best way to reach our team. We're here to provide personalized solutions 
+                    and answer all your questions about our services.
+                </p>
+            </div>
+                
+            <!-- Professional Contact Cards -->
+            <div class="grid lg:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
+                <div class="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-1 contact-card-animate border border-slate-100" data-card-index="0">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">General Inquiries</h3>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">Have questions about our products or services? Our team is ready to provide detailed information and guidance.</p>
+                    <a href="mailto:info@primotechllc.com" 
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Send Email
+                    </a>
+                </div>
+                
+                <div class="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-1 contact-card-animate border border-slate-100" data-card-index="1">
+                    <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Sales Team</h3>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">Ready to get started? Connect with our sales team for personalized solutions tailored to your business needs.</p>
+                    <a href="tel:+1-555-PRIMO-TECH" 
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-medium text-sm rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        Call Sales
+                    </a>
+                </div>
+                
+                <div class="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-1 contact-card-animate border border-slate-100" data-card-index="2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 11-9.75 9.75A9.75 9.75 0 0112 2.25z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Technical Support</h3>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">Need technical assistance? Our expert support team is available 24/7 to help resolve any issues quickly.</p>
+                    <a href="/support" 
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium text-sm rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 11-9.75 9.75A9.75 9.75 0 0112 2.25z"/>
+                        </svg>
+                        Get Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Contact Form Section -->
+    <section class="py-16 bg-white contact-form-section" id="contact-form">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center px-3 py-1.5 bg-slate-100 text-slate-800 rounded-full text-sm font-medium mb-3 form-badge-animate">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        Start Your Project
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 form-title-animate">
+                        Get In Touch
+                    </h2>
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto form-description-animate">
+                        Ready to discuss your project? Fill out the form below and we'll respond within 24 hours 
+                        with a personalized consultation.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 shadow-lg border border-slate-200 form-container-animate">
+                    <form class="space-y-6" id="contactForm">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="form-field-animate" data-delay="100">
+                                <label for="firstName" class="block text-sm font-medium text-slate-900 mb-2">
+                                    First Name *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    name="firstName" 
+                                    required
+                                    class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 hover:border-teal-300"
+                                    placeholder="Enter your first name"
+                                >
+                            </div>
+                            <div class="form-field-animate" data-delay="200">
+                                <label for="lastName" class="block text-sm font-medium text-slate-900 mb-2">
+                                    Last Name *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="lastName" 
+                                    name="lastName" 
+                                    required
+                                    class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 hover:border-teal-300"
+                                    placeholder="Enter your last name"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="form-field-animate" data-delay="300">
+                                <label for="email" class="block text-sm font-medium text-slate-900 mb-2">
+                                    Email Address *
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    required
+                                    class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 hover:border-teal-300"
+                                    placeholder="your.email@company.com"
+                                >
+                            </div>
+                            <div class="form-field-animate" data-delay="400">
+                                <label for="phone" class="block text-sm font-medium text-slate-900 mb-2">
+                                    Phone Number
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone"
+                                    class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 hover:border-teal-300"
+                                    placeholder="+1 (555) 123-4567"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="form-field-animate" data-delay="500">
+                                <label for="company" class="block text-sm font-medium text-slate-900 mb-2">
+                                    Company Name
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="company" 
+                                    name="company"
+                                    class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 hover:border-teal-300"
+                                    placeholder="Your Company Name"
+                                >
+                            </div>
+                            <div class="form-field-animate" data-delay="600">
+                                <label for="subject" class="block text-sm font-medium text-slate-900 mb-2">
+                                    Subject *
+                                </label>
+                                <select 
+                                    id="subject" 
+                                    name="subject" 
+                                    required
+                                    class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 hover:border-teal-300"
+                                >
+                                    <option value="">Select inquiry type</option>
+                                    <option value="sales">Sales Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="general">General Question</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-field-animate" data-delay="700">
+                            <label for="message" class="block text-sm font-medium text-slate-900 mb-2">
+                                Message *
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="4" 
+                                required
+                                class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 resize-y hover:border-teal-300"
+                                placeholder="Please describe your project requirements, questions, or how we can help you achieve your goals..."
+                            ></textarea>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center gap-6 pt-2">
+                            <div class="flex items-center text-sm text-slate-600 form-guarantee-animate">
+                                <div class="flex items-center space-x-2 bg-green-50 px-3 py-1.5 rounded-full border border-green-200">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="font-medium">We'll respond within 24 hours</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-button-animate">
+                                <button 
+                                    type="submit" 
+                                    class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg min-w-[180px] justify-center focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                                    id="submitBtn"
+                                >
+                                    Send Message
+                                    <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+    <!-- Contact Information Section -->
+    <section class="py-16 bg-slate-50 contact-info-section">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-6 text-center max-w-3xl mx-auto">
+                <div class="info-card-animate" data-delay="200">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 hover:scale-110">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Email</h3>
+                    <p class="text-slate-600 text-sm font-medium">info@primotechllc.com</p>
+                </div>
+                
+                <div class="info-card-animate" data-delay="400">
+                    <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 hover:scale-110">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Phone</h3>
+                    <p class="text-slate-600 text-sm font-medium">+1 (555) 123-4567</p>
+                </div>
+                
+                <div class="info-card-animate" data-delay="600">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 hover:scale-110">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Response Time</h3>
+                    <p class="text-slate-600 text-sm font-medium">Within 24 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Office Locations Section -->
+    <section class="py-16 bg-white locations-section">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center px-3 py-1.5 bg-slate-100 text-slate-800 rounded-full text-sm font-medium mb-3 locations-badge-animate">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                    Global Presence
+                </div>
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 locations-title-animate">
+                    Our Locations
+                </h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto locations-description-animate">
+                    Find us at one of our global offices, strategically located to serve clients worldwide 
+                    with local expertise and support.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="group bg-gradient-to-br from-slate-50 to-blue-50 p-6 rounded-xl shadow-md text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg location-card-animate border border-slate-200" data-delay="200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Headquarters</h4>
+                    <div class="text-slate-600 space-y-1 mb-4 text-sm leading-relaxed">
+                        <p class="font-medium">123 Tech Drive</p>
+                        <p>Innovation City, TC 12345</p>
+                        <p>United States</p>
+                    </div>
+                    <div class="space-y-1 text-xs">
+                        <p class="text-slate-900"><span class="font-medium">Phone:</span> +1 (555) 123-4567</p>
+                        <p class="text-slate-900"><span class="font-medium">Email:</span> info@primotechllc.com</p>
+                    </div>
+                </div>
+                
+                <div class="group bg-gradient-to-br from-slate-50 to-teal-50 p-6 rounded-xl shadow-md text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg location-card-animate border border-slate-200" data-delay="400">
+                    <div class="w-14 h-14 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">European Office</h4>
+                    <div class="text-slate-600 space-y-1 mb-4 text-sm leading-relaxed">
+                        <p class="font-medium">456 Innovation Street</p>
+                        <p>Tech District</p>
+                        <p>London, UK SW1A 1AA</p>
+                    </div>
+                    <div class="space-y-1 text-xs">
+                        <p class="text-slate-900"><span class="font-medium">Phone:</span> +44 20 1234 5678</p>
+                        <p class="text-slate-900"><span class="font-medium">Email:</span> europe@primotechllc.com</p>
+                    </div>
+                </div>
+                
+                <div class="group bg-gradient-to-br from-slate-50 to-emerald-50 p-6 rounded-xl shadow-md text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg location-card-animate border border-slate-200" data-delay="600">
+                    <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Asia Pacific</h4>
+                    <div class="text-slate-600 space-y-1 mb-4 text-sm leading-relaxed">
+                        <p class="font-medium">789 Future Avenue</p>
+                        <p>Business District</p>
+                        <p>Singapore 018956</p>
+                    </div>
+                    <div class="space-y-1 text-xs">
+                        <p class="text-slate-900"><span class="font-medium">Phone:</span> +65 6123 4567</p>
+                        <p class="text-slate-900"><span class="font-medium">Email:</span> asia@primotechllc.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Enhanced Professional CSS - Support Style -->
+<style>
+    /* Global styles - Fixed overflow issue */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Container width fix */
+    .container {
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    /* Hero animations - Same as Support */
+    .contact-hero {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-hero.hero-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hero-image-reveal {
+        transform: scale(1.1);
+        opacity: 0;
+        transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-hero.hero-revealed .hero-image-reveal {
+        transform: scale(1);
+        opacity: 1;
+        transition-delay: 0.2s;
+    }
+
+    .hero-overlay-fade {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
+
+    .contact-hero.hero-revealed .hero-overlay-fade {
+        opacity: 1;
+        transition-delay: 0.4s;
+    }
+
+    .hero-content-reveal {
+        opacity: 0;
+        transform: translateX(-60px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-hero.hero-revealed .hero-content-reveal {
+        opacity: 1;
+        transform: translateX(0);
+        transition-delay: 0.6s;
+    }
+
+    /* Staggered hero text animations */
+    .hero-title-animate {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero-subtitle-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero-description-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero-button-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-hero.hero-revealed .hero-title-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.8s;
+    }
+
+    .contact-hero.hero-revealed .hero-subtitle-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 1s;
+    }
+
+    .contact-hero.hero-revealed .hero-description-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 1.2s;
+    }
+
+    .contact-hero.hero-revealed .hero-button-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 1.4s;
+    }
+
+    /* Contact Options Section animations */
+    .contact-options-section {
+        opacity: 0;
+        transform: translateY(60px);
+        transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-options-section.section-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .contact-badge-animate,
+    .contact-title-animate,
+    .contact-description-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-options-section.section-revealed .contact-badge-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    .contact-options-section.section-revealed .contact-title-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.4s;
+    }
+
+    .contact-options-section.section-revealed .contact-description-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.6s;
+    }
+
+    .contact-card-animate {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-options-section.section-revealed .contact-card-animate {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Contact Form Section animations */
+    .contact-form-section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-form-section.section-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .form-badge-animate,
+    .form-title-animate,
+    .form-description-animate,
+    .form-container-animate,
+    .form-field-animate,
+    .form-guarantee-animate,
+    .form-button-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-form-section.section-revealed .form-badge-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    .contact-form-section.section-revealed .form-title-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.4s;
+    }
+
+    .contact-form-section.section-revealed .form-description-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.6s;
+    }
+
+    .contact-form-section.section-revealed .form-container-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.8s;
+    }
+
+    .contact-form-section.section-revealed .form-field-animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .contact-form-section.section-revealed .form-guarantee-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 1.2s;
+    }
+
+    .contact-form-section.section-revealed .form-button-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 1.4s;
+    }
+
+    /* Contact Info Section animations */
+    .contact-info-section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-info-section.section-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .info-card-animate {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-info-section.section-revealed .info-card-animate {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Locations Section animations */
+    .locations-section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .locations-section.section-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .locations-badge-animate,
+    .locations-title-animate,
+    .locations-description-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .locations-section.section-revealed .locations-badge-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    .locations-section.section-revealed .locations-title-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.4s;
+    }
+
+    .locations-section.section-revealed .locations-description-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.6s;
+    }
+
+    .location-card-animate {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .locations-section.section-revealed .location-card-animate {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Card hover effects */
+    .contact-card-animate,
+    .location-card-animate {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        text-decoration: none;
+    }
+
+    .contact-card-animate:hover,
+    .location-card-animate:hover {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        transform: translateY(-8px);
+        text-decoration: none;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .contact-hero,
+        .contact-options-section,
+        .contact-form-section,
+        .contact-info-section,
+        .locations-section,
+        .hero-image-reveal,
+        .hero-overlay-fade,
+        .hero-content-reveal,
+        .hero-title-animate,
+        .hero-subtitle-animate,
+        .hero-description-animate,
+        .hero-button-animate,
+        .contact-badge-animate,
+        .contact-title-animate,
+        .contact-description-animate,
+        .contact-card-animate,
+        .form-badge-animate,
+        .form-title-animate,
+        .form-description-animate,
+        .form-container-animate,
+        .form-field-animate,
+        .form-guarantee-animate,
+        .form-button-animate,
+        .info-card-animate,
+        .locations-badge-animate,
+        .locations-title-animate,
+        .locations-description-animate,
+        .location-card-animate {
+            animation: none;
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .hero-content-reveal {
+            transform: translateY(40px);
+        }
+        
+        .contact-hero.hero-revealed .hero-content-reveal {
+            transform: translateY(0);
+        }
+        
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #64748b;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+    }
+</style>
+
+<script>
+    // Intersection Observer for animations - Same as Support
+    const observerOptions = {
+        threshold: [0, 0.1, 0.3],
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    // Hero section observer
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                entry.target.classList.add('hero-revealed');
+                heroObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Section observers
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                entry.target.classList.add('section-revealed');
+                
+                // Stagger animations for cards
+                const cards = entry.target.querySelectorAll('[data-card-index], [data-delay]');
+                cards.forEach((card, index) => {
+                    const delay = card.getAttribute('data-delay') || (index * 100);
+                    setTimeout(() => {
+                        (card as HTMLElement).style.transitionDelay = `${delay}ms`;
+                    }, 100);
+                });
+                
+                // Stagger form field animations
+                const formFields = entry.target.querySelectorAll('.form-field-animate');
+                formFields.forEach((field, index) => {
+                    const delay = field.getAttribute('data-delay') || (index * 100);
+                    setTimeout(() => {
+                        (field as HTMLElement).style.transitionDelay = `${delay}ms`;
+                    }, 800);
+                });
+                
+                sectionObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', () => {
+        const heroSection = document.querySelector('.contact-hero');
+        const sections = document.querySelectorAll('.contact-options-section, .contact-form-section, .contact-info-section, .locations-section');
+        
+        if (heroSection) {
+            heroObserver.observe(heroSection);
+        }
+        
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (this: HTMLAnchorElement, e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                if (href) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Form submission handler
+        const form = document.getElementById('contactForm') as HTMLFormElement;
+        const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+        
+        if (form && submitBtn) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    company: formData.get('company'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message')
+                };
+
+                // Validation
+                if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
+                    showNotification('Please fill in all required fields.', 'error');
+                    return;
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email as string)) {
+                    showNotification('Please enter a valid email address.', 'error');
+                    return;
+                }
+
+                // Button animation
+                const originalHTML = submitBtn.innerHTML;
+                submitBtn.innerHTML = `
+                    <svg class="animate-spin w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                `;
+                submitBtn.disabled = true;
+
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    submitBtn.innerHTML = `
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Message Sent!
+                    `;
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalHTML;
+                        submitBtn.disabled = false;
+                        form.reset();
+                        showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
+                    }, 2000);
+                    
+                } catch (error) {
+                    submitBtn.innerHTML = 'Try Again';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalHTML;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                    showNotification('Failed to send message. Please try again.', 'error');
+                }
+            });
+        }
+    });
+
+    // Notification system
+    function showNotification(message: string, type: string) {
+        const notification = document.createElement('div');
+        const bgColor = type === 'success' 
+            ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 text-green-900' 
+            : 'bg-gradient-to-r from-red-50 to-rose-50 border-red-200 text-red-900';
+        const iconColor = type === 'success' ? 'text-green-600' : 'text-red-600';
+        const icon = type === 'success' 
+            ? `<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>`
+            : `<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>`;
+            
+        notification.className = `fixed top-4 right-4 ${bgColor} px-4 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-all duration-300 max-w-xs border`;
+        notification.innerHTML = `
+            <div class="flex items-start">
+                <svg class="w-5 h-5 mt-0.5 mr-2 ${iconColor} flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    ${icon}
+                </svg>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">${message}</p>
+                </div>
+                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 ${iconColor.replace('600', '400')} hover:${iconColor.replace('600', '600')} transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 4000);
+    }
+</script>
+</Layout>

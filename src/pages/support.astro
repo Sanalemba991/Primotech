@@ -1,0 +1,380 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Support - PrimoTech LLC";
+const description = "Get comprehensive support for all PrimoTech security solutions. Access software, FAQs, downloads, and video guides.";
+
+const supportSections = [
+  {
+    id: 'faq',
+    title: 'FAQ',
+    description: 'Quick answers to frequently asked questions about Uniarch products.',
+    icon: '❓',
+    link: '/support/faq'
+  },
+  {
+    id: 'video',
+    title: 'Video',
+    description: 'Visual construction guidelines to help with installation and setup.',
+    icon: '🎥',
+    link: '/support/videos'
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden support-hero">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img 
+          src="/images/support.jpg" 
+          alt="Support team ready to help" 
+          class="w-full h-full object-cover hero-image-reveal"
+        />
+        <div class="absolute inset-0 bg-black/40 hero-overlay-fade"></div>
+        <div class="absolute inset-0  bg-gradient-to-r from-teal-900/80 to-transparent hero-overlay-fade"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="relative z-10 flex items-center h-full">
+        <div class="container mx-auto px-6 lg:px-8">
+          <div class="max-w-2xl hero-content-reveal">
+            <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 hero-title-animate">
+              SUPPORT
+            </h1>
+            <p class="text-xl lg:text-2xl text-gray-200 mb-4 hero-subtitle-animate">
+              We prepared some information for you,
+            </p>
+            <p class="text-lg lg:text-xl text-gray-300 hero-description-animate">
+              in case you run into certain problems and need help.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support Grid Section -->
+    <section class="py-16 lg:py-24 bg-white support-grid-section">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {supportSections.map((section, index) => (
+            <a 
+              href={section.link}
+              class={`support-card p-8 lg:p-12 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-all duration-300 cursor-pointer group support-card-animate block`}
+              data-card-index={index}
+            >
+              <!-- Card Header -->
+              <div class="flex items-start justify-between mb-6">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 group-hover:text-teal-600 transition-colors duration-300">
+                  {section.title}
+                </h2>
+                <div class="w-12 h-12 rounded-full border-2 border-teal-500 flex items-center justify-center group-hover:bg-teal-500 transition-all duration-300">
+                  <svg class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Card Description -->
+              <p class="text-lg text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                {section.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 lg:py-32 bg-white contact-section">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Main Title -->
+          <h2 class="text-xl lg:text-3xl font-bold text-gray-900 mb-12 contact-title-animate">
+            CONTACT US
+          </h2>
+          
+          <!-- Description -->
+          <div class="max-w-3xl mx-auto mb-12 contact-description-animate">
+            <p class="text-base lg:text-lg text-gray-600 leading-relaxed mb-6">
+              If you have any problems and need personal consultations, or you want to learn more about our products,
+            </p>
+            <p class="text-base lg:text-lg text-gray-600 leading-relaxed mb-6">
+              please contact us directly, we are always online and ready to talk to you. More sensitive to trigger IR cut.
+            </p>
+            <p class="text-base lg:text-lg text-gray-600 leading-relaxed">
+              Automatically change the infrared light compensation intensity based on different image brightness to avoid figure overexposure.
+            </p>
+          </div>
+          
+          <!-- Contact Button -->
+          <div class="">
+            <a 
+              href="mailto:info@primotechllc.com"
+              class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group"
+            >
+              Contact Us
+              <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Hero animations */
+  .support-hero {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .support-hero.hero-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-image-reveal {
+    transform: scale(1.1);
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .support-hero.hero-revealed .hero-image-reveal {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+
+  .hero-overlay-fade {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
+
+  .support-hero.hero-revealed .hero-overlay-fade {
+    opacity: 1;
+    transition-delay: 0.4s;
+  }
+
+  .hero-content-reveal {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .support-hero.hero-revealed .hero-content-reveal {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.6s;
+  }
+
+  /* Staggered hero text animations */
+  .hero-title-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hero-subtitle-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .hero-description-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .support-hero.hero-revealed .hero-title-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.8s;
+  }
+
+  .support-hero.hero-revealed .hero-subtitle-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1s;
+  }
+
+  .support-hero.hero-revealed .hero-description-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
+  }
+
+  /* Support grid animations */
+  .support-grid-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .support-grid-section.grid-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .support-card-animate {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .support-grid-section.grid-revealed .support-card-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Card hover effects */
+  .support-card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-decoration: none;
+  }
+
+  .support-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-8px);
+    text-decoration: none;
+  }
+
+  /* Contact section animations */
+  .contact-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-section.contact-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-title-animate {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .contact-description-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-button-animate {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .contact-section.contact-revealed .contact-title-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 0.3s;
+  }
+
+  .contact-section.contact-revealed .contact-description-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+  }
+
+  .contact-section.contact-revealed .contact-button-animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 0.7s;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .hero-content-reveal {
+      transform: translateY(40px);
+    }
+    
+    .support-hero.hero-revealed .hero-content-reveal {
+      transform: translateY(0);
+    }
+
+    .contact-title-animate {
+      font-size: 1.5rem !important;
+    }
+    
+    .contact-description-animate p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for animations
+  const observerOptions = {
+    threshold: [0, 0.1, 0.3],
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  // Hero section observer
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+        entry.target.classList.add('hero-revealed');
+        heroObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Grid section observer
+  const gridObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+        entry.target.classList.add('grid-revealed');
+        
+        // Stagger card animations
+        const cards = entry.target.querySelectorAll('.support-card-animate');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            (card as HTMLElement).style.transitionDelay = `${index * 0.1}s`;
+          }, 100);
+        });
+        
+        gridObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Contact section observer
+  const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+        entry.target.classList.add('contact-revealed');
+        contactObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Initialize animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.querySelector('.support-hero');
+    const gridSection = document.querySelector('.support-grid-section');
+    const contactSection = document.querySelector('.contact-section');
+    
+    if (heroSection) {
+      heroObserver.observe(heroSection);
+    }
+    
+    if (gridSection) {
+      gridObserver.observe(gridSection);
+    }
+
+    if (contactSection) {
+      contactObserver.observe(contactSection);
+    }
+  });
+</script>
