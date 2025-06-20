@@ -3,7 +3,6 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import "../../styles/global.css";
 
-
 // Generate static paths for all tips
 export async function getStaticPaths() {
   const tips = await getCollection('tips');
@@ -21,18 +20,37 @@ type Props = {
 const { tip } = Astro.props;
 const { Content } = await tip.render();
 
-// Format date helper
-const formatDate = (date: Date) => {
+// Format date helper with safety check
+const formatDate = (date: Date | string | undefined) => {
+  if (!date) return 'No date available';
+  
+  const dateObj = date instanceof Date ? date : new Date(date);
+  
+  // Check if the date is valid
+  if (isNaN(dateObj.getTime())) return 'Invalid date';
+  
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }).format(date);
+  }).format(dateObj);
+};
+
+// Safe date conversion for ISO string
+const getISOString = (date: Date | string | undefined) => {
+  if (!date) return new Date().toISOString();
+  
+  const dateObj = date instanceof Date ? date : new Date(date);
+  
+  // Check if the date is valid
+  if (isNaN(dateObj.getTime())) return new Date().toISOString();
+  
+  return dateObj.toISOString();
 };
 
 // SEO meta data
 const title = `${tip.data.title} | Primotech Tips`;
-const description = tip.data.subTitle;
+const description = tip.data.subTitle || tip.data.description || 'Primotech security tips and guides';
 const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
 
 // Get related tips (excluding current tip)
@@ -40,255 +58,277 @@ const allTips = await getCollection("tips");
 const relatedTips = allTips
   .filter(t => t.slug !== tip.slug)
   .slice(0, 3);
-  
-// JSON-LD Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": tip.data.title,
-  "description": description,
-  "url": canonicalUrl,
-  "image": `https://primotechllc.com${tip.data.eventImage}`,
-  "datePublished": tip.data.pubDate || new Date().toISOString(),
-  "dateModified": tip.data.pubDate || new Date().toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": "Primotech Team",
-    "url": "https://primotechllc.com/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Primotech LLC",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://primotechllc.com/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": canonicalUrl
-  },
-  "keywords": tip.data.tags?.join(", ") || ""
-};
 ---
 
 <Layout
   title={title}
   description={description}
-  keywords={tip.data.tags?.join(', ')}
-  structuredData={structuredData}
 >
-  <!-- Animated Navigation Header -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50 transition-all duration-500 ease-out" data-animate>
-    <div class="container mx-auto px-4 py-4">
-      <!-- Breadcrumb -->
-      <nav class="flex items-center space-x-2 text-sm text-gray-600">
-        <a href="/" class="hover:text-blue-600 transition-colors duration-300 ease-in-out">Home</a>
-        <svg class="w-4 h-4 transition-transform duration-300 ease-out" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-        </svg>
-        <a href="/tips" class="hover:text-blue-600 transition-colors duration-300 ease-in-out">Tips</a>
-        <svg class="w-4 h-4 transition-transform duration-300 ease-out" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-        </svg>
-        <span class="text-blue-600 font-medium transition-colors duration-500 ease-out">{tip.data.title}</span>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="bg-gradient-to-br from-gray-50 via-white to-gray-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-      <div class="max-w-4xl mx-auto">
-        <!-- Article Header -->
-        <div class="text-center mb-12" data-animate data-animate-delay="100">
-          <!-- Category Badge -->
-          <div class="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 backdrop-blur-sm mb-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 hover:shadow-lg">
-            <svg class="w-5 h-5 text-blue-500 mr-3 transition-transform duration-500 ease-out group-hover:rotate-6" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-            </svg>
-            <span class="text-blue-700 font-semibold text-sm tracking-wide transition-colors duration-300 ease-in-out">Tech Tips</span>
-          </div>
-          
-          <!-- Tip Title -->
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-8 leading-tight transition-all duration-700 ease-[cubic-bezier(0.16,0.85,0.3,1.05)]" data-animate data-animate-delay="200">
-            {tip.data.title}
-          </h1>
-          
-          <!-- Tip Meta -->
-          <div class="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-12 text-gray-600 mb-8" data-animate data-animate-delay="300">
-            <!-- Location Info -->
-            <div class="flex items-center space-x-4 group">
-              <div class="relative">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center border-3 border-blue-300 shadow-lg transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-2xl group-hover:border-blue-500">
-                  <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                  </svg>
-                </div>
-                <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 rounded-full border-2 border-white transition-all duration-300 ease-out"></div>
-              </div>
-              <div class="text-left">
-                <p class="font-bold text-gray-900 text-lg transition-colors duration-300 ease-in-out">{tip.data.location}</p>
-                <p class="text-sm text-gray-500 transition-colors duration-300 ease-in-out">Location</p>
-              </div>
-            </div>
-            
-            <!-- Read Time -->
-            <div class="flex items-center space-x-8 text-sm">
-              <div class="flex items-center group">
-                <svg class="w-5 h-5 mr-2 transition-transform duration-500 ease-out group-hover:rotate-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                </svg>
-                <span class="font-medium transition-colors duration-500 ease-in-out group-hover:text-blue-600">{tip.data.readTime} min read</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Tags -->
-          {tip.data.tags && (
-            <div class="flex flex-wrap justify-center gap-3 mb-8" data-animate data-animate-delay="400">
-              {tip.data.tags.map((tag, index) => (
-                <span 
-                  class="px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 text-sm rounded-full backdrop-blur-sm border border-gray-300/50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:from-blue-100 hover:to-blue-200 hover:text-blue-800 hover:border-blue-300 hover:scale-105 hover:shadow-lg"
-                  data-animate data-animate-delay={100 + (index * 50)}
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
+  <!-- Enhanced Breadcrumb Navigation -->
+  <nav class="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 py-4 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-3 text-sm">
+        <!-- Home Link -->
+        <div class="flex items-center group animate-slide-in-from-left">
+          <svg class="w-4 h-4 text-gray-400 mr-2 group-hover:text-blue-500 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+          </svg>
+          <a href="/" class="text-gray-600 hover:text-blue-600 font-medium transition-all duration-300 ease-in-out hover:translate-x-1 relative">
+            Home
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
         </div>
 
-        <!-- Featured Image -->
-        {tip.data.eventImage && (
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl mb-16 group transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-3xl" data-animate data-animate-delay="500">
-            <img
-              src={tip.data.eventImage}
-              alt={tip.data.eventImageAlt}
-              class="w-full h-96 object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,0.85,0.3,1.05)] group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent transition-opacity duration-700 ease-out group-hover:from-black/40"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"></div>
-          </div>
-        )}
-        
-        <!-- Tip Content -->
-        <article class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 md:p-16 mb-16 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-2xl border border-gray-200/50" data-animate data-animate-delay="600">
-          <!-- Tip Description -->
-          <div class="prose prose-lg max-w-none mb-12">
-            <p class="text-xl text-gray-700 leading-relaxed border-l-4 border-gradient-to-b border-blue-500 pl-8 italic bg-gradient-to-r from-blue-50/50 to-transparent py-4 rounded-r-lg transition-all duration-500 ease-out">
-              {tip.data.subTitle}
-            </p>
-          </div>
-          
-          <!-- Tip Body -->
-          <div class="prose prose-lg prose-blue max-w-none transition-opacity duration-500 ease-in-out">
-            <Content />
-          </div>
-        </article>
-        
-        <!-- Enhanced Share Section -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-16 transition-all duration-300 ease-out">
-          <div class="text-center">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-6">Share This Tip</h3>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <a
-                href={`https://twitter.com/intent/tweet?url=${canonicalUrl}&text=${encodeURIComponent(tip.data.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-md transition-all duration-300 ease-out hover:bg-blue-700 hover:shadow-md hover:-translate-y-0.5 min-w-[130px]"
-              >
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                </svg>
-                <span class="font-medium">Twitter</span>
-              </a>
-              
-              <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${canonicalUrl}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-center px-6 py-3 bg-blue-700 text-white rounded-md transition-all duration-300 ease-out hover:bg-blue-800 hover:shadow-md hover:-translate-y-0.5 min-w-[130px]"
-              >
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-                <span class="font-medium">LinkedIn</span>
-              </a>
-              
-              <button
-                onclick="navigator.share && navigator.share({title: document.title, url: window.location.href}) || copyToClipboard(window.location.href)"
-                class="flex items-center justify-center px-6 py-3 bg-gray-600 text-white rounded-md transition-all duration-300 ease-out hover:bg-gray-700 hover:shadow-md hover:-translate-y-0.5 min-w-[130px]"
-              >
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
-                </svg>
-                <span class="font-medium">Share</span>
-              </button>
-            </div>
-          </div>
+        <!-- Separator -->
+        <svg class="w-4 h-4 text-gray-300 animate-fade-in-delay-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+        </svg>
+
+        <!-- Tips & Guides Link -->
+        <div class="flex items-center group animate-slide-in-from-left-delay">
+          <a href="/tips" class="text-gray-600 hover:text-blue-600 font-medium transition-all duration-300 ease-in-out hover:translate-x-1 relative">
+            Tips & Guides
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </div>
+
+        <!-- Separator -->
+        <svg class="w-4 h-4 text-gray-300 animate-fade-in-delay-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+        </svg>
+
+        <!-- Current Page Title -->
+        <div class="flex items-center animate-slide-in-from-right">
+          <span class="text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full text-xs border border-blue-200 truncate max-w-xs md:max-w-md lg:max-w-lg shadow-sm">
+            {tip.data.title}
+          </span>
         </div>
       </div>
     </div>
-    
-    <!-- Enhanced Related Tips Section -->
-    {relatedTips.length > 0 && (
-      <section class="bg-gradient-to-br from-gray-100 via-white to-gray-100 py-20" data-animate>
-        <div class="container mx-auto px-4">
-          <div class="text-center mb-16" data-animate data-animate-delay="100">
-            <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-6 transition-all duration-700 ease-out">
-              Related Tips
-            </h2>
-            <div class="w-32 h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 mx-auto rounded-full transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"></div>
-          </div>
+  </nav>
+
+  <!-- Main Content with Enhanced Animations -->
+  <main class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Article Header -->
+      <header class="mb-8 animate-fade-in-up">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4 leading-tight animate-slide-in-from-bottom">
+          {tip.data.title}
+        </h1>
+        
+        <div class="text-gray-500 text-sm mb-6 animate-fade-in-delay-3">
+          <time datetime={getISOString(tip.data.pubDate)}>
+            {formatDate(tip.data.pubDate)}
+          </time>
+        </div>
+      </header>
+
+      <!-- Featured Image -->
+      <div class="mb-8 animate-zoom-in">
+        <img 
+          src="/pictures/camera-comparison.jpg" 
+          alt="Modern security camera installation"
+          class="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-500"
+          loading="lazy"
+        />
+      </div>
+      
+      <!-- Article Content -->
+      <article class="prose max-w-none animate-fade-in-up-delay">
+        <p class="text-gray-700 leading-relaxed mb-6 text-sm">
+          After a brief but informative explanation of different types of cameras are commonly used. Today, let's explore some application scenarios and where each type of camera (bullet, dome, and PTZ) is most suitable for use:
+        </p>
+
+        <!-- Front Door Security Section -->
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-3">
+            - Front Door Security:
+          </h2>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          <p class="text-gray-700 mb-2 text-sm">
+            <strong>Recommended Camera Type: Bullet Camera</strong>
+          </p>
+          
+          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
+            <strong>Scenario:</strong> Bullet cameras are an excellent choice for monitoring your front door. Their visible presence acts as a deterrent to potential intruders, discouraging any unauthorized access. The compact size and weatherproof design make them suitable for outdoor use, ensuring clear video footage in various weather conditions.
+          </p>
+        </section>
+
+        <!-- Backyard and Pool Section -->
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-3">
+            - Backyard and Pool Surveillance:
+          </h2>
+          
+          <p class="text-gray-700 mb-2 text-sm">
+            <strong>Recommended Camera Type: Bullet Camera</strong>
+          </p>
+          
+          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
+            <strong>Scenario:</strong> For home security in the backyard and pool area, both bullet cameras and vandal-proof dome cameras are suitable choices. Bullet cameras provide clear visibility, and their weatherproof design ensures they can withstand outdoor elements.
+          </p>
+        </section>
+
+        <!-- Large Outdoor Areas Section -->
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-3">
+            - Large Outdoor Areas and Parking Lots:
+          </h2>
+          
+          <p class="text-gray-700 mb-2 text-sm">
+            <strong>Recommended Camera Type: PTZ Camera</strong>
+          </p>
+          
+          <p class="text-gray-700 leading-relaxed mb-6 text-sm">
+            <strong>Scenario:</strong> For monitoring large outdoor areas like parking lots or construction sites, PTZ cameras are ideal. Their pan, tilt, and zoom capabilities allow for comprehensive coverage of expansive spaces. With their ability to zoom in and out, they can capture detailed images even from a distance.
+          </p>
+
+          <!-- PTZ Camera Feature Image -->
+          <div class="mb-6">
+            <img 
+              src="/pictures/bullet-camera-installation.jpg" 
+              alt="3MP PTZ Wi-Fi Security Camera"
+              class="w-full h-48 object-cover rounded-lg"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <!-- Farm and Ranch Section -->
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-3">
+            - Farm and Ranch Security:
+          </h2>
+          
+          <p class="text-gray-700 mb-2 text-sm">
+            <strong>Recommended Camera Type: Bullet Camera or PTZ Camera</strong>
+          </p>
+          
+          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
+            <strong>Scenario:</strong> For securing large rural properties like farms and ranches, bullet cameras or PTZ cameras are appropriate. Bullet cameras can be strategically placed along fences or gates to monitor entry points, while PTZ cameras can cover extensive fields and livestock areas with their wide viewing angles.
+          </p>
+        </section>
+
+        <!-- Remote Monitoring Section -->
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 mb-3">
+            - Remote Monitoring of Vacation Homes:
+          </h2>
+          
+          <p class="text-gray-700 mb-2 text-sm">
+            <strong>Recommended Camera Type: PTZ Camera</strong>
+          </p>
+          
+          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
+            <strong>Scenario:</strong> For monitoring vacation homes from a distance, PTZ cameras are a valuable choice. Their remote directional control and zoom capabilities allow property owners to keep an eye on their premises while they're away.
+          </p>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-8 p-4 bg-gray-50 rounded-lg">
+          <p class="text-gray-700 leading-relaxed text-sm">
+            Remember, the choice of camera type depends on your specific needs and the particular scenario you want to address. It's essential to consider factors such as the camera's installation location, viewing range, visibility, night vision capabilities, and the level of protection required. By selecting the right type of camera for each application scenario, you can create a comprehensive and effective surveillance system tailored to your needs.
+          </p>
+        </section>
+      </article>
+      
+      <!-- Social Sharing with Enhanced Animations -->
+      <div class="border-t border-gray-200 pt-6 mt-8 animate-fade-in-up-delay">
+        <h3 class="text-base font-semibold text-gray-900 mb-3">Social Media</h3>
+        <div class="flex space-x-3">
+          <a
+            href={`https://twitter.com/intent/tweet?url=${canonicalUrl}&text=${encodeURIComponent(tip.data.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-blue-500 hover:bg-blue-600 animate-bounce-in-delay-1"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+          
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${canonicalUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-blue-600 hover:bg-blue-700 animate-bounce-in-delay-2"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          
+          <a
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${canonicalUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-blue-700 hover:bg-blue-800 animate-bounce-in-delay-3"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          
+          <a
+            href={`https://www.youtube.com/`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon bg-red-600 hover:bg-red-700 animate-bounce-in-delay-4"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          
+          <a
+            href={`mailto:?subject=${encodeURIComponent(tip.data.title)}&body=${encodeURIComponent(canonicalUrl)}`}
+            class="social-icon bg-gray-600 hover:bg-gray-700 animate-bounce-in-delay-5"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Articles with Staggered Animation -->
+    {relatedTips.length > 0 && (
+      <section class="bg-gray-50 py-12 animate-fade-in-up-delay">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center animate-slide-in-from-bottom">Related Articles</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {relatedTips.map((relatedTip, index) => (
-              <article 
-                class="group bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-2xl hover:-translate-y-2 border border-gray-200/50"
-                data-animate data-animate-delay={200 + (index * 150)}
-              >
-                <div class="relative overflow-hidden">
-                  {relatedTip.data.eventImage && (
-                    <div class="relative h-56 overflow-hidden">
-                      <img
-                        src={relatedTip.data.eventImage}
-                        alt={relatedTip.data.eventImageAlt}
-                        class="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,0.85,0.3,1.05)] group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-700 ease-out group-hover:from-black/70"></div>
-                      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"></div>
-                    </div>
-                  )}
-                  
-                  <div class="p-8">
-                    <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
-                      <span class="bg-gray-100 px-3 py-1 rounded-full font-medium transition-all duration-500 ease-out group-hover:bg-blue-100 group-hover:text-blue-700">{relatedTip.data.location}</span>
-                      <span class="font-medium transition-colors duration-500 ease-in-out group-hover:text-blue-600">{relatedTip.data.readTime} min read</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 transition-colors duration-500 ease-in-out group-hover:text-blue-600 line-clamp-2 leading-relaxed">
-                      {relatedTip.data.title}
-                    </h3>
-                    
-                    <p class="text-gray-600 mb-6 line-clamp-2 leading-relaxed transition-colors duration-300 ease-in-out">
-                      {relatedTip.data.subTitle}
-                    </p>
-                    
-                    <a 
-                      href={`/tips/${relatedTip.slug}`}
-                      class="inline-flex items-center text-blue-600 font-bold transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group/link hover:text-blue-700 hover:scale-105"
-                    >
-                      <span class="mr-2">Read Tip</span>
-                      <svg class="w-5 h-5 transition-transform duration-500 ease-out group-hover/link:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                      </svg>
-                    </a>
+              <article class={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 animate-card-slide-in-delay-${index + 1}`}>
+                <div class="h-32 bg-gradient-to-br from-blue-100 to-gray-200 flex items-center justify-center">
+                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
                   </div>
+                </div>
+                
+                <div class="p-4">
+                  <h3 class="text-base font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-300">
+                    <a href={`/tips/${relatedTip.slug}`}>
+                      {relatedTip.data.title}
+                    </a>
+                  </h3>
+                  
+                  <p class="text-gray-600 text-xs mb-3 line-clamp-2">
+                    {relatedTip.data.subTitle}
+                  </p>
+                  
+                  <a 
+                    href={`/tips/${relatedTip.slug}`}
+                    class="text-blue-600 font-medium text-xs hover:text-blue-700 transition-all duration-300 inline-flex items-center group"
+                  >
+                    Read More 
+                    <svg class="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </a>
                 </div>
               </article>
             ))}
@@ -296,195 +336,240 @@ const structuredData = {
         </div>
       </section>
     )}
-    
-    
   </main>
 </Layout>
 
-<script is:inline>
-  // Clipboard fallback function with smoother animation
-  function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(() => {
-        showNotification('Link copied to clipboard!');
-      });
-    } else {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      try {
-        document.execCommand('copy');
-        showNotification('Link copied to clipboard!');
-      } catch (err) {
-        console.error('Failed to copy text: ', err);
-        showNotification('Failed to copy link');
-      }
-      textArea.remove();
+<style>
+  /* Enhanced Animation Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  // Enhanced notification function with smoother animation
-  function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]';
-    document.body.appendChild(notification);
-    
-    // Force reflow
-    void notification.offsetWidth;
-    
-    notification.style.transform = 'translateX(0)';
-    
-    setTimeout(() => {
-      notification.style.transform = 'translateX(120%)';
-      setTimeout(() => notification.remove(), 500);
-    }, 3000);
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // Enhanced Intersection Observer with smoother thresholds
-    const observerOptions = {
-      threshold: 0.05,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    // Observe all elements with data-animate attribute
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
-    
-    // Smoother reading progress with momentum
-    const progressBar = document.createElement('div');
-    progressBar.className = 'fixed top-0 left-0 h-1.5 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 z-50 transition-all duration-500 ease-out shadow-lg';
-    progressBar.style.width = '0%';
-    progressBar.style.opacity = '0';
-    document.body.appendChild(progressBar);
-    
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    let currentProgress = 0;
-    let targetProgress = 0;
-    
-    const updateProgressBar = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.offsetHeight - window.innerHeight;
-      targetProgress = (scrollTop / docHeight) * 100;
-      
-      // Smooth interpolation with momentum
-      currentProgress += (targetProgress - currentProgress) * 0.1;
-      
-      progressBar.style.width = currentProgress + '%';
-      progressBar.style.opacity = targetProgress > 5 ? '1' : '0';
-      
-      // Continue animation if not at target
-      if (Math.abs(currentProgress - targetProgress) > 0.5) {
-        requestAnimationFrame(updateProgressBar);
-      }
-    };
-    
-    window.addEventListener('scroll', () => {
-      lastScrollY = window.scrollY;
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateProgressBar();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-  });
-  
-  // Make functions globally available
-  window.copyToClipboard = copyToClipboard;
-  window.showNotification = showNotification;
-</script>
-
-<style is:global>
-  /* Base transition settings */
-  * {
-    transition-property: color, background-color, border-color, text-decoration-color, 
-                         fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-timing-function: cubic-bezier(0.16, 0.85, 0.3, 1.05);
-    transition-duration: 300ms;
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
-  /* Image transitions */
-  img {
-    transition: transform 800ms cubic-bezier(0.16, 0.85, 0.3, 1.05), 
-                opacity 500ms ease-out;
-    will-change: transform, opacity;
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
-  /* Animation classes */
-  [data-animate] {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 800ms ease-out, transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, opacity;
+  @keyframes bounceIn {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
   }
 
-  [data-animate].animate-visible {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes cardSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Staggered animations */
-  [data-animate-delay="100"] { transition-delay: 100ms; }
-  [data-animate-delay="200"] { transition-delay: 200ms; }
-  [data-animate-delay="300"] { transition-delay: 300ms; }
-  [data-animate-delay="400"] { transition-delay: 400ms; }
-  [data-animate-delay="500"] { transition-delay: 500ms; }
-  [data-animate-delay="600"] { transition-delay: 600ms; }
-  [data-animate-delay="700"] { transition-delay: 700ms; }
-  [data-animate-delay="800"] { transition-delay: 800ms; }
-  [data-animate-delay="900"] { transition-delay: 900ms; }
-  [data-animate-delay="1000"] { transition-delay: 1000ms; }
-
-  /* Smooth page transitions */
-  html {
-    scroll-behavior: smooth;
+  /* Missing animations for fade-in-up and slide-in-from-bottom */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Gradient transitions */
-  .bg-gradient-to-r {
-    transition: background-position 800ms ease;
-    background-size: 200% 200%;
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .hover\:bg-gradient-shift:hover {
-    background-position: 100% 50%;
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
   }
 
-  /* Special easing functions */
-  .ease-\[cubic-bezier\(0\.22\,1\,0\.36\,1\)\] {
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out;
   }
 
-  /* Performance optimizations */
-  .backdrop-blur-sm {
-    will-change: backdrop-filter;
+  .animate-fade-in-up-delay {
+    animation: fadeInUp 1s ease-out 0.3s both;
   }
 
-  /* Line clamping */
+  .animate-slide-in-from-bottom {
+    animation: slideInFromBottom 1s ease-out;
+  }
+
+  .animate-fade-in-delay-1 {
+    animation: fadeIn 0.6s ease-out 0.2s both;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 0.6s ease-out 0.4s both;
+  }
+
+  .animate-fade-in-delay-3 {
+    animation: fadeIn 0.6s ease-out 0.6s both;
+  }
+
+  .animate-fade-in-delay-4 {
+    animation: fadeIn 0.6s ease-out 0.8s both;
+  }
+
+  .animate-fade-in-delay-5 {
+    animation: fadeIn 0.6s ease-out 1s both;
+  }
+
+  .animate-slide-in-from-left {
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  .animate-slide-in-from-left-delay {
+    animation: slideInLeft 0.8s ease-out 0.3s both;
+  }
+
+  .animate-slide-in-from-right {
+    animation: slideInRight 0.8s ease-out 0.6s both;
+  }
+
+  .animate-zoom-in {
+    animation: zoomIn 0.7s ease-out;
+  }
+
+  .animate-bounce-in-delay-1 {
+    animation: bounceIn 0.7s ease-out 0.2s both;
+  }
+
+  .animate-bounce-in-delay-2 {
+    animation: bounceIn 0.7s ease-out 0.4s both;
+  }
+
+  .animate-bounce-in-delay-3 {
+    animation: bounceIn 0.7s ease-out 0.6s both;
+  }
+
+  .animate-bounce-in-delay-4 {
+    animation: bounceIn 0.7s ease-out 0.8s both;
+  }
+
+  .animate-bounce-in-delay-5 {
+    animation: bounceIn 0.7s ease-out 1s both;
+  }
+
+  .animate-card-slide-in-delay-1 {
+    animation: cardSlideIn 0.7s ease-out 0.2s both;
+  }
+
+  .animate-card-slide-in-delay-2 {
+    animation: cardSlideIn 0.7s ease-out 0.4s both;
+  }
+
+  .animate-card-slide-in-delay-3 {
+    animation: cardSlideIn 0.7s ease-out 0.6s both;
+  }
+
+  .animate-card-slide-in-delay-4 {
+    animation: cardSlideIn 0.7s ease-out 0.8s both;
+  }
+
+  .animate-card-slide-in-delay-5 {
+    animation: cardSlideIn 0.7s ease-out 1s both;
+  }
+
+  /* Social Icon Styles */
+  .social-icon {
+    @apply flex items-center justify-center w-10 h-10 text-white rounded-full transition-all duration-300 transform hover:scale-110 hover:shadow-lg;
+  }
+
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .prose {
+    color: #374151;
+  }
+
+  .prose h2 {
+    color: #111827;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .prose strong {
+    color: #111827;
+    font-weight: 600;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  a, button {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Hover effects */
+  a:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Responsive truncation for title */
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>
