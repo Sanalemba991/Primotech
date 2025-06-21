@@ -1,754 +1,499 @@
 ---
+// filepath: c:\Users\LENOVO\Primotech\src\pages\faq.astro
 import Layout from "../layouts/Layout.astro";
 
-const title = "FAQ - PrimoTech LLC";
-const description = "Frequently asked questions about PrimoTech security solutions, support, and services. Find answers to common questions.";
+const title = "Frequently Asked Questions | PrimoTech LLC";
+const description = "Find answers to common questions about PrimoTech LLC products, services, and support.";
+
+const faqs = [
+  {
+    id: 1,
+    category: "General",
+    question: "How to change the login password of admin user?",
+    answer: "Log into the web interface of the camera, go to【Security】>【User List】"
+  },
+  {
+    id: 2,
+    category: "Network", 
+    question: "How to modify the IP address of Uniarch product?",
+    answer: "The default IP address of camera is 192.168.1.13, DHCP is enabled by default."
+  },
+  {
+    id: 3,
+    category: "Network",
+    question: "How to change network settings on my device?",
+    answer: "Two modes can be selected for obtaining IP address, which are static IP address and DHCP respectively."
+  },
+  {
+    id: 4,
+    category: "Features",
+    question: "Does PrimoTech support cloud storage?",
+    answer: "Yes, our cameras support secure cloud storage and local SD card recording with multiple backup options."
+  },
+  {
+    id: 5,
+    category: "Support",
+    question: "Where can I download manuals?",
+    answer: "Visit our Downloads page for the latest manuals and firmware for your product model."
+  },
+  {
+    id: 6,
+    category: "Warranty",
+    question: "What is the warranty period?",
+    answer: "All PrimoTech products include a 3-year limited warranty with comprehensive coverage."
+  }
+];
+
+const faqCategories = [...new Set(faqs.map(faq => faq.category))];
 ---
 
 <Layout title={title} description={description}>
-  <main class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="relative h-[70vh] overflow-hidden faq-hero">
-      <!-- Background Image -->
+  <main class="min-h-screen bg-gray-50 pb-20">
+    <!-- Cinematic Banner -->
+    <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden faq-hero mb-14">
       <div class="absolute inset-0">
         <img 
-          src="/images/faq-banner.jpg" 
-          alt="Customer support and FAQ assistance" 
-          class="w-full h-full object-cover hero-image-reveal"
+          src="/images/aboutus-background.png"
+          alt="PrimoTech office team"
+          class="w-full h-full object-cover faq-hero-image"
+          loading="eager"
         />
-        <div class="absolute inset-0 bg-black/40 hero-overlay-fade"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-transparent hero-overlay-fade"></div>
+        <div class="absolute inset-0 bg-black/40 faq-hero-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-transparent faq-hero-overlay"></div>
       </div>
-
-      <!-- Hero Content -->
       <div class="relative z-10 flex items-center h-full">
         <div class="container mx-auto px-6 lg:px-8">
-          <div class="max-w-3xl hero-content-reveal">
-            <h1 class="text-6xl lg:text-8xl font-bold text-white mb-8 hero-title-animate">
-              FAQ
+          <div class="max-w-2xl faq-hero-content">
+            <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 faq-hero-title">
+              Frequently Asked Questions
             </h1>
-            <p class="text-xl lg:text-2xl text-gray-200 mb-4 hero-subtitle-animate">
-              Find answers to common questions
+            <p class="text-xl lg:text-2xl text-gray-200 mb-4 faq-hero-subtitle">
+              Quick answers about PrimoTech products and support.
             </p>
-            <p class="text-lg lg:text-xl text-gray-300 mb-8 hero-description-animate">
-              about our security solutions and services.
+            <p class="text-lg lg:text-xl text-gray-300 mb-8 faq-hero-desc">
+              Find solutions to common questions or reach out to our team for more help.
             </p>
-            
-            <!-- Search FAQ Button -->
-            <div class="hero-button-animate">
-              <a 
-                href="#faq-search"
-                class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg"
-              >
-                Search FAQ
-                <svg class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="max-w-6xl mx-auto px-4 faq-content-section">
+      <div class="mb-12 flex flex-wrap gap-3 justify-center faq-filter-container">
+        <button class="faq-cat-btn active" data-category="All" onclick="filterFaqs('All')">All</button>
+        {faqCategories.map(category => (
+          <button class="faq-cat-btn" data-category={category} onclick={`filterFaqs('${category}')`}>{category}</button>
+        ))}
+      </div>
+
+      <!-- FAQ Grid -->
+      <div id="faq-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 faq-grid-container">
+        {faqs.map((faq, index) => (
+          <div class="faq-item bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-all duration-300" 
+               data-category={faq.category} 
+               style={`--delay: ${index * 0.05}s`}>
+            <div class="flex items-start mb-4">
+              <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-              </a>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 leading-tight">{faq.question}</h3>
             </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">{faq.answer}</p>
           </div>
-        </div>
+        ))}
       </div>
-    </section>
-
-    <!-- Search Section -->
-    <section class="py-16 bg-gradient-to-b from-white to-slate-50 search-section" id="faq-search">
-      <div class="container mx-auto px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="inline-flex items-center px-3 py-1.5 bg-teal-100 text-teal-800 rounded-full text-sm font-medium mb-3 search-badge-animate">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
-            </svg>
-            Quick Search
-          </div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 search-title-animate">
-            Search Our Knowledge Base
-          </h2>
-          <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 search-description-animate">
-            Can't find what you're looking for? Use our search feature to quickly find answers 
-            to your questions about our products and services.
-          </p>
-
-          <!-- Search Box -->
-          <div class="max-w-2xl mx-auto search-box-animate">
-            <div class="relative">
-              <input 
-                type="text" 
-                placeholder="Search for answers..." 
-                class="w-full px-6 py-4 text-lg border-2 border-slate-300 rounded-full focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white text-slate-900 pl-14"
-                id="faqSearch"
-              >
-              <svg class="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-              </svg>
-              <button 
-                type="button"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full transition-all duration-300"
-                id="searchBtn"
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Categories Section -->
-    <section class="py-16 bg-white categories-section">
-      <div class="container mx-auto px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <div class="inline-flex items-center px-3 py-1.5 bg-slate-100 text-slate-800 rounded-full text-sm font-medium mb-3 categories-badge-animate">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
-            </svg>
-            Browse by Category
-          </div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 categories-title-animate">
-            FAQ Categories
-          </h2>
-          <p class="text-lg text-slate-600 max-w-2xl mx-auto categories-description-animate">
-            Browse our most frequently asked questions organized by topic to find 
-            the information you need quickly.
-          </p>
-        </div>
-
-        <!-- Category Cards -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <div class="group bg-gradient-to-br from-slate-50 to-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-2 category-card-animate border border-slate-200" data-delay="200">
-            <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M6 7h12"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Products & Solutions</h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Questions about our security products, features, specifications, and compatibility.
-            </p>
-            <span class="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700">
-              View Questions
-              <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </span>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-teal-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-2 category-card-animate border border-slate-200" data-delay="400">
-            <div class="w-14 h-14 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 11-9.75 9.75A9.75 9.75 0 0112 2.25z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Technical Support</h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Troubleshooting guides, installation help, and technical assistance questions.
-            </p>
-            <span class="inline-flex items-center text-teal-600 font-medium text-sm group-hover:text-teal-700">
-              View Questions
-              <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </span>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-emerald-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-2 category-card-animate border border-slate-200" data-delay="600">
-            <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Orders & Billing</h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Information about ordering, pricing, billing, shipping, and payment methods.
-            </p>
-            <span class="inline-flex items-center text-emerald-600 font-medium text-sm group-hover:text-emerald-700">
-              View Questions
-              <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </span>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-2 category-card-animate border border-slate-200" data-delay="800">
-            <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Account & Access</h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Account management, user permissions, login issues, and access controls.
-            </p>
-            <span class="inline-flex items-center text-purple-600 font-medium text-sm group-hover:text-purple-700">
-              View Questions
-              <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </span>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-orange-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-2 category-card-animate border border-slate-200" data-delay="1000">
-            <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Training & Resources</h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Training programs, documentation, user guides, and educational resources.
-            </p>
-            <span class="inline-flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700">
-              View Questions
-              <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </span>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-rose-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center transform hover:-translate-y-2 category-card-animate border border-slate-200" data-delay="1200">
-            <div class="w-14 h-14 bg-gradient-to-br from-rose-500 to-rose-600 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Partnerships</h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Partner program, distribution, reseller agreements, and collaboration opportunities.
-            </p>
-            <span class="inline-flex items-center text-rose-600 font-medium text-sm group-hover:text-rose-700">
-              View Questions
-              <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Popular Questions Section -->
-    <section class="py-16 bg-slate-50 popular-section">
-      <div class="container mx-auto px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <div class="inline-flex items-center px-3 py-1.5 bg-teal-100 text-teal-800 rounded-full text-sm font-medium mb-3 popular-badge-animate">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
-            </svg>
-            Most Asked
-          </div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 popular-title-animate">
-            Popular Questions
-          </h2>
-          <p class="text-lg text-slate-600 max-w-2xl mx-auto popular-description-animate">
-            Here are the most frequently asked questions from our customers. 
-            These cover the most common topics and concerns.
-          </p>
-        </div>
-
-        <div class="max-w-4xl mx-auto">
-          <!-- Placeholder for popular questions -->
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center popular-content-animate">
-            <div class="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-4">FAQ Content Coming Soon</h3>
-            <p class="text-slate-600 mb-6">
-              We're currently preparing our comprehensive FAQ database. Popular questions 
-              and detailed answers will be displayed here to help you find information quickly.
-            </p>
-            <div class="inline-flex items-center text-teal-600 font-medium">
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              Updates coming soon
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Support Section -->
-    <section class="py-20 bg-white contact-section">
-      <div class="container mx-auto px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="inline-flex items-center px-3 py-1.5 bg-slate-100 text-slate-800 rounded-full text-sm font-medium mb-3 contact-badge-animate">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-            </svg>
-            Need More Help?
-          </div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 contact-title-animate">
-            Can't Find Your Answer?
-          </h2>
-          <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 contact-description-animate">
-            If you can't find the answer you're looking for, our support team is here to help. 
-            Contact us directly for personalized assistance.
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-4 justify-center contact-buttons-animate">
-            <a 
-              href="/contact"
-              class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg"
-            >
-              Contact Support
-              <svg class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </a>
-            
-            <a 
-              href="/support"
-              class="inline-flex items-center px-6 py-3 bg-slate-600 hover:bg-slate-700 text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg"
-            >
-              Visit Support Center
-              <svg class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 11-9.75 9.75A9.75 9.75 0 0112 2.25z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+      
+      <div id="no-results" class="hidden text-center py-12">
+        <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="text-lg font-medium text-gray-700 mb-1">No results found</h3>
+        <p class="text-gray-500">Try selecting a different category</p>
       </div>
     </section>
   </main>
 </Layout>
 
-<style>
-  /* Global styles */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
+<style is:global>
+/* Hero Animations */
+.faq-hero {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow-x: hidden;
+}
+.faq-hero.faq-hero-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.faq-hero-image {
+  transform: scale(1.1);
+  opacity: 0;
+  transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.faq-hero.faq-hero-revealed .faq-hero-image {
+  transform: scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+.faq-hero-overlay {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+.faq-hero.faq-hero-revealed .faq-hero-overlay {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+.faq-hero-content {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.faq-hero.faq-hero-revealed .faq-hero-content {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.6s;
+}
+.faq-hero-title {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.faq-hero.faq-hero-revealed .faq-hero-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.8s;
+}
+.faq-hero-subtitle {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.faq-hero.faq-hero-revealed .faq-hero-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1s;
+}
+.faq-hero-desc {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.faq-hero.faq-hero-revealed .faq-hero-desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1.2s;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+/* Section Scroll Animations */
+.faq-content-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
-  /* Container width fix */
-  .container {
-    max-width: 1200px;
-    width: 100%;
-  }
+.faq-content-section.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  /* Hero animations - Same as Partner */
-  .faq-hero {
+.faq-filter-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.section-visible .faq-filter-container {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.faq-grid-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.section-visible .faq-grid-container {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+/* Category Button Styles */
+.faq-cat-btn {
+  padding: 0.375rem 1rem;
+  border-radius: 20px;
+  border: 1.5px solid #99f6e4;
+  background: white;
+  color: #14b8a6;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 60px;
+  text-align: center;
+  letter-spacing: 0.025em;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.faq-cat-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.4s ease;
+}
+
+.faq-cat-btn:hover::before {
+  left: 100%;
+}
+
+.faq-cat-btn.active {
+  background: linear-gradient(135deg, #2dd4bf, #14b8a6);
+  color: white;
+  border-color: #2dd4bf;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 212, 191, 0.25);
+}
+
+.faq-cat-btn:hover:not(.active) {
+  background: rgba(45, 212, 191, 0.1);
+  border-color: #2dd4bf;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(45, 212, 191, 0.15);
+}
+
+.faq-cat-btn.loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.faq-cat-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* FAQ Item Animations */
+.faq-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: faqItemEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(var(--delay) + 0.4s);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes faqItemEnter {
+  0% {
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(20px);
   }
-
-  .faq-hero.hero-revealed {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
 
-  .hero-image-reveal {
-    transform: scale(1.1);
-    opacity: 0;
-    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+.faq-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2dd4bf, #14b8a6);
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: translateX(-100%);
+}
 
-  .faq-hero.hero-revealed .hero-image-reveal {
-    transform: scale(1);
-    opacity: 1;
-    transition-delay: 0.2s;
-  }
+.faq-item:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-  .hero-overlay-fade {
-    opacity: 0;
-    transition: opacity 1s ease-out;
-  }
+.faq-item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
 
-  .faq-hero.hero-revealed .hero-overlay-fade {
-    opacity: 1;
-    transition-delay: 0.4s;
-  }
+/* Exit animation for filtered out items */
+.faq-item.faq-exit {
+  animation: faqItemExit 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
 
-  .hero-content-reveal {
-    opacity: 0;
-    transform: translateX(-60px);
-    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .faq-hero.hero-revealed .hero-content-reveal {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.6s;
-  }
-
-  .hero-title-animate {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .hero-subtitle-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .hero-description-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .hero-button-animate {
-    opacity: 0;
-    transform: translateY(30px) scale(0.8);
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .faq-hero.hero-revealed .hero-title-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.8s;
-  }
-
-  .faq-hero.hero-revealed .hero-subtitle-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 1s;
-  }
-
-  .faq-hero.hero-revealed .hero-description-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 1.2s;
-  }
-
-  .faq-hero.hero-revealed .hero-button-animate {
+@keyframes faqItemExit {
+  0% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    transition-delay: 1.4s;
   }
-
-  /* Search Section animations */
-  .search-section {
+  100% {
     opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(20px) scale(0.95);
   }
+}
 
-  .search-section.section-revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Grid container transitions */
+#faq-list {
+  will-change: transform, opacity;
+  transition: height 0.4s ease-out;
+}
 
-  .search-badge-animate,
-  .search-title-animate,
-  .search-description-animate,
-  .search-box-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+/* No results animation */
+#no-results {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
-  .search-section.section-revealed .search-badge-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-  }
-
-  .search-section.section-revealed .search-title-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
-  }
-
-  .search-section.section-revealed .search-description-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.6s;
-  }
-
-  .search-section.section-revealed .search-box-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.8s;
-  }
-
-  /* Categories Section animations */
-  .categories-section {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .categories-section.section-revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .categories-badge-animate,
-  .categories-title-animate,
-  .categories-description-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .categories-section.section-revealed .categories-badge-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-  }
-
-  .categories-section.section-revealed .categories-title-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
-  }
-
-  .categories-section.section-revealed .categories-description-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.6s;
-  }
-
-  .category-card-animate {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .categories-section.section-revealed .category-card-animate {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  /* Popular Section animations */
-  .popular-section {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .popular-section.section-revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .popular-badge-animate,
-  .popular-title-animate,
-  .popular-description-animate,
-  .popular-content-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .popular-section.section-revealed .popular-badge-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-  }
-
-  .popular-section.section-revealed .popular-title-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
-  }
-
-  .popular-section.section-revealed .popular-description-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.6s;
-  }
-
-  .popular-section.section-revealed .popular-content-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.8s;
-  }
-
-  /* Contact Section animations */
-  .contact-section {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .contact-section.section-revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .contact-badge-animate,
-  .contact-title-animate,
-  .contact-description-animate,
-  .contact-buttons-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .contact-section.section-revealed .contact-badge-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-  }
-
-  .contact-section.section-revealed .contact-title-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
-  }
-
-  .contact-section.section-revealed .contact-description-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.6s;
-  }
-
-  .contact-section.section-revealed .contact-buttons-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.8s;
-  }
-
-  /* Card hover effects */
-  .category-card-animate {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
-  }
-
-  .category-card-animate:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    .hero-title-animate {
-      font-size: 3rem;
-    }
-    
-    .hero-content-reveal {
-      transform: translateY(40px);
-    }
-    
-    .faq-hero.hero-revealed .hero-content-reveal {
-      transform: translateY(0);
-    }
-    
-    .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f1f5f9;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #64748b;
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
-  }
+#no-results.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 
-<script>
-  // Intersection Observer for animations - Same as Partner
-  const observerOptions = {
-    threshold: [0, 0.2, 0.4],
-    rootMargin: '0px 0px -150px 0px'
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+  // Banner animation
+  const heroSection = document.querySelector('.faq-hero');
+  if (heroSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          heroSection.classList.add('faq-hero-revealed');
+          observer.unobserve(heroSection);
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(heroSection);
+  }
+
+  // Section scroll animation
+  const contentSection = document.querySelector('.faq-content-section');
+  if (contentSection) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { 
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px' // Trigger slightly before reaching the section
+    });
+    sectionObserver.observe(contentSection);
+  }
+
+  // Enhanced FAQ filtering with smooth transitions
+  window.filterFaqs = (category) => {
+    const container = document.getElementById('faq-list');
+    const items = Array.from(document.querySelectorAll('.faq-item'));
+    const noResults = document.getElementById('no-results');
+    const activeBtn = document.querySelector(`.faq-cat-btn[data-category="${category}"]`);
+    let visibleCount = 0;
+
+    // Add loading state to active button
+    activeBtn.classList.add('loading');
+
+    // Update active button state
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // First, apply exit animations to all items that don't match
+    items.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+      const shouldShow = category === 'All' || itemCategory === category;
+      
+      if (!shouldShow && item.style.display !== 'none') {
+        item.classList.add('faq-exit');
+      } else if (shouldShow) {
+        visibleCount++;
+      }
+    });
+
+    // After exit animations complete, update the display
+    setTimeout(() => {
+      // Hide exited items and reset their state
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        const shouldShow = category === 'All' || itemCategory === category;
+        
+        if (!shouldShow) {
+          item.style.display = 'none';
+          item.classList.remove('faq-exit');
+        } else {
+          if (item.style.display === 'none') {
+            item.style.display = 'block';
+            item.style.animation = 'none';
+            void item.offsetHeight; // Trigger reflow
+            item.style.animation = '';
+          }
+          item.classList.remove('faq-exit');
+        }
+      });
+
+      // Update active button after animation starts
+      activeBtn.classList.remove('loading');
+      activeBtn.classList.add('active');
+
+      // Show/hide no results message
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        setTimeout(() => {
+          noResults.classList.add('show');
+        }, 10);
+      } else {
+        noResults.classList.remove('show');
+        setTimeout(() => {
+          noResults.classList.add('hidden');
+        }, 300);
+      }
+
+      // Animate container height change
+      container.style.transition = 'height 0.4s ease-out';
+      container.style.height = `${container.scrollHeight}px`;
+      
+      // Remove fixed height after transition
+      setTimeout(() => {
+        container.style.transition = 'none';
+        container.style.height = 'auto';
+      }, 400);
+
+    }, 300); // Match this duration with the exit animation
   };
 
-  // Hero section observer
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
-        entry.target.classList.add('hero-revealed');
-        heroObserver.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Section observer
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
-        entry.target.classList.add('section-revealed');
-        
-        // Stagger card animations
-        const cards = entry.target.querySelectorAll('[data-delay]');
-        cards.forEach((card, index) => {
-          const delay = card.getAttribute('data-delay') || (index * 200);
-          setTimeout(() => {
-            (card as HTMLElement).style.transitionDelay = `${delay}ms`;
-          }, 100);
-        });
-        
-        sectionObserver.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Initialize animations
-  document.addEventListener('DOMContentLoaded', () => {
-    const heroSection = document.querySelector('.faq-hero');
-    const sections = document.querySelectorAll('.search-section, .categories-section, .popular-section, .contact-section');
-    
-    if (heroSection) {
-      heroObserver.observe(heroSection);
-    }
-    
-    sections.forEach(section => {
-      sectionObserver.observe(section);
-    });
-
-    // Search functionality
-    const searchInput = document.getElementById('faqSearch');
-    const searchBtn = document.getElementById('searchBtn');
-    
-    if (searchInput && searchBtn) {
-      searchBtn.addEventListener('click', () => {
-        const query = searchInput.value.trim();
-        if (query) {
-          console.log('Searching for:', query);
-          // Add search functionality here
-        }
-      });
-      
-      searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          const query = searchInput.value.trim();
-          if (query) {
-            console.log('Searching for:', query);
-            // Add search functionality here
-          }
-        }
-      });
-    }
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
+  // Initialize all items as visible
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = 'block';
   });
+});
 </script>
