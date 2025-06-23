@@ -47,6 +47,29 @@ const categories = [
     }
   }
 ];
+
+const supportItems = [
+  {
+    name: "Software",
+    href: "/support/software",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+  },
+  {
+    name: "FAQ",
+    href: "/support/faq",
+    icon: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+  },
+  {
+    name: "Download",
+    href: "/support/download",
+    icon: "M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+  },
+  {
+    name: "Video",
+    href: "/support/video",
+    icon: "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+  }
+];
 ---
 <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 w-full">
   <div class="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
@@ -70,23 +93,22 @@ const categories = [
           </svg>
         </button>
       </div>
+      
       <!-- Support Dropdown -->
-      <div class="relative group">
-        <a href="/support" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium group-hover:text-cyan-600 transition-colors duration-200">
-          Support
-        </a>
-        <div
-          class="absolute left-1/2 -translate-x-1/2 mt-2 w-40 bg-white border border-gray-100 rounded-lg shadow-lg 
-          opacity-0 group-hover:opacity-100 group-hover:visible invisible 
-          translate-y-4 group-hover:translate-y-0 
-          transition-all duration-500 ease-in-out z-30"
+      <div class="relative" id="support-menu">
+        <button
+          id="support-toggle"
+          class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200"
+          type="button"
+          aria-expanded="false"
         >
-         
-          <a href="/support/faq" class="block px-6 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-200">FAQ</a>
-          
-          <a href="/support/videos" class="block px-6 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-200">Video</a>
-        </div>
+          Support
+          <svg class="ml-1 w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
       </div>
+
       <a href="/partner" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Partner</a>
       <a href="/tips" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Tips & Guides</a>
     </div>
@@ -99,7 +121,7 @@ const categories = [
   </div>
 </nav>
 
-<!-- Mega Menu: shown below navbar, toggled by Products button -->
+<!-- Products Mega Menu -->
 <div id="mega-menu"
   class="w-full bg-white border-b border-gray-100 shadow fixed left-0 top-16 pointer-events-none opacity-0 invisible transition-all duration-300 z-40"
 >
@@ -136,28 +158,117 @@ const categories = [
   </div>
 </div>
 
+<!-- Support Full-Width Dropdown -->
+<div id="support-dropdown"
+  class="w-full bg-white border-b border-gray-100 shadow fixed left-0 top-16 pointer-events-none opacity-0 invisible transition-all duration-300 z-40"
+>
+  <div class="container mx-auto pointer-events-auto" id="support-dropdown-area">
+    <div class="flex justify-center py-12">
+      <div class="grid grid-cols-4 gap-8 max-w-4xl">
+        {supportItems.map((item) => (
+          <a href={item.href} class="support-item group flex flex-col items-center p-6 rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+            <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-cyan-200 transition-colors duration-200">
+              <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon}/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-cyan-700 transition-colors duration-200">{item.name}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  // Track menu state
+  // Track menu state for Products
   let isMenuOpen = false;
-  let hasUserHoveredProducts = false; // Track if user has manually hovered Products
+  let hasUserHoveredProducts = false;
   let hideMenuTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  // Track menu state for Support
+  let isSupportOpen = false;
+  let hasUserHoveredSupport = false;
+  let hideSupportTimeout: ReturnType<typeof setTimeout> | undefined;
 
   // Get DOM elements
   const productsMenu = document.getElementById('products-menu');
   const productsToggle = document.getElementById('products-toggle');
   const megaMenu = document.getElementById('mega-menu');
   const megaMenuArea = document.getElementById('mega-menu-area');
+  
+  const supportMenu = document.getElementById('support-menu');
+  const supportToggle = document.getElementById('support-toggle');
+  const supportDropdown = document.getElementById('support-dropdown');
+  const supportDropdownArea = document.getElementById('support-dropdown-area');
+  
   const navLinks = document.querySelectorAll('.nav-link');
 
-  // Only run if all elements exist
+  // Support menu hide function (hoisted for use above)
+  function hideSupportImmediate() {
+    clearTimeout(hideSupportTimeout);
+    if (isSupportOpen) {
+      isSupportOpen = false;
+      hasUserHoveredSupport = false;
+      supportToggle.classList.remove('text-cyan-600');
+      supportToggle.classList.add('text-gray-700');
+      const arrow = supportToggle.querySelector('svg');
+      if (arrow) arrow.style.transform = 'rotate(0deg)';
+      supportDropdown.classList.remove('opacity-100', 'visible');
+      supportDropdown.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+    }
+  }
+
+  // Products menu reset function (hoisted for use above)
+  function resetToDefault() {
+    const btns = megaMenu.querySelectorAll('.category-btn');
+    const panels = megaMenu.querySelectorAll('.product-panel');
+    
+    btns.forEach((b, i) => {
+      b.classList.remove(
+        'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+        'text-white', 'font-semibold'
+      );
+      if (i === 0) {
+        b.classList.add(
+          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'text-white', 'font-semibold'
+        );
+      }
+    });
+    
+    panels.forEach((p, i) => {
+      if (i === 0) p.classList.remove('hidden');
+      else p.classList.add('hidden');
+    });
+  }
+
+  // Products menu hide function (hoisted for use above)
+  function hideMenuImmediate() {
+    clearTimeout(hideMenuTimeout);
+    if (isMenuOpen) {
+      isMenuOpen = false;
+      hasUserHoveredProducts = false;
+      productsToggle.classList.remove('text-cyan-600');
+      productsToggle.classList.add('text-gray-700');
+      megaMenu.classList.remove('opacity-100', 'visible');
+      megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+      resetToDefault();
+    }
+  }
+
+  // Products menu functionality
   if (productsMenu && megaMenu && megaMenuArea && productsToggle) {
     
-    // Show menu function - only if user has hovered Products first
     const showMenu = () => {
-      clearTimeout(hideMenuTimeout); // Cancel any pending hide
+      clearTimeout(hideMenuTimeout);
       if (hasUserHoveredProducts && !isMenuOpen) {
         isMenuOpen = true;
-        // Keep products button highlighted while menu is open
+        // Close support menu if open
+        if (isSupportOpen) {
+          hideSupportImmediate();
+        }
+        
         productsToggle.classList.add('text-cyan-600');
         productsToggle.classList.remove('text-gray-700');
         megaMenu.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
@@ -165,103 +276,29 @@ const categories = [
       }
     };
 
-    // Hide menu function - immediate
-    const hideMenuImmediate = () => {
-      clearTimeout(hideMenuTimeout);
-      if (isMenuOpen) {
-        isMenuOpen = false;
-        hasUserHoveredProducts = false; // Reset the flag
-        // Remove highlight from products button
-        productsToggle.classList.remove('text-cyan-600');
-        productsToggle.classList.add('text-gray-700');
-        megaMenu.classList.remove('opacity-100', 'visible');
-        megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');
-        
-        // Reset category buttons to default state
-        resetToDefault();
-      }
-    };
-
-    // Hide menu function - with 0.1 second delay
     const hideMenuDelayed = () => {
       clearTimeout(hideMenuTimeout);
       hideMenuTimeout = setTimeout(() => {
         if (isMenuOpen) {
           isMenuOpen = false;
-          hasUserHoveredProducts = false; // Reset the flag
-          // Remove highlight from products button
+          hasUserHoveredProducts = false;
           productsToggle.classList.remove('text-cyan-600');
           productsToggle.classList.add('text-gray-700');
           megaMenu.classList.remove('opacity-100', 'visible');
           megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');
-          
-          // Reset category buttons to default state
           resetToDefault();
         }
-      }, 100); // 0.1 second delay (100ms)
+      }, 100);
     };
 
-    // Reset categories to default state
-    const resetToDefault = () => {
-      const btns = megaMenu.querySelectorAll('.category-btn');
-      const panels = megaMenu.querySelectorAll('.product-panel');
-      
-      btns.forEach((b, i) => {
-        b.classList.remove(
-          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
-          'text-white', 'font-semibold'
-        );
-        // Set default to index 0 (Wi-Fi Camera)
-        if (i === 0) {
-          b.classList.add(
-            'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
-            'text-white', 'font-semibold'
-          );
-        }
-      });
-      
-      panels.forEach((p, i) => {
-        if (i === 0) p.classList.remove('hidden');
-        else p.classList.add('hidden');
-      });
-    };
-
-    // Event listener for Products menu - ONLY this enables the dropdown
     productsMenu.addEventListener('mouseenter', () => {
-      hasUserHoveredProducts = true; // Enable dropdown functionality
+      hasUserHoveredProducts = true;
       showMenu();
     });
     
-    productsMenu.addEventListener('mouseleave', hideMenuDelayed); // Use delayed hide
-    
-    // Mega menu area only responds if user hovered Products first
+    productsMenu.addEventListener('mouseleave', hideMenuDelayed);
     megaMenuArea.addEventListener('mouseenter', showMenu);
-    megaMenuArea.addEventListener('mouseleave', hideMenuDelayed); // Use delayed hide
-
-    // Event listeners for other nav links - close menu immediately and reset flag
-    navLinks.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        hasUserHoveredProducts = false; // Reset flag
-        hideMenuImmediate(); // Immediate hide for other nav links
-      });
-    });
-
-    // Click outside handler
-    document.addEventListener('click', (e) => {
-      if (!productsMenu.contains(e.target as Node) && !megaMenu.contains(e.target as Node)) {
-        hasUserHoveredProducts = false; // Reset flag
-        hideMenuImmediate();
-      }
-    });
-
-    // Keyboard navigation handler
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        hasUserHoveredProducts = false; // Reset flag
-        hideMenuImmediate();
-        productsToggle.focus();
-      }
-    });
+    megaMenuArea.addEventListener('mouseleave', hideMenuDelayed);
 
     // Category switching functionality
     const btns = megaMenu.querySelectorAll('.category-btn');
@@ -280,24 +317,107 @@ const categories = [
         panels.forEach(p => p.classList.add('hidden'));
         panels[idx].classList.remove('hidden');
       });
-
-      btn.addEventListener('focus', () => {
-        btns.forEach(b => b.classList.remove(
-          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
-          'text-white', 'font-semibold'
-        ));
-        btn.classList.add(
-          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
-          'text-white', 'font-semibold'
-        );
-        panels.forEach(p => p.classList.add('hidden'));
-        panels[idx].classList.remove('hidden');
-      });
     });
 
-    // When leaving the mega menu area, reset to default
-    megaMenu.addEventListener('mouseleave', () => {
-      resetToDefault();
-    });
+    megaMenu.addEventListener('mouseleave', resetToDefault);
   }
+
+  // Support menu functionality
+  if (supportMenu && supportDropdown && supportDropdownArea && supportToggle) {
+    
+    const showSupportMenu = () => {
+      clearTimeout(hideSupportTimeout);
+      if (hasUserHoveredSupport && !isSupportOpen) {
+        isSupportOpen = true;
+        // Close products menu if open
+        if (isMenuOpen) {
+          hideMenuImmediate();
+        }
+        supportToggle.classList.add('text-cyan-600');
+        supportToggle.classList.remove('text-gray-700');
+        const arrow = supportToggle.querySelector('svg');
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+        supportDropdown.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
+        supportDropdown.classList.add('opacity-100', 'visible');
+      }
+    };
+
+    const hideSupportImmediate = () => {
+      clearTimeout(hideSupportTimeout);
+      if (isSupportOpen) {
+        isSupportOpen = false;
+        hasUserHoveredSupport = false;
+        supportToggle.classList.remove('text-cyan-600');
+        supportToggle.classList.add('text-gray-700');
+        const arrow = supportToggle.querySelector('svg');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+        supportDropdown.classList.remove('opacity-100', 'visible');
+        supportDropdown.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+      }
+    };
+
+    const hideSupportDelayed = () => {
+      clearTimeout(hideSupportTimeout);
+      hideSupportTimeout = setTimeout(() => {
+        if (isSupportOpen) {
+          isSupportOpen = false;
+          hasUserHoveredSupport = false;
+          supportToggle.classList.remove('text-cyan-600');
+          supportToggle.classList.add('text-gray-700');
+          const arrow = supportToggle.querySelector('svg');
+          if (arrow) arrow.style.transform = 'rotate(0deg)';
+          supportDropdown.classList.remove('opacity-100', 'visible');
+          supportDropdown.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+        }
+      }, 100);
+    };
+
+    supportMenu.addEventListener('mouseenter', () => {
+      hasUserHoveredSupport = true;
+      showSupportMenu();
+    });
+    
+    supportMenu.addEventListener('mouseleave', hideSupportDelayed);
+    supportDropdownArea.addEventListener('mouseenter', showSupportMenu);
+    supportDropdownArea.addEventListener('mouseleave', hideSupportDelayed);
+  }
+
+  // Event listeners for other nav links - close both menus
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      hasUserHoveredProducts = false;
+      hasUserHoveredSupport = false;
+      hideMenuImmediate();
+      hideSupportImmediate();
+    });
+  });
+
+  // Click outside handler for both menus
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    if (productsMenu && megaMenu && !productsMenu.contains(target) && !megaMenu.contains(target)) {
+      hasUserHoveredProducts = false;
+      hideMenuImmediate();
+    }
+    if (supportMenu && supportDropdown && !supportMenu.contains(target) && !supportDropdown.contains(target)) {
+      hasUserHoveredSupport = false;
+      hideSupportImmediate();
+    }
+  });
+
+  // Keyboard navigation handler for both menus
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (isMenuOpen) {
+        hasUserHoveredProducts = false;
+        hideMenuImmediate();
+        productsToggle?.focus();
+      }
+      if (isSupportOpen) {
+        hasUserHoveredSupport = false;
+        hideSupportImmediate();
+        supportToggle?.focus();
+      }
+    }
+  });
 </script>
