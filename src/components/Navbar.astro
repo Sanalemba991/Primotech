@@ -81,31 +81,41 @@ const supportItems = [
     <!-- Main Nav -->
     <div class="hidden md:flex items-center space-x-8">
       <div class="relative" id="products-menu">
-        <button
-          id="products-toggle"
+        <a
+          href="/products"
+          id="products-link"
           class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200"
-          type="button"
-          aria-expanded="false"
         >
           Products
-          <svg class="ml-1 w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
+        </a>
+        <button
+          id="products-toggle"
+          class="absolute right-0 top-1/2 -translate-y-1/2 p-1 bg-transparent border-none outline-none cursor-pointer"
+          type="button"
+          aria-expanded="false"
+          tabindex="0"
+        >
+          <!-- Arrow removed -->
         </button>
       </div>
       
       <!-- Support Dropdown -->
       <div class="relative" id="support-menu">
-        <button
-          id="support-toggle"
+        <a
+          href="/support"
+          id="support-link"
           class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200"
-          type="button"
-          aria-expanded="false"
         >
           Support
-          <svg class="ml-1 w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
+        </a>
+        <button
+          id="support-toggle"
+          class="absolute right-0 top-1/2 -translate-y-1/2 p-1 bg-transparent border-none outline-none cursor-pointer"
+          type="button"
+          aria-expanded="false"
+          tabindex="0"
+        >
+          <!-- Arrow removed -->
         </button>
       </div>
 
