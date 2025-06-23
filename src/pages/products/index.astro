@@ -1,0 +1,440 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "About PrimoTech LLC - Life in Focus | PrimoTech LLC";
+const description = "Learn about PrimoTech LLC's commitment to Safety, User-Friendliness, and Professionalism. Discover our innovative IoT solutions and expertise in security technology.";
+---
+
+<Layout title={title} description={description}>
+  <main class="min-h-screen">
+    
+    <!-- Hero Section -->
+    <section class="relative h-screen overflow-hidden scroll-animate hero-section company-hero" data-animation="fade-up">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img 
+          src="/images/aboutus-background.png" 
+          alt="Modern office space with people working" 
+          class="w-full h-full object-cover hero-image-reveal"
+        />
+        <div class="absolute inset-0 bg-black/20 hero-overlay-fade"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="relative z-10 flex items-center justify-center h-full">
+        <div class="container mx-auto px-6 lg:px-8 text-center">
+          <div class="max-w-5xl mx-auto scroll-animate hero-content-reveal" data-animation="slide-up">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extralight text-white mb-8 tracking-wider leading-tight hero-title-animate">
+            Products
+            </h1>
+            <div class="w-32 h-0.5 bg-teal-400 mx-auto mb-8 scroll-animate hero-divider-animate" data-animation="scale-in"></div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About PrimoTech LLC Section -->
+    <section class="py-24 bg-white scroll-animate main-section" data-animation="fade-up">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          
+          <!-- Section Header -->
+          <div class="text-center mb-20 scroll-animate" data-animation="slide-up">
+            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">About PrimoTech LLC</h2>
+            <div class="w-20 h-0.5 bg-teal-500 mx-auto mb-8"></div>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Pioneering accessible security solutions for the modern world
+            </p>
+          </div>
+
+          <!-- Main Content -->
+          <div class="grid lg:grid-cols-2 gap-20 items-center">
+            
+            <!-- Text Content -->
+            <div class="scroll-animate" data-animation="slide-left">
+              <div class="prose prose-lg max-w-none">
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                  PrimoTech LLC was established in 2020 as a leading IoT product manufacturer and solution provider with more than 
+                  <strong class="text-teal-600">15 years of expertise in security technology</strong>. 
+                  We are dedicated to democratizing advanced security solutions, making them 
+                  accessible to individuals and communities worldwide.
+                </p>
+                
+                <p class="text-lg text-gray-700 leading-relaxed mb-10">
+                  Our commitment extends beyond technology—we believe that thoughtful innovations in 
+                  security can create meaningful positive changes in how people interact with their 
+                  environment, ultimately <strong class="text-gray-900">improving the lives of individuals and communities</strong>.
+                </p>
+
+                <!-- Key Highlights -->
+                
+              </div>
+            </div>
+
+            <!-- Visual Element -->
+            <div class="scroll-animate" data-animation="slide-right">
+              <div class="relative bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-8 shadow-xl">
+                <div class="grid grid-cols-2 gap-6">
+                  <div class="text-center">
+                    <div class="text-4xl font-light text-teal-600 mb-2">2020</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Founded</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-4xl font-light text-blue-600 mb-2">15+</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Years Expertise</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-4xl font-light text-green-600 mb-2">Global</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Reach</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-4xl font-light text-purple-600 mb-2">IoT</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Innovation</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="py-24 bg-gray-50 scroll-animate main-section" data-animation="fade-up">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          
+          <!-- Section Header -->
+          <div class="text-center mb-20 scroll-animate" data-animation="slide-up">
+            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">Our Core Values</h2>
+            <div class="w-20 h-0.5 bg-teal-500 mx-auto mb-8"></div>
+            <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              The fundamental principles that drive our commitment to excellence and innovation
+            </p>
+          </div>
+
+          <!-- Values Grid -->
+          <div class="core-values-container grid lg:grid-cols-3 gap-12">
+            
+            <!-- Safety -->
+            <div class="value-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-1500 scroll-animate" data-animation="card-slide">
+              <div class="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Safety</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Security is at the core of everything we do. We prioritize the integrity and confidentiality 
+                of your data, ensuring that your security ecosystem remains protected from potential threats 
+                through advanced encryption and robust protection protocols.
+              </p>
+            </div>
+
+            <!-- User-Friendliness -->
+            <div class="value-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-1500 scroll-animate" data-animation="card-slide">
+              <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">User Experience</h3>
+              <p class="text-gray-700 leading-relaxed">
+                We prioritize exceptional user experience, ensuring our products are intuitive and accessible. 
+                Our design philosophy centers on simplicity, enabling effortless navigation and control to 
+                create a seamless, hassle-free interaction with advanced security technology.
+              </p>
+            </div>
+
+            <!-- Professionalism -->
+            <div class="value-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-1500 scroll-animate" data-animation="card-slide">
+              <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Professional Excellence</h3>
+              <p class="text-gray-700 leading-relaxed">
+                With extensive R&D capabilities and dedicated research centers, we maintain the highest 
+                standards of professionalism. Our commitment to excellence has earned prestigious industry 
+                recognition and awards for innovative security solutions.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Highlights Section -->
+    <section class="py-24 bg-white scroll-animate main-section" data-animation="fade-up">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          
+          <!-- Section Header -->
+          <div class="text-center mb-20 scroll-animate" data-animation="slide-up">
+            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">Key Highlights</h2>
+            <div class="w-20 h-0.5 bg-teal-500 mx-auto mb-8"></div>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Celebrating our milestones and impact in the security technology landscape
+            </p>
+          </div>
+
+          <!-- Highlights Grid -->
+          <div class="grid md:grid-cols-3 gap-6 mt-8">
+            <!-- Industry Leadership -->
+            <div class="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+              <div class="flex items-center justify-center w-14 h-14 bg-teal-100 rounded-full mb-4">
+                <!-- Trophy Icon -->
+                <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8M12 17v4m7-16v2a5 5 0 01-5 5H10a5 5 0 01-5-5V5m14 0h-2m-8 0H5"/>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-gray-900 mb-2 text-lg text-center">Industry Leadership</h4>
+              <p class="text-gray-600 text-center text-sm">Founded in 2020, with 15+ years of security expertise</p>
+            </div>
+            <!-- Global Innovation -->
+            <div class="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+              <div class="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
+                <!-- Globe Icon -->
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
+                </svg>
+              </div>
+              <h4 class="font-semibold text-gray-900 mb-2 text-lg text-center">Global Innovation</h4>
+              <p class="text-gray-600 text-center text-sm">Leading IoT solutions and security technology worldwide</p>
+            </div>
+            <!-- Community Impact -->
+            <div class="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+              <div class="flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
+                <!-- Heart Icon -->
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-gray-900 mb-2 text-lg text-center">Community Impact</h4>
+              <p class="text-gray-600 text-center text-sm">Dedicated to improving lives through accessible technology</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<!-- Animation Script Section -->
+<script>
+  // Section observer for "coming out" effect
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-revealed');
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.18,
+    rootMargin: '0px 0px -80px 0px'
+  });
+
+  // Hero observer for banner cinematic effect
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('hero-revealed');
+        heroObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hero banner
+    const heroSection = document.querySelector('.company-hero');
+    if (heroSection) heroObserver.observe(heroSection);
+
+    // All main sections (except hero)
+    document.querySelectorAll('.main-section').forEach(section => {
+      sectionObserver.observe(section);
+    });
+  });
+</script>
+
+<style>
+  /* Banner cinematic animation */
+  .company-hero {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .company-hero.hero-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .hero-image-reveal {
+    transform: scale(1.08);
+    opacity: 0;
+    transition: all 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .company-hero.hero-revealed .hero-image-reveal {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+  .hero-overlay-fade {
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .company-hero.hero-revealed .hero-overlay-fade {
+    opacity: 1;
+    transition-delay: 0.5s;
+  }
+  .hero-content-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .company-hero.hero-revealed .hero-content-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.7s;
+  }
+  .hero-title-animate,
+  .hero-divider-animate,
+  .hero-subtitle-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .company-hero.hero-revealed .hero-title-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1s;
+  }
+  .company-hero.hero-revealed .hero-divider-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
+  }
+  .company-hero.hero-revealed .hero-subtitle-animate {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.4s;
+  }
+
+  /* Section "coming out" animation */
+  .main-section {
+    opacity: 0;
+    transform: translateY(60px) scale(0.98);
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+  }
+  .main-section.section-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Smaller Hero Section */
+  .hero-section,
+  .company-hero {
+    height: 55vh;
+    min-height: 320px;
+  }
+
+  .hero-title,
+  .text-5xl, .text-7xl, .text-8xl {
+    font-size: 2.2rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-content-reveal,
+  .hero-content {
+    padding: 1rem;
+    max-width: 600px;
+  }
+
+  .hero-divider-animate,
+  .w-32 {
+    width: 5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle-animate,
+  .text-xl, .md\:text-2xl {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Section paddings */
+  .py-24 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .mb-20 {
+    margin-bottom: 2rem;
+  }
+
+  /* Section headers */
+  .text-4xl, .md\:text-5xl {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Paragraphs */
+  .text-lg, .prose-lg {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* Grid and card spacing */
+  .gap-20 {
+    gap: 2rem;
+  }
+  .gap-12 {
+    gap: 1.5rem;
+  }
+  .p-8 {
+    padding: 1.5rem;
+  }
+
+  /* Value cards */
+  .value-card {
+    padding: 1.25rem;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .hero-title,
+    .text-5xl, .text-7xl, .text-8xl {
+      font-size: 1.5rem;
+    }
+    .text-4xl, .md\:text-5xl {
+      font-size: 1.2rem;
+    }
+    .py-24 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+    .mb-20 {
+      margin-bottom: 1rem;
+    }
+    .gap-20, .gap-12 {
+      gap: 1rem;
+    }
+    .p-8 {
+      padding: 1rem;
+    }
+    .value-card {
+      padding: 1rem;
+    }
+  }
+</style>
