@@ -1,223 +1,509 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const title = "About PrimoTech LLC - Life in Focus | PrimoTech LLC";
-const description = "Learn about PrimoTech LLC's commitment to Safety, User-Friendliness, and Professionalism. Discover our innovative IoT solutions and expertise in security technology.";
----
+const title = "Products - PrimoTech LLC | Security Camera Solutions";
+const description = "Explore PrimoTech LLC's innovative security camera products including Panda P, S, B Series and Indoor Security Cameras. Advanced IoT solutions for comprehensive security.";
 
+// WiFi Camera Products Data
+const wifiCameras = [
+  {
+    title: 'Panda WiFi Series',
+    subtitle: 'Wireless Security Solutions',
+    description: 'High-performance wireless cameras with easy installation and flexible placement options.',
+    features: [
+      '1080p/4K HD Resolution',
+      'Wire-Free Installation',
+      'Smart Motion Detection',
+      'Two-Way Audio',
+      'Cloud & Local Storage'
+    ],
+    image: '/images/wifi-camera-banner.jpg'
+  }
+];
+
+// Camera Products Data
+const wifiProducts = [
+  {
+    id: 'panda-p',
+    title: 'Panda P Series',
+    description: 'Professional PTZ cameras with advanced tracking and high-resolution imaging',
+    image: '/images/panda-p-series.jpg',
+    features: [
+      '360° Pan & 90° Tilt',
+      '4K Ultra HD Resolution',
+      'Auto Tracking',
+      'Weatherproof IP66',
+      'Night Vision'
+    ]
+  },
+  {
+    id: 'panda-s',
+    title: 'Panda S Series',
+    description: 'Smart security cameras with AI-powered detection and cloud connectivity',
+    image: '/images/panda-s-series.jpg',
+    features: [
+      'AI Person Detection',
+      'Smart Alerts',
+      'Two-Way Audio',
+      'Wireless Connectivity',
+      'Weather Resistant'
+    ]
+  },
+  {
+    id: 'panda-b',
+    title: 'Panda B Series',
+    description: 'Versatile bullet cameras for outdoor surveillance with weather resistance',
+    image: '/images/panda-b-series.jpg',
+    features: [
+      'Varifocal Lens',
+      'IP67 Weatherproof',
+      'Infrared Night Vision',
+      'Wide Dynamic Range',
+      'Vandal Proof'
+    ]
+  },
+  {
+    id: 'indoor',
+    title: 'Indoor Security Camera',
+    description: 'Compact indoor cameras with two-way audio and mobile app integration',
+    image: '/images/indoor-security-camera.jpg',
+    features: [
+      'Privacy Mode',
+      'Baby/Pet Monitoring',
+      'Crystal Clear Audio',
+      'Smart Home Integration',
+      'Easy Installation'
+    ]
+  },
+  {
+    id: 'outdoor',
+    title: 'Outdoor Security Camera',
+    description: 'Weather-resistant outdoor cameras with night vision capabilities',
+    image: '/images/outdoor-security-camera.jpg',
+    features: [
+      'IP65 Weatherproof',
+      'Starlight Night Vision',
+      'Wide Viewing Angle',
+      'Smart Motion Zones',
+      'Tamper Detection'
+    ]
+  }
+];
+
+const IPandVR = [
+  {
+    id: 'dual-light',
+    title: 'Dual Light Rainbow',
+    description: 'Professional cameras with dual light technology for superior night vision',
+    image: '/images/dual-light-camera.jpg',
+    features: [
+      'Full Color Night Vision',
+      '4K Ultra HD Resolution',
+      'Smart IR Illumination',
+      'IP67 Weatherproof',
+      'AI-Powered Detection'
+    ]
+  },
+  {
+    id: 'pt-camera',
+    title: 'PT Cameras',
+    description: 'Pan-Tilt-Zoom cameras with advanced tracking capabilities',
+    image: '/images/pt-camera.jpg',
+    features: [
+      '360° Continuous Rotation',
+      '25x Optical Zoom',
+      'Auto Tracking',
+      'Preset Positions',
+      'Two-Way Audio'
+    ]
+  },
+  {
+    id: 'vari-focal',
+    title: 'Vari-focal Cameras',
+    description: 'Cameras with adjustable focal length for flexible installation',
+    image: '/images/vari-focal-camera.jpg',
+    features: [
+      '2.7-12mm Motorized Lens',
+      '5MP Resolution',
+      'WDR Technology',
+      'IP66 Rated',
+      'PoE Support'
+    ]
+  },
+  {
+    id: 'fixed-lens',
+    title: 'Fixed-Lens Cameras',
+    description: 'High-quality fixed lens cameras for consistent monitoring',
+    image: '/images/fixed-lens-camera.jpg',
+    features: [
+      '2.8mm/3.6mm Fixed Lens',
+      '4K Resolution',
+      'True WDR 120dB',
+      'IK10 Vandal Proof',
+      'H.265 Compression'
+    ]
+  },
+  {
+    id: 'nvr',
+    title: 'NVR Systems',
+    description: 'Network Video Recorders for centralized management',
+    image: '/images/nvr-system.jpg',
+    features: [
+      'Up to 32 Channels',
+      '16TB Storage Capacity',
+      '4K Playback',
+      'Smart Search',
+      'RAID Support'
+    ]
+  },
+  {
+    id: 'xvr',
+    title: 'XVR Systems',
+    description: 'Hybrid video recorders supporting multiple technologies',
+    image: '/images/xvr-system.jpg',
+    features: [
+      'Multi-Format Support',
+      'AI Channel Analysis',
+      '4K Resolution',
+      'HDMI/VGA Output',
+      'Mobile Access'
+    ]
+  }
+];
+
+const Analog = [
+  {
+    id: 'analog-hd',
+    title: 'Analog HD Cameras',
+    description: 'High-definition analog cameras with excellent performance',
+    image: '/images/analog-hd-camera.jpg',
+    features: [
+      '5MP Resolution',
+      '120dB True WDR',
+      'Smart IR Technology',
+      'IP67 Weatherproof',
+      '3D DNR'
+    ]
+  }
+];
+
+const transmission = [
+  {
+    id: 'switch',
+    title: 'Network Switches',
+    description: 'Professional PoE switches for surveillance systems',
+    image: '/images/network-switch.jpg',
+    features: [
+      '8/16/24 Port Options',
+      'PoE+ Support',
+      'Gigabit Ethernet',
+      'VLAN Support',
+      'Plug-and-Play'
+    ]
+  }
+];
+
+const Accessories = [
+  {
+    id: 'brackets',
+    title: 'Mounting Brackets',
+    description: 'Professional mounting solutions for all camera types',
+    image: '/images/mounting-brackets.jpg',
+    features: [
+      'Adjustable Angles',
+      'Weatherproof Design',
+      'Universal Compatibility',
+      'Stainless Steel',
+      'Easy Installation'
+    ]
+  }
+];
+---
 <Layout title={title} description={description}>
   <main class="min-h-screen">
     
     <!-- Hero Section -->
-    <section class="relative h-screen overflow-hidden scroll-animate hero-section company-hero" data-animation="fade-up">
-      <!-- Background Image -->
-      <div class="absolute inset-0">
-        <img 
+    <section class="relative h-[45vh] md:h-[55vh] overflow-hidden company-hero hero-section scroll-animate" data-animation="fade-up">
+      <!-- Collage Background -->
+      <div class="absolute inset-0 z-0">
+          <img 
           src="/images/aboutus-background.png" 
           alt="Modern office space with people working" 
           class="w-full h-full object-cover hero-image-reveal"
         />
-        <div class="absolute inset-0 bg-black/20 hero-overlay-fade"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
       </div>
-
       <!-- Hero Content -->
-      <div class="relative z-10 flex items-center justify-center h-full">
-        <div class="container mx-auto px-6 lg:px-8 text-center">
-          <div class="max-w-5xl mx-auto scroll-animate hero-content-reveal" data-animation="slide-up">
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extralight text-white mb-8 tracking-wider leading-tight hero-title-animate">
-            Products
-            </h1>
-            <div class="w-32 h-0.5 bg-teal-400 mx-auto mb-8 scroll-animate hero-divider-animate" data-animation="scale-in"></div>
-            
+      <div class="relative z-10 flex flex-col items-center justify-center w-full h-full">
+        <h1 class="text-4xl md:text-6xl font-light text-white mb-4 tracking-wide hero-title-animate">Products</h1>
+        <div class="w-24 h-1 bg-teal-400 rounded mx-auto mb-2 hero-divider-animate"></div>
+      </div>
+    </section>
+  <section class="navigation-menu py-4 bg-white border-b border-gray-200 sticky top-16 z-30 shadow-sm">
+  <div class="container mx-auto px-6 lg:px-8">
+    <nav class="flex flex-wrap justify-center gap-4 md:gap-8">
+      <a href="#wifi-cameras" class="nav-link text-gray-700 hover:text-teal-600 font-medium transition-all duration-300 px-3 py-2">
+        WiFi Cameras
+      </a>
+      <a href="#ip-vr" class="nav-link text-gray-700 hover:text-teal-600 font-medium transition-all duration-300 px-3 py-2">
+        IP & VR Solutions
+      </a>
+      <a href="#analog" class="nav-link text-gray-700 hover:text-teal-600 font-medium transition-all duration-300 px-3 py-2">
+        Analog Solutions
+      </a>
+      <a href="#transmission" class="nav-link text-gray-700 hover:text-teal-600 font-medium transition-all duration-300 px-3 py-2">
+        Transmission
+      </a>
+      <a href="#accessories" class="nav-link text-gray-700 hover:text-teal-600 font-medium transition-all duration-300 px-3 py-2">
+        Accessories
+      </a>
+    </nav>
+  </div>
+</section>
+    <!-- WiFi Camera Banner Section -->
+    <section class="category-banner py-16 bg-gradient-to-r from-teal-50 to-blue-50" id="wifi-cameras">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" 
+            alt="WiFi Security Camera Banner" 
+            class="w-full h-96 object-cover banner-image"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex items-center justify-center">
+            <div class="text-center px-6 banner-content">
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                WiFi Camera Solutions
+              </h2>
+              <p class="text-xl text-white mb-6 max-w-2xl mx-auto">
+                Cutting-edge wireless surveillance technology for flexible installation and smart monitoring
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About PrimoTech LLC Section -->
-    <section class="py-24 bg-white scroll-animate main-section" data-animation="fade-up">
+    <!-- WiFi Camera Products Section -->
+    <section class="main-section py-24 bg-gray-100">
       <div class="container mx-auto px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-          
-          <!-- Section Header -->
-          <div class="text-center mb-20 scroll-animate" data-animation="slide-up">
-            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">About PrimoTech LLC</h2>
-            <div class="w-20 h-0.5 bg-teal-500 mx-auto mb-8"></div>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Pioneering accessible security solutions for the modern world
-            </p>
-          </div>
-
-          <!-- Main Content -->
-          <div class="grid lg:grid-cols-2 gap-20 items-center">
-            
-            <!-- Text Content -->
-            <div class="scroll-animate" data-animation="slide-left">
-              <div class="prose prose-lg max-w-none">
-                <p class="text-lg text-gray-700 leading-relaxed mb-8">
-                  PrimoTech LLC was established in 2020 as a leading IoT product manufacturer and solution provider with more than 
-                  <strong class="text-teal-600">15 years of expertise in security technology</strong>. 
-                  We are dedicated to democratizing advanced security solutions, making them 
-                  accessible to individuals and communities worldwide.
-                </p>
-                
-                <p class="text-lg text-gray-700 leading-relaxed mb-10">
-                  Our commitment extends beyond technology—we believe that thoughtful innovations in 
-                  security can create meaningful positive changes in how people interact with their 
-                  environment, ultimately <strong class="text-gray-900">improving the lives of individuals and communities</strong>.
-                </p>
-
-                <!-- Key Highlights -->
-                
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {wifiProducts.map((product) => (
+            <div class="bg-white rounded-xl shadow-md flex flex-col items-center p-8 transition hover:shadow-lg">
+              <div class="mb-6 flex items-center justify-center h-40">
+                <img src={product.image} alt={product.title} class="h-32 object-contain" />
               </div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">{product.title}</h3>
+              <p class="text-gray-600 text-base text-center mb-6">{product.description}</p>
+              <button class="bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full text-base transition hover:bg-green-300 focus:outline-none">More</button>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-            <!-- Visual Element -->
-            <div class="scroll-animate" data-animation="slide-right">
-              <div class="relative bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-8 shadow-xl">
-                <div class="grid grid-cols-2 gap-6">
-                  <div class="text-center">
-                    <div class="text-4xl font-light text-teal-600 mb-2">2020</div>
-                    <div class="text-sm text-gray-600 uppercase tracking-wider">Founded</div>
-                  </div>
-                  <div class="text-center">
-                    <div class="text-4xl font-light text-blue-600 mb-2">15+</div>
-                    <div class="text-sm text-gray-600 uppercase tracking-wider">Years Expertise</div>
-                  </div>
-                  <div class="text-center">
-                    <div class="text-4xl font-light text-green-600 mb-2">Global</div>
-                    <div class="text-sm text-gray-600 uppercase tracking-wider">Reach</div>
-                  </div>
-                  <div class="text-center">
-                    <div class="text-4xl font-light text-purple-600 mb-2">IoT</div>
-                    <div class="text-sm text-gray-600 uppercase tracking-wider">Innovation</div>
-                  </div>
-                </div>
-              </div>
+    <!-- IP & VR Banner Section -->
+    <section class="category-banner py-16 bg-gradient-to-r from-blue-50 to-indigo-50" id="ip-vr">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            alt="IP & VR Camera Banner" 
+            class="w-full h-96 object-cover banner-image"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex items-center justify-center">
+            <div class="text-center px-6 banner-content">
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                IP & VR Solutions
+              </h2>
+              <p class="text-xl text-white mb-6 max-w-2xl mx-auto">
+                Professional-grade network video solutions with advanced recording capabilities
+              </p>
             </div>
-
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Core Values Section -->
-    <section class="py-24 bg-gray-50 scroll-animate main-section" data-animation="fade-up">
+    <!-- IP & VR Products Section -->
+     <section class="main-section py-24 bg-gray-100">
       <div class="container mx-auto px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-          
-          <!-- Section Header -->
-          <div class="text-center mb-20 scroll-animate" data-animation="slide-up">
-            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">Our Core Values</h2>
-            <div class="w-20 h-0.5 bg-teal-500 mx-auto mb-8"></div>
-            <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              The fundamental principles that drive our commitment to excellence and innovation
-            </p>
-          </div>
-
-          <!-- Values Grid -->
-          <div class="core-values-container grid lg:grid-cols-3 gap-12">
-            
-            <!-- Safety -->
-            <div class="value-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-1500 scroll-animate" data-animation="card-slide">
-              <div class="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-xl flex items-center justify-center mb-6">
-                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                </svg>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {IPandVR.map((product) => (
+            <div class="bg-white rounded-xl shadow-md flex flex-col items-center p-8 transition hover:shadow-lg">
+              <div class="mb-6 flex items-center justify-center h-40">
+                <img src={product.image} alt={product.title} class="h-32 object-contain" />
               </div>
-              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Safety</h3>
-              <p class="text-gray-700 leading-relaxed">
-                Security is at the core of everything we do. We prioritize the integrity and confidentiality 
-                of your data, ensuring that your security ecosystem remains protected from potential threats 
-                through advanced encryption and robust protection protocols.
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">{product.title}</h3>
+              <p class="text-gray-600 text-base text-center mb-6">{product.description}</p>
+              <button class="bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full text-base transition hover:bg-green-300 focus:outline-none">More</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Analog Banner Section -->
+    <section class="category-banner py-16 bg-gradient-to-r from-indigo-50 to-purple-50" id="analog">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1563770660941-10a63607739e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            alt="Analog Camera Banner" 
+            class="w-full h-96 object-cover banner-image"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex items-center justify-center">
+            <div class="text-center px-6 banner-content">
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Analog Solutions
+              </h2>
+              <p class="text-xl text-white mb-6 max-w-2xl mx-auto">
+                Reliable traditional surveillance systems with modern enhancements
               </p>
             </div>
-
-            <!-- User-Friendliness -->
-            <div class="value-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-1500 scroll-animate" data-animation="card-slide">
-              <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center mb-6">
-                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
-                </svg>
-              </div>
-              <h3 class="text-2xl font-semibold text-gray-900 mb-4">User Experience</h3>
-              <p class="text-gray-700 leading-relaxed">
-                We prioritize exceptional user experience, ensuring our products are intuitive and accessible. 
-                Our design philosophy centers on simplicity, enabling effortless navigation and control to 
-                create a seamless, hassle-free interaction with advanced security technology.
-              </p>
-            </div>
-
-            <!-- Professionalism -->
-            <div class="value-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-1500 scroll-animate" data-animation="card-slide">
-              <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mb-6">
-                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Professional Excellence</h3>
-              <p class="text-gray-700 leading-relaxed">
-                With extensive R&D capabilities and dedicated research centers, we maintain the highest 
-                standards of professionalism. Our commitment to excellence has earned prestigious industry 
-                recognition and awards for innovative security solutions.
-              </p>
-            </div>
-
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Key Highlights Section -->
-    <section class="py-24 bg-white scroll-animate main-section" data-animation="fade-up">
+    <!-- Analog Products Section -->
+   <section class="main-section py-24 bg-gray-100">
       <div class="container mx-auto px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-          
-          <!-- Section Header -->
-          <div class="text-center mb-20 scroll-animate" data-animation="slide-up">
-            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">Key Highlights</h2>
-            <div class="w-20 h-0.5 bg-teal-500 mx-auto mb-8"></div>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Celebrating our milestones and impact in the security technology landscape
-            </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {Analog.map((product) => (
+            <div class="bg-white rounded-xl shadow-md flex flex-col items-center p-8 transition hover:shadow-lg">
+              <div class="mb-6 flex items-center justify-center h-40">
+                <img src={product.image} alt={product.title} class="h-32 object-contain" />
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">{product.title}</h3>
+              <p class="text-gray-600 text-base text-center mb-6">{product.description}</p>
+              <button class="bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full text-base transition hover:bg-green-300 focus:outline-none">More</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Transmission Banner Section -->
+    <section class="category-banner py-16 bg-gradient-to-r from-purple-50 to-pink-50" id="transmission">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            alt="Transmission Equipment Banner" 
+            class="w-full h-96 object-cover banner-image"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex items-center justify-center">
+            <div class="text-center px-6 banner-content">
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Transmission Equipment
+              </h2>
+              <p class="text-xl text-white mb-6 max-w-2xl mx-auto">
+                High-performance networking solutions for seamless video transmission
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transmission Products Section -->
+    <section class="main-section py-24 bg-gray-100">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {transmission.map((product) => (
+            <div class="bg-white rounded-xl shadow-md flex flex-col items-center p-8 transition hover:shadow-lg">
+              <div class="mb-6 flex items-center justify-center h-40">
+                <img src={product.image} alt={product.title} class="h-32 object-contain" />
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">{product.title}</h3>
+              <p class="text-gray-600 text-base text-center mb-6">{product.description}</p>
+              <button class="bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full text-base transition hover:bg-green-300 focus:outline-none">More</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessories Banner Section -->
+    <section class="category-banner py-16 bg-gradient-to-r from-pink-50 to-red-50" id="accessories">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            alt="Security Accessories Banner" 
+            class="w-full h-96 object-cover banner-image"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex items-center justify-center">
+            <div class="text-center px-6 banner-content">
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Security Accessories
+              </h2>
+              <p class="text-xl text-white mb-6 max-w-2xl mx-auto">
+                Complete your surveillance system with our premium accessories
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessories Products Section -->
+    <section class="main-section py-24 bg-gray-100">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {Accessories.map((product) => (
+            <div class="bg-white rounded-xl shadow-md flex flex-col items-center p-8 transition hover:shadow-lg">
+              <div class="mb-6 flex items-center justify-center h-40">
+                <img src={product.image} alt={product.title} class="h-32 object-contain" />
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">{product.title}</h3>
+              <p class="text-gray-600 text-base text-center mb-6">{product.description}</p>
+              <button class="bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full text-base transition hover:bg-green-300 focus:outline-none">More</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="main-section py-24 bg-white">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="text-center mb-20">
+          <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+            Why Choose Our Products
+          </h2>
+          <div class="w-32 h-0.5 bg-teal-400 mx-auto mb-8"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Security</h3>
+            <p class="text-gray-600">Military-grade encryption and secure data transmission for complete peace of mind.</p>
           </div>
 
-          <!-- Highlights Grid -->
-          <div class="grid md:grid-cols-3 gap-6 mt-8">
-            <!-- Industry Leadership -->
-            <div class="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-              <div class="flex items-center justify-center w-14 h-14 bg-teal-100 rounded-full mb-4">
-                <!-- Trophy Icon -->
-                <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8M12 17v4m7-16v2a5 5 0 01-5 5H10a5 5 0 01-5-5V5m14 0h-2m-8 0H5"/>
-                </svg>
-              </div>
-              <h4 class="font-semibold text-gray-900 mb-2 text-lg text-center">Industry Leadership</h4>
-              <p class="text-gray-600 text-center text-sm">Founded in 2020, with 15+ years of security expertise</p>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
             </div>
-            <!-- Global Innovation -->
-            <div class="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-              <div class="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
-                <!-- Globe Icon -->
-                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
-                </svg>
-              </div>
-              <h4 class="font-semibold text-gray-900 mb-2 text-lg text-center">Global Innovation</h4>
-              <p class="text-gray-600 text-center text-sm">Leading IoT solutions and security technology worldwide</p>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">AI-Powered Intelligence</h3>
+            <p class="text-gray-600">Smart detection algorithms that learn and adapt to your environment for accurate alerts.</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
             </div>
-            <!-- Community Impact -->
-            <div class="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-              <div class="flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
-                <!-- Heart Icon -->
-                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/>
-                </svg>
-              </div>
-              <h4 class="font-semibold text-gray-900 mb-2 text-lg text-center">Community Impact</h4>
-              <p class="text-gray-600 text-center text-sm">Dedicated to improving lives through accessible technology</p>
-            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Mobile Integration</h3>
+            <p class="text-gray-600">Seamless mobile app control with real-time notifications and remote monitoring.</p>
           </div>
         </div>
       </div>
@@ -226,49 +512,149 @@ const description = "Learn about PrimoTech LLC's commitment to Safety, User-Frie
   </main>
 </Layout>
 
-<!-- Animation Script Section -->
-<script>
-  // Section observer for "coming out" effect
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('section-revealed');
-        sectionObserver.unobserve(entry.target);
-      }
+<script is:inline>
+  // Initialize all animations when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Hero observer for banner cinematic effect
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('hero-revealed');
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
     });
-  }, {
-    threshold: 0.18,
-    rootMargin: '0px 0px -80px 0px'
-  });
 
-  // Hero observer for banner cinematic effect
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('hero-revealed');
-        heroObserver.unobserve(entry.target);
-      }
+    // Section observer for "coming out" effect
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-revealed');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: '0px 0px -80px 0px'
     });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // Hero banner
+    // Category banner observer for parallax effect
+    const bannerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('banner-visible');
+          
+          // Stagger animations for inner elements
+          const bannerImage = entry.target.querySelector('.banner-image');
+          const bannerContent = entry.target.querySelector('.banner-content');
+          
+          if (bannerImage) {
+            setTimeout(() => {
+              bannerImage.style.transform = 'scale(1)';
+              bannerImage.style.opacity = '1';
+            }, 200);
+          }
+          
+          if (bannerContent) {
+            setTimeout(() => {
+              bannerContent.style.opacity = '1';
+              bannerContent.style.transform = 'translateY(0)';
+            }, 400);
+          }
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    });
+
+    // Observe all elements
     const heroSection = document.querySelector('.company-hero');
     if (heroSection) heroObserver.observe(heroSection);
 
-    // All main sections (except hero)
     document.querySelectorAll('.main-section').forEach(section => {
       sectionObserver.observe(section);
+    });
+
+    document.querySelectorAll('.category-banner').forEach(banner => {
+      bannerObserver.observe(banner);
+    });
+
+    // Product card hover effects
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px)';
+        card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+      });
+    });
+
+    // More button hover effects
+    document.querySelectorAll('.more-btn').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-2px)';
+        button.style.boxShadow = '0 6px 20px rgba(20, 184, 166, 0.4)';
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0)';
+        button.style.boxShadow = '0 4px 15px rgba(20, 184, 166, 0.3)';
+      });
     });
   });
 </script>
 
 <style>
-  /* Banner cinematic animation */
-  .company-hero {
+  /* Base Styles */
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+.company-hero {
     opacity: 0;
     transform: translateY(60px);
     transition: all 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -328,113 +714,350 @@ const description = "Learn about PrimoTech LLC's commitment to Safety, User-Frie
     transition-delay: 1.4s;
   }
 
-  /* Section "coming out" animation */
+  /* Section Animations */
   .main-section {
     opacity: 0;
     transform: translateY(60px) scale(0.98);
     transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: opacity, transform;
   }
+  
   .main-section.section-revealed {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 
-  /* Smaller Hero Section */
-  .hero-section,
-  .company-hero {
-    height: 55vh;
-    min-height: 320px;
+  /* Category Banner Styles */
+  .category-banner {
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+  }
+  
+  .category-banner.banner-visible {
+    opacity: 1;
+  }
+  
+  .banner-inner {
+    perspective: 1000px;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 24rem;
+    object-fit: cover;
+    transform: scale(1.1);
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+  }
+  
+  .banner-content {
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.3s;
+    will-change: transform, opacity;
+  }
+  
+  /* Gradient backgrounds for different categories */
+  #wifi-cameras .banner-inner {
+    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+  }
+  
+  #ip-vr .banner-inner {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  }
+  
+  #analog .banner-inner {
+    background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+  }
+  
+  #transmission .banner-inner {
+    background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+  }
+  
+  #accessories .banner-inner {
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
   }
 
-  .hero-title,
-  .text-5xl, .text-7xl, .text-8xl {
-    font-size: 2.2rem;
-    letter-spacing: 1.5px;
-    margin-bottom: 1.5rem;
+  /* Product Grid Styles */
+  .camera-showcase {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
   }
 
-  .hero-content-reveal,
-  .hero-content {
-    padding: 1rem;
-    max-width: 600px;
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
   }
 
-  .hero-divider-animate,
-  .w-32 {
-    width: 5rem;
-    margin-bottom: 1.5rem;
+  .product-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  .hero-subtitle-animate,
-  .text-xl, .md\:text-2xl {
-    font-size: 1.1rem;
+  .product-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+  }
+
+  .product-image {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-info {
+    padding: 24px;
+    text-align: center;
+  }
+
+  .product-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+
+  .product-description {
+    font-size: 0.9rem;
+    color: #6b7280;
     line-height: 1.5;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
   }
 
-  /* Section paddings */
-  .py-24 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  .mb-20 {
-    margin-bottom: 2rem;
-  }
-
-  /* Section headers */
-  .text-4xl, .md\:text-5xl {
-    font-size: 1.7rem;
-    margin-bottom: 1rem;
+  .more-btn {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
   }
 
-  /* Paragraphs */
-  .text-lg, .prose-lg {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+  .more-btn:hover {
+    background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
   }
 
-  /* Grid and card spacing */
-  .gap-20 {
+  .more-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Features Section Styles */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
-  .gap-12 {
-    gap: 1.5rem;
-  }
-  .p-8 {
-    padding: 1.5rem;
+
+  .feature-icon {
+    width: 4rem;
+    height: 4rem;
+    background-color: #f0fdf4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
   }
 
-  /* Value cards */
-  .value-card {
-    padding: 1.25rem;
-  }
-
-  /* Responsive tweaks */
+  /* Responsive Adjustments */
   @media (max-width: 768px) {
+    /* Hero Section */
     .hero-title,
     .text-5xl, .text-7xl, .text-8xl {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
     }
-    .text-4xl, .md\:text-5xl {
-      font-size: 1.2rem;
+    
+    /* Category Banners */
+    .category-banner {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
     }
-    .py-24 {
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
+    
+    .banner-image {
+      height: 70vh;
+      min-height: 300px;
     }
-    .mb-20 {
-      margin-bottom: 1rem;
+    
+    .banner-content h2 {
+      font-size: 2rem;
     }
-    .gap-20, .gap-12 {
+    
+    .banner-content p {
+      font-size: 1rem;
+    }
+    
+    /* Product Grid */
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 10px;
+    }
+    
+    .product-card {
+      margin: 0 auto;
+      max-width: 350px;
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-image {
+      height: 180px;
+    }
+    
+    .product-image img {
+      width: 100px;
+      height: 100px;
+    }
+    
+    /* Features Section */
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Product Grid */
+    .product-grid {
+      padding: 0 5px;
+    }
+    
+    .product-card {
+      max-width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero-title,
+    .text-5xl, .text-7xl, .text-8xl {
+      font-size: 2rem;
+    }
+  }
+</style><script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle navigation clicks
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        
+        if (targetSection) {
+          // Account for sticky header height
+          const headerOffset = 120;
+          const elementPosition = targetSection.offsetTop;
+          const offsetPosition = elementPosition - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (window.pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .navigation-menu {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(20, 184, 166, 0.1);
+  }
+  
+  .nav-link.active {
+    color: #0d9488;
+    background-color: rgba(20, 184, 166, 0.1);
+  }
+  
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: #0d9488;
+    border-radius: 1px;
+  }
+  
+  @media (max-width: 768px) {
+    .navigation-menu nav {
       gap: 1rem;
     }
-    .p-8 {
-      padding: 1rem;
-    }
-    .value-card {
-      padding: 1rem;
+    
+    .nav-link {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
     }
   }
 </style>
