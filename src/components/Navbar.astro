@@ -70,7 +70,23 @@ const categories = [
           </svg>
         </button>
       </div>
-      <a href="/support" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Support</a>
+      <!-- Support Dropdown -->
+      <div class="relative group">
+        <a href="/support" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium group-hover:text-cyan-600 transition-colors duration-200">
+          Support
+        </a>
+        <div
+          class="absolute left-1/2 -translate-x-1/2 mt-2 w-40 bg-white border border-gray-100 rounded-lg shadow-lg 
+          opacity-0 group-hover:opacity-100 group-hover:visible invisible 
+          translate-y-4 group-hover:translate-y-0 
+          transition-all duration-500 ease-in-out z-30"
+        >
+         
+          <a href="/support/faq" class="block px-6 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-200">FAQ</a>
+          
+          <a href="/support/videos" class="block px-6 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-200">Video</a>
+        </div>
+      </div>
       <a href="/partner" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Partner</a>
       <a href="/tips" class="nav-link text-gray-700 hover:text-cyan-600 px-3 py-2 text-base font-medium">Tips & Guides</a>
     </div>
