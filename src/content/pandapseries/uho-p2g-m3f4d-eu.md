@@ -1,5 +1,6 @@
 ---
 title: "Uho-P2G-M3F4D-EU"
+description: "3MP 4G Solar Battery PT Camera"
 image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"

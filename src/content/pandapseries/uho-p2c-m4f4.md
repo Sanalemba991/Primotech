@@ -1,5 +1,6 @@
 ---
 title: "Uho-P2C-M4F4"
+description: "4MP Full Color Alarm Wifi PT Camera"
 image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"

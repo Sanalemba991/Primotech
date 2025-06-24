@@ -1,5 +1,6 @@
 ---
 title: "Uho-P1G-M3F4D-LA"
+description: "3MP Outdoor 4G PT Camera"
 image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"

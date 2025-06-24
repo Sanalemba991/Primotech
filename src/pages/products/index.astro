@@ -972,31 +972,32 @@ const Accessories = [
   }
 </style><script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
-    // Handle navigation clicks
+    // Handle navigation clicks for hash links only (do not prevent default for normal links)
     document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-        
-        if (targetSection) {
-          // Account for sticky header height
-          const headerOffset = 120;
-          const elementPosition = targetSection.offsetTop;
-          const offsetPosition = elementPosition - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            // Account for sticky header height
+            const headerOffset = 120;
+            const elementPosition = targetSection.offsetTop;
+            const offsetPosition = elementPosition - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      }
+      // For normal links (not hash), do not preventDefault
     });
 
-    // Highlight active section on scroll
+    // Highlight active section on scroll (only for hash links)
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(section => {
@@ -1005,10 +1006,10 @@ const Accessories = [
           current = section.getAttribute('id');
         }
       });
-      
       navLinks.forEach(link => {
+        const href = link.getAttribute('href');
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
+        if (href && href.startsWith('#') && href === `#${current}`) {
           link.classList.add('active');
         }
       });

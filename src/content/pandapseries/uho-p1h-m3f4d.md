@@ -1,5 +1,6 @@
 ---
 title: "Uho-P1H-M3F4D"
+description: "3MP Outdoor Pan & Tilt Wi-Fi Camera"
 image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"

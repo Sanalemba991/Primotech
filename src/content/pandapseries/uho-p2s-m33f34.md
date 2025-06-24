@@ -1,5 +1,6 @@
 ---
 title: "Uho-P2S-M33F34"
+description: "3MP+3MP HD Outdoor Dual Lens PT WiFi Camera"
 image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
