@@ -1,0 +1,436 @@
+---
+// src/pages/products/switch/[slug].astro
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection, getEntryBySlug } from "astro:content";
+
+export async function getStaticPaths() {
+  const products = await getCollection("swit");
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { slug } = Astro.params;
+const { product } = Astro.props;
+// Add an explicit type for product to avoid 'never' type error
+const productData = product?.data;
+
+const allProducts = await getCollection("swit");
+const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
+
+// Helper function to render specifications
+
+ 
+---
+
+<Layout>
+  <section class="product-hero">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">Home</a> / 
+        <a href="/products">Products</a> / 
+        <a href="/products/switch">Switch Series</a> / 
+        <span>{productData?.title}</span>
+      </div>
+      <div class="product-hero-content">
+        <div class="product-images">
+          {productData?.images?.length ? (
+            <div class="main-image">
+              <img 
+                src={productData.images[0].url} 
+                alt={productData.images[0].caption || productData.title} 
+                class="product-main-image"
+              />
+            </div>
+          ) : productData?.image ? (
+            <div class="main-image">
+              <img 
+                src={productData.image} 
+                alt={productData.title} 
+                class="product-main-image"
+              />
+            </div>
+          ) : (
+            <div class="main-image">
+              <img 
+                src="/images/placeholder-camera.jpg" 
+                alt={productData?.title || "Product Image"} 
+                class="product-main-image"
+              />
+            </div>
+          )}
+          {(productData?.images?.length > 1) && (
+            <div class="thumbnail-gallery">
+              {productData.images.map((image, index) => (
+                <div class="thumbnail" onclick={`changeMainImage(${index})`}>
+                  <img 
+                    src={image.url} 
+                    alt={image.caption || `${productData.title} - Image ${index + 1}`} 
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div class="product-info">
+          <h1 class="product-title">{productData?.title}</h1>
+          <div class="product-description">
+            {productData?.description && <p>{productData.description}</p>}
+          </div>
+          {productData?.features?.length > 0 && (
+            <div class="product-features">
+              <h3>Key Features</h3>
+              <ul>
+                {productData.features.map((feature, index) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+     
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {relatedProducts.length > 0 && (
+    <section class="related-products">
+      <div class="container">
+        <h2 class="section-title">Related Products</h2>
+        <div class="related-grid">
+          {relatedProducts.map(item => (
+            <div class="related-card">
+              <a href={`/products/switch/${item.slug}`}>
+                <div class="related-image">
+                  <img 
+                    src={item.data.image ?? (item.data.images?.[0]?.url ?? "/images/placeholder-camera.jpg")}
+                    alt={item.data.images?.[0]?.caption ?? item.data.title ?? item.slug}
+                  />
+                </div>
+                <div class="related-info">
+                  <h3>{item.data.title}</h3>
+                  <p>{item.data.description?.substring(0, 100)}...</p>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  /* Product Page Styles */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .product-hero {
+    padding: 3rem 0 4rem;
+  }
+  
+  .breadcrumbs {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+  }
+  
+  .breadcrumbs a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .breadcrumbs a:hover {
+    color: #14b8a6;
+  }
+  
+  .breadcrumbs span {
+    color: #334155;
+    font-weight: 500;
+  }
+  
+  .product-hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+  
+  .product-images {
+    position: sticky;
+    top: 2rem;
+  }
+  
+  .main-image {
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+  
+  .product-main-image {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+  }
+  
+  .thumbnail-gallery {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .thumbnail:hover {
+    border-color: #14b8a6;
+    transform: translateY(-2px);
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .product-info {
+    padding-top: 1rem;
+  }
+  
+  .product-title {
+    font-size: 2.25rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .product-description {
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    color: #475569;
+  }
+  
+  .product-features {
+    margin-bottom: 2.5rem;
+  }
+  
+  .product-features h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .product-features ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .product-features li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: #475569;
+  }
+  
+  .product-features li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background-color: #14b8a6;
+    border-radius: 50%;
+  }
+  
+  .product-specs {
+    margin-top: 3rem;
+  }
+  
+  .product-specs h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .product-specs h4 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin: 1.5rem 0 1rem;
+    font-weight: 500;
+  }
+  
+  .product-specs table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+  
+  .product-specs th,
+  .product-specs td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .product-specs th {
+    font-weight: 500;
+    color: #334155;
+    width: 40%;
+  }
+  
+  .product-specs td {
+    color: #475569;
+  }
+  
+  /* Related Products */
+  .related-products {
+    padding: 3rem 0 5rem;
+    background-color: #f8fafc;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+    color: #1e293b;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .related-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .related-card a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .related-image {
+    height: 200px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  
+  .related-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .related-info {
+    padding: 1.5rem;
+  }
+  
+  .related-info h3 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .related-info p {
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .product-hero-content {
+      gap: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product-hero-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .product-images {
+      position: static;
+    }
+    
+    .product-title {
+      font-size: 1.75rem;
+    }
+    
+    .main-image {
+      min-height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-hero {
+      padding: 2rem 0 3rem;
+    }
+    
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Handle thumbnail click to change main image
+  function changeMainImage(index) {
+    const mainImage = document.querySelector('.product-main-image');
+    const thumbnails = document.querySelectorAll('.thumbnail img');
+    if (mainImage && thumbnails[index]) {
+      mainImage.src = thumbnails[index].src;
+      mainImage.alt = thumbnails[index].alt;
+      document.querySelectorAll('.thumbnail').forEach(thumb => {
+        thumb.style.borderColor = '#e2e8f0';
+      });
+      thumbnails[index].parentElement.style.borderColor = '#14b8a6';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const firstThumbnail = document.querySelector('.thumbnail');
+    if (firstThumbnail) {
+      firstThumbnail.style.borderColor = '#14b8a6';
+    }
+  });
+</script>

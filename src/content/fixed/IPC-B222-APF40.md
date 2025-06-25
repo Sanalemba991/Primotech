@@ -1,45 +1,42 @@
 ---
-title: "IPC-B213-APF40W"
-description: "3MP HD Fixed Dual-light Bullet Network Camera"
+title: "IPC-B222-APF40"
+description: "2MP Bullet Network Camera Datasheet"
 image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
 images:
   - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
     caption: "Front view"
 features:
   - Day/night functionality
-  - Smart IR, up to 50m (164ft) IR distance
+  - Smart IR, up to 60m (196ft) IR distance
   - Optical glass window with higher light transmittance
   - IR anti-reflection window to increase the infrared transmittance
   - 2D/3D DNR (Digital Noise Reduction)
   - Built-in Mic
-  - Ultra 265, H.265, H.264
+  - H.265, H.264
   - ROI (Region of Interest)
   - ONVIF Conformance
   - Wide temperature range:- -30°C ~ 60°C (-22°F ~ 140°F)
-  - Wide voltage range of ±25%
+  - Wide voltage range of DC12V(±25%)
   - IP67
 specifications:
-  Sensor: 1/2.8", progressive scan, CMOS
+  Sensor: 1/3", progressive scan, CMOS
   Shutter: Auto/Manual, 1 ~ 1/100000s
-  Minimum Illumination: Colour:- 0.01Lux (F2.0, AGC ON); 0Lux with IR on
+  Minimum Illumination: Colour:- 0.02 (F2.1, AGC ON); 0Lux with IR on
   WDR: DWDR
-  Lens Type: 4.0mm @2.0, Fixed-focal
-  Lens Mount: M12
-  Angle of View (H): 89.0°
-  Angle of View (V): 46.9°
-  Angle of View (O): 93.8°
-  4.0mm: Detect 73.5m, Observe 29.4m, Recognize 14.7m, Identify 7.3m
-  IR Range: Up to 50m (164ft) IR range
-  White Light Range: Up to 30m (98ft) White light range
+  Lens Type: 4.0mm @F2.1, Fixed-focal
+  Field of View (H): 80.2°
+  Field of View (V): 42.9°
+  Field of View (D): 86.0°
+  4.0mm: Detect 66.7m, Observe 26.7m, Recognize 13.3m, Identify 6.7m
+  IR Range: Up to 60m (196ft) IR range
   Wavelength: 850nm
   IR On/Off Control: Auto/Manual
-  Video Compression: Ultra 265, H.265, H.264
+  Video Compression: H.265, H.264
   H.264 code profile: Baseline profile, Main profile, High profile
-  Main Stream: 3MP (2304*1296), Max 25fps; 1080P (1920*1080), Max 30fps; 720P (1280*720), Max 30fps;
-  Sub Stream: 4CIF (704*576), Max 30fps; 640*360, Max 30fps; 2CIF(704*288), Max 30fps; CIF(352*288), Max 30fps;
+  Main Stream: 2MP (1920*1080), Max 25fps; 720P (1280*720), Max 25fps;
+  Sub Stream: D1 (720*576), Max 25fps; 640*360, Max 25fps; 2CIF(704*288), Max 25fps; CIF(352*288), Max 25fps;
   Video Bit Rate: 128 Kbps~6 Mbps
   U-code: Supported
-  9:16 Corridor Mode: N/A
   OSD: Up to 4 OSDs
   Privacy Mask: Up to 4 areas
   ROI: Up to 8 areas
@@ -53,25 +50,31 @@ specifications:
   HLC: Supported
   BLC: Supported
   Defog: Digital Defog
-  Basic Detection: motion detection, human body detection, audio detection
+  Basic Detection: motion detection, audio detection
   General Function: Watermark, IP address filtering, access policy, ARP protection, RTSP authentication, user authentication, HTTP authentication
-  Audio Compression: G.711
-  Suppression: Supported
+  Audio Compression: G.711A, G711U
+  Audio Bitrate: 64 Kbps
+  Two-way audio: N/A
+  Suppression: Support
   Sampling Rate: 8KHZ
   Protocols: IPv4, IGMP, ICMP, TCP, UDP, DHCP, RTP, RTSP, RTCP, DNS, DDNS, NTP, UPnP, HTTP, RTMP
-  Compatible Integration: ONVIF (Profile S, Profile T), API
+  Compatible Integration: ONVIF (Profile S, Profile T),API
   User/Host: Up to 32 users. 2 user levels:- administrator and common user
   Client: Uniarch Client, Uniarch APP
-  Web Browser: Plug-in required live view:- IE9+, Chrome 41 and below, Firefox 52 and below; Plug-in free live view:- Chrome 57.0+, Firefox 58.0+, Edge 16+
+  Web Browser: Plug-in free live view:- Chorme 57.0+, Firefox 58.0+, Edge 16+
   Network: 1 * RJ45 10M/100M Base-TX Ethernet
   Built-in Mic: Supported
+  EMC: CE-EMC (EN 55032:- 2015+A1:2020,EN 61000-3-3:- 2013+A1:- 2019,EN IEC 61000-3-2:- 2019+A1:- 2021,EN 55035:- 2017+A11:2020)
+  FCC: FCC CFR 47 part15 B, ANSI C63.4-2014
+  Safety: CE LVD (EN 62368-1:2014+A11:2017), CB (IEC 62368-1:2014), UL (UL 62368-1, 2nd Ed., Issue Date:- 2014-12-01)
+  Environment: CE-RoHS (2011/65/EU;(EU)2015/863); WEEE (2012/19/EU); Reach (Regulation (EC) No 1907/2006)
+  Protection: IP67 (IEC 60529:1989+AMD1:1999+AMD2:2013)
   Power: DC 12V±25%, PoE (IEEE 802.3af)
   Power consumption: Max 6.0W
   Power Interface: Ø 5.5mm coaxial power plug
-  Dimensions: 170 × 86 × 93mm (6.7” × 3.4” × 3.7”) without Accessories
-  Weight: 0.34kg (0.75lb) without Accessories
+  Dimensions: 246× 97 × 187mm (9.7” × 3.8” × 7.4”)
+  Weight: 0.65kg (1.43lb)
   Working Environment: -30°C ~ 60°C (-22°F ~ 140°F), Humidity:- ≤95% RH (non-condensing)
   Surge Protection: 4KV
   Reset Button: N/A
-  Ingress Protection: IP67
 ---
