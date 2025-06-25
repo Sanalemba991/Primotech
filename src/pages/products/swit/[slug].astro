@@ -30,7 +30,7 @@ const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
       <div class="breadcrumbs">
         <a href="/">Home</a> / 
         <a href="/products">Products</a> / 
-        <a href="/products/switch">Switch Series</a> / 
+        <a href="/products/swit">Switch Series</a> / 
         <span>{productData?.title}</span>
       </div>
       <div class="product-hero-content">
@@ -101,7 +101,7 @@ const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
         <div class="related-grid">
           {relatedProducts.map(item => (
             <div class="related-card">
-              <a href={`/products/switch/${item.slug}`}>
+              <a href={`/products/swit/${item.slug}`}>
                 <div class="related-image">
                   <img 
                     src={item.data.image ?? (item.data.images?.[0]?.url ?? "/images/placeholder-camera.jpg")}
