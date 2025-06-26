@@ -4,7 +4,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { getCollection, getEntryBySlug } from "astro:content";
 
 export async function getStaticPaths() {
-  const products = await getCollection("swit");
+  const products = await getCollection("pt");
   return products.map((product) => ({
     params: { slug: product.slug },
     props: { product },
@@ -15,90 +15,166 @@ const { slug } = Astro.params;
 const { product } = Astro.props;
 const productData = product?.data;
 
-const allProducts = await getCollection("swit");
+const allProducts = await getCollection("pt");
 const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
 
 // Helper function to render specifications
 function renderSpecifications(specs) {
   if (!specs) return null;
-  
+
   const specGroups = [];
-  
-  // Basic specifications
-  const basicSpecs = [];
-  if (specs.Ports) basicSpecs.push(['Ports', specs.Ports]);
-  if (specs.Standards) basicSpecs.push(['Standards', specs.Standards]);
-  if (specs['Switching capacity']) basicSpecs.push(['Switching Capacity', specs['Switching capacity']]);
-  if (specs['Forwarding performance']) basicSpecs.push(['Forwarding Performance', specs['Forwarding performance']]);
-  if (specs['Packet Buffer']) basicSpecs.push(['Packet Buffer', specs['Packet Buffer']]);
-  if (specs.MAC) basicSpecs.push(['MAC', specs.MAC]);
-  
-  if (basicSpecs.length > 0) {
-    specGroups.push({ title: 'Network Specifications', specs: basicSpecs });
+
+  // Imaging & Optics
+  const imagingSpecs = [];
+  if (specs["Sensor"]) imagingSpecs.push(["Sensor", specs["Sensor"]]);
+  if (specs["Min. Illumination"]) imagingSpecs.push(["Min. Illumination", specs["Min. Illumination"]]);
+  if (specs["Day/Night"]) imagingSpecs.push(["Day/Night", specs["Day/Night"]]);
+  if (specs["Shutter"]) imagingSpecs.push(["Shutter", specs["Shutter"]]);
+  if (specs["WDR"]) imagingSpecs.push(["WDR", specs["WDR"]]);
+  if (specs["Lens type"]) imagingSpecs.push(["Lens type", specs["Lens type"]]);
+  if (specs["Optical Zoom"]) imagingSpecs.push(["Optical Zoom", specs["Optical Zoom"]]);
+  if (specs["Iris"]) imagingSpecs.push(["Iris", specs["Iris"]]);
+  if (specs["Angle of View (H)"]) imagingSpecs.push(["Angle of View (H)", specs["Angle of View (H)"]]);
+  if (specs["Angle of View (V)"]) imagingSpecs.push(["Angle of View (V)", specs["Angle of View (V)"]]);
+  if (specs["Angle of View (O)"]) imagingSpecs.push(["Angle of View (O)", specs["Angle of View (O)"]]);
+  if (specs["Lens (mm)"]) imagingSpecs.push(["Lens (mm)", specs["Lens (mm)"]]);
+  if (imagingSpecs.length > 0) {
+    specGroups.push({ title: 'Imaging & Optics', specs: imagingSpecs });
   }
-  
-  // Physical specifications
-  const physicalSpecs = [];
-  if (specs.Dimensions) physicalSpecs.push(['Dimensions', specs.Dimensions]);
-  if (specs.Weight) physicalSpecs.push(['Weight', specs.Weight]);
-  if (specs['Cooling Fans']) physicalSpecs.push(['Cooling Fans', specs['Cooling Fans']]);
-  
-  if (physicalSpecs.length > 0) {
-    specGroups.push({ title: 'Physical Specifications', specs: physicalSpecs });
+
+  // Detection Distances
+  const detectSpecs = [];
+  if (specs["Detect (m)"]) detectSpecs.push(["Detect (m)", specs["Detect (m)"]]);
+  if (specs["Observe (m)"]) detectSpecs.push(["Observe (m)", specs["Observe (m)"]]);
+  if (specs["Recognize (m)"]) detectSpecs.push(["Recognize (m)", specs["Recognize (m)"]]);
+  if (specs["Identify (m)"]) detectSpecs.push(["Identify (m)", specs["Identify (m)"]]);
+  if (detectSpecs.length > 0) {
+    specGroups.push({ title: 'Detection Distances', specs: detectSpecs });
   }
-  
-  // Power specifications
+
+  // IR & Illumination
+  const irSpecs = [];
+  if (specs["IR Range"]) irSpecs.push(["IR Range", specs["IR Range"]]);
+  if (specs["Wavelength"]) irSpecs.push(["Wavelength", specs["Wavelength"]]);
+  if (specs["IR On/Off Control"]) irSpecs.push(["IR On/Off Control", specs["IR On/Off Control"]]);
+  if (irSpecs.length > 0) {
+    specGroups.push({ title: 'IR & Illumination', specs: irSpecs });
+  }
+
+  // Video
+  const videoSpecs = [];
+  if (specs["Video Compression"]) videoSpecs.push(["Video Compression", specs["Video Compression"]]);
+  if (specs["Frame Rate"]) videoSpecs.push(["Frame Rate", specs["Frame Rate"]]);
+  if (specs["Video Bit Rate"]) videoSpecs.push(["Video Bit Rate", specs["Video Bit Rate"]]);
+  if (specs["ROI"]) videoSpecs.push(["ROI", specs["ROI"]]);
+  if (specs["Video Stream"]) videoSpecs.push(["Video Stream", specs["Video Stream"]]);
+  if (videoSpecs.length > 0) {
+    specGroups.push({ title: 'Video', specs: videoSpecs });
+  }
+
+  // OSD & Privacy
+  const osdSpecs = [];
+  if (specs["OSD"]) osdSpecs.push(["OSD", specs["OSD"]]);
+  if (specs["Privacy Mask"]) osdSpecs.push(["Privacy Mask", specs["Privacy Mask"]]);
+  if (osdSpecs.length > 0) {
+    specGroups.push({ title: 'OSD & Privacy', specs: osdSpecs });
+  }
+
+  // Image Enhancements
+  const enhanceSpecs = [];
+  if (specs["White Balance"]) enhanceSpecs.push(["White Balance", specs["White Balance"]]);
+  if (specs["Digital Noise Reduction"]) enhanceSpecs.push(["Digital Noise Reduction", specs["Digital Noise Reduction"]]);
+  if (specs["Smart IR"]) enhanceSpecs.push(["Smart IR", specs["Smart IR"]]);
+  if (specs["Flip"]) enhanceSpecs.push(["Flip", specs["Flip"]]);
+  if (specs["HLC"]) enhanceSpecs.push(["HLC", specs["HLC"]]);
+  if (specs["BLC"]) enhanceSpecs.push(["BLC", specs["BLC"]]);
+  if (specs["Defog"]) enhanceSpecs.push(["Defog", specs["Defog"]]);
+  if (enhanceSpecs.length > 0) {
+    specGroups.push({ title: 'Image Enhancements', specs: enhanceSpecs });
+  }
+
+  // Smart Features
+  const smartSpecs = [];
+  if (specs["Basic Detection"]) smartSpecs.push(["Basic Detection", specs["Basic Detection"]]);
+  if (specs["Auto Tracking"]) smartSpecs.push(["Auto Tracking", specs["Auto Tracking"]]);
+  if (specs["General Function"]) smartSpecs.push(["General Function", specs["General Function"]]);
+  if (smartSpecs.length > 0) {
+    specGroups.push({ title: 'Smart Features', specs: smartSpecs });
+  }
+
+  // Storage & Network
+  const storageSpecs = [];
+  if (specs["Edge Storage"]) storageSpecs.push(["Edge Storage", specs["Edge Storage"]]);
+  if (specs["Network Storage"]) storageSpecs.push(["Network Storage", specs["Network Storage"]]);
+  if (specs["Protocols"]) storageSpecs.push(["Protocols", specs["Protocols"]]);
+  if (specs["Compatible Integration"]) storageSpecs.push(["Compatible Integration", specs["Compatible Integration"]]);
+  if (specs["User/Host"]) storageSpecs.push(["User/Host", specs["User/Host"]]);
+  if (specs["Security"]) storageSpecs.push(["Security", specs["Security"]]);
+  if (specs["Client"]) storageSpecs.push(["Client", specs["Client"]]);
+  if (specs["Web Browser"]) storageSpecs.push(["Web Browser", specs["Web Browser"]]);
+  if (storageSpecs.length > 0) {
+    specGroups.push({ title: 'Storage & Network', specs: storageSpecs });
+  }
+
+  // PTZ (Pan/Tilt/Zoom)
+  const ptzSpecs = [];
+  if (specs["Pan Range"]) ptzSpecs.push(["Pan Range", specs["Pan Range"]]);
+  if (specs["Pan Speed"]) ptzSpecs.push(["Pan Speed", specs["Pan Speed"]]);
+  if (specs["Tilt Range"]) ptzSpecs.push(["Tilt Range", specs["Tilt Range"]]);
+  if (specs["Tilt Speed"]) ptzSpecs.push(["Tilt Speed", specs["Tilt Speed"]]);
+  if (specs["Number of Presets"]) ptzSpecs.push(["Number of Presets", specs["Number of Presets"]]);
+  if (specs["Preset Patrol"]) ptzSpecs.push(["Preset Patrol", specs["Preset Patrol"]]);
+  if (specs["Route Patrol"]) ptzSpecs.push(["Route Patrol", specs["Route Patrol"]]);
+  if (specs["Recorded Patrol"]) ptzSpecs.push(["Recorded Patrol", specs["Recorded Patrol"]]);
+  if (specs["Patrol Stay Time"]) ptzSpecs.push(["Patrol Stay Time", specs["Patrol Stay Time"]]);
+  if (specs["Preset Image Freeze"]) ptzSpecs.push(["Preset Image Freeze", specs["Preset Image Freeze"]]);
+  if (specs["Home Position"]) ptzSpecs.push(["Home Position", specs["Home Position"]]);
+  if (ptzSpecs.length > 0) {
+    specGroups.push({ title: 'PTZ', specs: ptzSpecs });
+  }
+
+  // Audio & Alarm
+  const audioSpecs = [];
+  if (specs["Audio I/O"]) audioSpecs.push(["Audio I/O", specs["Audio I/O"]]);
+  if (specs["Alarm I/O"]) audioSpecs.push(["Alarm I/O", specs["Alarm I/O"]]);
+  if (specs["Serial Port"]) audioSpecs.push(["Serial Port", specs["Serial Port"]]);
+  if (specs["Built-in Mic"]) audioSpecs.push(["Built-in Mic", specs["Built-in Mic"]]);
+  if (specs["Built-in Speaker"]) audioSpecs.push(["Built-in Speaker", specs["Built-in Speaker"]]);
+  if (audioSpecs.length > 0) {
+    specGroups.push({ title: 'Audio & Alarm', specs: audioSpecs });
+  }
+
+  // Connectivity
+  const connSpecs = [];
+  if (specs["Wi-Fi"]) connSpecs.push(["Wi-Fi", specs["Wi-Fi"]]);
+  if (specs["Network"]) connSpecs.push(["Network", specs["Network"]]);
+  if (specs["Video Output"]) connSpecs.push(["Video Output", specs["Video Output"]]);
+  if (connSpecs.length > 0) {
+    specGroups.push({ title: 'Connectivity', specs: connSpecs });
+  }
+
+  // Power
   const powerSpecs = [];
-  if (specs['Power supply']) powerSpecs.push(['Power Supply', specs['Power supply']]);
-  if (specs.PoE) powerSpecs.push(['PoE', specs.PoE]);
-  if (specs['Max. PoE Power']) powerSpecs.push(['Max. PoE Power', specs['Max. PoE Power']]);
-  
+  if (specs["Power"]) powerSpecs.push(["Power", specs["Power"]]);
+  if (specs["Power consumption"]) powerSpecs.push(["Power consumption", specs["Power consumption"]]);
+  if (specs["Power Interface"]) powerSpecs.push(["Power Interface", specs["Power Interface"]]);
   if (powerSpecs.length > 0) {
-    specGroups.push({ title: 'Power Specifications', specs: powerSpecs });
+    specGroups.push({ title: 'Power', specs: powerSpecs });
   }
-  
-  // Environmental specifications
-  const envSpecs = [];
-  if (specs['Operating temperature']) envSpecs.push(['Operating Temperature', specs['Operating temperature']]);
-  if (specs['Operating humidity']) envSpecs.push(['Operating Humidity', specs['Operating humidity']]);
-  if (specs['Storage humidity']) envSpecs.push(['Storage Humidity', specs['Storage humidity']]);
-  
-  if (envSpecs.length > 0) {
-    specGroups.push({ title: 'Environmental Specifications', specs: envSpecs });
+
+  // Physical & Environmental
+  const physicalSpecs = [];
+  if (specs["Dimensions (Ø x H)"]) physicalSpecs.push(["Dimensions (Ø x H)", specs["Dimensions (Ø x H)"]]);
+  if (specs["Weight"]) physicalSpecs.push(["Weight", specs["Weight"]]);
+  if (specs["Working Environment"]) physicalSpecs.push(["Working Environment", specs["Working Environment"]]);
+  if (specs["Storage Environment"]) physicalSpecs.push(["Storage Environment", specs["Storage Environment"]]);
+  if (specs["Surge Protection"]) physicalSpecs.push(["Surge Protection", specs["Surge Protection"]]);
+  if (specs["Reset Button"]) physicalSpecs.push(["Reset Button", specs["Reset Button"]]);
+  if (specs["Protection"]) physicalSpecs.push(["Protection", specs["Protection"]]);
+  if (physicalSpecs.length > 0) {
+    specGroups.push({ title: 'Physical & Environmental', specs: physicalSpecs });
   }
-  
-  // Status Indicators
-  if (specs['Status Indicators']) {
-    const statusSpecs = [];
-    if (specs['Status Indicators'].Power) statusSpecs.push(['Power', specs['Status Indicators'].Power]);
-    if (specs['Status Indicators'].PoE) statusSpecs.push(['PoE', specs['Status Indicators'].PoE]);
-    if (specs['Status Indicators'].Network) statusSpecs.push(['Network', specs['Status Indicators'].Network]);
-    
-    if (statusSpecs.length > 0) {
-      specGroups.push({ title: 'Status Indicators', specs: statusSpecs });
-    }
-  }
-  
-  // Working Modes
-  if (specs['Working Modes']) {
-    const workingModes = [];
-    
-    if (typeof specs['Working Modes'] === 'object' && specs['Working Modes'] !== null) {
-      Object.entries(specs['Working Modes']).forEach(([mode, description]) => {
-        if (description) {
-          workingModes.push([mode, description]);
-        }
-      });
-    }
-    else if (typeof specs['Working Modes'] === 'string') {
-      workingModes.push(['Working Modes', specs['Working Modes']]);
-    }
-    
-    if (workingModes.length > 0) {
-      specGroups.push({ title: 'Working Modes', specs: workingModes });
-    }
-  }
-  
+
   return specGroups;
 }
 
@@ -106,22 +182,16 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 ---
 
 <Layout>
-  <!-- Loading Animation -->
-  <div id="page-loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity duration-300">
-    <div class="animate-pulse flex flex-col items-center">
-      <svg class="w-12 h-12 text-teal-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      <span class="mt-4 text-teal-900 font-medium">Loading Product Details...</span>
-    </div>
-  </div>
-
-  <!-- Header Banner with Animation -->
-  <section id="header-banner" class="bg-gradient-to-r from-teal-900/80 to-transparent opacity-0 translate-y-10 transition-all duration-500 ease-out">
+  <!-- Professional Header Banner - Add animation classes -->
+  <section 
+    id="header-banner"
+    class="bg-gradient-to-r from-teal-900/80 to-transparent opacity-0 translate-y-10 transition-all duration-500 ease-out"
+  >
+    <!-- ...existing header content... -->
     <div class="header-overlay"></div>
     <div class="container">
       <nav class="breadcrumbs">
+        <!-- ...existing breadcrumb code... -->
         <a href="/" class="breadcrumb-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
@@ -131,15 +201,19 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         <span class="breadcrumb-separator">/</span>
         <a href="/products" class="breadcrumb-link">Products</a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products/swit" class="breadcrumb-link">Network Switches</a>
+        <a href="/products/xvr" class="breadcrumb-link">XVR</a>
         <span class="breadcrumb-separator">/</span>
         <span class="breadcrumb-current">{productData?.title}</span>
       </nav>
     </div>
   </section>
 
-  <!-- Product Overview with Animation -->
-  <section id="product-overview" class="product-overview opacity-0 translate-y-10 transition-all duration-500 ease-out delay-100">
+  <!-- Product Overview Section - Add animation classes -->
+  <section 
+    id="product-overview"
+    class="product-overview opacity-0 translate-y-10 transition-all duration-500 ease-out delay-100"
+  >
+    <!-- ...existing product overview content... -->
     <div class="container">
       <div class="product-grid">
         <!-- Product Gallery -->
@@ -152,7 +226,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   src={productData.images[0].url} 
                   alt={productData.images[0].caption || productData.title} 
                   class="main-product-image"
-                  loading="eager"
                 />
                 <div class="image-zoom-indicator">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -167,7 +240,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   src={productData.image} 
                   alt={productData.title} 
                   class="main-product-image"
-                  loading="eager"
                 />
               </div>
             ) : (
@@ -177,7 +249,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   src="/images/placeholder-camera.jpg" 
                   alt={productData?.title || "Product Image"} 
                   class="main-product-image"
-                  loading="eager"
                 />
               </div>
             )}
@@ -193,8 +264,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                 >
                   <img 
                     src={image.url} 
-                    alt={image.caption || `${productData.title} - View ${index + 1}`}
-                    loading="lazy"
+                    alt={image.caption || `${productData.title} - View ${index + 1}`} 
                   />
                 </button>
               ))}
@@ -224,7 +294,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
               <h3 class="highlights-title">Key Features</h3>
               <div class="features-grid">
                 {productData.features.map((feature, index) => (
-                  <div class="feature-item" style={`transition-delay: ${index * 50}ms`}>
+                  <div class="feature-item">
                     <div class="feature-icon">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
@@ -258,9 +328,12 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </div>
   </section>
 
-  <!-- Technical Specifications with Animation -->
+  <!-- Technical Specifications - Updated to Category & List View -->
   {specificationGroups && specificationGroups.length > 0 && (
-    <section id="specifications" class="specifications-section opacity-0 translate-y-10 transition-all duration-500 ease-out delay-200">
+    <section 
+      id="specifications"
+      class="specifications-section opacity-0 translate-y-10 transition-all duration-500 ease-out delay-200"
+    >
       <div class="container">
         <div class="section-header">
           <div class="header-content">
@@ -278,43 +351,23 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         </div>
 
         <div class="specifications-container">
-          <div class="specs-navigation">
-            <div class="nav-tabs">
-              {specificationGroups.map((group, index) => (
-                <button 
-                  class={`nav-tab ${index === 0 ? 'active' : ''}`}
-                  onclick={`showSpecGroup(${index})`}
-                  data-tab={index}
-                >
-                  {group.title}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div class="specs-content">
+          <div class="specs-content-list">
             {specificationGroups.map((group, groupIndex) => (
-              <div 
-                class={`spec-group ${groupIndex === 0 ? 'active' : ''}`}
-                data-group={groupIndex}
-              >
-                <div class="spec-table-container">
-                  <table class="spec-table">
-                    <thead>
-                      <tr>
-                        <th class="spec-parameter">Parameter</th>
-                        <th class="spec-value-header">Specification</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {group.specs.map(([key, value]) => (
-                        <tr class="spec-row">
-                          <td class="spec-name">{key}</td>
-                          <td class="spec-value">{value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              <div class="spec-category-block">
+                <div class="category-header">
+                  <h3 class="category-title">{group.title}</h3>
+                  <div class="category-divider"></div>
+                </div>
+                
+                <div class="category-content">
+                  <div class="specs-grid">
+                    {group.specs.map(([key, value]) => (
+                      <div class="spec-item">
+                        <div class="spec-label">{key}</div>
+                        <div class="spec-detail">{value}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -324,52 +377,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </section>
   )}
 
-  <!-- Related Products with Animation -->
-  <section id="related-products" class="related-products opacity-0 translate-y-10 transition-all duration-500 ease-out delay-300">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Related Products</h2>
-        <p class="section-subtitle">Explore similar network switches</p>
-      </div>
-      
-      <div class="products-grid">
-        {relatedProducts.map((product, index) => (
-          <div class="product-card opacity-0 translate-y-10 transition-all duration-500 ease-out" style={`transition-delay: ${index * 100}ms`}>
-            <a href={`/products/switch/${product.slug}`} class="product-link">
-              <div class="product-image">
-                {product.data.images?.[0]?.url ? (
-                  <img 
-                    src={product.data.images[0].url} 
-                    alt={product.data.images[0].caption || product.data.title}
-                    loading="lazy"
-                  />
-                ) : (
-                  <img 
-                    src="/images/placeholder-camera.jpg" 
-                    alt={product.data.title}
-                    loading="lazy"
-                  />
-                )}
-                <div class="product-overlay">
-                  <span class="view-details">View Details</span>
-                </div>
-              </div>
-              <div class="product-info">
-                <h3 class="product-name">{product.data.title}</h3>
-                <p class="product-summary">{product.data.description?.substring(0, 100)}...</p>
-                <div class="product-footer">
-                  <span class="learn-more">Learn More →</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- Related Products - Add animation classes -->
+  
 </Layout>
-
-<style is:global>
+<style>
   /* CSS Variables for Professional Theme */
   :root {
     --primary-color: #2dd4bf; /* teal-400 */
@@ -405,6 +416,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   }
 
   /* Professional Header */
+  
   .header-overlay {
     position: absolute;
     top: 0;
@@ -645,6 +657,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
   }
 
   .btn-primary {
@@ -652,8 +665,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     color: white;
   }
 
-  .btn-primary:hover {
-    background: var(--primary-hover);
+  .btn-primary:hover, .btn-secondary:hover {
+    box-shadow: 0 8px 24px 0 rgba(45,212,191,0.18), 0 1.5px 4px 0 rgba(0,0,0,0.08);
+    transform: translateY(-2px) scale(1.04);
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
   }
 
   .btn-secondary {
@@ -701,7 +716,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     padding: 5rem 0;
     background: var(--background-secondary);
   }
-
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -709,20 +723,17 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     margin-bottom: 3rem;
     gap: 2rem;
   }
-
   .header-content h2.section-title {
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-primary);
     margin: 0 0 0.5rem 0;
   }
-
   .section-subtitle {
     color: var(--text-secondary);
     font-size: 1rem;
     margin: 0;
   }
-
   .btn-download {
     display: flex;
     align-items: center;
@@ -734,398 +745,215 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     border-radius: var(--radius-md);
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
-
   .btn-download:hover {
     background: var(--primary-color);
     color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
-
   .specifications-container {
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
     overflow: hidden;
   }
-
-  .specs-navigation {
+  .specs-content-list {
+    padding: 0;
+  }
+  .spec-category-block {
     border-bottom: 1px solid var(--border-color);
-    background: var(--background-tertiary);
   }
-
-  .nav-tabs {
+  .spec-category-block:last-child {
+    border-bottom: none;
+  }
+  .category-header {
+    padding: 2rem 2rem 1rem 2rem;
+    background: linear-gradient(135deg, var(--background-tertiary) 0%, var(--background-secondary) 100%);
+    border-bottom: 1px solid var(--border-color);
+  }
+  .category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
     display: flex;
-    overflow-x: auto;
-    padding: 0 1rem;
+    align-items: center;
+    gap: 1rem;
   }
-
-  .nav-tab {
-    padding: 1rem 1.5rem;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    border-bottom: 3px solid transparent;
+  .category-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 2px;
   }
-
-  .nav-tab:hover {
-    color: var(--primary-color);
-    background: rgba(45, 212, 191, 0.05); /* teal-400 with opacity */
+  .category-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+    border-radius: 1px;
   }
-
-  .nav-tab.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-    background: white;
-  }
-
-  .specs-content {
-    position: relative;
-  }
-
-  .spec-group {
-    display: none;
+  .category-content {
     padding: 2rem;
   }
-
-  .spec-group.active {
-    display: block;
-  }
-
-  .spec-table-container {
-    overflow-x: auto;
-  }
-
-  .spec-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .spec-table th {
-    background: var(--background-tertiary);
-    color: var(--text-primary);
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    border-bottom: 2px solid var(--border-color-strong);
-  }
-
-  .spec-parameter {
-    width: 40%;
-  }
-
-  .spec-value-header {
-    width: 60%;
-  }
-
-  .spec-row {
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .spec-row:hover {
-    background: var(--background-secondary);
-  }
-
-  .spec-name {
-    padding: 1rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    background: var(--background-tertiary);
-    width: 40%;
-  }
-
-  .spec-value {
-    padding: 1rem;
-    color: var(--text-secondary);
-    width: 60%;
-    line-height: 1.6;
-  }
-
-  /* Professional Related Products */
-  .related-products {
-    padding: 5rem 0;
-    background: var(--background-primary);
-  }
-
-  .products-grid {
+  .specs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
-
-  .product-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-color);
-  }
-
-  .product-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  .product-image {
-    position: relative;
-    height: 240px;
+  .spec-item {
     background: var(--background-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
     overflow: hidden;
   }
-
-  .product-image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .product-overlay {
+  .spec-item::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    background: rgba(30, 64, 175, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
-
-  .product-card:hover .product-overlay {
-    opacity: 1;
+  .spec-item:hover {
+    background: white;
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
-
-  .view-details {
-    color: white;
-    font-weight: 600;
+  .spec-item:hover::before {
+    transform: translateX(0);
+  }
+  .spec-label {
     font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-
-  .product-info {
-    padding: 1.5rem;
+  .spec-label::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border-color);
   }
-
-  .product-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 0.75rem 0;
-    line-height: 1.3;
-  }
-
-  .product-summary {
+  .spec-detail {
+    font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin: 0 0 1.5rem 0;
-    font-size: 0.875rem;
+    font-weight: 500;
   }
-
-  .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .learn-more {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: color 0.2s ease;
-  }
-
-  .product-card:hover .learn-more {
-    color: var(--primary-hover);
-  }
-
-  /* Animation Classes */
-  .animate-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-
-  /* Optimized transitions */
-  [class*="transition-all"] {
-    will-change: transform, opacity;
-  }
-  
-  /* Loading animation */
-  #page-loader {
-    transition: opacity 0.3s ease-out;
-  }
-  
-  #page-loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .container {
-      padding: 0 1.5rem;
+  @media (min-width: 1024px) {
+    .specs-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    .product-grid {
-      gap: 3rem;
+  }
+  @media (min-width: 1280px) {
+    .specs-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
-
+  }
+  @media (max-width: 768px) {
     .section-header {
       flex-direction: column;
       align-items: flex-start;
       gap: 1.5rem;
     }
-
-    .nav-tabs {
-      padding: 0;
+    .category-header {
+      padding: 1.5rem 1rem 1rem 1rem;
     }
-
-    .spec-table th,
-    .spec-name,
-    .spec-value {
-      padding: 0.75rem;
+    .category-title {
+      font-size: 1.25rem;
+    }
+    .category-content {
+      padding: 1.5rem 1rem;
+    }
+    .specs-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .spec-item {
+      padding: 1rem;
     }
   }
-
-  @media (max-width: 768px) {
-    .product-overview {
+  @media (max-width: 480px) {
+    .specifications-section {
       padding: 3rem 0;
     }
-
-    .product-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .product-gallery {
-      position: static;
-    }
-
-    .product-title {
-      font-size: 2rem;
-    }
-
-    .product-actions {
-      flex-direction: column;
-    }
-
-    .btn {
-      justify-content: center;
-    }
-
-    .specifications-section,
-    .related-products {
-      padding: 3rem 0;
-    }
-
     .section-header h2.section-title {
       font-size: 1.75rem;
     }
-
-    .nav-tabs {
-      flex-wrap: wrap;
-    }
-
-    .nav-tab {
-      padding: 0.75rem 1rem;
-      font-size: 0.875rem;
-    }
-
-    .spec-group {
+    .category-header {
       padding: 1rem;
     }
-
-    .spec-table th,
-    .spec-name,
-    .spec-value {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.875rem;
-    }
-
-    .products-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 0 1rem;
-    }
-
-    .main-image-container {
-      padding: 1rem;
-      min-height: 300px;
-    }
-
-    .gallery-thumbnails {
+    .category-title {
+      font-size: 1.125rem;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 0.5rem;
     }
-
-    .thumbnail-btn {
-      width: 60px;
-      height: 60px;
+    .category-content {
+      padding: 1rem;
     }
-
-    .product-title {
-      font-size: 1.75rem;
+    .spec-item {
+      padding: 0.875rem;
     }
-
-    .features-grid {
-      gap: 0.75rem;
+    .spec-label {
+      font-size: 0.8rem;
     }
-
-    .feature-item {
-      padding: 0.75rem;
-    }
-
-    .spec-table-container {
-      font-size: 0.75rem;
-    }
-
-    .spec-name {
-      width: 45%;
-    }
-
-    .spec-value {
-      width: 55%;
+    .spec-detail {
+      font-size: 0.9rem;
     }
   }
-
-  /* Print Styles */
   @media print {
-    #page-loader,
-    .product-actions,
-    .btn-download,
-    .nav-tabs,
-    .product-overlay {
+    .btn-download {
       display: none;
     }
-
     .specifications-section {
       background: white;
     }
-
-    .spec-group {
-      display: block !important;
+    .spec-category-block {
       page-break-inside: avoid;
+      margin-bottom: 2rem;
     }
-
-    .spec-table {
+    .category-header {
+      background: #f8f9fa !important;
       border: 1px solid #000;
     }
-
-    .spec-table th,
-    .spec-name,
-    .spec-value {
-      border: 1px solid #000;
+    .spec-item {
       background: white !important;
+      border: 1px solid #000;
+      break-inside: avoid;
     }
+  }
+
+  .animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .product-card:nth-child(1) { transition-delay: 100ms !important; }
+  .product-card:nth-child(2) { transition-delay: 200ms !important; }
+  .product-card:nth-child(3) { transition-delay: 300ms !important; }
+  [class*="transition-all"] {
+    will-change: transform, opacity;
+  }
+  #page-loader {
+    transition: opacity 0.3s ease-out;
+  }
+  #page-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 </style>
 
@@ -1136,23 +964,20 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     setTimeout(() => {
       const loader = document.getElementById('page-loader');
       if (loader) loader.classList.add('hidden');
-      
       // Trigger initial animations
       animateOnScroll();
-      
       // Remove loader after transition ends to prevent interaction
-      loader.addEventListener('transitionend', () => {
+      loader && loader.addEventListener('transitionend', () => {
         loader.style.display = 'none';
       });
     }, 300);
-    
-    // Initialize Intersection Observer for smooth scroll animations
+
+    // Intersection Observer for smooth scroll animations
     function animateOnScroll() {
       const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
       };
-      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1161,7 +986,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
           }
         });
       }, observerOptions);
-      
+
       // Observe all animated sections
       const animatedSections = [
         document.getElementById('header-banner'),
@@ -1169,147 +994,96 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         document.getElementById('specifications'),
         document.getElementById('related-products')
       ];
-      
       animatedSections.forEach(section => {
         if (section) observer.observe(section);
       });
-      
+
       // Observe individual product cards for staggered animation
       const productCards = document.querySelectorAll('.product-card');
       productCards.forEach((card) => {
         observer.observe(card);
       });
-      
-      // Observe feature items for staggered animation
-      const featureItems = document.querySelectorAll('.feature-item');
-      featureItems.forEach((item) => {
-        observer.observe(item);
-      });
     }
-    
-    // Initialize gallery functionality
-    function initializeGallery() {
+
+    // Initialize other functionality
+    // Gallery
+    function changeMainImage(index) {
       const mainImage = document.getElementById('mainProductImage');
       const thumbnails = document.querySelectorAll('.thumbnail-btn');
-      
-      if (thumbnails.length > 0) {
-        thumbnails.forEach(thumb => {
-          thumb.addEventListener('click', function() {
-            const index = this.getAttribute('data-index');
-            changeMainImage(index);
-          });
+      const thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
+      if (mainImage && thumbnailImages[index]) {
+        mainImage.src = thumbnailImages[index].src;
+        mainImage.alt = thumbnailImages[index].alt;
+        thumbnails.forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
         });
       }
-      
-      window.changeMainImage = function(index) {
-        const thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
-        if (mainImage && thumbnailImages[index]) {
-          // Add smooth transition
-          mainImage.style.opacity = '0';
-          setTimeout(() => {
-            mainImage.src = thumbnailImages[index].src;
-            mainImage.alt = thumbnailImages[index].alt;
-            mainImage.style.opacity = '1';
-          }, 150);
-          
-          // Update thumbnail states
-          thumbnails.forEach((thumb, i) => {
-            thumb.classList.toggle('active', i === parseInt(index));
-          });
-        }
-      };
     }
-    
-    // Initialize specification tabs
-    function initializeSpecTabs() {
-      const tabs = document.querySelectorAll('.nav-tab');
-      const groups = document.querySelectorAll('.spec-group');
-      
-      if (tabs.length > 0) {
-        tabs.forEach(tab => {
-          tab.addEventListener('click', function() {
-            const index = this.getAttribute('data-tab');
-            showSpecGroup(index);
-          });
-        });
-      }
-      
-      window.showSpecGroup = function(index) {
-        // Update tab states
-        tabs.forEach((tab, i) => {
-          tab.classList.toggle('active', i === parseInt(index));
-        });
-        
-        // Update group visibility
-        groups.forEach((group, i) => {
-          group.classList.toggle('active', i === parseInt(index));
-        });
-      };
-    }
-    
-    // Initialize all functionality
-    initializeGallery();
-    initializeSpecTabs();
-    
-    // Download specifications function
-    window.downloadSpecifications = function() {
+    window.changeMainImage = changeMainImage;
+
+    // Download Specifications
+    function downloadSpecifications() {
       const productTitle = document.querySelector('.product-title')?.textContent || 'Product';
-      const specificationGroups = document.querySelectorAll('.spec-group');
-      
-      if (specificationGroups.length === 0) return;
-      
-      // Create comprehensive CSV with all sections
+      const categoryBlocks = document.querySelectorAll('.spec-category-block');
+      if (categoryBlocks.length === 0) return;
       let csv = `Product Specifications - ${productTitle}\n`;
       csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
       csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
-      
-      specificationGroups.forEach((group, groupIndex) => {
-        const table = group.querySelector('.spec-table');
-        if (!table) return;
-        
-        // Get section title from corresponding nav tab
-        const navTabs = document.querySelectorAll('.nav-tab');
-        const sectionTitle = navTabs[groupIndex]?.textContent.trim() || `Section ${groupIndex + 1}`;
-        
-        // Add section header
-        csv += `\n=== ${sectionTitle.toUpperCase()} ===\n`;
-        
-        const rows = table.querySelectorAll('tr');
-        
-        rows.forEach(row => {
-          const cells = row.querySelectorAll('th, td');
-          const rowData = Array.from(cells).map(cell => {
-            let text = cell.textContent.trim();
-            // Clean up text and handle CSV formatting
-            text = text.replace(/\s+/g, ' ');
-            if (text.includes(',') || text.includes('"') || text.includes('\n')) {
-              text = '"' + text.replace(/"/g, '""') + '"';
-            }
-            return text;
-          });
-          
-          if (rowData.some(cell => cell.length > 0)) {
-            csv += rowData.join(',') + '\n';
+      categoryBlocks.forEach((block) => {
+        const categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
+        const specItems = block.querySelectorAll('.spec-item');
+        csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
+        csv += `Parameter,Specification\n`;
+        specItems.forEach(item => {
+          const label = item.querySelector('.spec-label')?.textContent.trim() || '';
+          const detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
+          const cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
+          const cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
+          const csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
+            ? `"${cleanLabel}"` : cleanLabel;
+          const csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
+            ? `"${cleanDetail}"` : cleanDetail;
+          if (csvLabel && csvDetail) {
+            csv += `${csvLabel},${csvDetail}\n`;
           }
         });
-        
-        csv += '\n'; // Add spacing between sections
+        csv += '\n';
       });
-      
-      // Create and download file
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      
-      const filename = `${productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_complete_specifications.csv`;
+      const filename = `${productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_specifications.csv`;
       link.setAttribute('download', filename);
-      
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-    };
+    }
+    window.downloadSpecifications = downloadSpecifications;
+
+    // Tab switching
+    function showSpecGroup(index) {
+      const tabs = document.querySelectorAll('.nav-tab');
+      const groups = document.querySelectorAll('.spec-group');
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+      });
+      groups.forEach((group, i) => {
+        group.classList.toggle('active', i === index);
+      });
+    }
+    window.showSpecGroup = showSpecGroup;
+
+    // Initialize first thumbnail/tab/group on DOMContentLoaded
+    const firstThumbnail = document.querySelector('.thumbnail-btn');
+    if (firstThumbnail) firstThumbnail.classList.add('active');
+    const firstTab = document.querySelector('.nav-tab');
+    const firstGroup = document.querySelector('.spec-group');
+    if (firstTab && firstGroup) {
+      firstTab.classList.add('active');
+      firstGroup.classList.add('active');
+    }
   });
 </script>

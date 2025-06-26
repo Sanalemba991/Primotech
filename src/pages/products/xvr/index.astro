@@ -105,7 +105,7 @@ const pandapseries = await getCollection("xvr");
       <div class="product-grid">
         {pandapseries.map(item => (
           <div class="product-card">
-            <a href={`/products/pandap/${item.slug}`} class="product-link">
+            <a href={`/products/xvr/${item.slug}`} class="product-link">
               <div class="product-image">
                 <img 
                   src={item.data.image ?? (item.data.images?.[0]?.url ?? "/images/placeholder-camera.jpg")}

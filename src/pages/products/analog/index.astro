@@ -2,7 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-const pandapseries = await getCollection("indoorSecurity");
+const pandapseries = await getCollection("analog");
 ---
 
 <Layout>
@@ -19,7 +19,7 @@ const pandapseries = await getCollection("indoorSecurity");
       </div>
       <!-- Hero Content -->
       <div class="relative z-10 flex flex-col items-center justify-center w-full h-full">
-        <h1 class="text-4xl md:text-6xl font-light text-white mb-4 tracking-wide hero-title-animate">Indoor Security Camera</h1>
+        <h1 class="text-4xl md:text-6xl font-light text-white mb-4 tracking-wide hero-title-animate">Fixed-lens Cameras</h1>
         <div class="w-24 h-1 bg-teal-400 rounded mx-auto mb-2 hero-divider-animate"></div>
       </div>
     </section>
@@ -29,9 +29,9 @@ const pandapseries = await getCollection("indoorSecurity");
     <div class="container">
       <div class="intro-content">
         <div class="intro-text">
-          <h2>Indoor Security Camera</h2>
+          <h2>Fixed-lens Cameras</h2>
           <p>
-            The products in the Indoor Security Camera are highly favored for entry-level applications, including residential and small retail settings. This series is made up of the PandaBasic and PandaStar lines. Their primary business value lies in delivering outstanding performance while maintaining an affordable price point.
+            The products in the Fixed-lens Cameras  are highly favored for entry-level applications, including residential and small retail settings. This series is made up of the PandaBasic and PandaStar lines. Their primary business value lies in delivering outstanding performance while maintaining an affordable price point.
           </p>
         </div>
         <div class="intro-image">
@@ -51,7 +51,7 @@ const pandapseries = await getCollection("indoorSecurity");
         <div class="advantage-text">
           <h2>Advantage</h2>
           <p>
-           All Indoor Security Camera products come equipped with <strong>Ultra 265 compression technology</strong>, a proprietary innovation by PrimoTech. In addition, these products are designed for quick and easy installation and maintenance, allowing them to be set up almost instantly in any environment. The Panda B Series offers the most <strong>budget-friendly</strong> solution for residential and small business applications.
+           All Fixed-lens Cameras  products come equipped with <strong>Ultra 265 compression technology</strong>, a proprietary innovation by PrimoTech. In addition, these products are designed for quick and easy installation and maintenance, allowing them to be set up almost instantly in any environment. The Panda B Series offers the most <strong>budget-friendly</strong> solution for residential and small business applications.
           </p>
         </div>
       </div>
@@ -80,7 +80,7 @@ const pandapseries = await getCollection("indoorSecurity");
               <polyline points="21,15 16,10 5,21"/>
             </svg>
           </div>
-          <div class="tech-label">Indoor Security Technology</div>
+          <div class="tech-label">Fixed-lens Cameras Security Technology</div>
           <div class="tech-desc">Radically reduce blurring, deliver clear, bright and colorful image.</div>
         </div>
         <div class="tech-col">
@@ -101,11 +101,11 @@ const pandapseries = await getCollection("indoorSecurity");
   <!-- Product List Section -->
   <section class="products section-animate">
     <div class="container">
-      <h2>Indoor Security Camera Product List</h2>
+      <h2>Fixed-lens Cameras Product List</h2>
       <div class="product-grid">
         {pandapseries.map(item => (
           <div class="product-card">
-            <a href={`/products/indoor/${item.slug}`} class="product-link">
+            <a href={`/products/analog/${item.slug}`} class="product-link">
               <div class="product-image">
                 <img 
                   src={item.data.image ?? (item.data.images?.[0]?.url ?? "/images/placeholder-camera.jpg")}

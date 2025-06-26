@@ -4,7 +4,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { getCollection, getEntryBySlug } from "astro:content";
 
 export async function getStaticPaths() {
-  const products = await getCollection("swit");
+  const products = await getCollection("xvr");
   return products.map((product) => ({
     params: { slug: product.slug },
     props: { product },
@@ -15,90 +15,112 @@ const { slug } = Astro.params;
 const { product } = Astro.props;
 const productData = product?.data;
 
-const allProducts = await getCollection("swit");
+const allProducts = await getCollection("xvr");
 const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
 
 // Helper function to render specifications
 function renderSpecifications(specs) {
   if (!specs) return null;
-  
+
   const specGroups = [];
-  
-  // Basic specifications
-  const basicSpecs = [];
-  if (specs.Ports) basicSpecs.push(['Ports', specs.Ports]);
-  if (specs.Standards) basicSpecs.push(['Standards', specs.Standards]);
-  if (specs['Switching capacity']) basicSpecs.push(['Switching Capacity', specs['Switching capacity']]);
-  if (specs['Forwarding performance']) basicSpecs.push(['Forwarding Performance', specs['Forwarding performance']]);
-  if (specs['Packet Buffer']) basicSpecs.push(['Packet Buffer', specs['Packet Buffer']]);
-  if (specs.MAC) basicSpecs.push(['MAC', specs.MAC]);
-  
-  if (basicSpecs.length > 0) {
-    specGroups.push({ title: 'Network Specifications', specs: basicSpecs });
+
+  // Video Input
+  const videoInputSpecs = [];
+  if (specs["Analog Video Input"]) videoInputSpecs.push(['Analog Video Input', specs["Analog Video Input"]]);
+  if (specs["IP Video Input"]) videoInputSpecs.push(['IP Video Input', specs["IP Video Input"]]);
+  if (specs["AHD input"]) videoInputSpecs.push(['AHD Input', specs["AHD input"]]);
+  if (specs["TVI input"]) videoInputSpecs.push(['TVI Input', specs["TVI input"]]);
+  if (specs["CVI input"]) videoInputSpecs.push(['CVI Input', specs["CVI input"]]);
+  if (specs["CVBS input"]) videoInputSpecs.push(['CVBS Input', specs["CVBS input"]]);
+  if (videoInputSpecs.length > 0) {
+    specGroups.push({ title: 'Video Input', specs: videoInputSpecs });
   }
-  
-  // Physical specifications
+
+  // Audio
+  const audioSpecs = [];
+  if (specs["Audio Input"]) audioSpecs.push(['Audio Input', specs["Audio Input"]]);
+  if (specs["Audio Output"]) audioSpecs.push(['Audio Output', specs["Audio Output"]]);
+  if (specs["Audio Compression"]) audioSpecs.push(['Audio Compression', specs["Audio Compression"]]);
+  if (specs["Two-way Audio"]) audioSpecs.push(['Two-way Audio', specs["Two-way Audio"]]);
+  if (audioSpecs.length > 0) {
+    specGroups.push({ title: 'Audio', specs: audioSpecs });
+  }
+
+  // Video Output
+  const videoOutputSpecs = [];
+  if (specs["VGA Output"]) videoOutputSpecs.push(['VGA Output', specs["VGA Output"]]);
+  if (specs["HDMI Output"]) videoOutputSpecs.push(['HDMI Output', specs["HDMI Output"]]);
+  if (specs["Live view display"]) videoOutputSpecs.push(['Live View Display', specs["Live view display"]]);
+  if (specs["Synchronous Playback"]) videoOutputSpecs.push(['Synchronous Playback', specs["Synchronous Playback"]]);
+  if (videoOutputSpecs.length > 0) {
+    specGroups.push({ title: 'Video Output', specs: videoOutputSpecs });
+  }
+
+  // Network
+  const networkSpecs = [];
+  if (specs["Incoming Bandwidth"]) networkSpecs.push(['Incoming Bandwidth', specs["Incoming Bandwidth"]]);
+  if (specs["Outgoing Bandwidth"]) networkSpecs.push(['Outgoing Bandwidth', specs["Outgoing Bandwidth"]]);
+  if (specs["Remote Users"]) networkSpecs.push(['Remote Users', specs["Remote Users"]]);
+  if (specs["Protocols"]) networkSpecs.push(['Protocols', specs["Protocols"]]);
+  if (specs["Browser"]) networkSpecs.push(['Browser', specs["Browser"]]);
+  if (specs["Network Interface"]) networkSpecs.push(['Network Interface', specs["Network Interface"]]);
+  if (networkSpecs.length > 0) {
+    specGroups.push({ title: 'Network', specs: networkSpecs });
+  }
+
+  // Storage
+  const storageSpecs = [];
+  if (specs["SATA"]) storageSpecs.push(['SATA', specs["SATA"]]);
+  if (specs["Capacity"]) storageSpecs.push(['Capacity', specs["Capacity"]]);
+  if (storageSpecs.length > 0) {
+    specGroups.push({ title: 'Storage', specs: storageSpecs });
+  }
+
+  // Recording & Playback
+  const recordingSpecs = [];
+  if (specs["Recording Resolution"]) recordingSpecs.push(['Recording Resolution', specs["Recording Resolution"]]);
+  if (specs["Capability"]) recordingSpecs.push(['Capability', specs["Capability"]]);
+  if (specs["FTP/Schedule/Event Snapshot"]) recordingSpecs.push(['FTP/Schedule/Event Snapshot', specs["FTP/Schedule/Event Snapshot"]]);
+  if (recordingSpecs.length > 0) {
+    specGroups.push({ title: 'Recording & Playback', specs: recordingSpecs });
+  }
+
+  // Alarm & VCA
+  const alarmSpecs = [];
+  if (specs["VCA Detection"]) alarmSpecs.push(['VCA Detection', specs["VCA Detection"]]);
+  if (specs["VCA Search"]) alarmSpecs.push(['VCA Search', specs["VCA Search"]]);
+  if (specs["General Alarm"]) alarmSpecs.push(['General Alarm', specs["General Alarm"]]);
+  if (specs["Alert Alarm"]) alarmSpecs.push(['Alert Alarm', specs["Alert Alarm"]]);
+  if (alarmSpecs.length > 0) {
+    specGroups.push({ title: 'Alarm & VCA', specs: alarmSpecs });
+  }
+
+  // Interfaces
+  const interfaceSpecs = [];
+  if (specs["USB Interface"]) interfaceSpecs.push(['USB Interface', specs["USB Interface"]]);
+  if (specs["Serial Interface"]) interfaceSpecs.push(['Serial Interface', specs["Serial Interface"]]);
+  if (interfaceSpecs.length > 0) {
+    specGroups.push({ title: 'Interfaces', specs: interfaceSpecs });
+  }
+
+  // Power & Environment
+  const powerEnvSpecs = [];
+  if (specs["Power Supply"]) powerEnvSpecs.push(['Power Supply', specs["Power Supply"]]);
+  if (specs["Power Consumption"]) powerEnvSpecs.push(['Power Consumption', specs["Power Consumption"]]);
+  if (specs["Working Environment"]) powerEnvSpecs.push(['Working Environment', specs["Working Environment"]]);
+  if (powerEnvSpecs.length > 0) {
+    specGroups.push({ title: 'Power & Environment', specs: powerEnvSpecs });
+  }
+
+  // Physical
   const physicalSpecs = [];
-  if (specs.Dimensions) physicalSpecs.push(['Dimensions', specs.Dimensions]);
-  if (specs.Weight) physicalSpecs.push(['Weight', specs.Weight]);
-  if (specs['Cooling Fans']) physicalSpecs.push(['Cooling Fans', specs['Cooling Fans']]);
-  
+  if (specs["Dimensions"]) physicalSpecs.push(['Dimensions', specs["Dimensions"]]);
+  if (specs["Weight"]) physicalSpecs.push(['Weight', specs["Weight"]]);
+  if (specs["Certification"]) physicalSpecs.push(['Certification', specs["Certification"]]);
   if (physicalSpecs.length > 0) {
-    specGroups.push({ title: 'Physical Specifications', specs: physicalSpecs });
+    specGroups.push({ title: 'Physical', specs: physicalSpecs });
   }
-  
-  // Power specifications
-  const powerSpecs = [];
-  if (specs['Power supply']) powerSpecs.push(['Power Supply', specs['Power supply']]);
-  if (specs.PoE) powerSpecs.push(['PoE', specs.PoE]);
-  if (specs['Max. PoE Power']) powerSpecs.push(['Max. PoE Power', specs['Max. PoE Power']]);
-  
-  if (powerSpecs.length > 0) {
-    specGroups.push({ title: 'Power Specifications', specs: powerSpecs });
-  }
-  
-  // Environmental specifications
-  const envSpecs = [];
-  if (specs['Operating temperature']) envSpecs.push(['Operating Temperature', specs['Operating temperature']]);
-  if (specs['Operating humidity']) envSpecs.push(['Operating Humidity', specs['Operating humidity']]);
-  if (specs['Storage humidity']) envSpecs.push(['Storage Humidity', specs['Storage humidity']]);
-  
-  if (envSpecs.length > 0) {
-    specGroups.push({ title: 'Environmental Specifications', specs: envSpecs });
-  }
-  
-  // Status Indicators
-  if (specs['Status Indicators']) {
-    const statusSpecs = [];
-    if (specs['Status Indicators'].Power) statusSpecs.push(['Power', specs['Status Indicators'].Power]);
-    if (specs['Status Indicators'].PoE) statusSpecs.push(['PoE', specs['Status Indicators'].PoE]);
-    if (specs['Status Indicators'].Network) statusSpecs.push(['Network', specs['Status Indicators'].Network]);
-    
-    if (statusSpecs.length > 0) {
-      specGroups.push({ title: 'Status Indicators', specs: statusSpecs });
-    }
-  }
-  
-  // Working Modes
-  if (specs['Working Modes']) {
-    const workingModes = [];
-    
-    if (typeof specs['Working Modes'] === 'object' && specs['Working Modes'] !== null) {
-      Object.entries(specs['Working Modes']).forEach(([mode, description]) => {
-        if (description) {
-          workingModes.push([mode, description]);
-        }
-      });
-    }
-    else if (typeof specs['Working Modes'] === 'string') {
-      workingModes.push(['Working Modes', specs['Working Modes']]);
-    }
-    
-    if (workingModes.length > 0) {
-      specGroups.push({ title: 'Working Modes', specs: workingModes });
-    }
-  }
-  
+
   return specGroups;
 }
 
@@ -106,22 +128,16 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 ---
 
 <Layout>
-  <!-- Loading Animation -->
-  <div id="page-loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity duration-300">
-    <div class="animate-pulse flex flex-col items-center">
-      <svg class="w-12 h-12 text-teal-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      <span class="mt-4 text-teal-900 font-medium">Loading Product Details...</span>
-    </div>
-  </div>
-
-  <!-- Header Banner with Animation -->
-  <section id="header-banner" class="bg-gradient-to-r from-teal-900/80 to-transparent opacity-0 translate-y-10 transition-all duration-500 ease-out">
+  <!-- Professional Header Banner - Add animation classes -->
+  <section 
+    id="header-banner"
+    class="bg-gradient-to-r from-teal-900/80 to-transparent opacity-0 translate-y-10 transition-all duration-500 ease-out"
+  >
+    <!-- ...existing header content... -->
     <div class="header-overlay"></div>
     <div class="container">
       <nav class="breadcrumbs">
+        <!-- ...existing breadcrumb code... -->
         <a href="/" class="breadcrumb-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
@@ -131,15 +147,19 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         <span class="breadcrumb-separator">/</span>
         <a href="/products" class="breadcrumb-link">Products</a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products/swit" class="breadcrumb-link">Network Switches</a>
+        <a href="/products/xvr" class="breadcrumb-link">XVR</a>
         <span class="breadcrumb-separator">/</span>
         <span class="breadcrumb-current">{productData?.title}</span>
       </nav>
     </div>
   </section>
 
-  <!-- Product Overview with Animation -->
-  <section id="product-overview" class="product-overview opacity-0 translate-y-10 transition-all duration-500 ease-out delay-100">
+  <!-- Product Overview Section - Add animation classes -->
+  <section 
+    id="product-overview"
+    class="product-overview opacity-0 translate-y-10 transition-all duration-500 ease-out delay-100"
+  >
+    <!-- ...existing product overview content... -->
     <div class="container">
       <div class="product-grid">
         <!-- Product Gallery -->
@@ -152,7 +172,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   src={productData.images[0].url} 
                   alt={productData.images[0].caption || productData.title} 
                   class="main-product-image"
-                  loading="eager"
                 />
                 <div class="image-zoom-indicator">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -167,7 +186,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   src={productData.image} 
                   alt={productData.title} 
                   class="main-product-image"
-                  loading="eager"
                 />
               </div>
             ) : (
@@ -177,7 +195,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   src="/images/placeholder-camera.jpg" 
                   alt={productData?.title || "Product Image"} 
                   class="main-product-image"
-                  loading="eager"
                 />
               </div>
             )}
@@ -193,8 +210,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                 >
                   <img 
                     src={image.url} 
-                    alt={image.caption || `${productData.title} - View ${index + 1}`}
-                    loading="lazy"
+                    alt={image.caption || `${productData.title} - View ${index + 1}`} 
                   />
                 </button>
               ))}
@@ -224,7 +240,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
               <h3 class="highlights-title">Key Features</h3>
               <div class="features-grid">
                 {productData.features.map((feature, index) => (
-                  <div class="feature-item" style={`transition-delay: ${index * 50}ms`}>
+                  <div class="feature-item">
                     <div class="feature-icon">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
@@ -258,9 +274,13 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </div>
   </section>
 
-  <!-- Technical Specifications with Animation -->
+  <!-- Technical Specifications - Add animation classes -->
   {specificationGroups && specificationGroups.length > 0 && (
-    <section id="specifications" class="specifications-section opacity-0 translate-y-10 transition-all duration-500 ease-out delay-200">
+    <section 
+      id="specifications"
+      class="specifications-section opacity-0 translate-y-10 transition-all duration-500 ease-out delay-200"
+    >
+      <!-- ...existing specifications content... -->
       <div class="container">
         <div class="section-header">
           <div class="header-content">
@@ -324,52 +344,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </section>
   )}
 
-  <!-- Related Products with Animation -->
-  <section id="related-products" class="related-products opacity-0 translate-y-10 transition-all duration-500 ease-out delay-300">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Related Products</h2>
-        <p class="section-subtitle">Explore similar network switches</p>
-      </div>
-      
-      <div class="products-grid">
-        {relatedProducts.map((product, index) => (
-          <div class="product-card opacity-0 translate-y-10 transition-all duration-500 ease-out" style={`transition-delay: ${index * 100}ms`}>
-            <a href={`/products/switch/${product.slug}`} class="product-link">
-              <div class="product-image">
-                {product.data.images?.[0]?.url ? (
-                  <img 
-                    src={product.data.images[0].url} 
-                    alt={product.data.images[0].caption || product.data.title}
-                    loading="lazy"
-                  />
-                ) : (
-                  <img 
-                    src="/images/placeholder-camera.jpg" 
-                    alt={product.data.title}
-                    loading="lazy"
-                  />
-                )}
-                <div class="product-overlay">
-                  <span class="view-details">View Details</span>
-                </div>
-              </div>
-              <div class="product-info">
-                <h3 class="product-name">{product.data.title}</h3>
-                <p class="product-summary">{product.data.description?.substring(0, 100)}...</p>
-                <div class="product-footer">
-                  <span class="learn-more">Learn More →</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- Related Products - Add animation classes -->
+  
 </Layout>
-
-<style is:global>
+<style>
   /* CSS Variables for Professional Theme */
   :root {
     --primary-color: #2dd4bf; /* teal-400 */
@@ -405,6 +383,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   }
 
   /* Professional Header */
+  
   .header-overlay {
     position: absolute;
     top: 0;
@@ -645,6 +624,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
   }
 
   .btn-primary {
@@ -652,8 +632,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     color: white;
   }
 
-  .btn-primary:hover {
-    background: var(--primary-hover);
+  .btn-primary:hover, .btn-secondary:hover {
+    box-shadow: 0 8px 24px 0 rgba(45,212,191,0.18), 0 1.5px 4px 0 rgba(0,0,0,0.08);
+    transform: translateY(-2px) scale(1.04);
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
   }
 
   .btn-secondary {
@@ -894,7 +876,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
   }
 
   .product-card:hover .product-overlay {
@@ -938,32 +919,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     color: var(--primary-color);
     font-weight: 600;
     font-size: 0.875rem;
-    transition: color 0.2s ease;
   }
 
   .product-card:hover .learn-more {
     color: var(--primary-hover);
-  }
-
-  /* Animation Classes */
-  .animate-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-
-  /* Optimized transitions */
-  [class*="transition-all"] {
-    will-change: transform, opacity;
-  }
-  
-  /* Loading animation */
-  #page-loader {
-    transition: opacity 0.3s ease-out;
-  }
-  
-  #page-loader.hidden {
-    opacity: 0;
-    pointer-events: none;
   }
 
   /* Responsive Design */
@@ -994,6 +953,15 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   }
 
   @media (max-width: 768px) {
+    .product-header {
+      padding: 1.5rem 0;
+    }
+
+    .breadcrumbs {
+      font-size: 0.75rem;
+      flex-wrap: wrap;
+    }
+
     .product-overview {
       padding: 3rem 0;
     }
@@ -1058,6 +1026,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
       padding: 0 1rem;
     }
 
+    .product-header {
+      padding: 1rem 0;
+    }
+
     .main-image-container {
       padding: 1rem;
       min-height: 300px;
@@ -1099,11 +1071,11 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 
   /* Print Styles */
   @media print {
-    #page-loader,
+    .product-header,
     .product-actions,
     .btn-download,
     .nav-tabs,
-    .product-overlay {
+    .related-products {
       display: none;
     }
 
@@ -1127,6 +1099,24 @@ const specificationGroups = renderSpecifications(productData?.specifications);
       background: white !important;
     }
   }
+
+  .animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .product-card:nth-child(1) { transition-delay: 100ms !important; }
+  .product-card:nth-child(2) { transition-delay: 200ms !important; }
+  .product-card:nth-child(3) { transition-delay: 300ms !important; }
+  [class*="transition-all"] {
+    will-change: transform, opacity;
+  }
+  #page-loader {
+    transition: opacity 0.3s ease-out;
+  }
+  #page-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
 </style>
 
 <script is:inline>
@@ -1136,23 +1126,20 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     setTimeout(() => {
       const loader = document.getElementById('page-loader');
       if (loader) loader.classList.add('hidden');
-      
       // Trigger initial animations
       animateOnScroll();
-      
       // Remove loader after transition ends to prevent interaction
-      loader.addEventListener('transitionend', () => {
+      loader && loader.addEventListener('transitionend', () => {
         loader.style.display = 'none';
       });
     }, 300);
-    
-    // Initialize Intersection Observer for smooth scroll animations
+
+    // Intersection Observer for smooth scroll animations
     function animateOnScroll() {
       const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
       };
-      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1161,7 +1148,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
           }
         });
       }, observerOptions);
-      
+
       // Observe all animated sections
       const animatedSections = [
         document.getElementById('header-banner'),
@@ -1169,147 +1156,99 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         document.getElementById('specifications'),
         document.getElementById('related-products')
       ];
-      
       animatedSections.forEach(section => {
         if (section) observer.observe(section);
       });
-      
+
       // Observe individual product cards for staggered animation
       const productCards = document.querySelectorAll('.product-card');
       productCards.forEach((card) => {
         observer.observe(card);
       });
-      
-      // Observe feature items for staggered animation
-      const featureItems = document.querySelectorAll('.feature-item');
-      featureItems.forEach((item) => {
-        observer.observe(item);
-      });
     }
-    
-    // Initialize gallery functionality
-    function initializeGallery() {
+
+    // Initialize other functionality
+    // Gallery
+    function changeMainImage(index) {
       const mainImage = document.getElementById('mainProductImage');
       const thumbnails = document.querySelectorAll('.thumbnail-btn');
-      
-      if (thumbnails.length > 0) {
-        thumbnails.forEach(thumb => {
-          thumb.addEventListener('click', function() {
-            const index = this.getAttribute('data-index');
-            changeMainImage(index);
-          });
+      const thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
+      if (mainImage && thumbnailImages[index]) {
+        mainImage.src = thumbnailImages[index].src;
+        mainImage.alt = thumbnailImages[index].alt;
+        thumbnails.forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
         });
       }
-      
-      window.changeMainImage = function(index) {
-        const thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
-        if (mainImage && thumbnailImages[index]) {
-          // Add smooth transition
-          mainImage.style.opacity = '0';
-          setTimeout(() => {
-            mainImage.src = thumbnailImages[index].src;
-            mainImage.alt = thumbnailImages[index].alt;
-            mainImage.style.opacity = '1';
-          }, 150);
-          
-          // Update thumbnail states
-          thumbnails.forEach((thumb, i) => {
-            thumb.classList.toggle('active', i === parseInt(index));
-          });
-        }
-      };
     }
-    
-    // Initialize specification tabs
-    function initializeSpecTabs() {
-      const tabs = document.querySelectorAll('.nav-tab');
-      const groups = document.querySelectorAll('.spec-group');
-      
-      if (tabs.length > 0) {
-        tabs.forEach(tab => {
-          tab.addEventListener('click', function() {
-            const index = this.getAttribute('data-tab');
-            showSpecGroup(index);
-          });
-        });
-      }
-      
-      window.showSpecGroup = function(index) {
-        // Update tab states
-        tabs.forEach((tab, i) => {
-          tab.classList.toggle('active', i === parseInt(index));
-        });
-        
-        // Update group visibility
-        groups.forEach((group, i) => {
-          group.classList.toggle('active', i === parseInt(index));
-        });
-      };
-    }
-    
-    // Initialize all functionality
-    initializeGallery();
-    initializeSpecTabs();
-    
-    // Download specifications function
-    window.downloadSpecifications = function() {
+    window.changeMainImage = changeMainImage;
+
+    // Download Specifications
+    function downloadSpecifications() {
       const productTitle = document.querySelector('.product-title')?.textContent || 'Product';
       const specificationGroups = document.querySelectorAll('.spec-group');
-      
       if (specificationGroups.length === 0) return;
-      
-      // Create comprehensive CSV with all sections
       let csv = `Product Specifications - ${productTitle}\n`;
       csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
       csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
-      
       specificationGroups.forEach((group, groupIndex) => {
         const table = group.querySelector('.spec-table');
         if (!table) return;
-        
-        // Get section title from corresponding nav tab
         const navTabs = document.querySelectorAll('.nav-tab');
         const sectionTitle = navTabs[groupIndex]?.textContent.trim() || `Section ${groupIndex + 1}`;
-        
-        // Add section header
         csv += `\n=== ${sectionTitle.toUpperCase()} ===\n`;
-        
         const rows = table.querySelectorAll('tr');
-        
         rows.forEach(row => {
           const cells = row.querySelectorAll('th, td');
           const rowData = Array.from(cells).map(cell => {
             let text = cell.textContent.trim();
-            // Clean up text and handle CSV formatting
             text = text.replace(/\s+/g, ' ');
             if (text.includes(',') || text.includes('"') || text.includes('\n')) {
               text = '"' + text.replace(/"/g, '""') + '"';
             }
             return text;
           });
-          
           if (rowData.some(cell => cell.length > 0)) {
             csv += rowData.join(',') + '\n';
           }
         });
-        
-        csv += '\n'; // Add spacing between sections
+        csv += '\n';
       });
-      
-      // Create and download file
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      
       const filename = `${productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_complete_specifications.csv`;
       link.setAttribute('download', filename);
-      
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-    };
+    }
+    window.downloadSpecifications = downloadSpecifications;
+
+    // Tab switching
+    function showSpecGroup(index) {
+      const tabs = document.querySelectorAll('.nav-tab');
+      const groups = document.querySelectorAll('.spec-group');
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+      });
+      groups.forEach((group, i) => {
+        group.classList.toggle('active', i === index);
+      });
+    }
+    window.showSpecGroup = showSpecGroup;
+
+    // Initialize first thumbnail/tab/group on DOMContentLoaded
+    const firstThumbnail = document.querySelector('.thumbnail-btn');
+    if (firstThumbnail) firstThumbnail.classList.add('active');
+    const firstTab = document.querySelector('.nav-tab');
+    const firstGroup = document.querySelector('.spec-group');
+    if (firstTab && firstGroup) {
+      firstTab.classList.add('active');
+      firstGroup.classList.add('active');
+    }
   });
 </script>

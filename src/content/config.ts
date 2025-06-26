@@ -961,6 +961,93 @@ const swit = defineCollection({
   }),
 });
 
+const analog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    images: z.array(
+      z.object({
+        url: z.string(),
+        caption: z.string().optional(),
+      })
+    ).optional(),
+    features: z.array(z.string()).optional(),
+    specifications: z.object({
+      "Pixel": z.string().optional(),
+      "Size": z.string().optional(),
+      "Minimum illumination": z.string().optional(),
+      "Lens": z.string().optional(),
+      "Lens mount": z.string().optional(),
+      "Angle of view": z.object({
+        "2.8mm": z.string().optional(),
+        "4.0mm": z.string().optional()
+      }).optional(),
+      "Illumination distance": z.string().optional(),
+      "Lifetime": z.string().optional(),
+      "Resolution": z.object({
+        "5MP@25fps": z.string().optional(),
+        "5MP@20fps": z.string().optional(),
+        "5MP@12.5fps": z.string().optional(),
+        "4MP": z.string().optional(),
+        "1080P": z.string().optional()
+      }).optional(),
+      "Video Formats": z.object({
+        "TVI": z.string().optional(),
+        "AHD": z.string().optional(),
+        "CVI": z.string().optional(),
+        "CVBS": z.string().optional()
+      }).optional(),
+      "Shutter time": z.string().optional(),
+      "Exposure mode": z.string().optional(),
+      "Day/Night": z.string().optional(),
+      "Digital noise reduction": z.string().optional(),
+      "White balance": z.string().optional(),
+      "WDR": z.string().optional(),
+      "Flip": z.string().optional(),
+      "Power Interface": z.string().optional(),
+      "Video output": z.string().optional(),
+      "Temperature": z.string().optional(),
+      "Humidity": z.string().optional(),
+      "Surge protection": z.string().optional(),
+      "Power": z.string().optional(),
+      "Mount": z.string().optional(),
+      "Dimensions": z.string().optional(),
+      "Material": z.string().optional(),
+      "Weight": z.string().optional(),
+      "OSD menu language": z.string().optional(),
+      "Certifications": z.object({
+        "EMC": z.string().optional(),
+        "Safety": z.string().optional(),
+        "Environment": z.string().optional(),
+        "Protection": z.string().optional()
+      }).optional()
+    }).optional(),
+  }),
+});
+
+const brackets = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    images: z.array(
+      z.object({
+        url: z.string(),
+        caption: z.string().optional(),
+      })
+    ).optional(),
+    features: z.array(z.string()).optional(),
+    specifications: z.object({
+      "Application": z.string().optional(),
+      "Dimensions": z.string().optional(),
+      "Weight": z.string().optional(),
+      "Material": z.string().optional()
+    }).optional(),
+  }),
+});
 
 export const collections = {
      tips: tipsCollection,
@@ -975,5 +1062,7 @@ export const collections = {
      fixed: fixed,
      nvr: nvr,
      xvr:xvr,
-     swit: swit
+     swit: swit,
+     analog: analog,
+     brackets: brackets
 };
