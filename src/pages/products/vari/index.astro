@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 const pandapseries = await getCollection("viral");
 ---
 
+
 <Layout>
   <!-- Hero Banner Section (No Animations) -->
   <section class="relative h-[45vh] md:h-[55vh] company-hero hero-section scroll-animate" data-animation="fade-up">
@@ -19,7 +20,7 @@ const pandapseries = await getCollection("viral");
       </div>
       <!-- Hero Content -->
       <div class="relative z-10 flex flex-col items-center justify-center w-full h-full">
-        <h1 class="text-4xl md:text-6xl font-light text-white mb-4 tracking-wide hero-title-animate">PT Camera</h1>
+        <h1 class="text-4xl md:text-6xl font-light text-white mb-4 tracking-wide hero-title-animate">Vari-focal Cameras</h1>
         <div class="w-24 h-1 bg-teal-400 rounded mx-auto mb-2 hero-divider-animate"></div>
       </div>
     </section>
@@ -31,7 +32,7 @@ const pandapseries = await getCollection("viral");
         <div class="intro-text">
           <h2>Vari-focal Cameras</h2>
           <p>
-            The products in the Vari-focal Cameras are highly favored for entry-level applications, including residential and small retail settings. This series is made up of the PandaBasic and PandaStar lines. Their primary business value lies in delivering outstanding performance while maintaining an affordable price point.
+            The products in the <strong>Vari-focal Cameras</strong> are highly favored for entry-level applications, including residential and small retail settings. This series is made up of the PandaBasic and PandaStar lines. Their primary business value lies in delivering outstanding performance while maintaining an affordable price point.
           </p>
         </div>
         <div class="intro-image">
@@ -105,7 +106,7 @@ const pandapseries = await getCollection("viral");
       <div class="product-grid">
         {pandapseries.map(item => (
           <div class="product-card">
-            <a href={`/products/viral/${item.slug}`} class="product-link">
+            <a href={`/products/vari/${item.slug}`} class="product-link">
               <div class="product-image">
                 <img 
                   src={item.data.image ?? (item.data.images?.[0]?.url ?? "/images/placeholder-camera.jpg")}

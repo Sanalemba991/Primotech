@@ -20,105 +20,111 @@ const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
 
 // Helper function to render specifications
 function renderSpecifications(specs) {
-  if (!specs) return null;
+  if (!specs) return [];
 
   const specGroups = [];
 
   // Video Input
   const videoInputSpecs = [];
-  if (specs["Analog Video Input"]) videoInputSpecs.push(['Analog Video Input', specs["Analog Video Input"]]);
-  if (specs["IP Video Input"]) videoInputSpecs.push(['IP Video Input', specs["IP Video Input"]]);
-  if (specs["AHD input"]) videoInputSpecs.push(['AHD Input', specs["AHD input"]]);
-  if (specs["TVI input"]) videoInputSpecs.push(['TVI Input', specs["TVI input"]]);
-  if (specs["CVI input"]) videoInputSpecs.push(['CVI Input', specs["CVI input"]]);
-  if (specs["CVBS input"]) videoInputSpecs.push(['CVBS Input', specs["CVBS input"]]);
+  if (specs["Analog Video Input"]) videoInputSpecs.push(["Analog Video Input", specs["Analog Video Input"]]);
+  if (specs["AHD input"]) videoInputSpecs.push(["AHD input", specs["AHD input"]]);
+  if (specs["TVI input"]) videoInputSpecs.push(["TVI input", specs["TVI input"]]);
+  if (specs["CVI input"]) videoInputSpecs.push(["CVI input", specs["CVI input"]]);
+  if (specs["CVBS input"]) videoInputSpecs.push(["CVBS input", specs["CVBS input"]]);
+  if (specs["IP Video Input"]) videoInputSpecs.push(["IP Video Input", specs["IP Video Input"]]);
   if (videoInputSpecs.length > 0) {
     specGroups.push({ title: 'Video Input', specs: videoInputSpecs });
   }
 
   // Audio
   const audioSpecs = [];
-  if (specs["Audio Input"]) audioSpecs.push(['Audio Input', specs["Audio Input"]]);
-  if (specs["Audio Output"]) audioSpecs.push(['Audio Output', specs["Audio Output"]]);
-  if (specs["Audio Compression"]) audioSpecs.push(['Audio Compression', specs["Audio Compression"]]);
-  if (specs["Two-way Audio"]) audioSpecs.push(['Two-way Audio', specs["Two-way Audio"]]);
+  if (specs["Audio Input"]) audioSpecs.push(["Audio Input", specs["Audio Input"]]);
+  if (specs["Audio Output"]) audioSpecs.push(["Audio Output", specs["Audio Output"]]);
+  if (specs["Audio Compression"]) audioSpecs.push(["Audio Compression", specs["Audio Compression"]]);
+  if (specs["Two-way Audio"]) audioSpecs.push(["Two-way Audio", specs["Two-way Audio"]]);
   if (audioSpecs.length > 0) {
     specGroups.push({ title: 'Audio', specs: audioSpecs });
   }
 
   // Video Output
   const videoOutputSpecs = [];
-  if (specs["VGA Output"]) videoOutputSpecs.push(['VGA Output', specs["VGA Output"]]);
-  if (specs["HDMI Output"]) videoOutputSpecs.push(['HDMI Output', specs["HDMI Output"]]);
-  if (specs["Live view display"]) videoOutputSpecs.push(['Live View Display', specs["Live view display"]]);
-  if (specs["Synchronous Playback"]) videoOutputSpecs.push(['Synchronous Playback', specs["Synchronous Playback"]]);
+  if (specs["HDMI Output"]) videoOutputSpecs.push(["HDMI Output", specs["HDMI Output"]]);
+  if (specs["VGA Output"]) videoOutputSpecs.push(["VGA Output", specs["VGA Output"]]);
   if (videoOutputSpecs.length > 0) {
     specGroups.push({ title: 'Video Output', specs: videoOutputSpecs });
   }
 
-  // Network
-  const networkSpecs = [];
-  if (specs["Incoming Bandwidth"]) networkSpecs.push(['Incoming Bandwidth', specs["Incoming Bandwidth"]]);
-  if (specs["Outgoing Bandwidth"]) networkSpecs.push(['Outgoing Bandwidth', specs["Outgoing Bandwidth"]]);
-  if (specs["Remote Users"]) networkSpecs.push(['Remote Users', specs["Remote Users"]]);
-  if (specs["Protocols"]) networkSpecs.push(['Protocols', specs["Protocols"]]);
-  if (specs["Browser"]) networkSpecs.push(['Browser', specs["Browser"]]);
-  if (specs["Network Interface"]) networkSpecs.push(['Network Interface', specs["Network Interface"]]);
-  if (networkSpecs.length > 0) {
-    specGroups.push({ title: 'Network', specs: networkSpecs });
+  // Recording
+  const recordingSpecs = [];
+  if (specs["Recording Resolution"]) recordingSpecs.push(["Recording Resolution", specs["Recording Resolution"]]);
+  if (specs["Synchronous Playback"]) recordingSpecs.push(["Synchronous Playback", specs["Synchronous Playback"]]);
+  if (specs["Live view display"]) recordingSpecs.push(["Live view display", specs["Live view display"]]);
+  if (specs["FTP/Schedule/Event Snapshot"]) recordingSpecs.push(["FTP/Schedule/Event Snapshot", specs["FTP/Schedule/Event Snapshot"]]);
+  if (specs["Capability"]) recordingSpecs.push(["Capability", specs["Capability"]]);
+  if (recordingSpecs.length > 0) {
+    specGroups.push({ title: 'Recording', specs: recordingSpecs });
   }
 
   // Storage
   const storageSpecs = [];
-  if (specs["SATA"]) storageSpecs.push(['SATA', specs["SATA"]]);
-  if (specs["Capacity"]) storageSpecs.push(['Capacity', specs["Capacity"]]);
+  if (specs["SATA"]) storageSpecs.push(["SATA", specs["SATA"]]);
+  if (specs["Capacity"]) storageSpecs.push(["Capacity", specs["Capacity"]]);
   if (storageSpecs.length > 0) {
     specGroups.push({ title: 'Storage', specs: storageSpecs });
   }
 
-  // Recording & Playback
-  const recordingSpecs = [];
-  if (specs["Recording Resolution"]) recordingSpecs.push(['Recording Resolution', specs["Recording Resolution"]]);
-  if (specs["Capability"]) recordingSpecs.push(['Capability', specs["Capability"]]);
-  if (specs["FTP/Schedule/Event Snapshot"]) recordingSpecs.push(['FTP/Schedule/Event Snapshot', specs["FTP/Schedule/Event Snapshot"]]);
-  if (recordingSpecs.length > 0) {
-    specGroups.push({ title: 'Recording & Playback', specs: recordingSpecs });
+  // Network
+  const networkSpecs = [];
+  if (specs["Protocols"]) networkSpecs.push(["Protocols", specs["Protocols"]]);
+  if (specs["Browser"]) networkSpecs.push(["Browser", specs["Browser"]]);
+  if (specs["Network Interface"]) networkSpecs.push(["Network Interface", specs["Network Interface"]]);
+  if (specs["USB Interface"]) networkSpecs.push(["USB Interface", specs["USB Interface"]]);
+  if (specs["Serial Interface"]) networkSpecs.push(["Serial Interface", specs["Serial Interface"]]);
+  if (networkSpecs.length > 0) {
+    specGroups.push({ title: 'Network & Interfaces', specs: networkSpecs });
   }
 
-  // Alarm & VCA
+  // Alarm & Intelligence
   const alarmSpecs = [];
-  if (specs["VCA Detection"]) alarmSpecs.push(['VCA Detection', specs["VCA Detection"]]);
-  if (specs["VCA Search"]) alarmSpecs.push(['VCA Search', specs["VCA Search"]]);
-  if (specs["General Alarm"]) alarmSpecs.push(['General Alarm', specs["General Alarm"]]);
-  if (specs["Alert Alarm"]) alarmSpecs.push(['Alert Alarm', specs["Alert Alarm"]]);
+  if (specs["VCA Detection"]) alarmSpecs.push(["VCA Detection", specs["VCA Detection"]]);
+  if (specs["VCA Search"]) alarmSpecs.push(["VCA Search", specs["VCA Search"]]);
+  if (specs["General Alarm"]) alarmSpecs.push(["General Alarm", specs["General Alarm"]]);
+  if (specs["Alert Alarm"]) alarmSpecs.push(["Alert Alarm", specs["Alert Alarm"]]);
   if (alarmSpecs.length > 0) {
-    specGroups.push({ title: 'Alarm & VCA', specs: alarmSpecs });
+    specGroups.push({ title: 'Alarm & Intelligence', specs: alarmSpecs });
   }
 
-  // Interfaces
-  const interfaceSpecs = [];
-  if (specs["USB Interface"]) interfaceSpecs.push(['USB Interface', specs["USB Interface"]]);
-  if (specs["Serial Interface"]) interfaceSpecs.push(['Serial Interface', specs["Serial Interface"]]);
-  if (interfaceSpecs.length > 0) {
-    specGroups.push({ title: 'Interfaces', specs: interfaceSpecs });
+  // Bandwidth & Users
+  const bandwidthSpecs = [];
+  if (specs["Incoming Bandwidth"]) bandwidthSpecs.push(["Incoming Bandwidth", specs["Incoming Bandwidth"]]);
+  if (specs["Outgoing Bandwidth"]) bandwidthSpecs.push(["Outgoing Bandwidth", specs["Outgoing Bandwidth"]]);
+  if (specs["Remote Users"]) bandwidthSpecs.push(["Remote Users", specs["Remote Users"]]);
+  if (bandwidthSpecs.length > 0) {
+    specGroups.push({ title: 'Bandwidth & Users', specs: bandwidthSpecs });
   }
 
-  // Power & Environment
-  const powerEnvSpecs = [];
-  if (specs["Power Supply"]) powerEnvSpecs.push(['Power Supply', specs["Power Supply"]]);
-  if (specs["Power Consumption"]) powerEnvSpecs.push(['Power Consumption', specs["Power Consumption"]]);
-  if (specs["Working Environment"]) powerEnvSpecs.push(['Working Environment', specs["Working Environment"]]);
-  if (powerEnvSpecs.length > 0) {
-    specGroups.push({ title: 'Power & Environment', specs: powerEnvSpecs });
+  // Power
+  const powerSpecs = [];
+  if (specs["Power Supply"]) powerSpecs.push(["Power Supply", specs["Power Supply"]]);
+  if (specs["Power Consumption"]) powerSpecs.push(["Power Consumption", specs["Power Consumption"]]);
+  if (powerSpecs.length > 0) {
+    specGroups.push({ title: 'Power', specs: powerSpecs });
   }
 
   // Physical
   const physicalSpecs = [];
-  if (specs["Dimensions"]) physicalSpecs.push(['Dimensions', specs["Dimensions"]]);
-  if (specs["Weight"]) physicalSpecs.push(['Weight', specs["Weight"]]);
-  if (specs["Certification"]) physicalSpecs.push(['Certification', specs["Certification"]]);
+  if (specs["Working Environment"]) physicalSpecs.push(["Working Environment", specs["Working Environment"]]);
+  if (specs["Dimensions"]) physicalSpecs.push(["Dimensions", specs["Dimensions"]]);
+  if (specs["Weight"]) physicalSpecs.push(["Weight", specs["Weight"]]);
   if (physicalSpecs.length > 0) {
     specGroups.push({ title: 'Physical', specs: physicalSpecs });
+  }
+
+  // Certification
+  const certSpecs = [];
+  if (specs["Certification"]) certSpecs.push(["Certification", specs["Certification"]]);
+  if (certSpecs.length > 0) {
+    specGroups.push({ title: 'Certification', specs: certSpecs });
   }
 
   return specGroups;
@@ -128,10 +134,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 ---
 
 <Layout>
-  <!-- Professional Header Banner - Add animation classes -->
+  <!-- Professional Header Banner - Cleaned: removed animation classes -->
   <section 
     id="header-banner"
-    class="bg-gradient-to-r from-teal-900/80 to-transparent opacity-0 translate-y-10 transition-all duration-500 ease-out"
+    class="bg-gradient-to-r from-teal-900/80 to-transparent"
   >
     <!-- ...existing header content... -->
     <div class="header-overlay"></div>
@@ -154,10 +160,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </div>
   </section>
 
-  <!-- Product Overview Section - Add animation classes -->
+  <!-- Product Overview Section - Cleaned: removed animation classes -->
   <section 
     id="product-overview"
-    class="product-overview opacity-0 translate-y-10 transition-all duration-500 ease-out delay-100"
+    class="product-overview"
   >
     <!-- ...existing product overview content... -->
     <div class="container">
@@ -221,7 +227,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         <!-- Product Information -->
         <div class="product-details">
           <div class="product-meta">
-            <span class="product-category">Network Switch</span>
+            <span class="product-category">XVR</span>
             <div class="product-status">
               <span class="status-badge available">In Stock</span>
             </div>
@@ -274,13 +280,12 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </div>
   </section>
 
-  <!-- Technical Specifications - Add animation classes -->
+  <!-- Technical Specifications - Cleaned: removed animation classes -->
   {specificationGroups && specificationGroups.length > 0 && (
     <section 
       id="specifications"
-      class="specifications-section opacity-0 translate-y-10 transition-all duration-500 ease-out delay-200"
+      class="specifications-section"
     >
-      <!-- ...existing specifications content... -->
       <div class="container">
         <div class="section-header">
           <div class="header-content">
@@ -298,43 +303,23 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         </div>
 
         <div class="specifications-container">
-          <div class="specs-navigation">
-            <div class="nav-tabs">
-              {specificationGroups.map((group, index) => (
-                <button 
-                  class={`nav-tab ${index === 0 ? 'active' : ''}`}
-                  onclick={`showSpecGroup(${index})`}
-                  data-tab={index}
-                >
-                  {group.title}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div class="specs-content">
+          <div class="specs-content-list">
             {specificationGroups.map((group, groupIndex) => (
-              <div 
-                class={`spec-group ${groupIndex === 0 ? 'active' : ''}`}
-                data-group={groupIndex}
-              >
-                <div class="spec-table-container">
-                  <table class="spec-table">
-                    <thead>
-                      <tr>
-                        <th class="spec-parameter">Parameter</th>
-                        <th class="spec-value-header">Specification</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {group.specs.map(([key, value]) => (
-                        <tr class="spec-row">
-                          <td class="spec-name">{key}</td>
-                          <td class="spec-value">{value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              <div class="spec-category-block">
+                <div class="category-header">
+                  <h3 class="category-title">{group.title}</h3>
+                  <div class="category-divider"></div>
+                </div>
+                
+                <div class="category-content">
+                  <div class="specs-grid">
+                    {group.specs.map(([key, value]) => (
+                      <div class="spec-item">
+                        <div class="spec-label">{key}</div>
+                        <div class="spec-detail">{value}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -344,7 +329,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </section>
   )}
 
-  <!-- Related Products - Add animation classes -->
+  <!-- Related Products - Cleaned: removed animation classes -->
   
 </Layout>
 <style>
@@ -683,7 +668,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     padding: 5rem 0;
     background: var(--background-secondary);
   }
-
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -691,20 +675,17 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     margin-bottom: 3rem;
     gap: 2rem;
   }
-
   .header-content h2.section-title {
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-primary);
     margin: 0 0 0.5rem 0;
   }
-
   .section-subtitle {
     color: var(--text-secondary);
     font-size: 1rem;
     margin: 0;
   }
-
   .btn-download {
     display: flex;
     align-items: center;
@@ -716,509 +697,251 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     border-radius: var(--radius-md);
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
-
   .btn-download:hover {
     background: var(--primary-color);
     color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
-
   .specifications-container {
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
     overflow: hidden;
   }
-
-  .specs-navigation {
+  .specs-content-list {
+    padding: 0;
+  }
+  .spec-category-block {
     border-bottom: 1px solid var(--border-color);
-    background: var(--background-tertiary);
   }
-
-  .nav-tabs {
+  .spec-category-block:last-child {
+    border-bottom: none;
+  }
+  .category-header {
+    padding: 2rem 2rem 1rem 2rem;
+    background: linear-gradient(135deg, var(--background-tertiary) 0%, var(--background-secondary) 100%);
+    border-bottom: 1px solid var(--border-color);
+  }
+  .category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
     display: flex;
-    overflow-x: auto;
-    padding: 0 1rem;
+    align-items: center;
+    gap: 1rem;
   }
-
-  .nav-tab {
-    padding: 1rem 1.5rem;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    border-bottom: 3px solid transparent;
+  .category-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 2px;
   }
-
-  .nav-tab:hover {
-    color: var(--primary-color);
-    background: rgba(45, 212, 191, 0.05); /* teal-400 with opacity */
+  .category-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+    border-radius: 1px;
   }
-
-  .nav-tab.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-    background: white;
-  }
-
-  .specs-content {
-    position: relative;
-  }
-
-  .spec-group {
-    display: none;
+  .category-content {
     padding: 2rem;
   }
-
-  .spec-group.active {
-    display: block;
-  }
-
-  .spec-table-container {
-    overflow-x: auto;
-  }
-
-  .spec-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .spec-table th {
-    background: var(--background-tertiary);
-    color: var(--text-primary);
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    border-bottom: 2px solid var(--border-color-strong);
-  }
-
-  .spec-parameter {
-    width: 40%;
-  }
-
-  .spec-value-header {
-    width: 60%;
-  }
-
-  .spec-row {
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .spec-row:hover {
-    background: var(--background-secondary);
-  }
-
-  .spec-name {
-    padding: 1rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    background: var(--background-tertiary);
-    width: 40%;
-  }
-
-  .spec-value {
-    padding: 1rem;
-    color: var(--text-secondary);
-    width: 60%;
-    line-height: 1.6;
-  }
-
-  /* Professional Related Products */
-  .related-products {
-    padding: 5rem 0;
-    background: var(--background-primary);
-  }
-
-  .products-grid {
+  .specs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
-
-  .product-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-color);
-  }
-
-  .product-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  .product-image {
-    position: relative;
-    height: 240px;
+  .spec-item {
     background: var(--background-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
     overflow: hidden;
   }
-
-  .product-image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .product-overlay {
+  .spec-item::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    background: rgba(30, 64, 175, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
-
-  .product-card:hover .product-overlay {
-    opacity: 1;
+  .spec-item:hover {
+    background: white;
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
-
-  .view-details {
-    color: white;
-    font-weight: 600;
+  .spec-item:hover::before {
+    transform: translateX(0);
+  }
+  .spec-label {
     font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-
-  .product-info {
-    padding: 1.5rem;
+  .spec-label::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border-color);
   }
-
-  .product-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 0.75rem 0;
-    line-height: 1.3;
-  }
-
-  .product-summary {
+  .spec-detail {
+    font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin: 0 0 1.5rem 0;
-    font-size: 0.875rem;
+    font-weight: 500;
   }
-
-  .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .learn-more {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.875rem;
-  }
-
-  .product-card:hover .learn-more {
-    color: var(--primary-hover);
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .container {
-      padding: 0 1.5rem;
+  @media (min-width: 1024px) {
+    .specs-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    .product-grid {
-      gap: 3rem;
+  }
+  @media (min-width: 1280px) {
+    .specs-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
-
+  }
+  @media (max-width: 768px) {
     .section-header {
       flex-direction: column;
       align-items: flex-start;
       gap: 1.5rem;
     }
-
-    .nav-tabs {
-      padding: 0;
+    .category-header {
+      padding: 1.5rem 1rem 1rem 1rem;
     }
-
-    .spec-table th,
-    .spec-name,
-    .spec-value {
-      padding: 0.75rem;
+    .category-title {
+      font-size: 1.25rem;
+    }
+    .category-content {
+      padding: 1.5rem 1rem;
+    }
+    .specs-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .spec-item {
+      padding: 1rem;
     }
   }
-
-  @media (max-width: 768px) {
-    .product-header {
-      padding: 1.5rem 0;
-    }
-
-    .breadcrumbs {
-      font-size: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .product-overview {
+  @media (max-width: 480px) {
+    .specifications-section {
       padding: 3rem 0;
     }
-
-    .product-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .product-gallery {
-      position: static;
-    }
-
-    .product-title {
-      font-size: 2rem;
-    }
-
-    .product-actions {
-      flex-direction: column;
-    }
-
-    .btn {
-      justify-content: center;
-    }
-
-    .specifications-section,
-    .related-products {
-      padding: 3rem 0;
-    }
-
     .section-header h2.section-title {
       font-size: 1.75rem;
     }
-
-    .nav-tabs {
-      flex-wrap: wrap;
-    }
-
-    .nav-tab {
-      padding: 0.75rem 1rem;
-      font-size: 0.875rem;
-    }
-
-    .spec-group {
+    .category-header {
       padding: 1rem;
     }
-
-    .spec-table th,
-    .spec-name,
-    .spec-value {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.875rem;
-    }
-
-    .products-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 0 1rem;
-    }
-
-    .product-header {
-      padding: 1rem 0;
-    }
-
-    .main-image-container {
-      padding: 1rem;
-      min-height: 300px;
-    }
-
-    .gallery-thumbnails {
+    .category-title {
+      font-size: 1.125rem;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 0.5rem;
     }
-
-    .thumbnail-btn {
-      width: 60px;
-      height: 60px;
+    .category-content {
+      padding: 1rem;
     }
-
-    .product-title {
-      font-size: 1.75rem;
+    .spec-item {
+      padding: 0.875rem;
     }
-
-    .features-grid {
-      gap: 0.75rem;
+    .spec-label {
+      font-size: 0.8rem;
     }
-
-    .feature-item {
-      padding: 0.75rem;
-    }
-
-    .spec-table-container {
-      font-size: 0.75rem;
-    }
-
-    .spec-name {
-      width: 45%;
-    }
-
-    .spec-value {
-      width: 55%;
+    .spec-detail {
+      font-size: 0.9rem;
     }
   }
-
-  /* Print Styles */
   @media print {
-    .product-header,
-    .product-actions,
-    .btn-download,
-    .nav-tabs,
-    .related-products {
+    .btn-download {
       display: none;
     }
-
     .specifications-section {
       background: white;
     }
-
-    .spec-group {
-      display: block !important;
+    .spec-category-block {
       page-break-inside: avoid;
+      margin-bottom: 2rem;
     }
-
-    .spec-table {
+    .category-header {
+      background: #f8f9fa !important;
       border: 1px solid #000;
     }
-
-    .spec-table th,
-    .spec-name,
-    .spec-value {
-      border: 1px solid #000;
+    .spec-item {
       background: white !important;
+      border: 1px solid #000;
+      break-inside: avoid;
     }
-  }
-
-  .animate-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-  .product-card:nth-child(1) { transition-delay: 100ms !important; }
-  .product-card:nth-child(2) { transition-delay: 200ms !important; }
-  .product-card:nth-child(3) { transition-delay: 300ms !important; }
-  [class*="transition-all"] {
-    will-change: transform, opacity;
-  }
-  #page-loader {
-    transition: opacity 0.3s ease-out;
-  }
-  #page-loader.hidden {
-    opacity: 0;
-    pointer-events: none;
   }
 </style>
 
 <script is:inline>
-  // Enhanced page load and scroll animations
-  document.addEventListener('DOMContentLoaded', () => {
-    // Hide loader when page is ready
-    setTimeout(() => {
-      const loader = document.getElementById('page-loader');
-      if (loader) loader.classList.add('hidden');
-      // Trigger initial animations
-      animateOnScroll();
-      // Remove loader after transition ends to prevent interaction
-      loader && loader.addEventListener('transitionend', () => {
-        loader.style.display = 'none';
-      });
-    }, 300);
-
-    // Intersection Observer for smooth scroll animations
-    function animateOnScroll() {
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-      };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      // Observe all animated sections
-      const animatedSections = [
-        document.getElementById('header-banner'),
-        document.getElementById('product-overview'),
-        document.getElementById('specifications'),
-        document.getElementById('related-products')
-      ];
-      animatedSections.forEach(section => {
-        if (section) observer.observe(section);
-      });
-
-      // Observe individual product cards for staggered animation
-      const productCards = document.querySelectorAll('.product-card');
-      productCards.forEach((card) => {
-        observer.observe(card);
-      });
-    }
-
-    // Initialize other functionality
+  // Cleaned: removed all animation/scroll/intersection observer JS, kept only gallery, download, tab switching
+  document.addEventListener('DOMContentLoaded', function() {
     // Gallery
     function changeMainImage(index) {
-      const mainImage = document.getElementById('mainProductImage');
-      const thumbnails = document.querySelectorAll('.thumbnail-btn');
-      const thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
+      var mainImage = document.getElementById('mainProductImage');
+      var thumbnails = document.querySelectorAll('.thumbnail-btn');
+      var thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
       if (mainImage && thumbnailImages[index]) {
         mainImage.src = thumbnailImages[index].src;
         mainImage.alt = thumbnailImages[index].alt;
-        thumbnails.forEach((thumb, i) => {
+        thumbnails.forEach(function(thumb, i) {
           thumb.classList.toggle('active', i === index);
         });
       }
     }
     window.changeMainImage = changeMainImage;
 
-    // Download Specifications
+    // Download Specifications (use var for compatibility)
     function downloadSpecifications() {
-      const productTitle = document.querySelector('.product-title')?.textContent || 'Product';
-      const specificationGroups = document.querySelectorAll('.spec-group');
-      if (specificationGroups.length === 0) return;
-      let csv = `Product Specifications - ${productTitle}\n`;
+      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
+      var categoryBlocks = document.querySelectorAll('.spec-category-block');
+      if (categoryBlocks.length === 0) return;
+      var csv = `Product Specifications - ${productTitle}\n`;
       csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
       csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
-      specificationGroups.forEach((group, groupIndex) => {
-        const table = group.querySelector('.spec-table');
-        if (!table) return;
-        const navTabs = document.querySelectorAll('.nav-tab');
-        const sectionTitle = navTabs[groupIndex]?.textContent.trim() || `Section ${groupIndex + 1}`;
-        csv += `\n=== ${sectionTitle.toUpperCase()} ===\n`;
-        const rows = table.querySelectorAll('tr');
-        rows.forEach(row => {
-          const cells = row.querySelectorAll('th, td');
-          const rowData = Array.from(cells).map(cell => {
-            let text = cell.textContent.trim();
-            text = text.replace(/\s+/g, ' ');
-            if (text.includes(',') || text.includes('"') || text.includes('\n')) {
-              text = '"' + text.replace(/"/g, '""') + '"';
-            }
-            return text;
-          });
-          if (rowData.some(cell => cell.length > 0)) {
-            csv += rowData.join(',') + '\n';
+      categoryBlocks.forEach(function(block) {
+        var categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
+        var specItems = block.querySelectorAll('.spec-item');
+        csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
+        csv += `Parameter,Specification\n`;
+        specItems.forEach(function(item) {
+          var label = item.querySelector('.spec-label')?.textContent.trim() || '';
+          var detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
+          var cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
+            ? `"${cleanLabel}"` : cleanLabel;
+          var csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
+            ? `"${cleanDetail}"` : cleanDetail;
+          if (csvLabel && csvDetail) {
+            csv += `${csvLabel},${csvDetail}\n`;
           }
         });
         csv += '\n';
       });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      var url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      const filename = `${productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_complete_specifications.csv`;
+      var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.csv';
       link.setAttribute('download', filename);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
@@ -1230,22 +953,22 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 
     // Tab switching
     function showSpecGroup(index) {
-      const tabs = document.querySelectorAll('.nav-tab');
-      const groups = document.querySelectorAll('.spec-group');
-      tabs.forEach((tab, i) => {
+      var tabs = document.querySelectorAll('.nav-tab');
+      var groups = document.querySelectorAll('.spec-group');
+      tabs.forEach(function(tab, i) {
         tab.classList.toggle('active', i === index);
       });
-      groups.forEach((group, i) => {
+      groups.forEach(function(group, i) {
         group.classList.toggle('active', i === index);
       });
     }
     window.showSpecGroup = showSpecGroup;
 
     // Initialize first thumbnail/tab/group on DOMContentLoaded
-    const firstThumbnail = document.querySelector('.thumbnail-btn');
+    var firstThumbnail = document.querySelector('.thumbnail-btn');
     if (firstThumbnail) firstThumbnail.classList.add('active');
-    const firstTab = document.querySelector('.nav-tab');
-    const firstGroup = document.querySelector('.spec-group');
+    var firstTab = document.querySelector('.nav-tab');
+    var firstGroup = document.querySelector('.spec-group');
     if (firstTab && firstGroup) {
       firstTab.classList.add('active');
       firstGroup.classList.add('active');

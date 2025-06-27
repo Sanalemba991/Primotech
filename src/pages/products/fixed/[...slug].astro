@@ -26,148 +26,149 @@ function renderSpecifications(specs) {
 
   // Imaging
   const imagingSpecs = [];
-  if (specs["Sensor"]) imagingSpecs.push(['Sensor', specs["Sensor"]]);
-  if (specs["Minimum Illumination"]) imagingSpecs.push(['Minimum Illumination', specs["Minimum Illumination"]]);
-  if (specs["Day/Night"]) imagingSpecs.push(['Day/Night', specs["Day/Night"]]);
-  if (specs["Shutter"]) imagingSpecs.push(['Shutter', specs["Shutter"]]);
-  if (specs["Adjustment angle"]) imagingSpecs.push(['Adjustment angle', specs["Adjustment angle"]]);
-  if (specs["WDR"]) imagingSpecs.push(['WDR', specs["WDR"]]);
-  if (specs["Lens Type"]) imagingSpecs.push(['Lens Type', specs["Lens Type"]]);
-  if (specs["Iris"]) imagingSpecs.push(['Iris', specs["Iris"]]);
-  if (specs["Angle of View (H)"]) imagingSpecs.push(['Angle of View (H)', specs["Angle of View (H)"]]);
-  if (specs["Angle of View (V)"]) imagingSpecs.push(['Angle of View (V)', specs["Angle of View (V)"]]);
-  if (specs["Angle of View (O)"]) imagingSpecs.push(['Angle of View (O)', specs["Angle of View (O)"]]);
-  if (specs["2.8mm"]) imagingSpecs.push(['2.8mm', specs["2.8mm"]]);
+  if (specs["Sensor"]) imagingSpecs.push(["Sensor", specs["Sensor"]]);
+  if (specs["Minimum Illumination"]) imagingSpecs.push(["Minimum Illumination", specs["Minimum Illumination"]]);
+  if (specs["Day/Night"]) imagingSpecs.push(["Day/Night", specs["Day/Night"]]);
+  if (specs["Shutter"]) imagingSpecs.push(["Shutter", specs["Shutter"]]);
+  if (specs["Adjustment angle"]) imagingSpecs.push(["Adjustment angle", specs["Adjustment angle"]]);
+  if (specs["WDR"]) imagingSpecs.push(["WDR", specs["WDR"]]);
+  if (specs["Lens Type"]) imagingSpecs.push(["Lens Type", specs["Lens Type"]]);
+  if (specs["Iris"]) imagingSpecs.push(["Iris", specs["Iris"]]);
+  if (specs["Angle of View (H)"]) imagingSpecs.push(["Angle of View (H)", specs["Angle of View (H)"]]);
+  if (specs["Angle of View (V)"]) imagingSpecs.push(["Angle of View (V)", specs["Angle of View (V)"]]);
+  if (specs["Angle of View (O)"]) imagingSpecs.push(["Angle of View (O)", specs["Angle of View (O)"]]);
+  if (specs["2.8mm"]) imagingSpecs.push(["2.8mm", specs["2.8mm"]]);
   if (imagingSpecs.length > 0) {
     specGroups.push({ title: 'Imaging', specs: imagingSpecs });
   }
 
   // Illumination
   const illumSpecs = [];
-  if (specs["IR Range"]) illumSpecs.push(['IR Range', specs["IR Range"]]);
-  if (specs["Wavelength"]) illumSpecs.push(['Wavelength', specs["Wavelength"]]);
-  if (specs["IR On/Off Control"]) illumSpecs.push(['IR On/Off Control', specs["IR On/Off Control"]]);
+  if (specs["IR Range"]) illumSpecs.push(["IR Range", specs["IR Range"]]);
+  if (specs["Wavelength"]) illumSpecs.push(["Wavelength", specs["Wavelength"]]);
+  if (specs["IR On/Off Control"]) illumSpecs.push(["IR On/Off Control", specs["IR On/Off Control"]]);
   if (illumSpecs.length > 0) {
     specGroups.push({ title: 'Illumination', specs: illumSpecs });
   }
 
   // Video
   const videoSpecs = [];
-  if (specs["Video Compression"]) videoSpecs.push(['Video Compression', specs["Video Compression"]]);
-  if (specs["H.264 code profile"]) videoSpecs.push(['H.264 code profile', specs["H.264 code profile"]]);
-  if (specs["Main Stream"]) videoSpecs.push(['Main Stream', specs["Main Stream"]]);
-  if (specs["Sub Stream"]) videoSpecs.push(['Sub Stream', specs["Sub Stream"]]);
-  if (specs["Video Bit Rate"]) videoSpecs.push(['Video Bit Rate', specs["Video Bit Rate"]]);
-  if (specs["U-code"]) videoSpecs.push(['U-code', specs["U-code"]]);
-  if (specs["OSD"]) videoSpecs.push(['OSD', specs["OSD"]]);
-  if (specs["Privacy Mask"]) videoSpecs.push(['Privacy Mask', specs["Privacy Mask"]]);
-  if (specs["ROI"]) videoSpecs.push(['ROI', specs["ROI"]]);
-  if (specs["Motion Detection"]) videoSpecs.push(['Motion Detection', specs["Motion Detection"]]);
-  if (specs["Video stream"]) videoSpecs.push(['Video stream', specs["Video stream"]]);
+  if (specs["Video Compression"]) videoSpecs.push(["Video Compression", specs["Video Compression"]]);
+  if (specs["H.264 code profile"]) videoSpecs.push(["H.264 code profile", specs["H.264 code profile"]]);
+  if (specs["Main Stream"]) videoSpecs.push(["Main Stream", specs["Main Stream"]]);
+  if (specs["Sub Stream"]) videoSpecs.push(["Sub Stream", specs["Sub Stream"]]);
+  if (specs["Video Bit Rate"]) videoSpecs.push(["Video Bit Rate", specs["Video Bit Rate"]]);
+  if (specs["U-code"]) videoSpecs.push(["U-code", specs["U-code"]]);
+  if (specs["OSD"]) videoSpecs.push(["OSD", specs["OSD"]]);
+  if (specs["Privacy Mask"]) videoSpecs.push(["Privacy Mask", specs["Privacy Mask"]]);
+  if (specs["ROI"]) videoSpecs.push(["ROI", specs["ROI"]]);
+  if (specs["Motion Detection"]) videoSpecs.push(["Motion Detection", specs["Motion Detection"]]);
+  if (specs["Video stream"]) videoSpecs.push(["Video stream", specs["Video stream"]]);
   if (videoSpecs.length > 0) {
     specGroups.push({ title: 'Video', specs: videoSpecs });
   }
 
   // Image Enhancement
   const enhancementSpecs = [];
-  if (specs["White Balance"]) enhancementSpecs.push(['White Balance', specs["White Balance"]]);
-  if (specs["Digital Noise Reduction"]) enhancementSpecs.push(['Digital Noise Reduction', specs["Digital Noise Reduction"]]);
-  if (specs["Smart IR"]) enhancementSpecs.push(['Smart IR', specs["Smart IR"]]);
-  if (specs["Flip"]) enhancementSpecs.push(['Flip', specs["Flip"]]);
-  if (specs["Dewarping"]) enhancementSpecs.push(['Dewarping', specs["Dewarping"]]);
-  if (specs["HLC"]) enhancementSpecs.push(['HLC', specs["HLC"]]);
-  if (specs["BLC"]) enhancementSpecs.push(['BLC', specs["BLC"]]);
-  if (specs["Defog"]) enhancementSpecs.push(['Defog', specs["Defog"]]);
+  if (specs["White Balance"]) enhancementSpecs.push(["White Balance", specs["White Balance"]]);
+  if (specs["Digital Noise Reduction"]) enhancementSpecs.push(["Digital Noise Reduction", specs["Digital Noise Reduction"]]);
+  if (specs["Smart IR"]) enhancementSpecs.push(["Smart IR", specs["Smart IR"]]);
+  if (specs["Flip"]) enhancementSpecs.push(["Flip", specs["Flip"]]);
+  if (specs["Dewarping"]) enhancementSpecs.push(["Dewarping", specs["Dewarping"]]);
+  if (specs["HLC"]) enhancementSpecs.push(["HLC", specs["HLC"]]);
+  if (specs["BLC"]) enhancementSpecs.push(["BLC", specs["BLC"]]);
+  if (specs["Defog"]) enhancementSpecs.push(["Defog", specs["Defog"]]);
   if (enhancementSpecs.length > 0) {
     specGroups.push({ title: 'Image Enhancement', specs: enhancementSpecs });
   }
 
   // Intelligence
   const smartSpecs = [];
-  if (specs["Basic Detection"]) smartSpecs.push(['Basic Detection', specs["Basic Detection"]]);
-  if (specs["General Function"]) smartSpecs.push(['General Function', specs["General Function"]]);
+  if (specs["Basic Detection"]) smartSpecs.push(["Basic Detection", specs["Basic Detection"]]);
+  if (specs["General Function"]) smartSpecs.push(["General Function", specs["General Function"]]);
   if (smartSpecs.length > 0) {
     specGroups.push({ title: 'Intelligence', specs: smartSpecs });
   }
 
   // Storage
   const storageSpecs = [];
-  if (specs["Edge Storage"]) storageSpecs.push(['Edge Storage', specs["Edge Storage"]]);
-  if (specs["Network Storage"]) storageSpecs.push(['Network Storage', specs["Network Storage"]]);
+  if (specs["Edge Storage"]) storageSpecs.push(["Edge Storage", specs["Edge Storage"]]);
+  if (specs["Network Storage"]) storageSpecs.push(["Network Storage", specs["Network Storage"]]);
   if (storageSpecs.length > 0) {
     specGroups.push({ title: 'Storage', specs: storageSpecs });
   }
 
   // Audio
   const audioSpecs = [];
-  if (specs["Audio Compression"]) audioSpecs.push(['Audio Compression', specs["Audio Compression"]]);
-  if (specs["Audio Bitrate"]) audioSpecs.push(['Audio Bitrate', specs["Audio Bitrate"]]);
-  if (specs["Two-way Audio"]) audioSpecs.push(['Two-way Audio', specs["Two-way Audio"]]);
-  if (specs["Suppression"]) audioSpecs.push(['Suppression', specs["Suppression"]]);
-  if (specs["Sampling Rate"]) audioSpecs.push(['Sampling Rate', specs["Sampling Rate"]]);
+  if (specs["Audio Compression"]) audioSpecs.push(["Audio Compression", specs["Audio Compression"]]);
+  if (specs["Audio Bitrate"]) audioSpecs.push(["Audio Bitrate", specs["Audio Bitrate"]]);
+  if (specs["Two-way Audio"]) audioSpecs.push(["Two-way Audio", specs["Two-way Audio"]]);
+  if (specs["Suppression"]) audioSpecs.push(["Suppression", specs["Suppression"]]);
+  if (specs["Sampling Rate"]) audioSpecs.push(["Sampling Rate", specs["Sampling Rate"]]);
   if (audioSpecs.length > 0) {
     specGroups.push({ title: 'Audio', specs: audioSpecs });
   }
 
   // Network
   const networkSpecs = [];
-  if (specs["Protocols"]) networkSpecs.push(['Protocols', specs["Protocols"]]);
-  if (specs["Compatible Integration"]) networkSpecs.push(['Compatible Integration', specs["Compatible Integration"]]);
-  if (specs["User/Host"]) networkSpecs.push(['User/Host', specs["User/Host"]]);
-  if (specs["Client"]) networkSpecs.push(['Client', specs["Client"]]);
-  if (specs["Web Browser"]) networkSpecs.push(['Web Browser', specs["Web Browser"]]);
+  if (specs["Protocols"]) networkSpecs.push(["Protocols", specs["Protocols"]]);
+  if (specs["Compatible Integration"]) networkSpecs.push(["Compatible Integration", specs["Compatible Integration"]]);
+  if (specs["User/Host"]) networkSpecs.push(["User/Host", specs["User/Host"]]);
+  if (specs["Client"]) networkSpecs.push(["Client", specs["Client"]]);
+  if (specs["Web Browser"]) networkSpecs.push(["Web Browser", specs["Web Browser"]]);
+  if (specs["WIFI"]) networkSpecs.push(["WIFI", specs["WIFI"]]);
+  if (specs["Network"]) networkSpecs.push(["Network", specs["Network"]]);
   if (networkSpecs.length > 0) {
     specGroups.push({ title: 'Network', specs: networkSpecs });
   }
 
   // I/O
   const ioSpecs = [];
-  if (specs["Audio I/O"]) ioSpecs.push(['Audio I/O', specs["Audio I/O"]]);
-  if (specs["Alarm I/O"]) ioSpecs.push(['Alarm I/O', specs["Alarm I/O"]]);
-  if (specs["Built-in Mic"]) ioSpecs.push(['Built-in Mic', specs["Built-in Mic"]]);
-  if (specs["Built-in Speaker"]) ioSpecs.push(['Built-in Speaker', specs["Built-in Speaker"]]);
-  if (specs["WIFI"]) ioSpecs.push(['WIFI', specs["WIFI"]]);
+  if (specs["Audio I/O"]) ioSpecs.push(["Audio I/O", specs["Audio I/O"]]);
+  if (specs["Alarm I/O"]) ioSpecs.push(["Alarm I/O", specs["Alarm I/O"]]);
+  if (specs["Built-in Mic"]) ioSpecs.push(["Built-in Mic", specs["Built-in Mic"]]);
+  if (specs["Built-in Speaker"]) ioSpecs.push(["Built-in Speaker", specs["Built-in Speaker"]]);
   if (ioSpecs.length > 0) {
     specGroups.push({ title: 'I/O', specs: ioSpecs });
   }
 
   // Video Output
   const videoOutputSpecs = [];
-  if (specs["Video Output"]) videoOutputSpecs.push(['Video Output', specs["Video Output"]]);
+  if (specs["Video Output"]) videoOutputSpecs.push(["Video Output", specs["Video Output"]]);
   if (videoOutputSpecs.length > 0) {
     specGroups.push({ title: 'Video Output', specs: videoOutputSpecs });
   }
 
   // Power & Protection
   const powerSpecs = [];
-  if (specs["Power"]) powerSpecs.push(['Power', specs["Power"]]);
-  if (specs["Power consumption"]) powerSpecs.push(['Power consumption', specs["Power consumption"]]);
-  if (specs["Surge Protection"]) powerSpecs.push(['Surge Protection', specs["Surge Protection"]]);
-  if (specs["Reset Button"]) powerSpecs.push(['Reset Button', specs["Reset Button"]]);
-  if (specs["Protection"]) powerSpecs.push(['Protection', specs["Protection"]]);
+  if (specs["Power"]) powerSpecs.push(["Power", specs["Power"]]);
+  if (specs["Power consumption"]) powerSpecs.push(["Power consumption", specs["Power consumption"]]);
+  if (specs["Surge Protection"]) powerSpecs.push(["Surge Protection", specs["Surge Protection"]]);
+  if (specs["Reset Button"]) powerSpecs.push(["Reset Button", specs["Reset Button"]]);
+  if (specs["Protection"]) powerSpecs.push(["Protection", specs["Protection"]]);
   if (powerSpecs.length > 0) {
     specGroups.push({ title: 'Power & Protection', specs: powerSpecs });
   }
 
-  // Physical
-  const physicalSpecs = [];
-  if (specs["Dimensions"]) physicalSpecs.push(['Dimensions', specs["Dimensions"]]);
-  if (specs["Weight"]) physicalSpecs.push(['Weight', specs["Weight"]]);
-  if (specs["Working Environment"]) physicalSpecs.push(['Working Environment', specs["Working Environment"]]);
-  if (specs["Storage Environment"]) physicalSpecs.push(['Storage Environment', specs["Storage Environment"]]);
-  if (physicalSpecs.length > 0) {
-    specGroups.push({ title: 'Physical', specs: physicalSpecs });
-  }
-
   // Certifications
   const certSpecs = [];
-  if (specs["EMC"]) certSpecs.push(['EMC', specs["EMC"]]);
-  if (specs["FCC"]) certSpecs.push(['FCC', specs["FCC"]]);
-  if (specs["Safety"]) certSpecs.push(['Safety', specs["Safety"]]);
-  if (specs["Environment"]) certSpecs.push(['Environment', specs["Environment"]]);
-  if (specs["Protection"]) certSpecs.push(['Protection', specs["Protection"]]);
+  if (specs["EMC"]) certSpecs.push(["EMC", specs["EMC"]]);
+  if (specs["FCC"]) certSpecs.push(["FCC", specs["FCC"]]);
+  if (specs["Safety"]) certSpecs.push(["Safety", specs["Safety"]]);
+  if (specs["Environment"]) certSpecs.push(["Environment", specs["Environment"]]);
+  if (specs["Protection"]) certSpecs.push(["Protection", specs["Protection"]]);
   if (certSpecs.length > 0) {
     specGroups.push({ title: 'Certifications', specs: certSpecs });
+  }
+
+  // Physical
+  const physicalSpecs = [];
+  if (specs["Dimensions"]) physicalSpecs.push(["Dimensions", specs["Dimensions"]]);
+  if (specs["Weight"]) physicalSpecs.push(["Weight", specs["Weight"]]);
+  if (specs["Working Environment"]) physicalSpecs.push(["Working Environment", specs["Working Environment"]]);
+  if (specs["Storage Environment"]) physicalSpecs.push(["Storage Environment", specs["Storage Environment"]]);
+  if (physicalSpecs.length > 0) {
+    specGroups.push({ title: 'Physical', specs: physicalSpecs });
   }
 
   return specGroups;
@@ -177,10 +178,10 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 ---
 
 <Layout>
-  <!-- Professional Header Banner - Add animation classes -->
+  <!-- Professional Header Banner - Cleaned: removed animation classes -->
   <section 
     id="header-banner"
-    class="bg-gradient-to-r from-teal-900/80 to-transparent opacity-0 translate-y-10 transition-all duration-500 ease-out"
+    class="bg-gradient-to-r from-teal-900/80 to-transparent"
   >
     <!-- ...existing header content... -->
     <div class="header-overlay"></div>
@@ -196,17 +197,17 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         <span class="breadcrumb-separator">/</span>
         <a href="/products" class="breadcrumb-link">Products</a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products/xvr" class="breadcrumb-link">XVR</a>
+        <a href="/products/fixed" class="breadcrumb-link">Fixed-lens Camera</a>
         <span class="breadcrumb-separator">/</span>
         <span class="breadcrumb-current">{productData?.title}</span>
       </nav>
     </div>
   </section>
 
-  <!-- Product Overview Section - Add animation classes -->
+  <!-- Product Overview Section - Cleaned: removed animation classes -->
   <section 
     id="product-overview"
-    class="product-overview opacity-0 translate-y-10 transition-all duration-500 ease-out delay-100"
+    class="product-overview"
   >
     <!-- ...existing product overview content... -->
     <div class="container">
@@ -270,7 +271,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         <!-- Product Information -->
         <div class="product-details">
           <div class="product-meta">
-            <span class="product-category">Network Switch</span>
+            <span class="product-category">Fixed-lens Cameras</span>
             <div class="product-status">
               <span class="status-badge available">In Stock</span>
             </div>
@@ -323,11 +324,11 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </div>
   </section>
 
-  <!-- Technical Specifications - Updated to Category & List View -->
+  <!-- Technical Specifications - Cleaned: removed animation classes -->
   {specificationGroups && specificationGroups.length > 0 && (
     <section 
       id="specifications"
-      class="specifications-section opacity-0 translate-y-10 transition-all duration-500 ease-out delay-200"
+      class="specifications-section"
     >
       <div class="container">
         <div class="section-header">
@@ -372,7 +373,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     </section>
   )}
 
-  <!-- Related Products - Add animation classes -->
+  <!-- Related Products - Cleaned: removed animation classes -->
   
 </Layout>
 <style>
@@ -932,111 +933,47 @@ const specificationGroups = renderSpecifications(productData?.specifications);
       break-inside: avoid;
     }
   }
-
-  .animate-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-  .product-card:nth-child(1) { transition-delay: 100ms !important; }
-  .product-card:nth-child(2) { transition-delay: 200ms !important; }
-  .product-card:nth-child(3) { transition-delay: 300ms !important; }
-  [class*="transition-all"] {
-    will-change: transform, opacity;
-  }
-  #page-loader {
-    transition: opacity 0.3s ease-out;
-  }
-  #page-loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
 </style>
 
 <script is:inline>
-  // Enhanced page load and scroll animations
-  document.addEventListener('DOMContentLoaded', () => {
-    // Hide loader when page is ready
-    setTimeout(() => {
-      const loader = document.getElementById('page-loader');
-      if (loader) loader.classList.add('hidden');
-      // Trigger initial animations
-      animateOnScroll();
-      // Remove loader after transition ends to prevent interaction
-      loader && loader.addEventListener('transitionend', () => {
-        loader.style.display = 'none';
-      });
-    }, 300);
-
-    // Intersection Observer for smooth scroll animations
-    function animateOnScroll() {
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-      };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      // Observe all animated sections
-      const animatedSections = [
-        document.getElementById('header-banner'),
-        document.getElementById('product-overview'),
-        document.getElementById('specifications'),
-        document.getElementById('related-products')
-      ];
-      animatedSections.forEach(section => {
-        if (section) observer.observe(section);
-      });
-
-      // Observe individual product cards for staggered animation
-      const productCards = document.querySelectorAll('.product-card');
-      productCards.forEach((card) => {
-        observer.observe(card);
-      });
-    }
-
-    // Initialize other functionality
+  // Cleaned: removed all animation/scroll/intersection observer JS, kept only gallery, download, tab switching
+  document.addEventListener('DOMContentLoaded', function() {
     // Gallery
     function changeMainImage(index) {
-      const mainImage = document.getElementById('mainProductImage');
-      const thumbnails = document.querySelectorAll('.thumbnail-btn');
-      const thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
+      var mainImage = document.getElementById('mainProductImage');
+      var thumbnails = document.querySelectorAll('.thumbnail-btn');
+      var thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
       if (mainImage && thumbnailImages[index]) {
         mainImage.src = thumbnailImages[index].src;
         mainImage.alt = thumbnailImages[index].alt;
-        thumbnails.forEach((thumb, i) => {
+        thumbnails.forEach(function(thumb, i) {
           thumb.classList.toggle('active', i === index);
         });
       }
     }
     window.changeMainImage = changeMainImage;
 
-    // Download Specifications
+    // Download Specifications (use var for compatibility)
     function downloadSpecifications() {
-      const productTitle = document.querySelector('.product-title')?.textContent || 'Product';
-      const categoryBlocks = document.querySelectorAll('.spec-category-block');
+      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
+      var categoryBlocks = document.querySelectorAll('.spec-category-block');
       if (categoryBlocks.length === 0) return;
-      let csv = `Product Specifications - ${productTitle}\n`;
+      var csv = `Product Specifications - ${productTitle}\n`;
       csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
       csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
-      categoryBlocks.forEach((block) => {
-        const categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
-        const specItems = block.querySelectorAll('.spec-item');
+      categoryBlocks.forEach(function(block) {
+        var categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
+        var specItems = block.querySelectorAll('.spec-item');
         csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
         csv += `Parameter,Specification\n`;
-        specItems.forEach(item => {
-          const label = item.querySelector('.spec-label')?.textContent.trim() || '';
-          const detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
-          const cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
-          const cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
-          const csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
+        specItems.forEach(function(item) {
+          var label = item.querySelector('.spec-label')?.textContent.trim() || '';
+          var detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
+          var cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
             ? `"${cleanLabel}"` : cleanLabel;
-          const csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
+          var csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
             ? `"${cleanDetail}"` : cleanDetail;
           if (csvLabel && csvDetail) {
             csv += `${csvLabel},${csvDetail}\n`;
@@ -1044,11 +981,11 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         });
         csv += '\n';
       });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      var url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      const filename = `${productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_specifications.csv`;
+      var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.csv';
       link.setAttribute('download', filename);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
@@ -1060,22 +997,22 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 
     // Tab switching
     function showSpecGroup(index) {
-      const tabs = document.querySelectorAll('.nav-tab');
-      const groups = document.querySelectorAll('.spec-group');
-      tabs.forEach((tab, i) => {
+      var tabs = document.querySelectorAll('.nav-tab');
+      var groups = document.querySelectorAll('.spec-group');
+      tabs.forEach(function(tab, i) {
         tab.classList.toggle('active', i === index);
       });
-      groups.forEach((group, i) => {
+      groups.forEach(function(group, i) {
         group.classList.toggle('active', i === index);
       });
     }
     window.showSpecGroup = showSpecGroup;
 
     // Initialize first thumbnail/tab/group on DOMContentLoaded
-    const firstThumbnail = document.querySelector('.thumbnail-btn');
+    var firstThumbnail = document.querySelector('.thumbnail-btn');
     if (firstThumbnail) firstThumbnail.classList.add('active');
-    const firstTab = document.querySelector('.nav-tab');
-    const firstGroup = document.querySelector('.spec-group');
+    var firstTab = document.querySelector('.nav-tab');
+    var firstGroup = document.querySelector('.spec-group');
     if (firstTab && firstGroup) {
       firstTab.classList.add('active');
       firstGroup.classList.add('active');
