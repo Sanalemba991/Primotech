@@ -116,14 +116,14 @@ const banners = [
     </div>
   </div>
 
-  <!-- Navigation Arrows -->
-  <button class="nav-arrow nav-prev absolute left-6 top-[calc(50%-4rem)] transform -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 banner-arrow-reveal" aria-label="Previous slide">
+  <!-- Navigation Arrows - Only show icons, no background -->
+  <button class="nav-arrow nav-prev absolute left-6 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center text-white transition-all duration-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible hover:scale-110" aria-label="Previous slide">
     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
     </svg>
   </button>
   
-  <button class="nav-arrow nav-next absolute right-6 top-[calc(50%-4rem)] transform -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 banner-arrow-reveal" aria-label="Next slide">
+  <button class="nav-arrow nav-next absolute right-6 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center text-white transition-all duration-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible hover:scale-110" aria-label="Next slide">
     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
     </svg>
@@ -231,9 +231,32 @@ const banners = [
     transition-delay: 1.6s;
   }
 
-  /* Dots and arrows reveal */
-  .banner-dots-reveal,
-  .banner-arrow-reveal {
+  /* Navigation arrows - clean styling without background */
+  .nav-arrow {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Show arrows only when hovering over the banner container */
+  .group:hover .nav-arrow {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Arrow hover and active effects */
+  .nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+    color: #5eead4; /* teal-300 for subtle hover */
+  }
+
+  .nav-arrow:active {
+    color: #2dd4bf; /* teal-400 when clicked */
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .banner-dots-reveal {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -243,12 +266,6 @@ const banners = [
     opacity: 1;
     transform: translateY(0);
     transition-delay: 1.8s;
-  }
-
-  .banner-animation.banner-revealed .banner-arrow-reveal {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 2s;
   }
 
   /* Arrow animation only on CTA button hover */
@@ -309,7 +326,7 @@ const banners = [
       this.prevBtn = document.querySelector('.nav-prev');
       this.nextBtn = document.querySelector('.nav-next');
       this.autoPlayInterval = null;
-      this.autoPlayDuration = 4000; // 4 seconds
+      this.autoPlayDuration = 3000; // 3 seconds
       this.totalSlides = this.slides.length;
       this.isTransitioning = false;
       
