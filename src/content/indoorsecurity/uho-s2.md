@@ -1,9 +1,9 @@
 ---
 title: "Uho-S2"
 description: "2MP Indoor Pan & Tilt Wi-Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/indoor/indoor (1).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/indoor/indoor (1).png"
     caption: "Front view"
 features:
   - High quality image with 2MP, 1/3"CMOS sensor

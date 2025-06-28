@@ -1,7 +1,7 @@
 ---
 title: "UAC-B145-AF28(40)LM-DL-H"
 description: "5MP ColorHunter With Smart Dual Light Bullet Analog Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/analog/analog (5).png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
     caption: "Front view"

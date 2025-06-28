@@ -1,9 +1,9 @@
 ---
 title: "IPC-B122-APF28(40)K"
 description: "2MP Mini Fixed Bullet Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (2).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (2).png"
     caption: "Front view"
 features:
   - High quality image with 2MP,1/2.9’’ CMOS sensor

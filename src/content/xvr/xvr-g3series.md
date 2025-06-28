@@ -1,9 +1,9 @@
 ---
 title: "XVR-G3 Series"
-description: "16CH 1-SATA H.265/H.264 XVR"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+description: "XVR-G3 Series: 4/8CH hybrid XVR with 5MP and IP support."
+image: "/images/xvr/xvr (1).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/xvr/xvr (1).png"
     caption: "Front view"
 features:
   - Support H.265/H.264 video formats

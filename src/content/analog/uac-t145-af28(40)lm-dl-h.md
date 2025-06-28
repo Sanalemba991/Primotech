@@ -1,9 +1,9 @@
 ---
 title: "UAC-T145-AF28(40)LM-DL-H"
 description: "5MP ColorHunter With Smart Dual Light Turret Analog Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/analog/t145.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/analog/t145.png"
     caption: "Front view"
 features:
   - High quality imaging with 5MP resolution

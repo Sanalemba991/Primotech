@@ -1,9 +1,9 @@
 ---
 title: "Uho-B1R-M2F3(4)"
 description: "2MP HD Outdoor Bullet Wi Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/outdoor/outdoor (1).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/outdoor/outdoor (1).png"
     caption: "Front view"
 features:
   - High quality image with 2MP, 1/2.9"CMOS sensor

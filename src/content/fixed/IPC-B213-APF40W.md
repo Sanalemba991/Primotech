@@ -1,9 +1,9 @@
 ---
 title: "IPC-B213-APF40W"
 description: "3MP HD Fixed Dual-light Bullet Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (10).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (10).png"
     caption: "Front view"
 features:
   - Day/night functionality

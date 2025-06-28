@@ -1,9 +1,9 @@
 ---
 title: "UAC-P112-AF40-W-H"
 description: "2MP ColorHunter HD Fixed PT Analog"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/analog/analog (6).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/analog/analog (6).png"
     caption: "Front view"
 features:
   - 2MP high quality imaging

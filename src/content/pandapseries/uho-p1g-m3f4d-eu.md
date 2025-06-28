@@ -1,9 +1,9 @@
 ---
 title: "Uho-P1G-M3F4D-EU"
 description: "3MP Outdoor 4G PT Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP (2).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP (2).png"
     caption: "Front view"
 features:
   - High quality image with 3MP, 1/3.0" CMOS sensor

@@ -1,9 +1,9 @@
 ---
 title: "IPC-P213-AF40KC"
 description: "3MP HD Dual Light Network PT Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/dual/duallight.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/dual/duallight.png"
     caption: "Front view"
 features:
   - 2304*1296@20fps in the main stream

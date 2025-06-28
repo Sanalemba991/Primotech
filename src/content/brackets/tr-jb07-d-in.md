@@ -1,9 +1,9 @@
 ---
 title: "TR-JB07-D-IN"
 description: "Bullet Junction Box"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/acessories/t5.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/acessories/t5.png"
     caption: "Front view"
 features:
   - Indoor or outdoor use

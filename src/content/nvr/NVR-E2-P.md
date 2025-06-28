@@ -1,9 +1,9 @@
 ---
 title: "NVR-E2-P"
 description: "4/8CH 1-SATA Ultra 265/H.265/H.264 PoE NVR"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/nvr/NVR (3).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/nvr/NVR (3).png"
     caption: "Front view"
 features:
   - Support Ultra 265/H.265/H.264 video formats

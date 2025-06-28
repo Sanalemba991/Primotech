@@ -1,9 +1,9 @@
 ---
 title: "IPC-D315-APKZ"
 description: "5MP Vandal-resistant Network IR VF Dome Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/vari/vari (1).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/vari/vari (1).png"
     caption: "Front view"
 features:
   - Day/night functionality

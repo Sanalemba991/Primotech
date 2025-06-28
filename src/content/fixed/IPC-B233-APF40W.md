@@ -1,9 +1,9 @@
 ---
 title: "IPC-B233-APF40W"
 description: "3MP Fixed Dual-light Bullet Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (1).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (1).png"
     caption: "Front view"
 features:
   - High quality image with 3MP,1/2.7" CMOS sensor

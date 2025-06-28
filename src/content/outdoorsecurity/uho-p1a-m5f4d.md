@@ -1,9 +1,9 @@
 ---
 title: "Uho-P1A-M5F4D"
 description: "5 MP HD Outdoor Pan & Tilt Wi Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/outdoor/outdoor (2).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/outdoor/outdoor (2).png"
     caption: "Front view"
 features:
   - High quality image with 5MP, 1/2.7"CMOS sensor

@@ -1,9 +1,9 @@
 ---
 title: "Uho-B2D-M5F3(4)D"
 description: "5MP HD Outdoor Bullet Wi-Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandab/PandaB (3).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandab/PandaB (3).png"
     caption: "Front view"
 features:
   - High quality image with 5MP, 1/3"CMOS sensor

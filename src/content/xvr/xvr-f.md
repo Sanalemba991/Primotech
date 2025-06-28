@@ -1,9 +1,9 @@
 ---
 title: "XVR-F"
-description: "16CH 1-SATA H.265/H.264 XVR"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+description: "The XVR-F is a 4/8CH H.265 hybrid XVR with 5MP Lite recording and 8CH IP support."
+image: "/images/xvr/xvr (2).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/xvr/xvr (2).png"
     caption: "Front view"
 features:
   - Support H.265/H.264 video formats

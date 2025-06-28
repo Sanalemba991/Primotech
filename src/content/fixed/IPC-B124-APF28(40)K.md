@@ -1,9 +1,9 @@
 ---
 title: "IPC-B124-APF28(40)K"
 description: "4MP Mini Fixed Bullet Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (5).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (5).png"
     caption: "Front view"
 features:
   - High quality image with 4MP,1/3’’ CMOS sensor

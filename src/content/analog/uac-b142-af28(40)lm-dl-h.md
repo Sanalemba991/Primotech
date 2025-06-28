@@ -1,9 +1,9 @@
 ---
 title: "UAC-B142-AF28(40)LM-DL-H"
 description: "2MP ColorHunter With Smart Dual Light Bullet Analog Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/analog/b142.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/analog/b142.png"
     caption: "Front view"
 features:
   - High quality imaging with 2MP resolution

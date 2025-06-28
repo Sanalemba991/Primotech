@@ -1,9 +1,9 @@
 ---
 title: "IPC-D124-PF28K"
 description: "4MP HD IR Fixed Dome Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (6).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (6).png"
     caption: "Front view"
 features:
   - High quality image with 4MP,1/3’’ CMOS sensor

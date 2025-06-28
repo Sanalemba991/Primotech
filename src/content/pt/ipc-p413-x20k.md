@@ -1,9 +1,9 @@
 ---
 title: "IPC-P413-X20K"
 description: "3MP 20X Network PTZ Dome Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pt/pt.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pt/pt.png"
     caption: "Front view"
 features:
   - High quality image with 3MP,1/2.8" CMOS sensor

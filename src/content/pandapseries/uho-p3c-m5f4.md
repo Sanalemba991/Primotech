@@ -1,9 +1,9 @@
 ---
 title: "Uho-P3C-M5F4"
 description: "5 MP ColorHunter with Wise-ISP Outdoor Pan & Tilt Wi-Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP (6).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP (6).png"
     caption: "Front view"
 features:
   - Fixed camera and PTZ camera integration, dual channels with one IP, look at overall situation and consider details at the same time

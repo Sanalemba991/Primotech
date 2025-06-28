@@ -1,9 +1,9 @@
 ---
 title: "TR-CM24-IN"
 description: "Fixed Dome Indoor Pendant Mount"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/acessories/t2.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/acessories/t2.png"
     caption: "Front view"
 features:
   - Indoor use

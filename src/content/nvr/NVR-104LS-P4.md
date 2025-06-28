@@ -1,7 +1,7 @@
 ---
 title: "NVR-104LS-P4"
 description: "4CH 1-SATA Ultra 265/H.265/H.264 NVR"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/nvr/NVR (1).png"
 images:
   - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
     caption: "Front view"

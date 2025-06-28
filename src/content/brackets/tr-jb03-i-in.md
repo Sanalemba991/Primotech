@@ -1,9 +1,9 @@
 ---
 title: "TR-JB03-I-IN"
 description: "Fixed Dome Junction Box"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/acessories/t3.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/acessories/t3.png"
     caption: "Front view"
 features:
   - Indoor use

@@ -1,9 +1,9 @@
 ---
 title: "S3E"
 description: "3MP Indoor Pan & Tilt Wi-Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandas/PandaS (2).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandas/PandaS (2).png"
     caption: "Front view"
 features:
   - High quality image with 3MP, 1/3.0" CMOS sensor

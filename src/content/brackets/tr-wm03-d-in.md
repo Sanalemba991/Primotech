@@ -1,9 +1,9 @@
 ---
 title: "TR-WM03-D-IN"
 description: "Fixed Dome Mount"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/acessories/t9.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/acessories/t9.png"
     caption: "Front view"
 features:
   - Indoor or outdoor use

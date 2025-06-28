@@ -1,9 +1,9 @@
 ---
 title: "TR-UP08-A-IN"
 description: "Pole Mount Adapter"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/acessories/t8.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/acessories/t8.png"
     caption: "Front view"
 features:
   - Indoor or outdoor use

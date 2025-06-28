@@ -1,9 +1,9 @@
 ---
 title: "IPC-T122-APF28K"
 description: "2MP Fixed Eyeball Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (4).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (4).png"
     caption: "Front view"
 features:
   - High quality image with 2MP,1/2.9’’ CMOS sensor

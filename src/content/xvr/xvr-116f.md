@@ -1,9 +1,9 @@
 ---
 title: "XVR-116F "
-description: "16CH 1-SATA H.265/H.264 XVR"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+description: "The XVR-116F is a 16CH H.265 hybrid XVR with 8MP IP support."
+image: "/images/xvr/xvr (2).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/xvr/xvr (2).png"
     caption: "Front view"
 features:
   - Support H.265/H.264 video formats

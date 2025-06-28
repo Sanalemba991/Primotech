@@ -1,9 +1,9 @@
 ---
 title: "Uho-P2C-M4F4"
 description: "4MP Full Color Alarm Wifi PT Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP (7).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP (7).png"
     caption: "Front view"
 features:
   - High quality image with 4MP, 1/2.9" CMOS sensor and F1.0 large aperture lens

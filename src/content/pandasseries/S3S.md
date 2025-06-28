@@ -1,9 +1,9 @@
 ---
 title: "S3S"
 description: "5MP+5MP HD Indoor Dual-lens PT Wi-Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandas/PandaS (1).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandas/PandaS (1).png"
     caption: "Front view"
 features:
   - Fixed camera and PT camera integration, dual channels with one IP, look at overall situation and consider details at the same time

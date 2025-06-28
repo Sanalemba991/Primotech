@@ -1,9 +1,9 @@
 ---
 title: "TR-JB05-A-IN"
 description: "Mini Bullet Camera Junction Box"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/acessories/t4.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/acessories/t4.png"
     caption: "Front view"
 features:
   - Indoor use

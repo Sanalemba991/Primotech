@@ -1,9 +1,9 @@
 ---
 title: "IPC-D122-PF28K"
 description: "2MP HD IR Fixed Dome Network Camera"
-image: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+image: "/images/fixed/fixed (3).png"
 images:
-  - url: "/images/categories/products/cameras/IPC-B124-APF28(40)/main.png"
+  - url: "/images/fixed/fixed (3).png"
     caption: "Front view"
 features:
   - High quality image with 2MP,1/2.9’’ CMOS sensor

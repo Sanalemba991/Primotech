@@ -1,9 +1,9 @@
 ---
 title: "Uho-P2G-M3F4D-AS"
 description: "3MP HD Outdoor Pan & Tilt 4G Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP (1).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP (1).png"
     caption: "Front view"
 features:
   - 2304*1296@15fps in the main stream

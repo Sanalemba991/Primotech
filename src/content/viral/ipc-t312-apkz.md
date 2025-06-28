@@ -1,9 +1,9 @@
 ---
 title: "IPC-T312-APKZ"
 description: "2MP HD VF Turrent Network Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/vari/vari (4).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/vari/vari (4).png"
     caption: "Front view"
 features:
   - Day/night functionality

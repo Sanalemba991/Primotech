@@ -1,9 +1,9 @@
 ---
 title: "Uho-P2A-M3F4D"
 description: "3MP HD Outdoor Pan & Tilt Wi-Fi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP (5).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP (5).png"
     caption: "Front view"
 features:
   - High quality image with 3MP, 1/3" CMOS sensor

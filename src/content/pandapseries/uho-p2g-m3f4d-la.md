@@ -1,9 +1,9 @@
 ---
 title: "Uho-P2G-M3F4D-LA"
 description: "3MP 4G Solar Battery PT Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP (9).png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP (9).png"
     caption: "Front view"
 features:
   - High quality image with 3MP, 1/2.8" CMOS sensor

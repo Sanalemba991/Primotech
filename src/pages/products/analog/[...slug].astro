@@ -326,11 +326,11 @@ const specificationGroups = renderSpecifications(productData?.specifications);
             <p class="section-subtitle">Detailed technical information and performance metrics</p>
           </div>
           <div class="header-actions">
-            <button class="btn-download" onclick="downloadSpecifications()">
+            <button class="btn-download" onclick="downloadPageAsImage()">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
               </svg>
-              Download PDF
+              Download Image
             </button>
           </div>
         </div>
@@ -365,6 +365,123 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   <!-- Related Products - Cleaned: removed animation classes -->
   
 </Layout>
+<!-- html2canvas CDN for client-side screenshot -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Gallery
+    function changeMainImage(index) {
+      var mainImage = document.getElementById('mainProductImage');
+      var thumbnails = document.querySelectorAll('.thumbnail-btn');
+      var thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
+      if (mainImage && thumbnailImages[index]) {
+        mainImage.src = thumbnailImages[index].src;
+        mainImage.alt = thumbnailImages[index].alt;
+        thumbnails.forEach(function(thumb, i) {
+          thumb.classList.toggle('active', i === index);
+        });
+      }
+    }
+    window.changeMainImage = changeMainImage;
+
+    // Download Specifications (use var for compatibility)
+    function downloadSpecifications() {
+      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
+      var categoryBlocks = document.querySelectorAll('.spec-category-block');
+      if (categoryBlocks.length === 0) return;
+      var csv = `Product Specifications - ${productTitle}\n`;
+      csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
+      csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
+      categoryBlocks.forEach(function(block) {
+        var categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
+        var specItems = block.querySelectorAll('.spec-item');
+        csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
+        csv += `Parameter,Specification\n`;
+        specItems.forEach(function(item) {
+          var label = item.querySelector('.spec-label')?.textContent.trim() || '';
+          var detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
+          var cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
+            ? `"${cleanLabel}"` : cleanLabel;
+          var csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
+            ? `"${cleanDetail}"` : cleanDetail;
+          if (csvLabel && csvDetail) {
+            csv += `${csvLabel},${csvDetail}\n`;
+          }
+        });
+        csv += '\n';
+      });
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      var url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.csv';
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+    window.downloadSpecifications = downloadSpecifications;
+
+    // Download Full Page as Image
+    function downloadPageAsImage() {
+      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
+      var section = document.querySelector('main') || document.body; // fallback to body if no main
+      var btn = document.querySelector('.btn-download');
+      if (btn) btn.disabled = true;
+      if (btn) btn.textContent = 'Generating...';
+      html2canvas(section, {
+        backgroundColor: '#fff',
+        useCORS: true,
+        scale: 2
+      }).then(function(canvas) {
+        var link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_product.png';
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        if (btn) btn.disabled = false;
+        if (btn) btn.textContent = 'Download Image';
+      }).catch(function() {
+        if (btn) btn.disabled = false;
+        if (btn) btn.textContent = 'Download Image';
+        alert('Failed to generate image. Please try again.');
+      });
+    }
+    window.downloadPageAsImage = downloadPageAsImage;
+
+    // Tab switching
+    function showSpecGroup(index) {
+      var tabs = document.querySelectorAll('.nav-tab');
+      var groups = document.querySelectorAll('.spec-group');
+      tabs.forEach(function(tab, i) {
+        tab.classList.toggle('active', i === index);
+      });
+      groups.forEach(function(group, i) {
+        group.classList.toggle('active', i === index);
+      });
+    }
+    window.showSpecGroup = showSpecGroup;
+
+    // Initialize first thumbnail/tab/group on DOMContentLoaded
+    var firstThumbnail = document.querySelector('.thumbnail-btn');
+    if (firstThumbnail) firstThumbnail.classList.add('active');
+    var firstTab = document.querySelector('.nav-tab');
+    var firstGroup = document.querySelector('.spec-group');
+    if (firstTab && firstGroup) {
+      firstTab.classList.add('active');
+      firstGroup.classList.add('active');
+    }
+
+
+  });
+</script>
+
 <style>
   /* CSS Variables for Professional Theme */
   :root {
@@ -923,89 +1040,3 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     }
   }
 </style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Gallery
-    function changeMainImage(index) {
-      var mainImage = document.getElementById('mainProductImage');
-      var thumbnails = document.querySelectorAll('.thumbnail-btn');
-      var thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
-      if (mainImage && thumbnailImages[index]) {
-        mainImage.src = thumbnailImages[index].src;
-        mainImage.alt = thumbnailImages[index].alt;
-        thumbnails.forEach(function(thumb, i) {
-          thumb.classList.toggle('active', i === index);
-        });
-      }
-    }
-    window.changeMainImage = changeMainImage;
-
-    // Download Specifications (use var for compatibility)
-    function downloadSpecifications() {
-      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
-      var categoryBlocks = document.querySelectorAll('.spec-category-block');
-      if (categoryBlocks.length === 0) return;
-      var csv = `Product Specifications - ${productTitle}\n`;
-      csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
-      csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
-      categoryBlocks.forEach(function(block) {
-        var categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
-        var specItems = block.querySelectorAll('.spec-item');
-        csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
-        csv += `Parameter,Specification\n`;
-        specItems.forEach(function(item) {
-          var label = item.querySelector('.spec-label')?.textContent.trim() || '';
-          var detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
-          var cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
-          var cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
-          var csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
-            ? `"${cleanLabel}"` : cleanLabel;
-          var csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
-            ? `"${cleanDetail}"` : cleanDetail;
-          if (csvLabel && csvDetail) {
-            csv += `${csvLabel},${csvDetail}\n`;
-          }
-        });
-        csv += '\n';
-      });
-      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var link = document.createElement('a');
-      var url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.csv';
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-    window.downloadSpecifications = downloadSpecifications;
-
-    // Tab switching
-    function showSpecGroup(index) {
-      var tabs = document.querySelectorAll('.nav-tab');
-      var groups = document.querySelectorAll('.spec-group');
-      tabs.forEach(function(tab, i) {
-        tab.classList.toggle('active', i === index);
-      });
-      groups.forEach(function(group, i) {
-        group.classList.toggle('active', i === index);
-      });
-    }
-    window.showSpecGroup = showSpecGroup;
-
-    // Initialize first thumbnail/tab/group on DOMContentLoaded
-    var firstThumbnail = document.querySelector('.thumbnail-btn');
-    if (firstThumbnail) firstThumbnail.classList.add('active');
-    var firstTab = document.querySelector('.nav-tab');
-    var firstGroup = document.querySelector('.spec-group');
-    if (firstTab && firstGroup) {
-      firstTab.classList.add('active');
-      firstGroup.classList.add('active');
-    }
-
-
-  });
-</script>

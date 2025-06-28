@@ -1,9 +1,9 @@
 ---
 title: "Uho-P2S-M33F34"
 description: "3MP+3MP HD Outdoor Dual Lens PT WiFi Camera"
-image: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+image: "/images/pandap/PandaP.png"
 images:
-  - url: "/images/categories/products/accessories/BAT-LA5800/BAT-LA58002.png"
+  - url: "/images/pandap/PandaP.png"
     caption: "Front view"
 features:
   - Fixed camera and PTZ camera integration, dual channels with one IP, look at overall situation and consider details at the same time
