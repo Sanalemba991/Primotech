@@ -925,7 +925,6 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 </style>
 
 <script is:inline>
-  // Cleaned: removed all animation/scroll/intersection observer JS, kept only gallery, download, tab switching
   document.addEventListener('DOMContentLoaded', function() {
     // Gallery
     function changeMainImage(index) {
@@ -1006,5 +1005,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
       firstTab.classList.add('active');
       firstGroup.classList.add('active');
     }
+
+
   });
 </script>
