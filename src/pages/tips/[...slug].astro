@@ -20,6 +20,12 @@ type Props = {
 const { tip } = Astro.props;
 const { Content } = await tip.render();
 
+// Fetch all tips for related tips section
+const allTips = await getCollection('tips');
+const relatedTips = allTips
+  .filter(t => t.slug !== tip.slug)
+  .slice(0, 3);
+
 // Format date helper with safety check
 const formatDate = (date: Date | string | undefined) => {
   if (!date) return 'No date available';
@@ -34,6 +40,19 @@ const formatDate = (date: Date | string | undefined) => {
     month: 'long',
     day: 'numeric'
   }).format(dateObj);
+};
+
+// Get event duration
+const getEventDuration = (startDate: Date | string, endDate: Date | string) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return '';
+  
+  const diffTime = Math.abs(end.getTime() - start.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  return diffDays === 1 ? '1 day' : `${diffDays} days`;
 };
 
 // Safe date conversion for ISO string
@@ -52,60 +71,30 @@ const getISOString = (date: Date | string | undefined) => {
 const title = `${tip.data.title} | Primotech Tips`;
 const description = tip.data.subTitle || tip.data.description || 'Primotech security tips and guides';
 const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
-
-// Get related tips (excluding current tip)
-const allTips = await getCollection("tips");
-const relatedTips = allTips
-  .filter(t => t.slug !== tip.slug)
-  .slice(0, 3);
 ---
 
 <Layout
   title={title}
   description={description}
 >
-  <!-- Enhanced Breadcrumb Navigation -->
-  <nav class="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 py-4 shadow-sm scroll-animate" data-animation="slide-down">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center space-x-3 text-sm">
-        <!-- Home Link -->
-        <div class="flex items-center group">
-          <svg class="w-4 h-4 text-gray-400 mr-2 group-hover:text-teal-400 transition-colors duration-1000" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+  <!-- Header Banner with Breadcrumbs -->
+  <section id="header-banner" class="bg-gradient-to-r from-teal-900/80 to-transparent">
+    <div class="header-overlay"></div>
+    <div class="container mx-auto px-4">
+      <nav class="breadcrumbs">
+        <a href="/" class="breadcrumb-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           </svg>
-          <a href="/" class="text-gray-600 hover:text-teal-400 font-medium transition-all duration-1000 ease-out hover:translate-x-0.5 relative">
-            Home
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-400 transition-all duration-1000 group-hover:w-full"></span>
-          </a>
-        </div>
-
-        <!-- Separator -->
-        <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-        </svg>
-
-        <!-- Tips & Guides Link -->
-        <div class="flex items-center group">
-          <a href="/tips" class="text-gray-600 hover:text-teal-400 font-medium transition-all duration-1000 ease-out hover:translate-x-0.5 relative">
-            Tips & Guides
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-400 transition-all duration-1000 group-hover:w-full"></span>
-          </a>
-        </div>
-
-        <!-- Separator -->
-        <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-        </svg>
-
-        <!-- Current Page Title -->
-        <div class="flex items-center">
-          <span class="text-teal-600 font-semibold bg-transparent px-3 py-1 rounded-full text-xs truncate max-w-xs md:max-w-md lg:max-w-lg hover:text-teal-400 transition-all duration-1000">
-            {tip.data.title}
-          </span>
-        </div>
-      </div>
+          Home
+        </a>
+        <span class="breadcrumb-separator">/</span>
+        <a href="/tips" class="breadcrumb-link">Tips &amp; Guides</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">{tip.data.title}</span>
+      </nav>
     </div>
-  </nav>
+  </section>
 
   <!-- Main Content with Scroll-triggered Animations -->
   <main class="bg-white">
@@ -117,228 +106,155 @@ const relatedTips = allTips
         </h1>
         
         <div class="text-gray-500 text-sm mb-6 scroll-animate" data-animation="fade-left">
-          <time datetime={getISOString(tip.data.pubDate)}>
-            {formatDate(tip.data.pubDate)}
+          <time datetime={getISOString(tip.data.startDate)}>
+            {formatDate(tip.data.startDate)} - {formatDate(tip.data.endDate)}
           </time>
+          <span class="mx-2">•</span>
+          <span>{tip.data.readTime} min read</span>
+          <span class="mx-2">•</span>
+          <span>{tip.data.location}</span>
         </div>
+
+        <p class="text-lg text-gray-600 leading-relaxed scroll-animate" data-animation="slide-up">
+          {tip.data.subTitle}
+        </p>
       </header>
+
+      <!-- Author Info -->
+      <div class="flex items-center mb-8 scroll-animate" data-animation="slide-left">
+        <img 
+          src={tip.data.authorImage} 
+          alt={tip.data.authorImageAlt}
+          class="w-12 h-12 rounded-full object-cover mr-4"
+        />
+        <div>
+          <p class="font-semibold text-gray-900">{tip.data.name}</p>
+          <p class="text-sm text-gray-600">Security Expert</p>
+        </div>
+      </div>
 
       <!-- Featured Image -->
       <div class="mb-8 scroll-animate" data-animation="scale-in">
         <img 
-          src="/pictures/camera-comparison.jpg" 
-          alt="Modern security camera installation"
+          src={tip.data.eventImage} 
+          alt={tip.data.eventImageAlt}
           class="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-1500"
           loading="lazy"
         />
       </div>
-      
-      <!-- Article Content -->
-      <article class="prose max-w-none">
-        <!-- Introduction -->
-        <div class="scroll-animate" data-animation="fade-up">
-          <p class="text-gray-700 leading-relaxed mb-6 text-sm">
-            After a brief but informative explanation of different types of cameras are commonly used. Today, let's explore some application scenarios and where each type of camera (bullet, dome, and PTZ) is most suitable for use:
-          </p>
+    
+      <!-- Professional Article Content -->
+      <article class="professional-content max-w-2xl mx-auto px-2">
+        <!-- Title Section -->
+        <div class="content-section scroll-animate" data-animation="fade-up">
+          <h1 class="content-title">{tip.data.title}</h1>
+          <div class="content-meta">{formatDate(tip.data.startDate)}</div>
         </div>
-
-        <!-- Front Door Security Section -->
-        <section class="mb-8 scroll-animate" data-animation="slide-left">
-          <h2 class="text-lg font-semibold text-gray-900 mb-3">
-            - Front Door Security:
-          </h2>
-          
-          <p class="text-gray-700 mb-2 text-sm">
-            <strong>Recommended Camera Type: Bullet Camera</strong>
-          </p>
-          
-          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
-            <strong>Scenario:</strong> Bullet cameras are an excellent choice for monitoring your front door. Their visible presence acts as a deterrent to potential intruders, discouraging any unauthorized access. The compact size and weatherproof design make them suitable for outdoor use, ensuring clear video footage in various weather conditions.
-          </p>
-        </section>
-
-        <!-- Backyard and Pool Section -->
-        <section class="mb-8 scroll-animate" data-animation="slide-right">
-          <h2 class="text-lg font-semibold text-gray-900 mb-3">
-            - Backyard and Pool Surveillance:
-          </h2>
-          
-          <p class="text-gray-700 mb-2 text-sm">
-            <strong>Recommended Camera Type: Bullet Camera</strong>
-          </p>
-          
-          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
-            <strong>Scenario:</strong> For home security in the backyard and pool area, both bullet cameras and vandal-proof dome cameras are suitable choices. Bullet cameras provide clear visibility, and their weatherproof design ensures they can withstand outdoor elements.
-          </p>
-        </section>
-
-        <!-- Large Outdoor Areas Section -->
-        <section class="mb-8 scroll-animate" data-animation="slide-left">
-          <h2 class="text-lg font-semibold text-gray-900 mb-3">
-            - Large Outdoor Areas and Parking Lots:
-          </h2>
-          
-          <p class="text-gray-700 mb-2 text-sm">
-            <strong>Recommended Camera Type: PTZ Camera</strong>
-          </p>
-          
-          <p class="text-gray-700 leading-relaxed mb-6 text-sm">
-            <strong>Scenario:</strong> For monitoring large outdoor areas like parking lots or construction sites, PTZ cameras are ideal. Their pan, tilt, and zoom capabilities allow for comprehensive coverage of expansive spaces. With their ability to zoom in and out, they can capture detailed images even from a distance.
-          </p>
-
-          <!-- PTZ Camera Feature Image -->
-          <div class="mb-6 scroll-animate" data-animation="zoom-in">
-            <img 
-              src="/pictures/bullet-camera-installation.jpg" 
-              alt="3MP PTZ Wi-Fi Security Camera"
-              class="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-1200"
-              loading="lazy"
-            />
+        
+        <!-- Separator Line -->
+        <div class="content-separator"></div>
+        
+        <!-- Description Section -->
+        <div class="content-section scroll-animate" data-animation="fade-up">
+          <p class="content-description">{tip.data.description}</p>
+        </div>
+        
+        <!-- Main Content -->
+        {tip.data.contents.length > 0 && (
+          <div class="content-section scroll-animate" data-animation="fade-up">
+            {tip.data.contents.map((content, idx) => (
+              <div class="content-item">
+                {content.title && (
+                  <span class="content-item-title">
+                    {content.title}
+                  </span>
+                )}
+                {content.title && content.text && <span class="content-separator-text">: </span>}
+                <span class="content-item-text">{content.text || content}</span>
+              </div>
+            ))}
           </div>
-        </section>
-
-        <!-- Farm and Ranch Section -->
-        <section class="mb-8 scroll-animate" data-animation="slide-right">
-          <h2 class="text-lg font-semibold text-gray-900 mb-3">
-            - Farm and Ranch Security:
-          </h2>
-          
-          <p class="text-gray-700 mb-2 text-sm">
-            <strong>Recommended Camera Type: Bullet Camera or PTZ Camera</strong>
-          </p>
-          
-          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
-            <strong>Scenario:</strong> For securing large rural properties like farms and ranches, bullet cameras or PTZ cameras are appropriate. Bullet cameras can be strategically placed along fences or gates to monitor entry points, while PTZ cameras can cover extensive fields and livestock areas with their wide viewing angles.
-          </p>
-        </section>
-
-        <!-- Remote Monitoring Section -->
-        <section class="mb-8 scroll-animate" data-animation="slide-left">
-          <h2 class="text-lg font-semibold text-gray-900 mb-3">
-            - Remote Monitoring of Vacation Homes:
-          </h2>
-          
-          <p class="text-gray-700 mb-2 text-sm">
-            <strong>Recommended Camera Type: PTZ Camera</strong>
-          </p>
-          
-          <p class="text-gray-700 leading-relaxed mb-4 text-sm">
-            <strong>Scenario:</strong> For monitoring vacation homes from a distance, PTZ cameras are a valuable choice. Their remote directional control and zoom capabilities allow property owners to keep an eye on their premises while they're away.
-          </p>
-        </section>
-
-        <!-- Conclusion -->
-        <section class="mb-8 p-4 bg-gray-50 rounded-lg scroll-animate" data-animation="fade-up">
-          <p class="text-gray-700 leading-relaxed text-sm">
-            Remember, the choice of camera type depends on your specific needs and the particular scenario you want to address. It's essential to consider factors such as the camera's installation location, viewing range, visibility, night vision capabilities, and the level of protection required. By selecting the right type of camera for each application scenario, you can create a comprehensive and effective surveillance system tailored to your needs.
-          </p>
-        </section>
+        )}
+        
+        <!-- Tags Section -->
+        <div class="content-section scroll-animate" data-animation="fade-up">
+          <div class="content-separator content-separator-light"></div>
+          <div class="flex flex-wrap gap-2 scroll-animate" data-animation="bounce-in">
+            {tip.data.tags.map((tag) => (
+              <span class="content-tag">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </article>
       
       <!-- Social Sharing -->
-      <div class="border-t border-gray-200 pt-6 mt-8 scroll-animate" data-animation="slide-up">
+      <div class="social-share-section pt-6 mt-8 scroll-animate" data-animation="slide-up">
+        <div class="content-separator content-separator-light mb-6"></div>
         <h3 class="text-base font-semibold text-gray-900 mb-3">Social Media</h3>
-        <div class="flex space-x-3">
+        <div class="flex items-center gap-2">
           <a
             href={`https://twitter.com/intent/tweet?url=${canonicalUrl}&text=${encodeURIComponent(tip.data.title)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon bg-teal-500 hover:bg-teal-400 scroll-animate" data-animation="bounce-in"
+            class="social-icon focus:outline-none focus:ring-2 focus:ring-teal-400 bg-teal-500 hover:bg-teal-400 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            aria-label="Share on Twitter"
+            data-animation="bounce-in"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
             </svg>
           </a>
-          
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${canonicalUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon bg-blue-600 hover:bg-blue-400 scroll-animate" data-animation="bounce-in"
+            class="social-icon focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-600 hover:bg-blue-500 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            aria-label="Share on Facebook"
+            data-animation="bounce-in"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
           </a>
-          
           <a
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${canonicalUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon bg-blue-700 hover:bg-blue-400 scroll-animate" data-animation="bounce-in"
+            class="social-icon focus:outline-none focus:ring-2 focus:ring-blue-700 bg-blue-700 hover:bg-blue-600 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            aria-label="Share on LinkedIn"
+            data-animation="bounce-in"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
           </a>
-          
           <a
             href={`https://www.youtube.com/`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon bg-red-600 hover:bg-red-700 scroll-animate" data-animation="bounce-in"
+            class="social-icon focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-600 hover:bg-red-700 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            aria-label="Visit YouTube"
+            data-animation="bounce-in"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
           </a>
-          
           <a
             href={`mailto:?subject=${encodeURIComponent(tip.data.title)}&body=${encodeURIComponent(canonicalUrl)}`}
-            class="social-icon bg-gray-600 hover:bg-gray-700 scroll-animate" data-animation="bounce-in"
+            class="social-icon focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-600 hover:bg-gray-700 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            aria-label="Share via Email"
+            data-animation="bounce-in"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
           </a>
         </div>
-      </div>
+      </div>   
     </div>
-
-    <!-- Related Articles -->
-    {relatedTips.length > 0 && (
-      <section class="bg-gray-50 py-12 scroll-animate" data-animation="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center scroll-animate" data-animation="slide-up">Related Articles</h2>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedTips.map((relatedTip, index) => (
-              <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-1500 hover:-translate-y-0.5 scroll-animate" data-animation="card-slide">
-                <div class="h-32 bg-gradient-to-br from-teal-100 to-gray-200 flex items-center justify-center">
-                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
-                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                    </svg>
-                  </div>
-                </div>
-                
-                <div class="p-4">
-                  <h3 class="text-base font-semibold text-gray-900 mb-2 hover:text-teal-400 transition-colors duration-800">
-                    <a href={`/tips/${relatedTip.slug}`}>
-                      {relatedTip.data.title}
-                    </a>
-                  </h3>
-                  
-                  <p class="text-gray-600 text-xs mb-3 line-clamp-2">
-                    {relatedTip.data.subTitle}
-                  </p>
-                  
-                  <a 
-                    href={`/tips/${relatedTip.slug}`}
-                    class="text-teal-400 font-medium text-xs hover:text-teal-500 transition-all duration-800 inline-flex items-center group"
-                  >
-                    Read More 
-                    <svg class="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform duration-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
   </main>
 </Layout>
 
@@ -418,11 +334,11 @@ const relatedTips = allTips
     transform: translateX(0);
   }
 
-  .animate-fade-left {
-    transform: translateX(-6px); /* Ultra-subtle movement */
+  .animate-slide-up {
+    transform: translateY(8px); /* Minimal upward movement */
   }
-  .animate-in.animate-fade-left {
-    transform: translateX(0);
+  .animate-in.animate-slide-up {
+    transform: translateY(0);
   }
 
   .animate-scale-in {
@@ -437,13 +353,6 @@ const relatedTips = allTips
   }
   .animate-in.animate-zoom-in {
     transform: scale(1);
-  }
-
-  .animate-slide-up {
-    transform: translateY(8px); /* Minimal upward movement */
-  }
-  .animate-in.animate-slide-up {
-    transform: translateY(0);
   }
 
   .animate-bounce-in {
@@ -479,37 +388,12 @@ const relatedTips = allTips
     }
   }
 
-  /* Ultra-slow social icon transitions */
-  .social-icon {
-    @apply flex items-center justify-center w-10 h-10 text-white rounded-full transition-all duration-1000 transform hover:scale-102 hover:shadow-lg; /* Extremely subtle scale */
-  }
-
-  .line-clamp-2 {
+  /* Line clamp utility */
+  .line-clamp-3 {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-
-  .prose {
-    color: #374151;
-  }
-
-  .prose h2 {
-    color: #111827;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .prose p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-  }
-
-  .prose strong {
-    color: #111827;
-    font-weight: 600;
   }
 
   /* Ultra-slow transitions for all interactive elements */
@@ -522,16 +406,184 @@ const relatedTips = allTips
     transform: translateY(-0.25px); /* Barely perceptible lift */
   }
 
-  /* Responsive truncation for title */
-  .truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  /* Custom ultra-subtle scale classes */
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
   }
 
-  /* Custom ultra-subtle scale classes */
-  .hover\:scale-102:hover {
-    transform: scale(1.02);
+  /* Professional Content Styles */
+  .professional-content {
+    max-width: 38rem; /* ~608px, smaller than before */
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: #ffffff;
+    margin-bottom: 2rem;
+  }
+
+  .content-section {
+    padding: 2rem 0;
+  }
+
+  .content-section:first-child {
+    padding-top: 0;
+  }
+
+  .content-section:last-child {
+    padding-bottom: 0;
+  }
+
+  .content-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .content-meta {
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .content-separator {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e5e7eb 20%, #e5e7eb 80%, transparent);
+    margin: 0;
+    border: none;
+  }
+
+  .content-separator-light {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #f3f4f6 20%, #f3f4f6 80%, transparent);
+    margin: 0;
+    border: none;
+  }
+
+  .content-description {
+    color: #374151;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .content-item {
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .content-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content-item-title {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 1.1rem;
+    display: inline;
+  }
+
+  .content-separator-text {
+    font-weight: 400;
+    color: #6b7280;
+  }
+
+  .content-item-text {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .content-tag {
+    background-color: #f0fdfa;
+    color: #0f766e;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid #a7f3d0;
+  }
+
+  .content-tag:hover {
+    background-color: #ccfbf1;
+    color: #0d9488;
+    transform: translateY(-1px);
+  }
+
+  /* Social Share Section Styles */
+  .social-share-section {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .social-share-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0;
+    color: #1f2937;
+  }
+  .social-icon {
+    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.375rem;
+    padding: 0;
+  }
+  .social-icon:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(20,184,166,0.3);
+  }
+
+  /* Header Banner Styles */
+  #header-banner {
+    position: relative;
+    z-index: 2;
+  }
+  .header-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    position: relative;
+    z-index: 1;
+  }
+  .breadcrumb-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .breadcrumb-link:hover {
+    color: #fff;
+  }
+  .breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+  }
+  .breadcrumb-current {
+    color: #fff;
+    font-weight: 500;
+  }
+  #header-banner .container {
+    position: relative;
+    z-index: 2;
   }
 
   /* Reduced motion for accessibility */
@@ -550,6 +602,40 @@ const relatedTips = allTips
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Responsive design improvements */
+  @media (max-width: 768px) {
+    .grid {
+      gap: 1rem;
+    }
+    
+    .content-title {
+      font-size: 1.875rem;
+    }
+    
+    .content-description {
+      font-size: 1rem;
+    }
+    
+    .content-section {
+      padding: 1.5rem 0;
+    }
+    
+    .py-16 {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .content-title {
+      font-size: 1.5rem;
+    }
+    
+    .content-section {
+      padding: 1rem 0;
     }
   }
 </style>
