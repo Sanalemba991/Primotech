@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import "../../styles/global.css";
+import Whatsapp from '../../components/Whatsapp';
 
 // Generate static paths for all tips
 export async function getStaticPaths() {
@@ -256,6 +257,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
       </div>   
     </div>
   </main>
+   <Whatsapp client:load />
 </Layout>
 
 <!-- Scroll-triggered Animation Script -->

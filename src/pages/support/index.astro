@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
+import Whatsapp from "../../components/Whatsapp";
 const title = "Support - PrimoTech LLC";
 const description = "Get comprehensive support for all PrimoTech security solutions. Access software, FAQs, downloads, and video guides.";
 
@@ -123,6 +123,7 @@ const supportSections = [
       </div>
     </section>
   </main>
+  <Whatsapp client:load />
 </Layout>
 
 <style>

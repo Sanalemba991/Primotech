@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import Whatsapp from '../../../components/Whatsapp';
 import { getCollection } from "astro:content";
 
 const pandapseries = await getCollection("pt");
@@ -124,6 +125,7 @@ const pandapseries = await getCollection("pt");
       </div>
     </div>
   </section>
+    <Whatsapp client:load />
 </Layout>
 
 <style>

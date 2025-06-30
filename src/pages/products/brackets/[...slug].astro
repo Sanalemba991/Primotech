@@ -1,6 +1,7 @@
 ---
 // src/pages/products/switch/[slug].astro
 import Layout from "../../../layouts/Layout.astro";
+import Whatsapp from '../../../components/Whatsapp';
 import { getCollection, getEntryBySlug } from "astro:content";
 
 export async function getStaticPaths() {
@@ -238,7 +239,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   )}
 
   <!-- Related Products -->
-  
+    <Whatsapp client:load />
 </Layout>
 <style>
   /* CSS Variables for Professional Theme */

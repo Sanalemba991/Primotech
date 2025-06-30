@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Whatsapp from '../../components/Whatsapp.tsx';
 
 const title = "Products - PrimoTech LLC | Security Camera Solutions";
 const description = "Explore PrimoTech LLC's innovative security camera products including Panda P, S, B Series and Indoor Security Cameras. Advanced IoT solutions for comprehensive security.";
@@ -518,6 +519,7 @@ const Accessories = [
     </section>
 
   </main>
+    <Whatsapp client:load />
 </Layout>
 
 <script is:inline>

@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import Whatsapp from "../components/Whatsapp.tsx";
 const title = "Contact Us - PrimoTech LLC";
 const description = "Get in touch with PrimoTech LLC for all your security technology needs. Contact our sales team or technical support.";
 ---
@@ -905,4 +905,5 @@ const description = "Get in touch with PrimoTech LLC for all your security techn
         }, 4000);
     }
 </script>
+ <Whatsapp client:load />
 </Layout>

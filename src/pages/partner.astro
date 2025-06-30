@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Whatsapp from "../components/Whatsapp.tsx";
 
 const title = "Partner - PrimoTech LLC";
 const description = "Join our partner network and grow your business with PrimoTech security solutions. Become an authorized distributor today.";
@@ -232,6 +233,7 @@ const description = "Join our partner network and grow your business with PrimoT
       </div>
     </section>
   </main>
+    <Whatsapp client:load />
 </Layout>
 
 <style>

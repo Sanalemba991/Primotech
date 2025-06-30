@@ -1,6 +1,7 @@
 ---
 // src/pages/products/switch/[slug].astro
 import Layout from "../../../layouts/Layout.astro";
+import Whatsapp from '../../../components/Whatsapp';
 import { getCollection, getEntryBySlug } from "astro:content";
 
 export async function getStaticPaths() {
@@ -363,7 +364,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   )}
 
   <!-- Related Products - Cleaned: removed animation classes -->
-  
+    <Whatsapp client:load />
 </Layout>
 <!-- html2canvas CDN for client-side screenshot -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
