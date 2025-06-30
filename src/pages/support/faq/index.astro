@@ -10,55 +10,55 @@ const faqs = [
     id: 1,
     category: "General",
     question: "How to change the login password of admin user and manage user accounts?",
-    answer: "To change the admin password: 1. Log into the web interface of the camera using your current credentials. 2. Navigate to【Security】>【User List】. 3. Select the admin user account. 4. Click 'Edit' and enter your new password twice for confirmation. 5. Save changes. For enhanced security, we recommend creating a complex password with uppercase letters, numbers, and special characters. You can also add additional user accounts with customized permissions through this interface."
+    answer: "To change the admin password, log into the camera's web interface using your current credentials. Go to【Security】>【User List】. Select the admin account and click 'Edit'. Enter the new password and confirm it. Save changes to apply. For better security, we suggest using a complex password that includes uppercase letters, numbers, and symbols. You can also create and manage additional user accounts from this section with custom permissions for each user."
   },
   {
     id: 2,
     category: "Network", 
     question: "How to modify the IP address of Uniarch product and configure advanced network settings?",
-    answer: "The default IP address of our cameras is 192.168.1.13 with DHCP enabled by default. To modify: 1. Access the device's web interface. 2. Go to【Network】>【TCP/IP Settings】. 3. Choose between DHCP (automatic IP assignment) or static IP mode. 4. For static IP, enter the desired IP address, subnet mask, and gateway. 5. Configure DNS servers if needed. 6. Save and reboot the device. For enterprise networks, you may also configure VLAN settings, QoS parameters, and port forwarding rules in this section."
+    answer: "The default IP address is 192.168.1.13 and DHCP is enabled by default. To change it, access the device’s web interface and go to【Network】>【TCP/IP Settings】. Choose DHCP for automatic assignment or select static mode to set a fixed IP address. Enter the IP, subnet mask, and gateway if using static mode. Configure DNS servers if needed. Save your settings and restart the device. You can also adjust VLAN, QoS, and port forwarding settings in this section for advanced networking."
   },
   {
     id: 3,
     category: "Network",
     question: "How to change network settings on my device and troubleshoot connection issues?",
-    answer: "Our devices support two IP assignment modes: 1) Static IP - manually configured network parameters, recommended for permanent installations. 2) DHCP - automatic network configuration, ideal for dynamic environments. To configure: Access【Network Settings】>【Basic】. For troubleshooting: Check physical connections, verify network compatibility (10/100/1000 Mbps), test with different cables/ports, reset network settings to default if needed. Advanced users can configure MTU size, enable/disable UPnP, and adjust bandwidth throttling for optimal performance in congested networks."
+    answer: "Devices support both static and DHCP IP assignment. Static IP is best for permanent setups, while DHCP suits dynamic networks. Go to【Network Settings】>【Basic】to configure. If facing issues, check cables and network ports, ensure compatibility (10/100/1000 Mbps), and try different setups. Reset network settings if needed. Advanced options include adjusting MTU size, enabling/disabling UPnP, and setting bandwidth limits for performance tuning."
   },
   {
     id: 4,
     category: "Features",
     question: "Does PrimoTech support cloud storage and what are the available recording options?",
-    answer: "Yes, our cameras support multiple storage solutions: 1) Secure cloud storage with end-to-end encryption, offering 7/30/90-day retention plans. 2) Local SD card recording (supports up to 256GB). 3) Network-attached storage (NAS) integration. 4) FTP server backup. Cloud features include: AI-powered event tagging, multi-user access controls, and cross-platform synchronization. For optimal performance, we recommend a minimum upload speed of 2Mbps per camera for cloud streaming. All plans include motion-triggered recording and intelligent storage optimization."
+    answer: "Yes, our cameras support multiple storage methods. Cloud storage offers end-to-end encryption and options for 7, 30, or 90-day plans. Local storage via SD card is supported up to 256GB. Devices also work with NAS and FTP for backups. Cloud features include motion-triggered recording, AI event tagging, multi-user access, and cross-platform sync. For smooth cloud use, we recommend at least 2Mbps upload per camera."
   },
   {
     id: 5,
     category: "Support",
     question: "Where can I download manuals, firmware updates, and additional software tools?",
-    answer: "Comprehensive support resources are available: 1) Visit our official website's Downloads section. 2) Select your product category and model number. 3) Access: - Product manuals in PDF format - Latest firmware packages with release notes - Device configuration tools - Mobile apps for iOS/Android - SDK for developers. For legacy products, check the 'Archived Downloads' section. Register your product to receive automatic update notifications. Our knowledge base also contains installation guides, troubleshooting articles, and video tutorials."
+    answer: "Visit our official website and go to the Downloads section. Select your product category and model. You’ll find manuals (PDF), firmware updates with release notes, configuration tools, mobile apps (iOS/Android), and SDKs. For older devices, check the 'Archived Downloads'. Register your product to receive update alerts. Our knowledge base also includes setup guides, troubleshooting tips, and video tutorials."
   },
   {
     id: 6,
     category: "Warranty",
     question: "What is the warranty period and what does the coverage include?",
-    answer: "All PrimoTech products come with our industry-leading 3-year limited warranty that includes: 1) Hardware replacement for manufacturing defects. 2) Free technical support for the warranty duration. 3) Advanced replacement option for critical systems. 4) On-site service for enterprise products. The warranty covers components including lenses, sensors, and internal electronics. Exclusions include physical damage, water ingress, or unauthorized modifications. Extended warranty plans are available for purchase, adding up to 2 additional years of coverage with accidental damage protection."
+    answer: "PrimoTech offers a 3-year limited warranty covering hardware defects and technical support. Critical systems may qualify for advanced replacement. Enterprise products are eligible for on-site service. Covered parts include lenses, sensors, and internal electronics. Damage from misuse, water exposure, or unauthorized modifications is excluded. Extended warranty plans are available, adding up to 2 years and optional accidental damage coverage."
   },
   {
     id: 7,
     category: "Installation",
     question: "What are the recommended installation practices for outdoor cameras?",
-    answer: "For optimal outdoor installation: 1) Choose locations with proper weather protection (IP67-rated enclosures included). 2) Ensure mounting surfaces can support 3x the camera weight. 3) Maintain clearance from trees/bushes (minimum 3 feet). 4) Use provided waterproof cable glands for all connections. 5) Consider sun position to avoid glare. 6) For PoE installations, use outdoor-rated Ethernet cables with proper surge protection. We recommend professional installation for heights above 10 feet. The included mounting template helps with precise positioning and cable routing."
+    answer: "Install cameras in locations with proper weather protection (IP67-rated enclosures included). Use strong mounting surfaces that can handle at least 3x the device weight. Keep at least 3 feet away from trees or bushes to avoid obstruction. Use waterproof cable glands for all wiring. Avoid direct sunlight angles to reduce glare. For PoE, use outdoor-rated Ethernet and surge protection. For high placements, professional installation is recommended. A mounting template is included for easy setup."
   },
   {
     id: 8,
     category: "Features",
     question: "What advanced analytics features are available on PrimoTech cameras?",
-    answer: "Our AI-powered analytics include: 1) Smart motion detection with human/vehicle filtering. 2) Facial recognition (requires compatible models). 3) License plate recognition. 4) People counting. 5) Intrusion detection with customizable zones. 6) Loitering detection. 7) Heat mapping. These features can trigger alarms, recordings, or automated responses through our VMS integration. Analytics settings can be fine-tuned through the web interface or mobile app, with sensitivity adjustments for different environments. Some features require subscription plans for cloud processing."
+    answer: "Our AI features include smart motion detection with human/vehicle filtering, facial recognition (on supported models), license plate reading, people counting, intrusion detection zones, loitering alerts, and heat mapping. These functions can trigger alarms or recordings and integrate with VMS. Settings can be adjusted via the web interface or mobile app. Some features may require a cloud plan for processing."
   },
   {
     id: 9,
     category: "Maintenance",
     question: "How should I maintain my PrimoTech surveillance system?",
-    answer: "Recommended maintenance schedule: Weekly: Check system alerts and storage status. Monthly: Clean camera lenses with microfiber cloth, verify weather seals, test night vision. Quarterly: Update firmware, inspect cables/connections, verify backup systems. Annually: Professional inspection for large installations. For IR cameras: periodically check for spider webs near lenses. Our devices include self-diagnostic tools accessible via the web interface that monitor system health, temperature, and component status. Always power down equipment before cleaning and use only manufacturer-approved accessories."
+    answer: "Regular maintenance helps ensure system reliability. Check alerts and storage weekly. Clean lenses monthly using a microfiber cloth and inspect weather seals. Test IR night vision. Every few months, update firmware, inspect wiring, and verify backups. Annually, large systems may benefit from a professional inspection. For IR models, check for spider webs. Devices include diagnostics for system health, temperature, and hardware status. Always power down before cleaning and use approved tools only."
   }
 ];
 
