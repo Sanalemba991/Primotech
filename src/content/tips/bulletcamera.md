@@ -10,7 +10,7 @@ authorImageAlt: "Security Technology Specialist"
 videoClip: "https://www.youtube.com/embed/bullet-camera-guide"
 startDate: 2024-04-01
 endDate: 2024-04-30
-eventImage: "public/pictures/bullet-camera-installation.jpg"
+eventImage: "/images/tips/tips (6).jpg"
 eventImageAlt: "Professional bullet camera installation"
 readTime: 5
 titleOne: "Weather Resistance"

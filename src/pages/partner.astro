@@ -48,10 +48,7 @@ const description = "Join our partner network and grow your business with PrimoT
     <section class="py-16 bg-gray-50 partners-grid-section">
       <div class="container mx-auto px-6 lg:px-8">
         <div class="text-center partners-content-reveal">
-          <p class="text-lg text-gray-600 mb-8">
-            Partner listings will be displayed here based on selected filters.
-          </p>
-          
+         
           <!-- Partnership Information -->
           <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-gray-900 mb-6">
@@ -105,10 +102,10 @@ const description = "Join our partner network and grow your business with PrimoT
         <div class="grid gap-6 max-w-5xl mx-auto">
           
           <!-- Partner 1: PT. Adsec Global Indonesia -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden partner-card partner-card-animate border border-gray-200">
+          <div class="bg-white rounded-lg shadow-none overflow-hidden partner-card partner-card-animate">
             <div class="flex flex-col md:flex-row">
               <!-- Logo Section -->
-              <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6 border-r border-gray-200">
+              <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6">
                 <img src="/images/company1.png" alt="Adsec Global Indonesia Logo" class="w-full h-32 object-contain">
               </div>
               
@@ -149,11 +146,13 @@ const description = "Join our partner network and grow your business with PrimoT
             </div>
           </div>
 
+          <hr class="my-8 border-gray-200">
+
           <!-- Partner 2: Eltcrac System Sp. z o.o. -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden partner-card partner-card-animate border border-gray-200">
+          <div class="bg-white rounded-lg shadow-none overflow-hidden partner-card partner-card-animate">
             <div class="flex flex-col md:flex-row">
               <!-- Logo Section -->
-              <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6 border-r border-gray-200">
+              <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6">
                 <div class="w-full h-32 bg-white border border-gray-300 rounded flex items-center justify-center">
                   <img src="/images/company2.png" alt="Eltcrac System Logo" class="max-w-full h-full object-contain">
                 </div>
@@ -366,12 +365,12 @@ const description = "Join our partner network and grow your business with PrimoT
 
   /* Partner card hover effects */
   .partner-card {
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: none;
   }
 
   .partner-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15), 0 8px 12px -3px rgba(0, 0, 0, 0.08);
+    transform: none;
+    box-shadow: none;
   }
 
   /* Contact section animations */
@@ -419,12 +418,15 @@ const description = "Join our partner network and grow your business with PrimoT
 
   /* Professional link styling */
   .partner-card a {
-    text-decoration: none;
+    text-decoration: none !important;
     font-weight: 500;
+    color: #2dd4bf; /* tailwind teal-400 */
+    transition: color 0.2s;
   }
 
   .partner-card a:hover {
-    text-decoration: underline;
+    text-decoration: none !important;
+    color: #14b8a6; /* tailwind teal-500 for hover */
   }
 
   /* Mobile responsiveness */

@@ -10,7 +10,7 @@ authorImageAlt: "Agricultural Security Specialist"
 videoClip: "https://www.youtube.com/embed/vineyard-security-guide"
 startDate: 2024-06-01
 endDate: 2024-06-30
-eventImage: "public/pictures/vineyard-surveillance.jpg"
+eventImage: "/images/tips/tips (2).jpg"
 eventImageAlt: "Security cameras monitoring vineyard operations"
 readTime: 8
 titleOne: "Crop Protection"

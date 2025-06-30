@@ -10,7 +10,7 @@ authorImageAlt: "Security Camera Expert"
 videoClip: "https://www.youtube.com/embed/camera-comparison"
 startDate: 2024-03-01
 endDate: 2024-03-31
-eventImage: "public/pictures/camera-comparison.jpg"
+eventImage: "/images/tips/tips (5).jpg"
 eventImageAlt: "Dome and bullet cameras side by side"
 readTime: 6
 titleOne: "Dome Camera Advantages"

@@ -40,7 +40,7 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
           <div class="hero-button-animate">
             <button 
               id="explore-btn"
-              class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg"
+              class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group transform hover:scale-105 hover:shadow-lg relative overflow-hidden"
             >
               Explore Articles
               <svg class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,66 +53,52 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     </div>
   </section>
 
-  <main class="bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen">
+  <main class="  min-h-screen">
     <!-- Tips List Section -->
     <section class="py-20 tips-section">
-      <div class="container mx-auto px-4">
-        <!-- Tips Grid -->
-        <div class="tips-grid space-y-8" id="tips-container">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <!-- Tips List -->
+        <div class="tips-list" id="tips-container">
           {sortedTips.map((tip, index) => (
             <article 
-              class="tip-card group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100" 
+              class="tip-card group bg-white flex flex-col lg:flex-row items-stretch py-6 px-0 mb-0 relative border-b border-gray-200"
               data-animate 
               data-animate-delay={200 + (index * 100)}
+              style="box-shadow:none; border-left: none; border-right: none; border-top: none;"
             >
-              <a href={`/tips/${tip.slug}`} class="block h-full">
-                <div class="grid md:grid-cols-12 gap-0 h-full">
-                  <!-- Image Section -->
-                  <div class="md:col-span-4 relative overflow-hidden">
-                    <img 
-                      src={tip.data.eventImage} 
-                      alt={tip.data.eventImageAlt}
-                      class="w-full h-64 md:h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <a href={`/tips/${tip.slug}`} class="flex w-full gap-8">
+                {/* Image Section */}
+                <div class="w-full lg:w-[420px] flex-shrink-0 flex items-center justify-center pl-4">
+                  <img 
+                    src={tip.data.eventImage} 
+                    alt={tip.data.eventImageAlt}
+                    class="w-full h-[220px] object-cover rounded-lg border border-gray-200 bg-gray-50"
+                    loading="lazy"
+                  />
+                </div>
+                {/* Content Section */}
+                <div class="flex flex-col justify-center flex-1 pr-4">
+                  <div class="flex items-center space-x-4 mb-2 mt-2">
+                    <span class="text-gray-600 text-xs font-medium">{new Date(tip.data.startDate || Date.now()).toLocaleDateString('en-CA')}</span>
                   </div>
-                  
-                  <!-- Content Section -->
-                  <div class="md:col-span-8 p-6 md:p-8 flex flex-col justify-between">
-                    <div>
-                      <!-- Date Only (no badge) -->
-                      <div class="flex items-center justify-end mb-4">
-                        <span class="text-gray-500 text-sm">
-                          {new Date(tip.data.startDate || Date.now()).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit'
-                          })}
-                        </span>
-                      </div>
-                      
-                      <!-- Title -->
-                      <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-teal-400 transition-colors duration-300 leading-tight line-clamp-2">
-                        {tip.data.title}
-                      </h3>
-                      
-                      <!-- Description -->
-                      <p class="text-gray-600 leading-relaxed text-base line-clamp-3 mb-4">
-                        {tip.data.subTitle}
-                      </p>
-                    </div>
-                    
-                    <!-- Read More Link -->
-                    <div class="flex items-center text-teal-400 font-semibold text-sm group-hover:text-teal-500 transition-colors duration-300">
-                      <span class="mr-2">Read More</span>
-                      <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                      </svg>
-                    </div>
+                  <h3 class="text-2xl font-semibold text-gray-900 mb-2 leading-snug">
+                    {tip.data.title}
+                  </h3>
+                  <p class="text-gray-700 text-base mb-2">
+                    {tip.data.subTitle}
+                  </p>
+                  <div class="flex items-center text-teal-500 font-semibold text-base group-hover:text-teal-600 transition-colors duration-300 pt-2">
+                    <span class="mr-2">Read Full Article</span>
+                    <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
                   </div>
                 </div>
               </a>
+              {/* Divider Line (except for last item) */}
+              {index < sortedTips.length - 1 && (
+                null
+              )}
             </article>
           ))}
         </div>
@@ -134,18 +120,14 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
       const x = e.clientX - rect.left - size / 2;
       const y = e.clientY - rect.top - size / 2;
       
+      ripple.className = 'absolute rounded-full bg-white/30 pointer-events-none animate-ping';
       ripple.style.cssText = `
-        position: absolute;
         width: ${size}px;
         height: ${size}px;
         left: ${x}px;
         top: ${y}px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
         transform: scale(0);
         animation: ripple 0.8s ease-out;
-        pointer-events: none;
-        z-index: 5;
       `;
       
       this.appendChild(ripple);
@@ -241,7 +223,7 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     width: 100%;
   }
 
-  /* Hero animations - Same as Contact */
+  /* Hero animations */
   .tips-hero {
     opacity: 0;
     transform: translateY(50px);
@@ -333,21 +315,9 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     transform: translateY(0);
   }
 
-  .section-header-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .tips-section.section-revealed .section-header-animate {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-  }
-
-  /* Tips Grid */
-  .tips-grid {
-    max-width: 1200px;
+  /* Tips List */
+  .tips-list {
+    max-width: 100%;
     margin: 0 auto;
   }
   
@@ -355,12 +325,10 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     opacity: 0;
     transform: translateY(30px);
-    min-height: 280px;
   }
   
   .tip-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
   }
 
   .tip-card.animate-visible {
@@ -368,12 +336,7 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     transform: translateY(0);
   }
 
-  /* Explore button styles */
-  #explore-btn {
-    position: relative;
-    overflow: hidden;
-  }
-
+  /* Explore button shimmer effect */
   #explore-btn::before {
     content: '';
     position: absolute;
@@ -403,13 +366,6 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
   }
 
   /* Line clamping */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -417,16 +373,17 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     overflow: hidden;
   }
 
-  /* Staggered animation delays */
-  [data-animate-delay="200"] { transition-delay: 200ms; }
-  [data-animate-delay="300"] { transition-delay: 300ms; }
-  [data-animate-delay="400"] { transition-delay: 400ms; }
-  [data-animate-delay="500"] { transition-delay: 500ms; }
-  [data-animate-delay="600"] { transition-delay: 600ms; }
-  [data-animate-delay="700"] { transition-delay: 700ms; }
-  [data-animate-delay="800"] { transition-delay: 800ms; }
-
   /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .tip-card .flex {
+      flex-direction: column;
+    }
+    
+    .tip-card img {
+      height: 250px;
+    }
+  }
+
   @media (max-width: 768px) {
     .hero-content-reveal {
       transform: translateY(40px);
@@ -436,22 +393,13 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
       transform: translateY(0);
     }
     
-    .tip-card {
-      margin-bottom: 1rem;
-      min-height: auto;
-    }
-    
-    .tip-card .grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .tip-card img {
-      height: 200px;
-    }
-    
     .container {
       padding-left: 1rem;
       padding-right: 1rem;
+    }
+    
+    .tip-card {
+      padding: 1rem 0;
     }
   }
 
@@ -466,22 +414,12 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
     .hero-subtitle-animate,
     .hero-description-animate,
     .hero-button-animate,
-    .section-header-animate,
     .tip-card {
       animation: none;
       opacity: 1;
       transform: none;
       transition: none;
     }
-  }
-
-  /* Image hover effects */
-  .tip-card img {
-    transition: transform 0.7s ease-out;
-  }
-  
-  .tip-card:hover img {
-    transform: scale(1.05);
   }
 
   /* Custom scrollbar */
@@ -500,5 +438,11 @@ const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - ne
 
   ::-webkit-scrollbar-thumb:hover {
     background: #475569;
+  }
+
+  /* Add style for flat card and image border */
+  .tip-card {
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 </style>

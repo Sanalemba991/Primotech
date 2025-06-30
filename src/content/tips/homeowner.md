@@ -10,7 +10,7 @@ authorImageAlt: "Home Security Consultant"
 videoClip: "https://www.youtube.com/embed/home-security-guide"
 startDate: 2024-05-01
 endDate: 2024-05-31
-eventImage: "public/pictures/home-security-system.jpg"
+eventImage: "/images/tips/tips (1).jpg"
 eventImageAlt: "Modern home security camera installation"
 readTime: 7
 titleOne: "Indoor Camera Solutions"

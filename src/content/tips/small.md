@@ -10,7 +10,7 @@ authorImageAlt: "Security Camera Technology Expert"
 videoClip: "https://www.youtube.com/embed/camera-selection-guide"
 startDate: 2024-08-01
 endDate: 2024-08-31
-eventImage: "public/pictures/camera-comparison.jpg"
+eventImage: "/images/tips/tips (4).jpg"
 eventImageAlt: "Bullet and PTZ cameras side by side comparison"
 readTime: 4
 titleOne: "Bullet Camera Applications"

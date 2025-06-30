@@ -10,7 +10,7 @@ authorImageAlt: "Security Finance Advisor"
 videoClip: "https://www.youtube.com/embed/security-financing-guide"
 startDate: 2024-07-01
 endDate: 2024-07-31
-eventImage: "public/pictures/payment-solutions.jpg"
+eventImage: "/images/tips/tips (3).jpg"
 eventImageAlt: "Various payment and financing options for security systems"
 readTime: 6
 titleOne: "Upfront Purchase"
