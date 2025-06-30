@@ -11,39 +11,37 @@ const categories = [
     },
     subcategories: [
       {
+        name: "Panda P Series",
+        desc: "Professional PTZ cameras with advanced tracking and high-resolution imaging",
+        image: "/images/pandap/PandaP (2).png",
+        href: "/wifi-camera/panda-p-series"
+      }, {
         name: "Panda S Series",
-        desc: "Indoor smart camera",
-        image: "https://images.unsplash.com/photo-1567446537708-ac4aa75c9c28?w=200&h=150&fit=crop&auto=format",
+        desc: "Smart security cameras with AI-powered detection and cloud connectivity",
+        image: "/images/pandas/PandaS (1).png",
+        href: "/wifi-camera/panda-s-series"
+      },{
+        name: "Panda B Series",
+        desc: "Versatile bullet cameras for outdoor surveillance with weather resistance",
+        image: "/images/pandab/PandaB (2).png",
         href: "/wifi-camera/panda-s-series"
       },
       {
-        name: "Panda B Series", 
-        desc: "Outdoor bullet camera",
-        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&h=150&fit=crop&auto=format",
-        href: "/wifi-camera/panda-b-series"
-      },
-      {
-        name: "Panda P Series",
-        desc: "PTZ dome camera",
-        image: "https://images.unsplash.com/photo-1516062423079-7ca13cdc7f5a?w=200&h=150&fit=crop&auto=format",
-        href: "/wifi-camera/panda-p-series"
-      },
-      {
-        name: "Basic Series",
-        desc: "Indoor security camera",
-        image: "https://images.unsplash.com/photo-1585241645927-c7a8e5840c42?w=200&h=150&fit=crop&auto=format",
+        name: "Indoor Security Camera",
+        desc: "Compact indoor cams with audio and app control",
+        image: "/images/indoor/indoor (4).png",
         href: "/wifi-camera/basic-series"
       },
       {
-        name: "Outdoor Basic Series",
-        desc: "Outdoor security camera",
-        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&h=150&fit=crop&auto=format",
+        name: "Outdoor Security Camera",
+        desc: "Weather-resistant outdoor cameras with night vision capabilities",
+        image: "/images/outdoor/outdoor (1).png",
         href: "/wifi-camera/outdoor-basic"
       }
     ]
   },
   {
-    name: "IP Cameras & NVRs",
+    name: "IP & VR Solutions",
     href: "/ip-cameras-nvrs",
     product: {
       image: "https://images.unsplash.com/photo-1590736969955-862d1f7fd8a0?w=400&h=300&fit=crop&auto=format",
@@ -52,41 +50,57 @@ const categories = [
     },
     subcategories: [
       {
-        name: "IP Dome Cameras",
-        desc: "Professional dome cameras",
-        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&h=150&fit=crop&auto=format",
+        name: "Dual Light Rainbow",
+        desc: "Professional cameras with dual light technology for superior night vision",
+        image: "/images/dual/duallight.png",
         href: "/ip-cameras-nvrs/dome-cameras"
       },
       {
-        name: "IP Bullet Cameras",
-        desc: "Outdoor bullet cameras",
-        image: "https://images.unsplash.com/photo-1567446537708-ac4aa75c9c28?w=200&h=150&fit=crop&auto=format",
+        name: "PT Cameras",
+        desc: "PTZ cameras with advanced tracking, zoom, and remote control features",
+        image: "/images/pt/pt.png",
+        href: "/ip-cameras-nvrs/dome-cameras"
+      },
+      {
+        name: "Vari-focal Cameras",
+        desc: "Cameras with adjustable focal length for flexible and versatile installation",
+        image: "/images/vari/vari (9).png",
         href: "/ip-cameras-nvrs/bullet-cameras"
       },
       {
-        name: "PTZ Cameras",
-        desc: "Pan-tilt-zoom cameras",
-        image: "https://images.unsplash.com/photo-1516062423079-7ca13cdc7f5a?w=200&h=150&fit=crop&auto=format",
+        name: "Fixed Lens Cameras",
+        desc: "Fixed lens cameras for consistent coverage",
+        image: "/images/fixed/fixed (10).png",
         href: "/ip-cameras-nvrs/ptz-cameras"
       },
       {
         name: "NVR Systems",
-        desc: "Network video recorders",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=150&fit=crop&auto=format",
+        desc: "Network Video Recorders for centralized management",
+        image: "/images/nvr/NVR (1).png",
         href: "/ip-cameras-nvrs/nvr-systems"
       },
       {
-        name: "PoE IP Cameras",
-        desc: "Power over Ethernet cameras",
-        image: "https://images.unsplash.com/photo-1585241645927-c7a8e5840c42?w=200&h=150&fit=crop&auto=format",
+        name: "XVR Systems",
+        desc: "Hybrid video recorders with multi-tech support",
+        image: "/images/xvr/xvr (1).png",
         href: "/ip-cameras-nvrs/poe-cameras"
       },
+    ]
+  },{
+    name: "Analog Cameras",
+    href: "/dedicated-products",
+    product: {
+      image: "https://images.unsplash.com/photo-1586281010191-d502c4b24b26?w=400&h=300&fit=crop&auto=format",
+      title: "Dedicated Products",
+      desc: "Specialized solutions for unique security needs."
+    },
+    subcategories: [
       {
-        name: "4K IP Cameras",
-        desc: "Ultra HD resolution cameras",
-        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&h=150&fit=crop&auto=format",
-        href: "/ip-cameras-nvrs/4k-cameras"
-      }
+        name: "Analog Cameras",
+        desc: "High-definition analog cameras with excellent performance",
+        image: "/images/analog/322.png",
+        href: "/dedicated-products/access-control"
+      },
     ]
   },
   {
@@ -99,72 +113,14 @@ const categories = [
     },
     subcategories: [
       {
-        name: "PoE Switches",
-        desc: "Power over Ethernet switches",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200&h=150&fit=crop&auto=format",
+        name: "Network Switches",
+        desc: "Professional PoE switches for surveillance systems",
+        image: "/images/switch/switch (2).png",
         href: "/transmission/poe-switches"
       },
-      {
-        name: "Managed Switches",
-        desc: "Advanced managed switches",
-        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=200&h=150&fit=crop&auto=format",
-        href: "/transmission/managed-switches"
-      },
-      {
-        name: "Unmanaged Switches",
-        desc: "Simple plug-and-play switches",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=150&fit=crop&auto=format",
-        href: "/transmission/unmanaged-switches"
-      },
-      {
-        name: "Industrial Switches",
-        desc: "Rugged industrial switches",
-        image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=200&h=150&fit=crop&auto=format",
-        href: "/transmission/industrial-switches"
-      },
-      {
-        name: "Gigabit Switches",
-        desc: "High-speed gigabit switches",
-        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=200&h=150&fit=crop&auto=format",
-        href: "/transmission/gigabit-switches"
-      }
     ]
   },
-  {
-    name: "Dedicated Products",
-    href: "/dedicated-products",
-    product: {
-      image: "https://images.unsplash.com/photo-1586281010191-d502c4b24b26?w=400&h=300&fit=crop&auto=format",
-      title: "Dedicated Products",
-      desc: "Specialized solutions for unique security needs."
-    },
-    subcategories: [
-      {
-        name: "Access Control",
-        desc: "Door access control systems",
-        image: "https://images.unsplash.com/photo-1586281010191-d502c4b24b26?w=200&h=150&fit=crop&auto=format",
-        href: "/dedicated-products/access-control"
-      },
-      {
-        name: "Intercom Systems",
-        desc: "Video door phones",
-        image: "https://images.unsplash.com/photo-1585432100430-a8e6da17aa95?w=200&h=150&fit=crop&auto=format",
-        href: "/dedicated-products/intercom"
-      },
-      {
-        name: "Alarm Systems",
-        desc: "Security alarm solutions",
-        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&h=150&fit=crop&auto=format",
-        href: "/dedicated-products/alarm-systems"
-      },
-      {
-        name: "Motion Detectors",
-        desc: "Advanced motion sensing",
-        image: "https://images.unsplash.com/photo-1567446537708-ac4aa75c9c28?w=200&h=150&fit=crop&auto=format",
-        href: "/dedicated-products/motion-detectors"
-      }
-    ]
-  },
+  
   {
     name: "Accessories",
     href: "/accessories",
@@ -175,41 +131,12 @@ const categories = [
     },
     subcategories: [
       {
-        name: "Camera Mounts",
-        desc: "Wall and ceiling mounts",
-        image: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=200&h=150&fit=crop&auto=format",
+        name: "Mounting Brackets",
+        desc: "Professional mounting solutions for all camera types",
+        image: "/images/acessories/t9.png",
         href: "/accessories/camera-mounts"
       },
-      {
-        name: "Power Adapters",
-        desc: "DC power supplies",
-        image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=200&h=150&fit=crop&auto=format",
-        href: "/accessories/power-adapters"
-      },
-      {
-        name: "Cables & Connectors",
-        desc: "Video and power cables",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=150&fit=crop&auto=format",
-        href: "/accessories/cables"
-      },
-      {
-        name: "Storage Solutions",
-        desc: "Hard drives and memory",
-        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=200&h=150&fit=crop&auto=format",
-        href: "/accessories/storage"
-      },
-      {
-        name: "Junction Boxes",
-        desc: "Weatherproof enclosures",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200&h=150&fit=crop&auto=format",
-        href: "/accessories/junction-boxes"
-      },
-      {
-        name: "Extension Cables",
-        desc: "Long-range connectivity",
-        image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=200&h=150&fit=crop&auto=format",
-        href: "/accessories/extension-cables"
-      }
+     
     ]
   }
 ];
@@ -323,11 +250,11 @@ const supportItems = [
                   href={subcat.href}
                   class="group flex flex-col p-4 bg-white rounded-xl hover:shadow-lg transition-all duration-200 border border-gray-100 hover:border-cyan-200"
                 >
-                  <div class="w-full h-32 bg-gray-100 rounded-lg mb-3 overflow-hidden group-hover:bg-gray-50 transition-colors duration-200">
+                  <div class="w-full h-40 bg-gray-100 rounded-lg mb-3 overflow-hidden group-hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center p-2">
                     <img 
                       src={subcat.image} 
                       alt={subcat.name}
-                      class="w-full h-full object-cover"
+                      class="w-full h-full object-contain"
                       loading="lazy"
                     />
                   </div>
