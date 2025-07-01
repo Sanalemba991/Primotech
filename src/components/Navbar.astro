@@ -5,7 +5,7 @@ const categories = [
     name: "Wi-Fi Camera",
     href: "/wifi-camera",
     product: {
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+      image: "/images/pandap/PandaP (2).png",
       title: "Wi-Fi Camera",
       desc: "Smart wireless cameras for home and business security."
     },
@@ -44,7 +44,7 @@ const categories = [
     name: "IP & VR Solutions",
     href: "/ip-cameras-nvrs",
     product: {
-      image: "https://images.unsplash.com/photo-1590736969955-862d1f7fd8a0?w=400&h=300&fit=crop&auto=format",
+      image: "/images/dual/duallight.png", // from Dual Light Rainbow subcategory
       title: "IP Cameras & NVRs",
       desc: "Professional IP surveillance and network video recorders."
     },
@@ -90,7 +90,7 @@ const categories = [
     name: "Analog Cameras",
     href: "/dedicated-products",
     product: {
-      image: "https://images.unsplash.com/photo-1586281010191-d502c4b24b26?w=400&h=300&fit=crop&auto=format",
+      image: "/images/analog/322.png", // from Analog Cameras subcategory
       title: "Dedicated Products",
       desc: "Specialized solutions for unique security needs."
     },
@@ -107,7 +107,7 @@ const categories = [
     name: "Transmission",
     href: "/transmission",
     product: {
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop&auto=format",
+      image: "/images/switch/switch (2).png", // from Network Switches subcategory
       title: "Switch",
       desc: "Experience seamless data transfer, high security of data, and reliable connections, ensuring optimal performance."
     },
@@ -125,7 +125,7 @@ const categories = [
     name: "Accessories",
     href: "/accessories",
     product: {
-      image: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=400&h=300&fit=crop&auto=format",
+      image: "/images/acessories/t9.png", // from Mounting Brackets subcategory
       title: "Accessories",
       desc: "Mounts, adapters, and more for your system."
     },
@@ -167,7 +167,7 @@ const supportItems = [
         <a
           href="/products"
           id="products-link"
-          class={`px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200 ${Astro.url.pathname.startsWith('/products') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-teal-400'}`}
+          class={`nav-link px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200 ${Astro.url.pathname.startsWith('/products') ? 'is-active text-teal-600 font-medium' : 'text-gray-700 hover:text-teal-500'}`}
         >
           Products
         </a>
@@ -186,7 +186,7 @@ const supportItems = [
         <a
           href="/support"
           id="support-link"
-          class={`px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200 ${Astro.url.pathname.startsWith('/support') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+          class={`nav-link px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200 ${Astro.url.pathname.startsWith('/support') ? 'is-active text-teal-600 font-medium' : 'text-gray-700 hover:text-teal-500'}`}
         >
           Support
         </a>
@@ -202,24 +202,24 @@ const supportItems = [
       </div>
       <a 
         href="/partner" 
-        class={`px-3 py-2 text-base font-medium ${Astro.url.pathname.startsWith('/partner') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`nav-link px-3 py-2 text-base font-medium focus:outline-none transition-colors duration-200 ${Astro.url.pathname.startsWith('/partner') ? 'is-active text-teal-600 font-medium' : 'text-gray-700 hover:text-teal-500'}`}
       >
         Partner
       </a>
       <a 
         href="/tips" 
-        class={`px-3 py-2 text-base font-medium ${Astro.url.pathname.startsWith('/tips') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`nav-link px-3 py-2 text-base font-medium focus:outline-none transition-colors duration-200 ${Astro.url.pathname.startsWith('/tips') ? 'is-active text-teal-600 font-medium' : 'text-gray-700 hover:text-teal-500'}`}
       >
         Tips & Guides
       </a>
     </div>
     <a 
       href="/contact" 
-      class={`hidden md:inline-block px-4 py-2 font-medium ${Astro.url.pathname.startsWith('/contact') ? 'text-teal-400 font-semibold' : 'text-cyan-700 hover:text-cyan-900'}`}
+      class={`hidden md:inline-block px-4 py-2 font-medium transition-colors duration-200 ${Astro.url.pathname.startsWith('/contact') ? 'contact-active text-teal-600 font-medium' : 'text-cyan-700 hover:text-teal-500'}`}
     >
       Contact Us
     </a>
-    <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-500 hover:text-cyan-600" aria-expanded="false">
+    <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-500 hover:text-teal-500" aria-expanded="false">
       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
@@ -231,7 +231,7 @@ const supportItems = [
     <div id="mobile-main-menu" class="mobile-menu-level flex flex-col space-y-1 px-4 py-4">
       <a 
         href="/" 
-        class={`block py-2 px-2 font-medium ${Astro.url.pathname === '/' ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`mobile-nav-link block py-2 px-2 font-medium ${Astro.url.pathname === '/' ? 'mobile-active text-teal-600 font-medium bg-teal-50 rounded border-l-4 border-teal-500' : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'}`}
       >
         Home
       </a>
@@ -239,7 +239,7 @@ const supportItems = [
       <!-- Products Button -->
       <button
         type="button"
-        class={`mobile-nav-button flex items-center justify-between w-full py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/products') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`mobile-nav-button flex items-center justify-between w-full py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/products') ? 'mobile-active text-teal-600 font-medium bg-teal-50 rounded border-l-4 border-teal-500' : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'}`}
         data-target="mobile-categories-menu"
       >
         <span>Products</span>
@@ -248,10 +248,10 @@ const supportItems = [
         </svg>
       </button>
       
-      <!-- Support Button - Updated to use the same pattern as Products -->
+      <!-- Support Button -->
       <button
         type="button"
-        class={`mobile-nav-button flex items-center justify-between w-full py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/support') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`mobile-nav-button flex items-center justify-between w-full py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/support') ? 'mobile-active text-teal-600 font-medium bg-teal-50 rounded border-l-4 border-teal-500' : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'}`}
         data-target="mobile-support-menu"
       >
         <span>Support</span>
@@ -262,19 +262,19 @@ const supportItems = [
       
       <a 
         href="/partner" 
-        class={`block py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/partner') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`mobile-nav-link block py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/partner') ? 'mobile-active text-teal-600 font-medium bg-teal-50 rounded border-l-4 border-teal-500' : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'}`}
       >
         Partner
       </a>
       <a 
         href="/tips" 
-        class={`block py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/tips') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+        class={`mobile-nav-link block py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/tips') ? 'mobile-active text-teal-600 font-medium bg-teal-50 rounded border-l-4 border-teal-500' : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'}`}
       >
         Tips & Guides
       </a>
       <a 
         href="/contact" 
-        class={`block py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/contact') ? 'text-teal-400 font-semibold' : 'text-cyan-700 hover:text-cyan-900'}`}
+        class={`mobile-nav-link block py-2 px-2 font-medium ${Astro.url.pathname.startsWith('/contact') ? 'mobile-active text-teal-600 font-medium bg-teal-50 rounded border-l-4 border-teal-500' : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'}`}
       >
         Contact Us
       </a>
@@ -458,10 +458,10 @@ const supportItems = [
         ))}
         
         <a 
-          href={category.href}
+          href="/products"
           class="block py-3 px-2 text-cyan-700 hover:text-cyan-900 font-medium mt-4"
         >
-          View All {category.name}
+          View All Products
         </a>
       </div>
     ))}
@@ -1064,4 +1064,94 @@ const supportItems = [
   background-color: rgba(20, 184, 166, 0.1);
   color: rgb(13, 148, 136);
 }
-  </style>
+
+/* Enhanced Active Link Styles - Desktop */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(20, 184, 166, 0.05);
+}
+
+/* Active state indicator */
+.nav-link.is-active::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(20, 184, 166, 0.8) 0%, rgba(13, 148, 136, 1) 100%);
+  border-radius: 3px;
+  transition: none; /* Remove animation on click/active */
+}
+
+/* Hover animation for non-active nav links on desktop */
+@media (min-width: 768px) {
+  .nav-link:not(.is-active)::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    transform: translateX(-50%);
+    background: rgba(20, 184, 166, 0.6); /* Lighter, less greenish color */
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:not(.is-active):hover::before {
+    width: 24px; /* Same width as active state */
+  }
+}
+
+/* Remove hover animation for active state */
+.nav-link.is-active:hover::before {
+  width: 24px; /* Keep same width on hover */
+}
+
+.contact-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(20, 184, 166, 0.8) 0%, rgba(13, 148, 136, 1) 100%);
+  border-radius: 3px;
+}
+
+/* Mobile Active Link Styles */
+.mobile-nav-link, .mobile-nav-button {
+  transition: all 0.2s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-active {
+  padding-left: 0.75rem !important;
+  font-weight: 500;
+}
+
+.mobile-nav-link:active, .mobile-nav-button:active {
+  background-color: rgba(20, 184, 166, 0.1);
+  transform: translateY(1px);
+}
+
+/* Enhanced menu animations */
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
