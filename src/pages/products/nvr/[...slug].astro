@@ -105,6 +105,7 @@ function renderSpecifications(specs) {
 const specificationGroups = renderSpecifications(productData?.specifications);
 ---
 
+
 <Layout>
   <!-- Professional Header Banner - Cleaned: removed animation classes -->
   <section 
@@ -126,8 +127,8 @@ const specificationGroups = renderSpecifications(productData?.specifications);
           <span class="breadcrumb-text">Products</span>
         </a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products/nvr" class="breadcrumb-link hide-on-mobile">
-          <span class="breadcrumb-text">NVR</span>
+        <a href="/products/analog" class="breadcrumb-link hide-on-mobile">
+          <span class="breadcrumb-text">Analog</span>
         </a>
         <span class="breadcrumb-separator hide-on-mobile">/</span>
         <span class="breadcrumb-current truncate">{productData?.title}</span>
@@ -711,6 +712,36 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     align-items: start;
   }
 
+  /* Professional Gallery - Updated for better sticky behavior on desktop */
+  .product-gallery {
+    position: relative;
+  }
+
+  @media (min-width: 992px) {
+    .product-gallery {
+      position: sticky;
+      top: 2rem;
+      align-self: flex-start;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      /* Hide scrollbar for clean appearance */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .product-gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Ensure thumbnail container doesn't overflow */
+    .gallery-thumbnails {
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+    }
+  }
+
   /* Mobile-specific grid order */
   @media (max-width: 991px) {
     .product-grid {
@@ -721,19 +752,26 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     .product-gallery {
       order: 1;
       margin-bottom: 2rem;
+      position: relative;
     }
 
     /* Make product details appear second on mobile */
     .product-details {
       order: 2;
     }
+
+    /* Improve image container on mobile */
+    .main-image-container {
+      min-height: 300px;
+      padding: 1.5rem;
+    }
+
+    .main-product-image {
+      max-height: 250px;
+    }
   }
 
-  /* Professional Gallery */
-  .product-gallery {
-    position: relative; /* Changed from sticky to relative */
-  }
-
+  /* Optimize gallery for different screen sizes */
   .gallery-main {
     margin-bottom: 1.5rem;
   }
@@ -749,53 +787,23 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     justify-content: center;
     border: 1px solid var(--border-color);
     overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .main-image-container:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-hover);
   }
 
   .main-product-image {
     max-width: 100%;
     max-height: 350px;
     object-fit: contain;
+    transition: transform 0.3s ease;
   }
 
-  .image-zoom-indicator {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
-  }
-
-  .gallery-thumbnails {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .thumbnail-btn {
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 0.5rem;
-    background: var(--background-secondary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .thumbnail-btn:hover,
-  .thumbnail-btn.active {
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-md);
-  }
-
-  .thumbnail-btn img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+  .main-image-container:hover .main-product-image {
+    transform: scale(1.05);
   }
 
   /* Professional Product Details */
@@ -1209,6 +1217,21 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     }
     100% {
       transform: rotate(360deg);
+    }
+  }
+
+  /* Header improvements - make it more compact */
+  #header-banner {
+    padding: 1rem 0;
+  }
+
+  /* Overall layout improvements */
+  @media (min-width: 1200px) {
+    .container {
+      padding: 0 3rem;
+    }
+    .product-grid {
+      gap: 5rem;
     }
   }
 </style>
