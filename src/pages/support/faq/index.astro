@@ -152,7 +152,8 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
             <article 
               class="faq-item bg-white rounded-xl shadow-md border border-gray-100 transition-all duration-500 hover:shadow-lg focus-within:ring-2 focus-within:ring-teal-500"
               data-category={faq.category}
-              data-search-text={`${faq.question} ${faq.answer}`.toLowerCase()}
+              data-search-text={`${faq.question} ${faq.answer}`.toLowerCase()
+              }
               style={`animation-delay: ${(index % 4) * 100}ms`}
               role="article"
               aria-labelledby={`faq-question-${faq.id}`}
@@ -328,31 +329,111 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
   box-shadow: 0 8px 25px rgba(20, 184, 166, 0.08);
 }
 
-/* FAQ Item Styles - Clean fade animation */
+/* Enhanced FAQ Item Styles with ultra-smooth animations */
 .faq-item {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1); /* Smooth expo-like easing */
   opacity: 1;
   display: block !important;
   transform: translateY(0);
   border-left: 4px solid transparent;
+  will-change: transform, opacity, border-color;
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden; /* Reduces flickering */
+  transform-style: preserve-3d; /* Improves animation smoothness */
+  perspective: 1000px; /* Adds depth to animations */
+}
+
+.faq-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(20, 184, 166, 0.08), transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
 }
 
 .faq-item:hover {
   border-left-color: #14b8a6;
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
 }
 
+.faq-item:hover::before {
+  transform: translateX(0) translateZ(0);
+}
+
+/* Extra-smooth filtering animations */
 .faq-item.filtering-out {
   opacity: 0;
-  transform: translateY(-10px) scale(0.98);
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transform: translateY(-20px) scale(0.95);
   pointer-events: none;
-  display: none !important;
+  transition: all 0.7s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 .faq-item.filtering-in {
   opacity: 1;
   transform: translateY(0) scale(1);
-  display: block !important;
+  max-height: 2000px; /* Large enough to contain content */
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Improved easing */
+  animation: faqItemReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Enhanced animation for revealing FAQ items */
+@keyframes faqItemReveal {
+  0% {
+    opacity: 0.3;
+    transform: translateY(25px) scale(0.97);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-4px) scale(1.01);
+  }
+  75% {
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animation for active filter button */
+.category-btn.active {
+  color: #0d9488;
+  background: rgba(20, 184, 166, 0.08);
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.1);
+  transform: scale(1.06);
+  animation: activeBtnPulse 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes activeBtnPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(20, 184, 166, 0);
+  }
+  40% {
+    transform: scale(1.12);
+    box-shadow: 0 0 25px rgba(20, 184, 166, 0.35);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1.06);
+    box-shadow: 0 4px 16px rgba(20, 184, 166, 0.1);
+  }
 }
 
 /* Loading States */
@@ -561,43 +642,97 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
   function filterByCategory(category, buttons, items, noResults, visibleCount) {
     let visible = 0;
     
-    // Update button states
+    // Add subtle ripple effect to container
+    const faqList = document.getElementById('faq-list');
+    if (faqList) {
+      faqList.animate([
+        { opacity: 1 },
+        { opacity: 0.95 },
+        { opacity: 1 }
+      ], {
+        duration: 400,
+        easing: 'ease-out'
+      });
+    }
+    
+    // Update button states with improved animation
     buttons.forEach(btn => {
       const isActive = btn.getAttribute('data-category') === category;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', isActive);
-      btn.setAttribute('tabindex', isActive ? '0' : '-1');
+      
+      // Remove active state
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+      btn.setAttribute('tabindex', '-1');
+      
+      // Add active state with perfect timing
+      if (isActive) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            btn.setAttribute('tabindex', '0');
+          });
+        });
+      }
     });
     
-    // Filter items
+    // Create smoother staggered animations with golden ratio timing
+    const baseDelay = 30;
+    const totalDuration = 800;
+    
+    // First hide all items that need to be hidden
     items.forEach(item => {
       const itemCategory = item.getAttribute('data-category');
       const shouldShow = category === 'All' || itemCategory === category;
       
-      if (shouldShow) {
-        item.classList.remove('filtering-out');
-        item.classList.add('filtering-in');
-        item.style.display = 'block';
-        visible++;
-      } else {
+      if (!shouldShow) {
         item.classList.add('filtering-out');
         item.classList.remove('filtering-in');
+        
+        // Hide after animation completes
         setTimeout(() => {
           if (item.classList.contains('filtering-out')) {
             item.style.display = 'none';
           }
-        }, 300);
+        }, 700); // Match the CSS transition time
       }
     });
     
-    // Update UI
-    updateResultsDisplay(visible, noResults, visibleCount);
+    // Then show items with staggered delays based on golden ratio timing
+    const itemsToShow = Array.from(items).filter(item => {
+      const itemCategory = item.getAttribute('data-category');
+      return category === 'All' || itemCategory === category;
+    });
+    
+    // Calculate optimal delays for smooth appearance
+    itemsToShow.forEach((item, index) => {
+      // Logarithmic delay creates natural-feeling staggered animation
+      const delay = baseDelay * Math.log(index + 2) * 25;
+      
+      setTimeout(() => {
+        item.style.display = 'block';
+        // Force reflow for transition
+        void item.offsetWidth;
+        item.classList.remove('filtering-out');
+        item.classList.add('filtering-in');
+        visible++;
+        
+        if (index === itemsToShow.length - 1) {
+          updateResultsDisplay(visible, noResults, visibleCount);
+        }
+      }, delay);
+    });
+    
+    // Show "no results" message with a nice fade if needed
+    setTimeout(() => {
+      updateResultsDisplay(itemsToShow.length, noResults, visibleCount);
+    }, baseDelay);
     
     // Analytics
     if (window.gtag) {
       window.gtag('event', 'faq_filter', {
         category: category,
-        results_count: visible
+        results_count: itemsToShow.length
       });
     }
   }
@@ -658,6 +793,19 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
   
   // Clear all filters
   window.clearFilters = function() {
+    // Add a subtle flash animation to the container
+    const faqList = document.getElementById('faq-list');
+    if (faqList) {
+      faqList.animate([
+        { opacity: 1 },
+        { opacity: 0.8 },
+        { opacity: 1 }
+      ], {
+        duration: 600,
+        easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+      });
+    }
+    
     const searchInput = document.getElementById('faq-search');
     if (searchInput) {
       searchInput.value = '';
