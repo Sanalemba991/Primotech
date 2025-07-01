@@ -104,13 +104,14 @@ const banners = [
   </div>
 
   <!-- Navigation Dots - Bottom Left in a Row -->
-  <div class="absolute left-8 bottom-8 z-20 banner-dots-reveal">
+  <div class="absolute left-4 bottom-12 z-30 banner-dots-reveal">
     <div class="flex space-x-3">
       {banners.map((_, index) => (
         <button
-          class={`nav-dot w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-white' : 'bg-white/30 hover:bg-white/60'}`}
+          class={`nav-dot w-3 h-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-white' : 'bg-white/30 hover:bg-white/60'}`}
           data-slide={index}
           aria-label={`Go to slide ${index + 1}`}
+          style="min-width: 8px; min-height: 8px;"
         ></button>
       ))}
     </div>
@@ -256,6 +257,13 @@ const banners = [
     transform: translateY(-50%) scale(1.05);
   }
 
+  /* Make banner normal size again */
+  .banner-container {
+    min-height: calc(100vh - 3rem);
+    max-height: calc(100vh - 3rem);
+  }
+
+  /* Enhance dots styling */
   .banner-dots-reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -268,31 +276,10 @@ const banners = [
     transition-delay: 1.8s;
   }
 
-  /* Arrow animation only on CTA button hover */
-  .cta-button:hover .arrow-icon {
-    transform: translateX(4px);
-  }
-
-  /* Ensure slides are properly layered */
-  .banner-slide {
-    pointer-events: none;
-  }
-
-  .banner-slide.active {
-    pointer-events: auto;
-  }
-
-  /* Fallback styling to prevent blank states */
-  .banner-container {
-    min-height: calc(100vh - 3rem);
-  }
-
-  .banner-slide.opacity-100 {
-    display: block !important;
-  }
-
-  .banner-slide.opacity-0 {
-    display: block !important;
+  .nav-dot {
+    width: 2px;
+    height: 2px;
+    margin-right: -1px; /* Reduce spacing between dots */
   }
 
   /* Mobile responsiveness - enhanced */
@@ -342,8 +329,22 @@ const banners = [
     
     /* Increase nav dots size */
     .nav-dot {
-      width: 10px !important;
-      height: 10px !important;
+      width: 8px !important;
+      height: 8px !important;
+      margin: 0 4px; /* Less spacing between dots */
+    }
+    
+    /* Keep dots on the left side on mobile */
+    .banner-dots-reveal {
+      bottom: 24px !important;
+      left: 16px !important; /* More to the left */
+      transform: translateY(20px);
+      width: auto;
+      opacity: 1 !important;
+    }
+
+    .banner-animation.banner-revealed .banner-dots-reveal {
+      transform: translateY(0);
     }
   }
   
@@ -571,124 +572,122 @@ const banners = [
     }
     
     // New method to enhance mobile display
-    optimizeMobileDisplay(): void {
-      const isMobile = window.innerWidth <= 768;
-      if (!isMobile) return;
-      
-      // Get all content containers
-      const contentContainers = document.querySelectorAll('.banner-content-reveal');
-      contentContainers.forEach(container => {
-        if (container instanceof HTMLElement) {
-          // Position content based on device size and orientation
-          const isPortrait = window.innerHeight > window.innerWidth;
-          const viewportHeight = window.innerHeight;
+  optimizeMobileDisplay(): void {
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) return;
+    
+    // Get all content containers
+    const contentContainers = document.querySelectorAll('.banner-content-reveal');
+    contentContainers.forEach(container => {
+      if (container instanceof HTMLElement) {
+        // Position content based on device size and orientation
+        const isPortrait = window.innerHeight > window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        if (isPortrait) {
+          // Portrait mode - position higher with larger content
+          container.style.marginTop = viewportHeight < 700 ? '-20vh' : '-25vh';
           
-          if (isPortrait) {
-            // Portrait mode - position higher with larger content
-            container.style.marginTop = viewportHeight < 700 ? '-20vh' : '-25vh';
-            
-            // Make text bigger
-            const title = container.querySelector('.banner-title-animate');
-            if (title instanceof HTMLElement) {
-              title.style.fontSize = viewportHeight < 700 ? '3rem' : '3.75rem';
-              title.style.fontWeight = '800';
-              title.style.lineHeight = '1.1';
-              title.style.letterSpacing = '-0.02em';
-            }
-            
-            const subtitle = container.querySelector('.banner-subtitle-animate');
-            if (subtitle instanceof HTMLElement) {
-              subtitle.style.fontSize = '1.5rem';
-              subtitle.style.letterSpacing = '0.05em';
-            }
-            
-            const desc = container.querySelector('.banner-description-animate');
-            if (desc instanceof HTMLElement) {
-              desc.style.fontSize = viewportHeight < 700 ? '1.125rem' : '1.325rem';
-              desc.style.lineHeight = '1.4';
-              desc.style.marginBottom = '1.75rem';
-            }
-            
-            const cta = container.querySelector('.cta-button');
-            if (cta instanceof HTMLElement) {
-              cta.style.fontSize = '1.375rem';
-              cta.style.fontWeight = '600';
-            }
-          } else {
-            // Landscape mode
-            container.style.marginTop = '-10vh';
-            
-            const title = container.querySelector('.banner-title-animate');
-            if (title instanceof HTMLElement) {
-              title.style.fontSize = '2.5rem';
-            }
+          // Make text bigger
+          const title = container.querySelector('.banner-title-animate');
+          if (title instanceof HTMLElement) {
+            title.style.fontSize = viewportHeight < 700 ? '3rem' : '3.75rem';
+            title.style.fontWeight = '800';
+            title.style.lineHeight = '1.1';
+            title.style.letterSpacing = '-0.02em';
+          }
+          
+          const subtitle = container.querySelector('.banner-subtitle-animate');
+          if (subtitle instanceof HTMLElement) {
+            subtitle.style.fontSize = '1.5rem';
+            subtitle.style.letterSpacing = '0.05em';
+          }
+          
+          const desc = container.querySelector('.banner-description-animate');
+          if (desc instanceof HTMLElement) {
+            desc.style.fontSize = viewportHeight < 700 ? '1.125rem' : '1.325rem';
+            desc.style.lineHeight = '1.4';
+            desc.style.marginBottom = '1.75rem';
+          }
+          
+          const cta = container.querySelector('.cta-button');
+          if (cta instanceof HTMLElement) {
+            cta.style.fontSize = '1.375rem';
+            cta.style.fontWeight = '600';
+          }
+        } else {
+          // Landscape mode
+          container.style.marginTop = '-10vh';
+          
+          const title = container.querySelector('.banner-title-animate');
+          if (title instanceof HTMLElement) {
+            title.style.fontSize = '2.5rem';
           }
         }
-      });
-      
-      // Make nav dots larger on mobile
-      const dots = document.querySelectorAll('.nav-dot');
-      dots.forEach(dot => {
-        if (dot instanceof HTMLElement) {
-          dot.style.width = '10px';
-          dot.style.height = '10px';
-        }
-      });
-    }
-
-    goToSlide(index: number): void {
-      if (index >= 0 && index < this.totalSlides && index !== this.currentSlide) {
-        this.currentSlide = index;
-        this.updateSlideDisplay();
       }
-    }
-
-    prevSlide(): void {
-      this.currentSlide = this.currentSlide - 1;
-      if (this.currentSlide < 0) {
-        this.currentSlide = this.totalSlides - 1;
+    });
+    
+    // Make nav dots larger on mobile
+    const dots = document.querySelectorAll('.nav-dot');
+    dots.forEach(dot => {
+      if (dot instanceof HTMLElement) {
+        dot.style.width = '10px';
+        dot.style.height = '10px';
       }
-      this.updateSlideDisplay();
-    }
-
-    nextSlide(): void {
-      this.currentSlide = this.currentSlide + 1;
-      if (this.currentSlide >= this.totalSlides) {
-        this.currentSlide = 0;
-      }
-      this.updateSlideDisplay();
-    }
-
-    startAutoPlay(): void {
-      this.pauseAutoPlay(); // Clear any existing interval
-      
-      this.autoPlayInterval = setInterval(() => {
-        if (!this.isTransitioning) {
-          this.nextSlide();
-        }
-      }, this.autoPlayDuration);
-    }
-
-    pauseAutoPlay(): void {
-      if (this.autoPlayInterval) {
-        clearInterval(this.autoPlayInterval);
-        this.autoPlayInterval = null;
-      }
-    }
-
-    resetAutoPlay(): void {
-      this.pauseAutoPlay();
-      setTimeout(() => {
-        this.startAutoPlay();
-      }, 100);
-    }
+    });
   }
 
+  goToSlide(index: number): void {
+    if (index >= 0 && index < this.totalSlides && index !== this.currentSlide) {
+      this.currentSlide = index;
+      this.updateSlideDisplay();
+    }
+  }
+  
+  prevSlide(): void {
+    this.currentSlide = this.currentSlide - 1;
+    if (this.currentSlide < 0) {
+      this.currentSlide = this.totalSlides - 1;
+    }
+    this.updateSlideDisplay();
+  }
+  
+  nextSlide(): void {
+    this.currentSlide = this.currentSlide + 1;
+    if (this.currentSlide >= this.totalSlides) {
+      this.currentSlide = 0;
+    }
+    this.updateSlideDisplay();
+  }
+  
+  startAutoPlay(): void {
+    this.pauseAutoPlay(); // Clear any existing interval
+    this.autoPlayInterval = setInterval(() => {
+      if (!this.isTransitioning) {
+        this.nextSlide();
+      }
+    }, this.autoPlayDuration);
+  }
+  
+  pauseAutoPlay(): void {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
+    }
+  }
+  
+  resetAutoPlay(): void {
+    this.pauseAutoPlay();
+    setTimeout(() => {
+      this.startAutoPlay();
+    }, 100);
+  }
+  }
   // Initialize banner slider when DOM is loaded
   document.addEventListener('DOMContentLoaded', (): void => {
     new BannerSlider();
   });
-
+  
   // Also initialize on window load as backup
   window.addEventListener('load', (): void => {
     if (!document.querySelector('.banner-slide.active')) {
