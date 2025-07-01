@@ -187,26 +187,37 @@ const categories = [
 
 /* Mobile responsiveness - Simplified animations */
 @media (max-width: 768px) {
-  .category-slide-from-left {
-    transform: translateY(30px) translateZ(0);
+  .category-slide {
+    /* Remove transform effects that might cause scrolling issues */
+    transform: none;
+    will-change: opacity;
   }
   
+  .category-slide-from-left,
   .category-slide-from-right {
-    transform: translateY(30px) translateZ(0);
+    transform: none;
   }
   
   .category-slide-from-left.category-in-view,
   .category-slide-from-right.category-in-view {
-    transform: translateY(0) translateZ(0);
+    transform: none;
   }
   
   .category-slide-from-left .category-content-reveal,
   .category-slide-from-right .category-content-reveal {
-    transform: translateY(20px) translateZ(0);
+    transform: none;
   }
   
   .category-slide.category-in-view .category-content-reveal {
-    transform: translateY(0) translateZ(0);
+    transform: none;
+  }
+  
+  /* Simplify animations for better mobile performance */
+  .category-title-animate,
+  .category-subtitle-animate,
+  .category-description-animate,
+  .category-button-animate {
+    transform: none;
   }
   
   /* Reduce stagger delays on mobile */
@@ -285,14 +296,21 @@ if (document.readyState === 'loading') {
   initializeCategoryAnimations();
 }
 
-// Throttle scroll events on mobile for better performance
-let scrollTimeout;
+// Optimize scroll handling for mobile devices
+let lastKnownScrollPosition = 0;
+let ticking = false;
+
 window.addEventListener('scroll', () => {
-  if (scrollTimeout) {
-    clearTimeout(scrollTimeout);
+  lastKnownScrollPosition = window.scrollY;
+
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      // No specific scroll actions needed, just managing the animation frame
+      ticking = false;
+    });
+    ticking = true;
   }
-  scrollTimeout = setTimeout(() => {
-    // Any scroll-related logic here
-  }, 16); // ~60fps
-}, { passive: true });
+}, { passive: true }); // Use passive listener for better scroll performance
+
+// Remove the previous throttle scroll event handler that might cause issues
 </script>
