@@ -198,19 +198,22 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     <div class="header-overlay"></div>
     <div class="container">
       <nav class="breadcrumbs">
-        <!-- ...existing breadcrumb code... -->
         <a href="/" class="breadcrumb-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="breadcrumb-icon">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           </svg>
-          Home
+          <span class="breadcrumb-text">Home</span>
         </a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products" class="breadcrumb-link">Products</a>
+        <a href="/products" class="breadcrumb-link">
+          <span class="breadcrumb-text">Products</span>
+        </a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products/pt" class="breadcrumb-link">PT Cameras</a>
-        <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current">{productData?.title}</span>
+        <a href="/products/pt" class="breadcrumb-link hide-on-mobile">
+          <span class="breadcrumb-text">PT</span>
+        </a>
+        <span class="breadcrumb-separator hide-on-mobile">/</span>
+        <span class="breadcrumb-current truncate">{productData?.title}</span>
       </nav>
     </div>
   </section>
@@ -234,11 +237,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
                   alt={productData.images[0].caption || productData.title} 
                   class="main-product-image"
                 />
-                <div class="image-zoom-indicator">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                  </svg>
-                </div>
+               
               </div>
             ) : productData?.image ? (
               <div class="main-image-container">
@@ -282,7 +281,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
         <!-- Product Information -->
         <div class="product-details">
           <div class="product-meta">
-            <span class="product-category">PT Cameras</span>
+            <span class="product-category">Analog Fixed-lens Cameras</span>
             <div class="product-status">
               <span class="status-badge available">In Stock</span>
             </div>
@@ -348,11 +347,11 @@ const specificationGroups = renderSpecifications(productData?.specifications);
             <p class="section-subtitle">Detailed technical information and performance metrics</p>
           </div>
           <div class="header-actions">
-            <button class="btn-download" onclick="downloadSpecifications()">
+            <button class="btn-download" onclick="downloadPageAsImage()">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
               </svg>
-              Download PDF
+              Download Image
             </button>
           </div>
         </div>
@@ -387,6 +386,279 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   <!-- Related Products - Cleaned: removed animation classes -->
     <Whatsapp client:load />
 </Layout>
+<!-- html2canvas CDN for client-side screenshot -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Gallery
+    function changeMainImage(index) {
+      var mainImage = document.getElementById('mainProductImage');
+      var thumbnails = document.querySelectorAll('.thumbnail-btn');
+      var thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
+      if (mainImage && thumbnailImages[index]) {
+        mainImage.src = thumbnailImages[index].src;
+        mainImage.alt = thumbnailImages[index].alt;
+        thumbnails.forEach(function(thumb, i) {
+          thumb.classList.toggle('active', i === index);
+        });
+      }
+    }
+    window.changeMainImage = changeMainImage;
+
+    // Download Specifications (use var for compatibility)
+    function downloadSpecifications() {
+      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
+      var categoryBlocks = document.querySelectorAll('.spec-category-block');
+      if (categoryBlocks.length === 0) return;
+      var csv = `Product Specifications - ${productTitle}\n`;
+      csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
+      csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
+      categoryBlocks.forEach(function(block) {
+        var categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
+        var specItems = block.querySelectorAll('.spec-item');
+        csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
+        csv += `Parameter,Specification\n`;
+        specItems.forEach(function(item) {
+          var label = item.querySelector('.spec-label')?.textContent.trim() || '';
+          var detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
+          var cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
+          var csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
+            ? `"${cleanLabel}"` : cleanLabel;
+          var csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
+            ? `"${cleanDetail}"` : cleanDetail;
+          if (csvLabel && csvDetail) {
+            csv += `${csvLabel},${csvDetail}\n`;
+          }
+        });
+        csv += '\n';
+      });
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      var url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.csv';
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+    window.downloadSpecifications = downloadSpecifications;
+
+    // Enhanced Download Page as Image with Visual Formatting
+    function downloadPageAsImage() {
+      const productTitle = document.querySelector('.product-title')?.textContent || 'Product';
+      const btn = document.querySelector('.btn-download');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<svg class="spin-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Generating...';
+      }
+      
+      // Create an image summary container
+      const imageSummary = document.createElement('div');
+      imageSummary.className = 'image-summary';
+      imageSummary.style.cssText = 'background: white; padding: 40px; max-width: 1200px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;';
+      
+      // Add product header section
+      const header = document.createElement('div');
+      header.style.cssText = 'display: flex; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #14b8a6; padding-bottom: 20px;';
+      
+      // Add company logo
+      header.innerHTML = `
+        <div style="margin-right: 20px;">
+          <img src="/favicon.svg" alt="PrimoTech LLC" style="height: 50px; width: 50px;" />
+        </div>
+        <div>
+          <h1 style="margin: 0; color: #0f766e; font-size: 24px; font-weight: 700;">${productTitle}</h1>
+          <p style="margin: 5px 0 0; color: #5f6368; font-size: 14px;">PrimoTech LLC | Analog Fixed-lens Cameras</p>
+        </div>
+      `;
+      imageSummary.appendChild(header);
+      
+      // Add content section in 2 columns
+      const content = document.createElement('div');
+      content.style.cssText = 'display: flex; gap: 30px; margin-bottom: 30px;';
+      
+      // Get product image
+      const productImg = document.getElementById('mainProductImage');
+      const productImgSrc = productImg?.src || '/images/placeholder-camera.jpg';
+      
+      // Left column with image
+      const leftCol = document.createElement('div');
+      leftCol.style.cssText = 'flex: 1; max-width: 40%;';
+      leftCol.innerHTML = `
+        <div style="background: #f8fafc; border-radius: 12px; padding: 20px; display: flex; align-items: center; justify-content: center; height: 300px; border: 1px solid #e5e7eb;">
+          <img src="${productImgSrc}" alt="${productTitle}" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+        </div>
+      `;
+      content.appendChild(leftCol);
+      
+      // Right column with features
+      const rightCol = document.createElement('div');
+      rightCol.style.cssText = 'flex: 1; max-width: 60%;';
+      
+      // Add description if available
+      const description = document.querySelector('.product-description p')?.textContent;
+      if (description) {
+        rightCol.innerHTML += `
+          <div style="margin-bottom: 20px;">
+            <h3 style="margin: 0 0 10px; color: #1f2937; font-size: 16px;">Description</h3>
+            <p style="margin: 0; color: #4b5563; font-size: 14px; line-height: 1.6;">${description}</p>
+          </div>
+        `;
+      }
+      
+      // Add features if available
+      const features = Array.from(document.querySelectorAll('.feature-item .feature-text')).map(el => el.textContent);
+      if (features.length) {
+        rightCol.innerHTML += `
+          <div>
+            <h3 style="margin: 0 0 10px; color: #1f2937; font-size: 16px;">Key Features</h3>
+            <ul style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px; line-height: 1.6;">
+              ${features.map(feature => `<li style="margin-bottom: 8px;">${feature}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+      content.appendChild(rightCol);
+      imageSummary.appendChild(content);
+      
+      // Add specifications section
+      const specs = document.createElement('div');
+      specs.style.cssText = 'margin-top: 30px;';
+      
+      specs.innerHTML = `
+        <h2 style="margin: 0 0 15px; color: #1f2937; font-size: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">Technical Specifications</h2>
+      `;
+      
+      // Get specs from the page
+      const specGroups = document.querySelectorAll('.spec-category-block');
+      if (specGroups.length) {
+        const specsGrid = document.createElement('div');
+        specsGrid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;';
+        
+        specGroups.forEach(group => {
+          const title = group.querySelector('.category-title')?.textContent;
+          const items = Array.from(group.querySelectorAll('.spec-item')).map(item => {
+            const label = item.querySelector('.spec-label')?.textContent;
+            const value = item.querySelector('.spec-detail')?.textContent;
+            return { label, value };
+          });
+          
+          if (title && items.length) {
+            const groupEl = document.createElement('div');
+            groupEl.style.cssText = 'background: #f8fafc; border-radius: 8px; padding: 15px; border: 1px solid #e5e7eb;';
+            
+            let groupContent = `<h3 style="margin: 0 0 12px; color: #14b8a6; font-size: 15px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;">${title}</h3>`;
+            groupContent += '<table style="width: 100%; border-collapse: collapse; font-size: 13px;">';
+            
+            items.forEach(item => {
+              if (item.label && item.value) {
+                groupContent += `
+                  <tr>
+                    <td style="padding: 6px 0; color: #4b5563; font-weight: 600; vertical-align: top;">${item.label}:</td>
+                    <td style="padding: 6px 0; color: #1f2937; vertical-align: top;">${item.value}</td>
+                  </tr>
+                `;
+              }
+            });
+            
+            groupContent += '</table>';
+            groupEl.innerHTML = groupContent;
+            specsGrid.appendChild(groupEl);
+          }
+        });
+        
+        specs.appendChild(specsGrid);
+      } else {
+        specs.innerHTML += '<p style="color: #6b7280; font-style: italic;">No specifications available for this product.</p>';
+      }
+      
+      imageSummary.appendChild(specs);
+      
+      // Add footer with date and disclaimer
+      const footer = document.createElement('div');
+      footer.style.cssText = 'margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 20px; font-size: 12px; color: #6b7280; text-align: center;';
+      
+      const now = new Date();
+      footer.innerHTML = `
+        <p style="margin: 0;">Document generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}</p>
+        <p style="margin: 5px 0 0;">© ${now.getFullYear()} PrimoTech LLC</p>
+      `;
+      imageSummary.appendChild(footer);
+      
+      // Add the summary to the page temporarily (hidden) for html2canvas to capture it
+      imageSummary.style.position = 'absolute';
+      imageSummary.style.left = '-9999px';
+      imageSummary.style.top = '-9999px';
+      document.body.appendChild(imageSummary);
+      
+      // Use html2canvas to generate the image
+      html2canvas(imageSummary, {
+        backgroundColor: '#fff',
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        allowTaint: false
+      }).then(canvas => {
+        // Convert to image and download
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        const filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.png';
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        document.body.removeChild(imageSummary);
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download Image';
+        }
+      }).catch(error => {
+        console.error('Failed to generate image:', error);
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download Image';
+        }
+        document.body.removeChild(imageSummary);
+        alert('Failed to generate the image. Please try again.');
+      });
+    }
+    window.downloadPageAsImage = downloadPageAsImage;
+
+    // Tab switching
+    function showSpecGroup(index) {
+      var tabs = document.querySelectorAll('.nav-tab');
+      var groups = document.querySelectorAll('.spec-group');
+      tabs.forEach(function(tab, i) {
+        tab.classList.toggle('active', i === index);
+      });
+      groups.forEach(function(group, i) {
+        group.classList.toggle('active', i === index);
+      });
+    }
+    window.showSpecGroup = showSpecGroup;
+
+    // Initialize first thumbnail/tab/group on DOMContentLoaded
+    var firstThumbnail = document.querySelector('.thumbnail-btn');
+    if (firstThumbnail) firstThumbnail.classList.add('active');
+    var firstTab = document.querySelector('.nav-tab');
+    var firstGroup = document.querySelector('.spec-group');
+    if (firstTab && firstGroup) {
+      firstTab.classList.add('active');
+      firstGroup.classList.add('active');
+    }
+
+
+  });
+</script>
+
+<!-- Add styling for the loading spinner -->
 <style>
   /* CSS Variables for Professional Theme */
   :root {
@@ -436,19 +708,23 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 
   .breadcrumbs {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.875rem;
+    gap: 0.5rem;
+    font-size: 0.75rem;
     position: relative;
     z-index: 1;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .breadcrumb-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.375rem;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .breadcrumb-link:hover {
@@ -457,11 +733,52 @@ const specificationGroups = renderSpecifications(productData?.specifications);
 
   .breadcrumb-separator {
     color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
   }
 
   .breadcrumb-current {
     color: white;
     font-weight: 500;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  
+  .breadcrumb-icon {
+    flex-shrink: 0;
+  }
+  
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 480px) {
+    .hide-on-mobile {
+      display: none;
+    }
+    
+    .breadcrumb-current {
+      max-width: 120px;
+    }
+    
+    .breadcrumbs {
+      font-size: 0.7rem;
+      gap: 0.25rem;
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 640px) {
+    .breadcrumb-current {
+      max-width: 150px;
+    }
+    
+    .breadcrumbs {
+      font-size: 0.75rem;
+    }
   }
 
   /* Product Overview */
@@ -477,10 +794,27 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     align-items: start;
   }
 
+  /* Mobile-specific grid order */
+  @media (max-width: 991px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Make gallery appear first on mobile */
+    .product-gallery {
+      order: 1;
+      margin-bottom: 2rem;
+    }
+
+    /* Make product details appear second on mobile */
+    .product-details {
+      order: 2;
+    }
+  }
+
   /* Professional Gallery */
   .product-gallery {
-    position: sticky;
-    top: 2rem;
+    position: relative; /* Changed from sticky to relative */
   }
 
   .gallery-main {
@@ -744,6 +1078,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
   .btn-download {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     background: white;
     color: var(--primary-color);
@@ -753,6 +1088,7 @@ const specificationGroups = renderSpecifications(productData?.specifications);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-width: 160px;
   }
   .btn-download:hover {
     background: var(--primary-color);
@@ -944,89 +1280,18 @@ const specificationGroups = renderSpecifications(productData?.specifications);
       break-inside: avoid;
     }
   }
+
+  /* Add loading animation for download button */
+  .spin-icon {
+    animation: spin 1.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
-
-<script is:inline>
-  // Cleaned: removed all animation/scroll/intersection observer JS, kept only gallery, download, tab switching
-  document.addEventListener('DOMContentLoaded', function() {
-    // Gallery
-    function changeMainImage(index) {
-      var mainImage = document.getElementById('mainProductImage');
-      var thumbnails = document.querySelectorAll('.thumbnail-btn');
-      var thumbnailImages = document.querySelectorAll('.thumbnail-btn img');
-      if (mainImage && thumbnailImages[index]) {
-        mainImage.src = thumbnailImages[index].src;
-        mainImage.alt = thumbnailImages[index].alt;
-        thumbnails.forEach(function(thumb, i) {
-          thumb.classList.toggle('active', i === index);
-        });
-      }
-    }
-    window.changeMainImage = changeMainImage;
-
-    // Download Specifications (use var for compatibility)
-    function downloadSpecifications() {
-      var productTitle = document.querySelector('.product-title')?.textContent || 'Product';
-      var categoryBlocks = document.querySelectorAll('.spec-category-block');
-      if (categoryBlocks.length === 0) return;
-      var csv = `Product Specifications - ${productTitle}\n`;
-      csv += `Generated on: ${new Date().toLocaleDateString()}\n`;
-      csv += `Time: ${new Date().toLocaleTimeString()}\n\n`;
-      categoryBlocks.forEach(function(block) {
-        var categoryTitle = block.querySelector('.category-title')?.textContent.trim() || 'Category';
-        var specItems = block.querySelectorAll('.spec-item');
-        csv += `\n=== ${categoryTitle.toUpperCase()} ===\n`;
-        csv += `Parameter,Specification\n`;
-        specItems.forEach(function(item) {
-          var label = item.querySelector('.spec-label')?.textContent.trim() || '';
-          var detail = item.querySelector('.spec-detail')?.textContent.trim() || '';
-          var cleanLabel = label.replace(/\s+/g, ' ').replace(/"/g, '""');
-          var cleanDetail = detail.replace(/\s+/g, ' ').replace(/"/g, '""');
-          var csvLabel = (cleanLabel.includes(',') || cleanLabel.includes('"') || cleanLabel.includes('\n')) 
-            ? `"${cleanLabel}"` : cleanLabel;
-          var csvDetail = (cleanDetail.includes(',') || cleanDetail.includes('"') || cleanDetail.includes('\n')) 
-            ? `"${cleanDetail}"` : cleanDetail;
-          if (csvLabel && csvDetail) {
-            csv += `${csvLabel},${csvDetail}\n`;
-          }
-        });
-        csv += '\n';
-      });
-      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var link = document.createElement('a');
-      var url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      var filename = productTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_specifications.csv';
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-    window.downloadSpecifications = downloadSpecifications;
-
-    // Tab switching
-    function showSpecGroup(index) {
-      var tabs = document.querySelectorAll('.nav-tab');
-      var groups = document.querySelectorAll('.spec-group');
-      tabs.forEach(function(tab, i) {
-        tab.classList.toggle('active', i === index);
-      });
-      groups.forEach(function(group, i) {
-        group.classList.toggle('active', i === index);
-      });
-    }
-    window.showSpecGroup = showSpecGroup;
-
-    // Initialize first thumbnail/tab/group on DOMContentLoaded
-    var firstThumbnail = document.querySelector('.thumbnail-btn');
-    if (firstThumbnail) firstThumbnail.classList.add('active');
-    var firstTab = document.querySelector('.nav-tab');
-    var firstGroup = document.querySelector('.spec-group');
-    if (firstTab && firstGroup) {
-      firstTab.classList.add('active');
-      firstGroup.classList.add('active');
-    }
-  });
-</script>
