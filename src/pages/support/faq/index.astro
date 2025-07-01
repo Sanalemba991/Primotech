@@ -69,13 +69,14 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
 <Layout title={title} description={description}>
   <main class="min-h-screen bg-gray-50">
     <!-- Hero Banner with Animations -->
-    <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden faq-hero">
+    <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden faq-hero" role="banner" aria-labelledby="hero-title">
       <div class="absolute inset-0">
         <img 
           src="/images/aboutus-background.png"
           alt="PrimoTech office team"
           class="w-full h-full object-cover hero-image-reveal"
           loading="eager"
+          decoding="async"
         />
         <div class="absolute inset-0 bg-black/40 hero-overlay-fade"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-transparent hero-overlay-fade"></div>
@@ -83,13 +84,13 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
       <div class="relative z-10 flex items-center h-full">
         <div class="container mx-auto px-6 lg:px-8">
           <div class="max-w-2xl hero-content-reveal">
-            <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 hero-title-animate">
+            <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 hero-title-animate">
               Frequently Asked Questions
             </h1>
-            <p class="text-xl lg:text-2xl text-gray-200 mb-4 hero-subtitle-animate">
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-200 mb-4 hero-subtitle-animate">
               Quick answers about PrimoTech products and support.
             </p>
-            <p class="text-lg lg:text-xl text-gray-300 hero-description-animate">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 hero-description-animate">
               Find solutions to common questions or reach out to our team for more help.
             </p>
           </div>
@@ -98,14 +99,28 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
     </section>
 
     <!-- FAQ Content Section -->
-    <section class="py-16 faq-content-section">
+    <section class="py-16 faq-content-section" role="main" aria-labelledby="faq-heading">
       <div class="max-w-6xl mx-auto px-6">
+        <!-- Page Introduction -->
+        <div class="text-center mb-12">
+          <h2 id="faq-heading" class="text-3xl font-bold text-gray-900 mb-4">
+            Support Center
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Browse our comprehensive FAQ database or use the category filters below to find specific answers to your questions.
+          </p>
+        </div>
+
         <!-- Category Filter -->
         <div class="mb-12 text-center">
-          <div class="inline-flex flex-wrap gap-3 bg-white rounded-2xl p-3 shadow-lg border filter-container">
+          <div class="inline-flex flex-wrap gap-3 bg-white rounded-2xl p-3 shadow-lg border filter-container" role="tablist" aria-label="FAQ Categories">
             <button 
               class="category-btn active" 
               data-category="All"
+              role="tab"
+              aria-selected="true"
+              aria-controls="faq-list"
+              tabindex="0"
             >
               All Categories
             </button>
@@ -113,6 +128,10 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
               <button 
                 class="category-btn" 
                 data-category={category}
+                role="tab"
+                aria-selected="false"
+                aria-controls="faq-list"
+                tabindex="-1"
               >
                 {category}
               </button>
@@ -120,18 +139,28 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
           </div>
         </div>
 
+        <!-- FAQ Stats - Keep this section -->
+        <div class="mb-8 text-center">
+          <p class="text-sm text-gray-500">
+            Showing <span id="visible-count" class="font-semibold text-teal-600">9</span> of <span class="font-semibold">9</span> questions
+          </p>
+        </div>
+
         <!-- FAQ Grid -->
-        <div id="faq-list" class="space-y-6">
+        <div id="faq-list" class="space-y-6" role="tabpanel" aria-labelledby="faq-heading">
           {faqs.map((faq, index) => (
-            <div 
-              class="faq-item bg-white rounded-xl shadow-md border border-gray-100 transition-all duration-500"
+            <article 
+              class="faq-item bg-white rounded-xl shadow-md border border-gray-100 transition-all duration-500 hover:shadow-lg focus-within:ring-2 focus-within:ring-teal-500"
               data-category={faq.category}
+              data-search-text={`${faq.question} ${faq.answer}`.toLowerCase()}
               style={`animation-delay: ${(index % 4) * 100}ms`}
+              role="article"
+              aria-labelledby={`faq-question-${faq.id}`}
             >
-              <div class="p-8 relative">
+              <div class="p-6 md:p-8 relative">
                 <div class="flex items-start gap-6">
                   <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg relative overflow-visible">
-                    <svg class="w-6 h-6 text-white z-10 relative" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-white z-10 relative" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
@@ -141,25 +170,47 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
                         {faq.category}
                       </span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 leading-tight">{faq.question}</h3>
-                    <p class="text-gray-600 leading-relaxed text-base">{faq.answer}</p>
+                    <h3 id={`faq-question-${faq.id}`} class="text-lg md:text-xl font-bold text-gray-900 mb-4 leading-tight">
+                      {faq.question}
+                    </h3>
+                    <div class="text-gray-600 leading-relaxed text-base prose prose-sm max-w-none">
+                      <p>{faq.answer}</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                      <p class="text-xs text-gray-500">
+                        Was this helpful? 
+                        <button class="ml-2 text-teal-600 hover:text-teal-700 font-medium" onclick={`trackHelpfulness(true, ${faq.id})`}>
+                          Yes
+                        </button>
+                        <span class="mx-1">|</span>
+                        <button class="text-teal-600 hover:text-teal-700 font-medium" onclick={`trackHelpfulness(false, ${faq.id})`}>
+                          No
+                        </button>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
         
         <!-- No Results Message -->
-        <div id="no-results" class="hidden text-center py-16">
+        <div id="no-results" class="hidden text-center py-16" role="status" aria-live="polite">
           <div class="max-w-md mx-auto">
             <div class="w-20 h-20 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <h3 class="text-2xl font-bold text-gray-700 mb-3">No results found</h3>
-            <p class="text-gray-500 text-lg">Try selecting a different category to see more FAQs</p>
+            <p class="text-gray-500 text-lg mb-6">Try adjusting your search terms or selecting a different category</p>
+            <button 
+              onclick="clearFilters()" 
+              class="inline-flex items-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            >
+              Clear Filters
+            </button>
           </div>
         </div>
       </div>
@@ -279,42 +330,97 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
 
 /* FAQ Item Styles - Clean fade animation */
 .faq-item {
-  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s ease-in-out;
   opacity: 1;
-  max-height: 1000px;
-  overflow: hidden;
-  transform: translateY(20px) scale(0.98);
+  display: block !important;
+  transform: translateY(0);
+  border-left: 4px solid transparent;
 }
+
+.faq-item:hover {
+  border-left-color: #14b8a6;
+  transform: translateY(-2px);
+}
+
 .faq-item.filtering-out {
   opacity: 0;
-  max-height: 0;
+  transform: translateY(-10px) scale(0.98);
   pointer-events: none;
-  transform: translateY(20px) scale(0.98);
+  display: none !important;
 }
+
 .faq-item.filtering-in {
   opacity: 1;
-  max-height: 1000px;
   transform: translateY(0) scale(1);
+  display: block !important;
 }
 
-/* Remove filter container scaling/fading */
-.filter-container.filtering {
-  /* No animation */
+/* Loading States */
+.loading {
+  position: relative;
+  overflow: hidden;
 }
 
-/* No Results Enhanced Animation */
-#no-results {
-  opacity: 0;
-  transform: scale(0.9) translateY(40px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: loading-shimmer 1.5s infinite;
 }
 
-#no-results.show {
-  opacity: 1;
-  transform: scale(1) translateY(0);
+@keyframes loading-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
-/* Hero animations */
+/* Improved Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero-title-animate {
+    font-size: 2.5rem !important;
+  }
+  
+  .faq-item .flex {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .faq-item .w-12.h-12 {
+    align-self: flex-start;
+  }
+  
+  .filter-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .category-btn {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .hero-section,
+  .contact-section,
+  .filter-container,
+  .category-btn {
+    display: none;
+  }
+  
+  .faq-item {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Hero animations - Restore original animations */
 .faq-hero {
   opacity: 0;
   transform: translateY(50px);
@@ -348,143 +454,390 @@ const faqCategories = [...new Set(faqs.map(faq => faq.category))];
   transition-delay: 0.4s;
 }
 
-/* Section animations */
-.faq-content-section, .contact-section {
+.hero-content-reveal {
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.faq-content-section.section-revealed, 
-.contact-section.section-revealed {
+.faq-hero.hero-revealed .hero-content-reveal {
   opacity: 1;
   transform: translateY(0);
+  transition-delay: 0.5s;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .category-btn {
-    font-size: 0.8125rem;
-    padding: 0.5rem 1rem;
-  }
-  
-  .filter-container {
-    gap: 0.5rem;
-    padding: 0.75rem;
-  }
+.hero-title-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .category-btn, .faq-item, .filter-container {
-    transition: none !important;
-    animation: none !important;
-  }
+.hero-subtitle-animate {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-description-animate {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.faq-hero.hero-revealed .hero-title-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+.faq-hero.hero-revealed .hero-subtitle-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.7s;
+}
+
+.faq-hero.hero-revealed .hero-description-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.8s;
 }
 </style>
 
 <script is:inline>
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize animations
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-        entry.target.classList.add('hero-revealed');
-        heroObserver.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: [0, 0.1, 0.3],
-    rootMargin: '0px 0px -100px 0px'
-  });
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-        entry.target.classList.add('section-revealed');
-        sectionObserver.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: [0, 0.1, 0.3],
-    rootMargin: '0px 0px -100px 0px'
-  });
-
-  // Observe elements
-  const heroSection = document.querySelector('.faq-hero');
-  const sections = document.querySelectorAll('.faq-content-section, .contact-section');
+// Production-ready FAQ functionality with error handling
+(function() {
+  'use strict';
   
-  if (heroSection) heroObserver.observe(heroSection);
-  sections.forEach(section => sectionObserver.observe(section));
-
-  // Enhanced FAQ filtering functionality
-  let isFiltering = false;
-
-  function filterFaqs(category) {
-    if (isFiltering) return;
-    isFiltering = true;
-
+  let isInitialized = false;
+  
+  // Initialize when DOM is ready
+  function initializeFAQ() {
+    if (isInitialized) return;
+    
+    try {
+      setupCategoryFilters();
+      setupKeyboardNavigation();
+      setupAnalytics();
+      isInitialized = true;
+      console.log('FAQ system initialized successfully');
+    } catch (error) {
+      console.error('Error initializing FAQ system:', error);
+      fallbackInitialization();
+    }
+  }
+  
+  // Category filtering with improved UX
+  function setupCategoryFilters() {
+    const buttons = document.querySelectorAll('.category-btn');
     const items = document.querySelectorAll('.faq-item');
     const noResults = document.getElementById('no-results');
-    const buttons = document.querySelectorAll('.category-btn');
-    let visibleCount = 0;
-
-    // Update active button instantly
-    buttons.forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-category') === category);
-    });
-
-    // Animate out items to be hidden
-    items.forEach((item) => {
-      const itemCategory = item.getAttribute('data-category');
-      const shouldShow = category === 'All' || itemCategory === category;
-      if (!shouldShow) {
-        item.classList.remove('filtering-in');
-        item.classList.add('filtering-out');
-        setTimeout(() => {
-          item.style.display = 'none';
-        }, 350); // Wait for transition before hiding
-      }
-    });
-
-    // Animate in items to be shown
-    setTimeout(() => {
-      items.forEach((item) => {
-        const itemCategory = item.getAttribute('data-category');
-        const shouldShow = category === 'All' || itemCategory === category;
-        if (shouldShow) {
-          item.style.display = '';
-          // Force reflow for transition
-          void item.offsetWidth;
-          item.classList.remove('filtering-out');
-          item.classList.add('filtering-in');
-          visibleCount++;
+    const visibleCount = document.getElementById('visible-count');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const category = this.getAttribute('data-category');
+        filterByCategory(category, buttons, items, noResults, visibleCount);
+        updateURL(category);
+      });
+      
+      // Keyboard navigation
+      button.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
         }
       });
-
-      // Handle no results
-      if (visibleCount === 0) {
-        noResults.classList.remove('hidden');
-        setTimeout(() => noResults.classList.add('show'), 100);
-      } else {
-        noResults.classList.remove('show');
-        setTimeout(() => noResults.classList.add('hidden'), 300);
-      }
-
-      isFiltering = false;
-    }, 350);
-  }
-
-  // Add click event listeners to filter buttons
-  document.querySelectorAll('.category-btn').forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      const category = button.getAttribute('data-category');
-      filterFaqs(category);
     });
+    
+    // Initialize from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = urlParams.get('category') || 'All';
+    filterByCategory(initialCategory, buttons, items, noResults, visibleCount);
+  }
+  
+  // Filter by category
+  function filterByCategory(category, buttons, items, noResults, visibleCount) {
+    let visible = 0;
+    
+    // Update button states
+    buttons.forEach(btn => {
+      const isActive = btn.getAttribute('data-category') === category;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive);
+      btn.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+    
+    // Filter items
+    items.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+      const shouldShow = category === 'All' || itemCategory === category;
+      
+      if (shouldShow) {
+        item.classList.remove('filtering-out');
+        item.classList.add('filtering-in');
+        item.style.display = 'block';
+        visible++;
+      } else {
+        item.classList.add('filtering-out');
+        item.classList.remove('filtering-in');
+        setTimeout(() => {
+          if (item.classList.contains('filtering-out')) {
+            item.style.display = 'none';
+          }
+        }, 300);
+      }
+    });
+    
+    // Update UI
+    updateResultsDisplay(visible, noResults, visibleCount);
+    
+    // Analytics
+    if (window.gtag) {
+      window.gtag('event', 'faq_filter', {
+        category: category,
+        results_count: visible
+      });
+    }
+  }
+  
+  // Update results display
+  function updateResultsDisplay(visible, noResults, visibleCount) {
+    if (visibleCount) {
+      visibleCount.textContent = visible;
+    }
+    
+    if (visible === 0) {
+      noResults.style.display = 'block';
+      noResults.classList.remove('hidden');
+    } else {
+      noResults.style.display = 'none';
+      noResults.classList.add('hidden');
+    }
+  }
+  
+  // Keyboard navigation
+  function setupKeyboardNavigation() {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        clearFilters();
+      }
+    });
+  }
+  
+  // Analytics setup
+  function setupAnalytics() {
+    // Track FAQ views
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const faqId = entry.target.querySelector('[id^="faq-question-"]')?.id;
+          if (faqId && window.gtag) {
+            window.gtag('event', 'faq_view', {
+              faq_id: faqId
+            });
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.faq-item').forEach(item => {
+      observer.observe(item);
+    });
+  }
+  
+  // Update URL without page reload
+  function updateURL(category) {
+    if (category === 'All') {
+      history.replaceState({}, '', window.location.pathname);
+    } else {
+      history.replaceState({}, '', `${window.location.pathname}?category=${encodeURIComponent(category)}`);
+    }
+  }
+  
+  // Clear all filters
+  window.clearFilters = function() {
+    const searchInput = document.getElementById('faq-search');
+    if (searchInput) {
+      searchInput.value = '';
+    }
+    
+    const allButton = document.querySelector('.category-btn[data-category="All"]');
+    if (allButton) {
+      allButton.click();
+    }
+    
+    updateURL('All');
+    
+    // Ensure all items are visible
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.style.display = 'block';
+      item.classList.remove('filtering-out');
+      item.classList.add('filtering-in');
+    });
+    
+    // Update the visible count
+    const visibleCount = document.getElementById('visible-count');
+    if (visibleCount) {
+      visibleCount.textContent = document.querySelectorAll('.faq-item').length.toString();
+    }
+    
+    // Hide no results message
+    const noResults = document.getElementById('no-results');
+    if (noResults) {
+      noResults.style.display = 'none';
+      noResults.classList.add('hidden');
+    }
+  };
+  
+  // Track helpfulness
+  window.trackHelpfulness = function(helpful, faqId) {
+    if (window.gtag) {
+      window.gtag('event', 'faq_helpful', {
+        faq_id: faqId,
+        helpful: helpful
+      });
+    }
+    
+    // Show thank you message
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Thank you!';
+    button.disabled = true;
+    
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+    }, 2000);
+  };
+  
+  // Fallback initialization for better reliability
+  function fallbackInitialization() {
+    console.log('Using fallback initialization for FAQ system');
+    
+    // Basic filtering without animations
+    document.querySelectorAll('.category-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        document.querySelectorAll('.category-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        const category = this.getAttribute('data-category');
+        const items = document.querySelectorAll('.faq-item');
+        let visible = 0;
+        
+        // Simple show/hide filtering
+        items.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          const shouldShow = category === 'All' || itemCategory === category;
+          
+          item.style.display = shouldShow ? 'block' : 'none';
+          if (shouldShow) visible++;
+        });
+        
+        // Show/hide no results message
+        const noResults = document.getElementById('no-results');
+        if (noResults) {
+          noResults.style.display = visible === 0 ? 'block' : 'none';
+        }
+        
+        // Update count
+        const visibleCount = document.getElementById('visible-count');
+        if (visibleCount) {
+          visibleCount.textContent = visible.toString();
+        }
+      });
+    });
+    
+    // Initialize search with basic functionality
+    const searchInput = document.getElementById('faq-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const items = document.querySelectorAll('.faq-item');
+        let visible = 0;
+        
+        items.forEach(item => {
+          const searchText = item.getAttribute('data-search-text') || '';
+          const shouldShow = !searchTerm || searchText.includes(searchTerm);
+          
+          item.style.display = shouldShow ? 'block' : 'none';
+          if (shouldShow) visible++;
+        });
+        
+        // Show/hide no results message
+        const noResults = document.getElementById('no-results');
+        if (noResults) {
+          noResults.style.display = visible === 0 ? 'block' : 'none';
+        }
+        
+        // Update count
+        const visibleCount = document.getElementById('visible-count');
+        if (visibleCount) {
+          visibleCount.textContent = visible.toString();
+        }
+      });
+    }
+  }
+  
+  // Initialize on DOM ready with automatic hero reveal
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeFAQ();
+      
+      // Trigger hero animation immediately
+      setTimeout(() => {
+        const heroSection = document.querySelector('.faq-hero');
+        if (heroSection) {
+          heroSection.classList.add('hero-revealed');
+        }
+      }, 100);
+    });
+  } else {
+    initializeFAQ();
+    
+    // Trigger hero animation immediately
+    setTimeout(() => {
+      const heroSection = document.querySelector('.faq-hero');
+      if (heroSection) {
+        heroSection.classList.add('hero-revealed');
+      }
+    }, 100);
+  }
+  
+  // Ensure everything works even after full page load
+  window.addEventListener('load', function() {
+    // Re-initialize if needed
+    if (!isInitialized) {
+      initializeFAQ();
+    }
+    
+    // Ensure all items are visible initially
+    setTimeout(() => {
+      document.querySelectorAll('.faq-item').forEach(item => {
+        if (!item.classList.contains('filtering-out')) {
+          item.style.display = 'block';
+          item.style.opacity = '1';
+        }
+      });
+      
+      // Ensure hero section is visible
+      const heroSection = document.querySelector('.faq-hero');
+      if (heroSection) {
+        heroSection.classList.add('hero-revealed');
+      }
+      
+      // Ensure content sections are visible
+      const sections = document.querySelectorAll('.faq-content-section, .contact-section');
+      sections.forEach(section => {
+        section.classList.add('section-revealed');
+      });
+    }, 200);
   });
-
-  // Initialize with all items visible
-  filterFaqs('All');
-});
+})();
 </script>
