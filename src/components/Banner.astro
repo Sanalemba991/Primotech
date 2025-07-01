@@ -295,14 +295,77 @@ const banners = [
     display: block !important;
   }
 
-  /* Mobile responsiveness */
+  /* Mobile responsiveness - enhanced */
   @media (max-width: 768px) {
+    .banner-container {
+      height: 100vh !important;
+    }
+    
     .banner-content-reveal {
       transform: translateY(40px);
+      margin-top: -25vh; /* Move content up from center */
+      max-width: 100%;
     }
     
     .banner-animation.banner-revealed .banner-content-reveal {
       transform: translateY(0);
+    }
+    
+    /* Larger text for mobile */
+    .banner-subtitle-animate {
+      font-size: 1.5rem !important;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .banner-title-animate {
+      font-size: 3.75rem !important;
+      line-height: 1.05 !important;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+      font-weight: 800 !important;
+    }
+    
+    .banner-description-animate {
+      font-size: 1.325rem !important;
+      line-height: 1.4 !important;
+      margin-bottom: 1.75rem !important;
+      max-width: 100% !important;
+    }
+    
+    /* Button enhancement for mobile */
+    .cta-button {
+      font-size: 1.375rem !important;
+      padding: 0.5rem 0;
+      font-weight: 600;
+    }
+    
+    /* Increase nav dots size */
+    .nav-dot {
+      width: 10px !important;
+      height: 10px !important;
+    }
+  }
+  
+  /* Small phones */
+  @media (max-width: 480px) {
+    .banner-content-reveal {
+      margin-top: -20vh; /* Less offset for small screens */
+    }
+    
+    .banner-title-animate {
+      font-size: 3.25rem !important;
+    }
+  }
+  
+  /* Landscape mode adjustments */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .banner-content-reveal {
+      margin-top: -10vh;
+    }
+    
+    .banner-title-animate {
+      font-size: 2.5rem !important;
     }
   }
 </style>
@@ -337,21 +400,21 @@ const banners = [
       
       this.init();
     }
-
-    init() {
-      // Ensure first slide is visible immediately
-      this.forceShowFirstSlide();
-      this.setupEventListeners();
-      this.initScrollAnimation();
-      this.startAutoPlay();
-    }
-
+    
+    init(): void {
+        this.setupEventListeners();
+        this.initScrollAnimation();
+        this.startAutoPlay();
+        // Ensure first slide is visible immediately
+        this.forceShowFirstSlide();
+      }
+  
     initScrollAnimation() {
-      // Enhanced intersection observer for banner reveal
-      const bannerObserverOptions = {
-        threshold: [0, 0.1, 0.3],
-        rootMargin: '0px 0px -200px 0px'
-      };
+        // Enhanced intersection observer for banner reveal
+        const bannerObserverOptions = {
+          threshold: [0, 0.1, 0.3],
+          rootMargin: '0px 0px -200px 0px'
+        };
 
       const bannerObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -376,7 +439,7 @@ const banners = [
       }
     }
 
-    forceShowFirstSlide() {
+    forceShowFirstSlide(): void {
       // Force show the first slide to prevent blank state
       if (this.slides.length > 0) {
         this.slides[0].classList.add('opacity-100', 'z-10', 'active');
@@ -402,7 +465,7 @@ const banners = [
       }
     }
 
-    updateSlideDisplay() {
+    updateSlideDisplay(): void {
       if (this.isTransitioning) return;
       
       this.isTransitioning = true;
@@ -448,7 +511,7 @@ const banners = [
       }, 500);
     }
 
-    setupEventListeners() {
+    setupEventListeners(): void {
       // Navigation arrows
       this.prevBtn?.addEventListener('click', () => {
         if (!this.isTransitioning) {
@@ -500,16 +563,87 @@ const banners = [
           this.startAutoPlay();
         }
       });
+      
+      // Mobile enhancement for banner content
+      this.optimizeMobileDisplay();
+      window.addEventListener('resize', () => this.optimizeMobileDisplay());
+      window.addEventListener('orientationchange', () => this.optimizeMobileDisplay());
+    }
+    
+    // New method to enhance mobile display
+    optimizeMobileDisplay(): void {
+      const isMobile = window.innerWidth <= 768;
+      if (!isMobile) return;
+      
+      // Get all content containers
+      const contentContainers = document.querySelectorAll('.banner-content-reveal');
+      contentContainers.forEach(container => {
+        if (container instanceof HTMLElement) {
+          // Position content based on device size and orientation
+          const isPortrait = window.innerHeight > window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          
+          if (isPortrait) {
+            // Portrait mode - position higher with larger content
+            container.style.marginTop = viewportHeight < 700 ? '-20vh' : '-25vh';
+            
+            // Make text bigger
+            const title = container.querySelector('.banner-title-animate');
+            if (title instanceof HTMLElement) {
+              title.style.fontSize = viewportHeight < 700 ? '3rem' : '3.75rem';
+              title.style.fontWeight = '800';
+              title.style.lineHeight = '1.1';
+              title.style.letterSpacing = '-0.02em';
+            }
+            
+            const subtitle = container.querySelector('.banner-subtitle-animate');
+            if (subtitle instanceof HTMLElement) {
+              subtitle.style.fontSize = '1.5rem';
+              subtitle.style.letterSpacing = '0.05em';
+            }
+            
+            const desc = container.querySelector('.banner-description-animate');
+            if (desc instanceof HTMLElement) {
+              desc.style.fontSize = viewportHeight < 700 ? '1.125rem' : '1.325rem';
+              desc.style.lineHeight = '1.4';
+              desc.style.marginBottom = '1.75rem';
+            }
+            
+            const cta = container.querySelector('.cta-button');
+            if (cta instanceof HTMLElement) {
+              cta.style.fontSize = '1.375rem';
+              cta.style.fontWeight = '600';
+            }
+          } else {
+            // Landscape mode
+            container.style.marginTop = '-10vh';
+            
+            const title = container.querySelector('.banner-title-animate');
+            if (title instanceof HTMLElement) {
+              title.style.fontSize = '2.5rem';
+            }
+          }
+        }
+      });
+      
+      // Make nav dots larger on mobile
+      const dots = document.querySelectorAll('.nav-dot');
+      dots.forEach(dot => {
+        if (dot instanceof HTMLElement) {
+          dot.style.width = '10px';
+          dot.style.height = '10px';
+        }
+      });
     }
 
-    goToSlide(index: number) {
+    goToSlide(index: number): void {
       if (index >= 0 && index < this.totalSlides && index !== this.currentSlide) {
         this.currentSlide = index;
         this.updateSlideDisplay();
       }
     }
 
-    prevSlide() {
+    prevSlide(): void {
       this.currentSlide = this.currentSlide - 1;
       if (this.currentSlide < 0) {
         this.currentSlide = this.totalSlides - 1;
@@ -517,7 +651,7 @@ const banners = [
       this.updateSlideDisplay();
     }
 
-    nextSlide() {
+    nextSlide(): void {
       this.currentSlide = this.currentSlide + 1;
       if (this.currentSlide >= this.totalSlides) {
         this.currentSlide = 0;
@@ -525,7 +659,7 @@ const banners = [
       this.updateSlideDisplay();
     }
 
-    startAutoPlay() {
+    startAutoPlay(): void {
       this.pauseAutoPlay(); // Clear any existing interval
       
       this.autoPlayInterval = setInterval(() => {
@@ -535,14 +669,14 @@ const banners = [
       }, this.autoPlayDuration);
     }
 
-    pauseAutoPlay() {
+    pauseAutoPlay(): void {
       if (this.autoPlayInterval) {
         clearInterval(this.autoPlayInterval);
         this.autoPlayInterval = null;
       }
     }
 
-    resetAutoPlay() {
+    resetAutoPlay(): void {
       this.pauseAutoPlay();
       setTimeout(() => {
         this.startAutoPlay();
@@ -551,12 +685,12 @@ const banners = [
   }
 
   // Initialize banner slider when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', (): void => {
     new BannerSlider();
   });
 
   // Also initialize on window load as backup
-  window.addEventListener('load', () => {
+  window.addEventListener('load', (): void => {
     if (!document.querySelector('.banner-slide.active')) {
       new BannerSlider();
     }
