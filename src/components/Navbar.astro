@@ -167,7 +167,7 @@ const supportItems = [
         <a
           href="/products"
           id="products-link"
-          class={`px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200 ${Astro.url.pathname.startsWith('/products') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-cyan-600'}`}
+          class={`px-3 py-2 text-base font-medium focus:outline-none flex items-center transition-colors duration-200 ${Astro.url.pathname.startsWith('/products') ? 'text-teal-400 font-semibold' : 'text-gray-700 hover:text-teal-400'}`}
         >
           Products
         </a>
@@ -513,6 +513,78 @@ const supportItems = [
     </div>
   </div>
 
+  <!-- Products Mega Menu -->
+<div id="mega-menu"
+  class="w-full bg-white border-b border-gray-100 shadow fixed left-0 top-16 pointer-events-none opacity-0 invisible transition-all duration-300 z-40"
+>
+  <div class="container mx-auto flex pointer-events-auto" id="mega-menu-area">
+    <!-- Sidebar -->
+    <div class="w-80 bg-gray-50 border-r border-gray-100 flex flex-col py-10" id="category-list">
+      {categories.map((cat, idx) => (
+        <button
+          type="button"
+          class={[
+            "category-btn flex items-center justify-between px-8 py-5 text-lg w-full text-left transition-colors rounded-none",
+            idx === 0 ? "bg-gradient-to-r from-teal-400 to-teal-500 text-white font-semibold" : "hover:bg-teal-50 text-gray-700"
+          ].join(" ")}
+          data-idx={idx}
+          tabindex="0"
+        >
+          <span>{cat.name}</span>
+          <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      ))}
+    </div>
+    <!-- Product Panel -->
+    <div class="flex-1 relative min-h-[600px] max-h-[600px] overflow-hidden" id="product-panel-area">
+      {categories.map((cat, idx) => (
+        <div id={`panel-${idx}`} class={`product-panel absolute inset-0 p-8 transition-all duration-200 ${idx === 0 ? '' : 'hidden'} flex flex-col h-full`}>
+          <!-- Scrollable Subcategories Container -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar">
+            <div class="grid grid-cols-3 gap-4 pb-4">
+              {cat.subcategories?.map((subcat) => (
+                <a 
+                  href={subcat.href}
+                  class="group flex flex-col p-4 bg-white rounded-xl hover:shadow-lg transition-all duration-200 border border-gray-100 hover:border-teal-200"
+                >
+                  <div class="w-full h-40 bg-gray-100 rounded-lg mb-3 overflow-hidden group-hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center p-2">
+                    <img 
+                      src={subcat.image} 
+                      alt={subcat.name}
+                      class="w-full h-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 class="text-base font-semibold text-gray-900 mb-1 group-hover:text-teal-600 transition-colors duration-200">
+                    {subcat.name}
+                  </h3>
+                  <p class="text-gray-500 text-xs leading-relaxed">
+                    {subcat.desc}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+          <!-- View All Link - Fixed at bottom -->
+          <div class="mt-6 pt-4 border-t border-gray-100 text-center">
+            <a 
+              href={cat.href}
+              class="inline-flex items-center text-teal-600 hover:text-teal-800 font-medium group"
+            >
+              View All {cat.name}
+              <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
   <script>
     // Track menu state for Products
     let isMenuOpen = false;
@@ -601,7 +673,7 @@ const supportItems = [
         if (isSupportOpen) {
           hideSupportImmediate();
         }
-        productsToggle.classList.add('text-cyan-600');
+        productsToggle.classList.add('text-teal-400'); // Changed to teal
         productsToggle.classList.remove('text-gray-700');
         megaMenu.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
         megaMenu.classList.add('opacity-100', 'visible');
@@ -616,7 +688,7 @@ const supportItems = [
           if (isMenuOpen) {
             isMenuOpen = false;
             hasUserHoveredProducts = false;
-            productsToggle.classList.remove('text-cyan-600');
+            productsToggle.classList.remove('text-teal-400');
             productsToggle.classList.add('text-gray-700');
             megaMenu.classList.remove('opacity-100', 'visible');
             megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');
@@ -641,11 +713,11 @@ const supportItems = [
       btns.forEach((btn, idx) => {
         btn.addEventListener('mouseenter', () => {
           btns.forEach(b => b.classList.remove(
-            'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+            'bg-gradient-to-r', 'from-teal-400', 'to-teal-500', // Changed to teal
             'text-white', 'font-semibold'
           ));
           btn.classList.add(
-            'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+            'bg-gradient-to-r', 'from-teal-400', 'to-teal-500', // Changed to teal
             'text-white', 'font-semibold'
           );
           panels.forEach(p => p.classList.add('hidden'));
@@ -951,4 +1023,45 @@ const supportItems = [
       max-height: 1000px;
       transition: all 0.5s ease-in;
     }
+
+    /* Product menu animation */
+#mega-menu.visible {
+  animation: menu-fade-in 0.3s ease-out forwards;
+}
+
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-panel {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.product-panel:not(.hidden) {
+  animation: panel-fade-in 0.3s ease-out forwards;
+}
+
+@keyframes panel-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Category button hover effect */
+.category-btn:not(.active):hover {
+  background-color: rgba(20, 184, 166, 0.1);
+  color: rgb(13, 148, 136);
+}
   </style>
