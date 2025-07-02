@@ -157,21 +157,23 @@ const Whatsapp = () => {
           }`}
           title={isOpen ? 'Close Menu' : 'Contact Support'}
         >
-          <div className={`transition-all duration-500 ${isOpen ? 'rotate-45' : ''}`}>
-            {isOpen ? (
-              <X size={22} className="sm:w-6 sm:h-6 md:w-7 md:h-7 transition-transform duration-500" />
-            ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="sm:w-6 sm:h-6 md:w-7 md:h-7 transition-transform duration-500">
-                <circle cx="12" cy="7" r="3" fill="currentColor"/>
-                <path d="M12 14c-3.5 0-6.5 1.5-6.5 4v1h13v-1c0-2.5-3-4-6.5-4z" fill="currentColor"/>
-                <path d="M8 6c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                <rect x="6.5" y="5.5" width="2" height="3" rx="1" fill="currentColor"/>
-                <rect x="15.5" y="5.5" width="2" height="3" rx="1" fill="currentColor"/>
-                <path d="M9 10c0 1.66 1.34 3 3 3s3-1.34 3-3" stroke="currentColor" strokeWidth="1" fill="none"/>
-                <line x1="12" y1="13" x2="12" y2="15" stroke="currentColor" strokeWidth="1"/>
-                <circle cx="12" cy="15.5" r="0.5" fill="currentColor"/>
-              </svg>
-            )}
+          <div 
+            className="transition-all duration-500"
+            style={{
+              transform: isOpen ? 'translateY(-2px) scale(0.95) rotate(40deg)' : 'translateY(0) scale(1) rotate(0deg)',
+              transition: 'all 0.4s cubic-bezier(.4,1.8,.5,1)'
+            }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="sm:w-6 sm:h-6 md:w-7 md:h-7">
+              <circle cx="12" cy="7" r="3" fill="currentColor"/>
+              <path d="M12 14c-3.5 0-6.5 1.5-6.5 4v1h13v-1c0-2.5-3-4-6.5-4z" fill="currentColor"/>
+              <path d="M8 6c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+              <rect x="6.5" y="5.5" width="2" height="3" rx="1" fill="currentColor"/>
+              <rect x="15.5" y="5.5" width="2" height="3" rx="1" fill="currentColor"/>
+              <path d="M9 10c0 1.66 1.34 3 3 3s3-1.34 3-3" stroke="currentColor" strokeWidth="1" fill="none"/>
+              <line x1="12" y1="13" x2="12" y2="15" stroke="currentColor" strokeWidth="1"/>
+              <circle cx="12" cy="15.5" r="0.5" fill="currentColor"/>
+            </svg>
           </div>
           
           {/* Notification Badge */}
