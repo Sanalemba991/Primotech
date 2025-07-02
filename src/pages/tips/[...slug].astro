@@ -2,11 +2,11 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import "../../styles/global.css";
-import Whatsapp from '../../components/Whatsapp';
+import Whatsapp from "../../components/Whatsapp";
 
 // Generate static paths for all tips
 export async function getStaticPaths() {
-  const tips = await getCollection('tips');
+  const tips = await getCollection("tips");
   return tips.map((tip) => ({
     params: { slug: tip.slug },
     props: { tip },
@@ -22,24 +22,22 @@ const { tip } = Astro.props;
 const { Content } = await tip.render();
 
 // Fetch all tips for related tips section
-const allTips = await getCollection('tips');
-const relatedTips = allTips
-  .filter(t => t.slug !== tip.slug)
-  .slice(0, 3);
+const allTips = await getCollection("tips");
+const relatedTips = allTips.filter((t) => t.slug !== tip.slug).slice(0, 3);
 
 // Format date helper with safety check
 const formatDate = (date: Date | string | undefined) => {
-  if (!date) return 'No date available';
-  
+  if (!date) return "No date available";
+
   const dateObj = date instanceof Date ? date : new Date(date);
-  
+
   // Check if the date is valid
-  if (isNaN(dateObj.getTime())) return 'Invalid date';
-  
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  if (isNaN(dateObj.getTime())) return "Invalid date";
+
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(dateObj);
 };
 
@@ -47,45 +45,54 @@ const formatDate = (date: Date | string | undefined) => {
 const getEventDuration = (startDate: Date | string, endDate: Date | string) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
-  
-  if (isNaN(start.getTime()) || isNaN(end.getTime())) return '';
-  
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
+
   const diffTime = Math.abs(end.getTime() - start.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
-  return diffDays === 1 ? '1 day' : `${diffDays} days`;
+
+  return diffDays === 1 ? "1 day" : `${diffDays} days`;
 };
 
 // Safe date conversion for ISO string
 const getISOString = (date: Date | string | undefined) => {
   if (!date) return new Date().toISOString();
-  
+
   const dateObj = date instanceof Date ? date : new Date(date);
-  
+
   // Check if the date is valid
   if (isNaN(dateObj.getTime())) return new Date().toISOString();
-  
+
   return dateObj.toISOString();
 };
 
 // SEO meta data
 const title = `${tip.data.title} | Primotech Tips`;
-const description = tip.data.subTitle || tip.data.description || 'Primotech security tips and guides';
+const description =
+  tip.data.subTitle ||
+  tip.data.description ||
+  "Primotech security tips and guides";
 const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
 ---
 
-<Layout
-  title={title}
-  description={description}
->
+<Layout title={title} description={description}>
   <!-- Header Banner with Breadcrumbs - Smaller Version -->
-  <section id="header-banner" class="bg-gradient-to-r from-teal-900/80 to-transparent py-3">
+  <section
+    id="header-banner"
+    class="bg-gradient-to-r from-teal-900/80 to-transparent py-3"
+  >
     <div class="header-overlay"></div>
     <div class="container mx-auto px-4">
       <nav class="breadcrumbs">
         <a href="/" class="breadcrumb-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="breadcrumb-icon">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="breadcrumb-icon"
+          >
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
           </svg>
           <span class="breadcrumb-text">Home</span>
         </a>
@@ -94,7 +101,9 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
           <span class="breadcrumb-text">Tips &amp; Guides</span>
         </a>
         <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current truncate">{tip.data.title}</span>
+        <span class="breadcrumb-current breadcrumb-title-pc truncate"
+          >{tip.data.title}</span
+        >
       </nav>
     </div>
   </section>
@@ -107,8 +116,11 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
         <h1 class="text-3xl font-bold text-gray-900 mb-4 leading-tight">
           {tip.data.title}
         </h1>
-        
-        <div class="text-gray-500 text-sm mb-6 scroll-animate" data-animation="fade-left">
+
+        <div
+          class="text-gray-500 text-sm mb-6 scroll-animate"
+          data-animation="fade-left"
+        >
           <time datetime={getISOString(tip.data.startDate)}>
             {formatDate(tip.data.startDate)} - {formatDate(tip.data.endDate)}
           </time>
@@ -118,15 +130,21 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
           <span>{tip.data.location}</span>
         </div>
 
-        <p class="text-lg text-gray-600 leading-relaxed scroll-animate" data-animation="slide-up">
+        <p
+          class="text-lg text-gray-600 leading-relaxed scroll-animate"
+          data-animation="slide-up"
+        >
           {tip.data.subTitle}
         </p>
       </header>
 
       <!-- Author Info -->
-      <div class="flex items-center mb-8 scroll-animate" data-animation="slide-left">
-        <img 
-          src={tip.data.authorImage} 
+      <div
+        class="flex items-center mb-8 scroll-animate"
+        data-animation="slide-left"
+      >
+        <img
+          src="/images/arthor.avif"
           alt={tip.data.authorImageAlt}
           class="w-12 h-12 rounded-full object-cover mr-4"
         />
@@ -138,14 +156,14 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
 
       <!-- Featured Image -->
       <div class="mb-8 scroll-animate" data-animation="scale-in">
-        <img 
-          src={tip.data.eventImage} 
+        <img
+          src={tip.data.eventImage}
           alt={tip.data.eventImageAlt}
           class="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-1500"
           loading="lazy"
         />
       </div>
-    
+
       <!-- Professional Article Content -->
       <article class="professional-content max-w-2xl mx-auto px-2">
         <!-- Title Section -->
@@ -153,110 +171,156 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
           <h1 class="content-title">{tip.data.title}</h1>
           <div class="content-meta">{formatDate(tip.data.startDate)}</div>
         </div>
-        
+
         <!-- Separator Line -->
         <div class="content-separator"></div>
-        
+
         <!-- Description Section -->
         <div class="content-section scroll-animate" data-animation="fade-up">
           <p class="content-description">{tip.data.description}</p>
         </div>
-        
+
         <!-- Main Content -->
-        {tip.data.contents.length > 0 && (
-          <div class="content-section scroll-animate" data-animation="fade-up">
-            {tip.data.contents.map((content, idx) => (
-              <div class="content-item">
-                {content.title && (
-                  <span class="content-item-title">
-                    {content.title}
+        {
+          tip.data.contents.length > 0 && (
+            <div
+              class="content-section scroll-animate"
+              data-animation="fade-up"
+            >
+              {tip.data.contents.map((content, idx) => (
+                <div class="content-item">
+                  {content.title && (
+                    <span class="content-item-title">{content.title}</span>
+                  )}
+                  {content.title && content.text && (
+                    <span class="content-separator-text">: </span>
+                  )}
+                  <span class="content-item-text">
+                    {content.text || content}
                   </span>
-                )}
-                {content.title && content.text && <span class="content-separator-text">: </span>}
-                <span class="content-item-text">{content.text || content}</span>
-              </div>
-            ))}
-          </div>
-        )}
-        
+                </div>
+              ))}
+            </div>
+          )
+        }
+
         <!-- Tags Section -->
         <div class="content-section scroll-animate" data-animation="fade-up">
           <div class="content-separator content-separator-light"></div>
-          <div class="flex flex-wrap gap-2 scroll-animate" data-animation="bounce-in">
-            {tip.data.tags.map((tag) => (
-              <span class="content-tag">
-                #{tag}
-              </span>
-            ))}
+          <div
+            class="flex flex-wrap gap-2 scroll-animate"
+            data-animation="bounce-in"
+          >
+            {
+              tip.data.tags.map((tag) => (
+                <span class="content-tag">#{tag}</span>
+              ))
+            }
           </div>
         </div>
       </article>
-      
+
       <!-- Social Sharing -->
-      <div class="social-share-section pt-6 mt-8 scroll-animate" data-animation="slide-up">
-        <div class="content-separator content-separator-light mb-6"></div>
-        <h3 class="text-base font-semibold text-gray-900 mb-3">Social Media</h3>
-        <div class="flex items-center gap-2">
+      <div
+        class="social-share-section pt-8 mt-10 scroll-animate"
+        data-animation="slide-up"
+      >
+        <div class="content-separator content-separator-light mb-8 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-6 tracking-tight">Share This</h3>
+        <div class="flex items-center gap-3 flex-wrap">
           <a
             href={`https://twitter.com/intent/tweet?url=${canonicalUrl}&text=${encodeURIComponent(tip.data.title)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon focus:outline-none focus:ring-2 focus:ring-teal-400 bg-teal-500 hover:bg-teal-400 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            class="social-icon group focus:outline-none focus:ring-3 focus:ring-blue-400/50 focus:ring-offset-2 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 active:scale-95 transition-all duration-300 ease-out w-12 h-12 flex items-center justify-center rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1"
             aria-label="Share on Twitter"
             data-animation="bounce-in"
           >
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            <svg
+              class="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+              ></path>
             </svg>
           </a>
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${canonicalUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-600 hover:bg-blue-500 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            class="social-icon group focus:outline-none focus:ring-3 focus:ring-blue-600/50 focus:ring-offset-2 bg-gradient-to-br from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 active:scale-95 transition-all duration-300 ease-out w-12 h-12 flex items-center justify-center rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1"
             aria-label="Share on Facebook"
             data-animation="bounce-in"
           >
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            <svg
+              class="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              ></path>
             </svg>
           </a>
           <a
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${canonicalUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="social-icon focus:outline-none focus:ring-2 focus:ring-blue-700 bg-blue-700 hover:bg-blue-600 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            class="social-icon group focus:outline-none focus:ring-3 focus:ring-blue-800/50 focus:ring-offset-2 bg-gradient-to-br from-blue-800 to-blue-900 hover:from-blue-700 hover:to-blue-800 active:scale-95 transition-all duration-300 ease-out w-12 h-12 flex items-center justify-center rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1"
             aria-label="Share on LinkedIn"
             data-animation="bounce-in"
           >
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            <svg
+              class="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              ></path>
             </svg>
           </a>
-          <a
-            href={`https://www.youtube.com/`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-icon focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-600 hover:bg-red-700 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
-            aria-label="Visit YouTube"
-            data-animation="bounce-in"
-          >
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-          </a>
+         
           <a
             href={`mailto:?subject=${encodeURIComponent(tip.data.title)}&body=${encodeURIComponent(canonicalUrl)}`}
-            class="social-icon focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-600 hover:bg-gray-700 transition-all duration-200 w-8 h-8 flex items-center justify-center rounded-md"
+            class="social-icon group focus:outline-none focus:ring-3 focus:ring-gray-500/50 focus:ring-offset-2 bg-gradient-to-br from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 active:scale-95 transition-all duration-300 ease-out w-12 h-12 flex items-center justify-center rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1"
             aria-label="Share via Email"
             data-animation="bounce-in"
           >
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            <svg
+              class="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(tip.data.title + " " + canonicalUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon group focus:outline-none focus:ring-3 focus:ring-green-500/50 focus:ring-offset-2 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 active:scale-95 transition-all duration-300 ease-out w-14 h-14 flex items-center justify-center rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1"
+            aria-label="Share on WhatsApp"
+            data-animation="bounce-in"
+          >
+            <svg
+              class="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-200"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.770-1.17.823-.299.047-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.130.332.202c.045.072.045.419-.1.824z"/>
             </svg>
           </a>
         </div>
-      </div>   
+      </div>
     </div>
   </main>
   <Whatsapp client:load />
@@ -267,21 +331,21 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
   // Ultra-slow intersection observer with gentle detection
   const observerOptions = {
     threshold: 0.03, // Even lower threshold for earlier, gentler trigger
-    rootMargin: '0px 0px -10px 0px' // Very minimal margin
+    rootMargin: "0px 0px -10px 0px", // Very minimal margin
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const element = entry.target as HTMLElement;
         const animation = element.dataset.animation;
-        
+
         // Longer delay for ultra-natural feel
         setTimeout(() => {
-          element.classList.add('animate-in');
+          element.classList.add("animate-in");
           element.classList.add(`animate-${animation}`);
         }, 200);
-        
+
         // Unobserve the element to prevent re-triggering
         observer.unobserve(element);
       }
@@ -289,9 +353,9 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
   }, observerOptions);
 
   // Observe all elements with scroll-animate class
-  document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.scroll-animate');
-    animatedElements.forEach(element => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const animatedElements = document.querySelectorAll(".scroll-animate");
+    animatedElements.forEach((element) => {
       observer.observe(element);
     });
   });
@@ -401,7 +465,8 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
   }
 
   /* Ultra-slow transitions for all interactive elements */
-  a, button {
+  a,
+  button {
     transition: all 0.8s ease-out; /* Leisurely hover effects */
   }
 
@@ -454,14 +519,26 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
 
   .content-separator {
     height: 1px;
-    background: linear-gradient(to right, transparent, #e5e7eb 20%, #e5e7eb 80%, transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      #e5e7eb 20%,
+      #e5e7eb 80%,
+      transparent
+    );
     margin: 0;
     border: none;
   }
 
   .content-separator-light {
     height: 1px;
-    background: linear-gradient(to right, transparent, #f3f4f6 20%, #f3f4f6 80%, transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      #f3f4f6 20%,
+      #f3f4f6 80%,
+      transparent
+    );
     margin: 0;
     border: none;
   }
@@ -534,7 +611,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     color: #1f2937;
   }
   .social-icon {
-    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none;
     width: 2rem;
     height: 2rem;
@@ -543,7 +620,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
   }
   .social-icon:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(20,184,166,0.3);
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3);
   }
 
   /* Header Banner Styles - Updated to be smaller */
@@ -552,14 +629,14 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     z-index: 2;
     padding: 0.75rem 0;
   }
-  
+
   .header-overlay {
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 0;
   }
-  
+
   .breadcrumbs {
     display: flex;
     align-items: center;
@@ -570,7 +647,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     max-width: 100%;
     overflow: hidden;
   }
-  
+
   .breadcrumb-link {
     display: flex;
     align-items: center;
@@ -579,16 +656,16 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     text-decoration: none;
     white-space: nowrap;
   }
-  
+
   .breadcrumb-link:hover {
     color: white;
   }
-  
+
   .breadcrumb-separator {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.75rem;
   }
-  
+
   .breadcrumb-current {
     color: white;
     font-weight: 500;
@@ -598,37 +675,29 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     white-space: nowrap;
     display: inline-block;
   }
-  
-  .breadcrumb-icon {
-    flex-shrink: 0;
+  /* Show full title on PC, clamp on mobile */
+  .breadcrumb-title-pc {
+    max-width: none;
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+    display: inline;
   }
-  
-  .truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  @media (max-width: 480px) {
-    .hide-on-mobile {
-      display: none;
-    }
-    
-    .breadcrumb-current {
+  @media (max-width: 768px) {
+    .breadcrumb-title-pc {
       max-width: 120px;
-    }
-    
-    .breadcrumbs {
-      font-size: 0.7rem;
-      gap: 0.25rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
     }
   }
-  
+
   @media (min-width: 481px) and (max-width: 640px) {
     .breadcrumb-current {
       max-width: 150px;
     }
-    
+
     .breadcrumbs {
       font-size: 0.75rem;
     }
@@ -641,11 +710,11 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
       transform: none !important;
       transition: none !important;
     }
-    
+
     .animate-in {
       animation: none !important;
     }
-    
+
     * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
@@ -658,19 +727,19 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     .grid {
       gap: 1rem;
     }
-    
+
     .content-title {
       font-size: 1.875rem;
     }
-    
+
     .content-description {
       font-size: 1rem;
     }
-    
+
     .content-section {
       padding: 1.5rem 0;
     }
-    
+
     .py-16 {
       padding-top: 3rem;
       padding-bottom: 3rem;
@@ -681,7 +750,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     .content-title {
       font-size: 1.5rem;
     }
-    
+
     .content-section {
       padding: 1rem 0;
     }
