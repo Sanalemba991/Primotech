@@ -74,7 +74,7 @@ const banners = [
           <div class="container mx-auto px-6 lg:px-8">
             <div class="max-w-3xl banner-content-reveal">
               <!-- Subtitle -->
-              <p class="text-cyan-400 font-semibold text-lg md:text-xl tracking-wide uppercase mb-4 banner-subtitle-animate">
+              <p class="text-teal-400 font-semibold text-lg md:text-xl tracking-wide uppercase mb-4 banner-subtitle-animate">
                 {banner.subtitle}
               </p>
               
@@ -91,10 +91,10 @@ const banners = [
               <!-- CTA Text with Arrow -->
               <a 
                 href={banner.buttonLink}
-                class="inline-flex items-center text-sky-300 hover:text-sky-200 font-semibold text-lg cursor-pointer transition-all duration-300 cta-button banner-button-animate"
+                class="inline-flex items-center text-teal-400 hover:text-sky-200 font-semibold text-lg cursor-pointer transition-all duration-300 cta-button banner-button-animate hover-container"
               >
                 {banner.buttonText}
-                <span class="ml-2 arrow-icon transition-transform duration-300">→</span>
+                <span class="ml-2 transform transition-transform duration-300 ease-out arrow">→</span>
               </a>
             </div>
           </div>
@@ -368,6 +368,21 @@ const banners = [
     .banner-title-animate {
       font-size: 2.5rem !important;
     }
+  }
+
+  .cta-button .arrow-icon {
+    transition: transform 0.3s;
+  }
+  .cta-button:hover span {
+    transform: translateX(8px);
+  }
+
+  .hover-container:hover .arrow {
+    transform: translateX(8px);
+  }
+
+  .arrow {
+    transition: transform 0.3s ease;
   }
 </style>
 
