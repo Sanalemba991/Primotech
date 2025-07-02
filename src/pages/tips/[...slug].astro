@@ -101,9 +101,9 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
           <span class="breadcrumb-text">Tips &amp; Guides</span>
         </a>
         <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current breadcrumb-title-pc truncate"
-          >{tip.data.title}</span
-        >
+        <div class="breadcrumb-title-wrapper">
+          <span class="breadcrumb-current">{tip.data.title}</span>
+        </div>
       </nav>
     </div>
   </section>
@@ -623,7 +623,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3);
   }
 
-  /* Header Banner Styles - Updated to be smaller */
+  /* Header Banner Styles - Updated with proper responsive behavior */
   #header-banner {
     position: relative;
     z-index: 2;
@@ -655,6 +655,7 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .breadcrumb-link:hover {
@@ -664,32 +665,37 @@ const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
   .breadcrumb-separator {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .breadcrumb-title-wrapper {
+    flex: 1;
+    min-width: 0; /* Required for text-overflow to work */
   }
 
   .breadcrumb-current {
     color: white;
     font-weight: 500;
-    max-width: 180px;
+    display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    display: inline-block;
   }
-  /* Show full title on PC, clamp on mobile */
-  .breadcrumb-title-pc {
-    max-width: none;
-    overflow: visible;
-    text-overflow: initial;
-    white-space: normal;
-    display: inline;
+
+  /* Different styling based on screen size */
+  @media (min-width: 769px) {
+    /* Tablet and desktop: show full title with wrapping */
+    .breadcrumb-current {
+      max-width: none;
+      white-space: normal;
+      display: inline;
+    }
   }
+
   @media (max-width: 768px) {
-    .breadcrumb-title-pc {
+    /* Mobile only: truncate title */
+    .breadcrumb-current {
       max-width: 120px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      display: inline-block;
     }
   }
 
