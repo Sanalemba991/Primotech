@@ -7,298 +7,172 @@ import WhyUs from "../components/WhyUs.astro";
 import Question from "../components/Question.astro";
 import Whatsapp from "../components/Whatsapp.tsx";
 
+const title: string =
+  "PrimoTech LLC - Authorized Uniarch Distributor in Dubai, UAE";
+const description: string =
+  "PrimoTech LLC is the official distributor of Uniarch products in Dubai, UAE, offering reliable surveillance solutions, IT services, and smart technology integration.";
 
-
-
-const title: string = "PrimoTech LLC - Premier Technology Solutions Provider in Dubai, UAE";
-const description: string = "Leading technology solutions provider in Dubai, UAE offering cutting-edge tech services, IT consulting, and digital transformation solutions. Your trusted technology partner.";
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://primotechllc.com/#organization",
-      "name": "PrimoTech LLC",
-      "url": "https://primotechllc.com",
-      "logo": {
+      "@id": "https://promotechllc.com/#organization",
+      name: "Primotech Uniarch Dubai",
+      url: "https://promotechllc.com",
+      logo: {
         "@type": "ImageObject",
-        "@id": "https://primotechllc.com/images/logo.png",
-        "url": "https://primotechllc.com/images/logo.png",
-        "caption": "PrimoTech LLC - Premier Technology Solutions Provider",
-        "inLanguage": "en-US",
-        "width": 1000,
-        "height": 375
+        "@id": `${Astro.url.origin}/log.png`,
+        url: `${Astro.url.origin}/log.png`,
+
+        caption: "Primotech Uniarch Dubai",
+        inLanguage: "en-US",
+        width: 1000,
+        height: 375,
       },
-      "description": "Premier technology solutions provider in Dubai, UAE delivering comprehensive IT services and digital transformation solutions since 2015",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Al Raffa St - Al Fahidi - Dubai - United Arab Emirates",
-        "addressLocality": "Dubai",
-        "addressRegion": "Dubai",
-        "postalCode": "00000",
-        "addressCountry": "AE"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 25.262528,
-        "longitude": 55.290111
-      },
-      "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "telephone": "+971554221967",
-          "contactType": "sales",
-          "email": "sales@primotechllc.com",
-          "areaServed": ["AE"],
-          "availableLanguage": ["English", "Arabic"]
-        },
-        {
-          "@type": "ContactPoint",
-          "telephone": "+971554221967",
-          "contactType": "customer service",
-          "email": "support@primotechllc.com",
-          "areaServed": ["AE"],
-          "availableLanguage": ["English", "Arabic"]
-        }
-      ],
-      "foundingDate": "2015",
-      "numberOfEmployees": {
-        "@type": "QuantitativeValue",
-        "value": "25"
-      },
-      "slogan": "Leading Technology Solutions Provider in UAE",
-      "industry": "Information Technology",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "158",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "Ahmed Al-Mansoori"
-          },
-          "reviewBody": "Excellent technology solutions and professional service. PrimoTech LLC delivered our digital transformation project on time and within budget. Highly recommended!",
-          "datePublished": "2024-12-10"
-        },
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "Sarah Hassan"
-          },
-          "reviewBody": "Outstanding IT consulting services and technical support. The team was very professional and knowledgeable throughout our project implementation.",
-          "datePublished": "2024-11-28"
-        },
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "Mohammed Al-Zaabi"
-          },
-          "reviewBody": "Best technology partner in Dubai. Quick response, innovative solutions, and excellent project management. Very satisfied with their services.",
-          "datePublished": "2024-11-15"
-        }
-      ],
-      "sameAs": [
-        "https://www.facebook.com/primotechllc",
-        "https://www.instagram.com/primotechllc",
-        "https://www.linkedin.com/company/primotechllc"
-      ]
     },
     {
       "@type": "WebSite",
-      "@id": "https://primotechllc.com/#website",
-      "url": "https://primotechllc.com",
-      "name": "PrimoTech LLC | Premier Technology Solutions Provider in UAE",
-      "publisher": {
-        "@id": "https://primotechllc.com/#organization"
+      "@id": "https://promotechllc.com/#website",
+      url: "https://promotechllc.com",
+      name: "Primotach | Uniarch Authorized Distributor in UAE ",
+      publisher: {
+        "@id": "https://promotechllc.com/#organization",
       },
-      "inLanguage": "en-US",
-      "potentialAction": {
+      inLanguage: "en-US",
+      potentialAction: {
         "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "https://primotechllc.com/search?q={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "LocalBusiness",
-      "@id": "https://primotechllc.com/#localbusiness",
-      "name": "PrimoTech LLC",
-      "image": "https://primotechllc.com/images/logo.png",
-      "url": "https://primotechllc.com",
-      "telephone": "+971554221967",
-      "email": "sales@primotechllc.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Al Raffa St - Al Fahidi - Dubai - United Arab Emirates",
-        "addressLocality": "Dubai",
-        "addressRegion": "Dubai",
-        "postalCode": "00000",
-        "addressCountry": "AE"
+        target: "https://promotechllc/?s={search_term_string}",
+        "query-input": "required name=search_term_string",
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 25.262528,
-        "longitude": 55.290111
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "priceRange": "AED 1,000 - AED 100,000",
-      "currenciesAccepted": ["AED", "USD"],
-      "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer", "Cheque"],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "158"
-      }
     },
     {
       "@type": "ImageObject",
-      "@id": "https://primotechllc.com/images/logo.png",
-      "url": "https://primotechllc.com/images/logo.png",
-      "width": 1000,
-      "height": 375,
-      "inLanguage": "en-US",
-      "caption": "PrimoTech LLC - Premier Technology Solutions Provider Logo"
+      "@id": `${Astro.url.origin}/log.png`,
+      url: `${Astro.url.origin}/log.png`,
+      width: 200,
+      height: 200,
+      inLanguage: "en-US",
     },
     {
       "@type": "WebPage",
-      "@id": "https://primotechllc.com/#webpage",
-      "url": "https://primotechllc.com/",
-      "name": title,
-      "description": description,
-      "datePublished": "2023-05-05T12:19:39+01:00",
-      "dateModified": new Date().toISOString(),
-      "about": {
-        "@id": "https://primotechllc.com/#organization"
+      "@id": "https://promotechllc.com/#webpage",
+      url: "https://promotechllc.com/",
+      name: "Primotech Uniarch Authorized Distributor in Dubai, UAE | Security Solutions ",
+      description: description,
+      datePublished: "2023-05-05T12:19:39+01:00",
+      dateModified: "2024-11-25T11:05:33+00:00",
+      about: {
+        "@id": "https://promotechllc.com/#organization",
       },
-      "isPartOf": {
-        "@id": "https://primotechllc.com/#website"
+      isPartOf: {
+        "@id": "https://promotechllc.com/#website",
       },
-      "primaryImageOfPage": {
-        "@id": "https://primotechllc.com/images/logo.png"
+      primaryImageOfPage: {
+        "@id": `${Astro.url.origin}/log.png`,
       },
-      "inLanguage": "en-US",
-      "keywords": "PrimoTech LLC Dubai, technology solutions UAE, IT consulting Dubai, digital transformation UAE, software development Dubai",
-      "author": {
-        "@id": "https://primotechllc.com/#organization"
-      },
-      "publisher": {
-        "@id": "https://primotechllc.com/#organization"
-      }
+      inLanguage: "en-US",
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What technology services does PrimoTech LLC offer in Dubai?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We offer comprehensive technology solutions including IT consulting, software development, digital transformation, cloud services, cybersecurity, and technology infrastructure solutions for businesses in Dubai and the UAE."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you provide custom software development services?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we specialize in custom software development, web applications, mobile apps, enterprise solutions, and digital platforms tailored to meet specific business requirements and industry standards."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does PrimoTech LLC offer IT support services in Dubai?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we provide comprehensive IT support services including 24/7 technical support, system maintenance, network management, and technology infrastructure support throughout Dubai and the UAE."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I contact PrimoTech LLC for technology consultation?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You can contact us at +971554221967, email sales@primotechllc.com, or visit our office at Al Raffa St - Al Fahidi - Dubai. We provide consultation services in English and Arabic."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What industries does PrimoTech LLC serve in the UAE?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We serve various industries including healthcare, finance, retail, hospitality, real estate, logistics, government, and manufacturing sectors with specialized technology solutions designed for each industry's unique requirements."
-          }
-        }
-      ]
+      "@type": "Article",
+      headline:
+        "Primotech Uniarch Security Solutions in Dubai - Authorized Distributor",
+      datePublished: "2023-05-05T12:19:39+01:00",
+      dateModified: "2024-11-25T11:05:33+00:00",
+      publisher: {
+        "@id": "https://promotechllc.com/#organization",
+      },
+      description: description,
+      name: title,
+      "@id": "https://promotechllc.com/#richSnippet",
+      isPartOf: {
+        "@id": "https://promotechllc.com/#webpage",
+      },
+      inLanguage: "en-US",
+      mainEntityOfPage: {
+        "@id": "https://promotechllc.com/#webpage",
+      },
+      author: {
+        "@type": "Organization",
+        name: "UNV Dubai",
+      },
+      image: {
+        "@type": "ImageObject",
+        url: `${Astro.url.origin}/log.png`,
+        width: 1200,
+        height: 630,
+        caption: "Primotech Uniarch Dubai Authorized Distributor",
+      },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [".hero", ".testimonials"],
+      },
     },
     {
-      "@type": "Service",
-      "name": "Technology Solutions and IT Consulting",
-      "description": "Professional technology solutions, IT consulting, and digital transformation services in Dubai and UAE",
-      "provider": {
-        "@id": "https://primotechllc.com/#organization"
+      "@type": "LocalBusiness",
+      "@id": "https://promotechllc.com/#localbusiness",
+      name: "Primotech Uniarch Dubai",
+      image: `${Astro.url.origin}/log.png`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Your Street Address",
+        addressLocality: "Dubai",
+        addressRegion: "Dubai",
+        postalCode: "Your Postal Code",
+        addressCountry: "AE",
       },
-      "areaServed": {
-        "@type": "Country",
-        "name": "United Arab Emirates"
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "25.2048", // Replace with actual coordinates
+        longitude: "55.2708",
       },
-      "serviceType": "Information Technology Services"
+      telephone: "+971 52 879 6664",
+      priceRange: "$$",
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          opens: "09:00",
+          closes: "18:00",
+        },
+      ],
     },
     {
-      "@type": "Brand",
-      "name": "PrimoTech LLC",
-      "description": "Leading technology solutions provider specializing in digital transformation and IT consulting services",
-      "url": "https://primotechllc.com",
-      "logo": "https://primotechllc.com/images/logo.png"
-    }
-  ]
+      "@type": "BreadcrumbList",
+      "@id": "https://promotechllc.com/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://promotechllc.com/",
+        },
+      ],
+    },
+  ],
 };
+
+
 ---
 
-<Layout title={title} description={description} structuredData={structuredData}>
-  <Banner/>
-  <Products/>
-  <Cataegories/>
-<WhyUs/>
-<Question/>
+<Layout
+  title={title}
+  description={description}
+  structuredData={structuredData}
+  canonicalUrl={Astro.url.href}
+>
+  <Banner />
+  <Products />
+  <Cataegories />
+  <WhyUs />
+  <Question />
   <Whatsapp client:load />
-
-  
 </Layout>
-

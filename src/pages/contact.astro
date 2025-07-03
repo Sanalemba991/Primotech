@@ -1,11 +1,90 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Whatsapp from "../components/Whatsapp.tsx";
-const title = "Contact Us - PrimoTech LLC";
-const description = "Get in touch with PrimoTech LLC for all your security technology needs. Contact our sales team or technical support.";
----
+const title = "PrimoTech - Authorized Uniarch Camera Distributor in Dubai, Sharjah & UAE";
+const description = "Contact PrimoTech LLC  - Your trusted Uniarch camera distributor in UAE. Get expert support for CCTV solutions in Dubai, Sharjah & across UAE.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
-<Layout title={title} description={description}>
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl,
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${Astro.site}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": canonicalUrl
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Primotech - Uniarch Dubai",
+    "url": "https://primotechllc.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${Astro.url.origin}/log.png`,
+      "width": 1000,
+      "height": 375
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+971 52 879 6664",
+      "contactType": ["sales", "customer service"],
+      "email": "sales@primotech.com", 
+      "areaServed": ["AE"],
+      "availableLanguage": ["English", "Arabic"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "25th St - Naif - Dubai - United Arab Emirates", // Replace
+        "addressLocality": "Dubai",
+        "addressRegion": "Dubai",
+        "postalCode": "123241", 
+        "addressCountry": "AE"
+      }
+    },
+  
+  }
+};
+
+// Open Graph Metadata
+const openGraph = {
+  title: title,
+  description: description,
+  url: canonicalUrl,
+  siteName: "Primotech LLC ",
+  images: [
+    {
+      url: `${Astro.url.origin}/images/log.png`, // Replace with actual image
+      width: 1200,
+      height: 630,
+      alt: "Primotech - Uniarch Camera NVR & XVR Authorized Distributor in Dubai"
+    }
+  ],
+  locale: "en_US",
+  type: "website"
+};
+---
+<meta charset="UTF-8" />
+<Layout 
+  title={title} 
+  description={description} 
+  structuredData={structuredData}
+  canonicalUrl={canonicalUrl}
+>
 <main class="min-h-screen">
     <!-- Hero Section -->
     <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden contact-hero">

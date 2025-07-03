@@ -1,34 +1,27 @@
 ---
-// import Navbar from "../components/Navbar.astro";
-import { SEO } from "astro-seo";
-import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
-// import GoogleAnalytics from "~/components/GoogleAnalytics.astro";
+import { SEO } from "astro-seo";
+import Footer from "~/components/Footer.astro";
+
 
 // Fallback for site and pathname to prevent "Invalid URL" error
-const site = "https://primotechllc.com";
+const site =  "https://primotechllc.com";
 const pathname = Astro.url?.pathname ?? "/";
 const canonicalURL = new URL(pathname, site);
 
-export interface Props {
-  title?: string;
-  description?: string;
+export interface props {
   structuredData?: object;
-  keywords?: string;
 }
-
 const { title, description, structuredData, keywords } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="robots" content="index, follow" />
-    <link rel="icon" type="image/png" href="/favicon.jpg" />
-    <!-- <GoogleAnalytics /> -->
-    
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png/jpg" href="/favicon.jpg" />
     {
       structuredData && (
         <script
@@ -38,63 +31,58 @@ const { title, description, structuredData, keywords } = Astro.props;
         />
       )
     }
-    
     <SEO
-      title={title ?? "Ezviz Dubai Authorized distributor in Dubai, U.A.E"}
-      description={description ??
-        "Ezviz Dubai is an authorized distributor of Ezviz products in Dubai, UAE"}
-      canonical={canonicalURL}
+     title={title ?? "Primotech Uniarch distributor in Dubai, U.A.E"}
+     description={description ?? "Primotech is an authorized distributor of Uniarch products in Dubai, U.A.E."}
+     canonical={canonicalURL}
       openGraph={{
         basic: {
-          title: title ?? "Ezviz Dubai Authorized distributor in Dubai, U.A.E",
-          type: "website",
-          image: "https://ezviz-dubai.com/images/logo.png",
+          title: title ?? "Ezviz Dubai Authorized distributor in Dubai,U.A.E",
+          type: "article",
+          image: "",
         },
         optional: {
-          description:
-            description ??
-            "Ezviz Dubai is an authorized distributor of Ezviz products in Dubai, UAE",
-          siteName: "Ezviz distributor in Dubai",
-          locale: "en_US",
-        },
+      description:
+        description ?? "Primotech is an authorized distributor of Uniarch products in Dubai, U.A.E.",
+      siteName: "Primotech Uniarch Dubai",
+      locale: "en_US",
+    },
       }}
       twitter={{
-        card: "summary_large_image",
-        creator: "@ezvizdubai",
-        site: "@ezvizdubai",
-        title: title ?? "Ezviz Authorized distributor in Dubai, U.A.E",
-        image: "https://ezviz-dubai.com/images/logo.png",
-        imageAlt: "Ezviz Dubai",
-        description:
-          description ??
-          "Ezviz Dubai is an authorized distributor of Ezviz products in Dubai, UAE.",
-      }}
-      extend={{
-        meta: [
-          {
-            name: "keywords",
-            content:
-              "Ezviz Dubai distributor, Dubai, UAE, surveillance, security" +
-              (keywords ? ", " + keywords : ""),
-          },
-          { name: "robots", content: "index, follow" },
-          { name: "language", content: "English" },
-          { name: "author", content: "Ezviz Dubai" },
-          { name: "theme-color", content: "#00B4D8" },
-          { name: "apple-mobile-web-app-capable", content: "yes" },
-          { name: "apple-mobile-web-app-status-bar-style", content: "default" },
-          { name: "format-detection", content: "telephone=no" },
-        ],
-      }}
-    />
-    <link rel="stylesheet" href="./styles/global.css" />
+    card: "summary_large_image",
+    creator: "@primotechdubai", // update if needed
+    site: "@primotechdubai",
+    title: title ?? "Primotech Uniarch distributor in Dubai, U.A.E",
+    image: "https://primotechllc/images/logo.png", // replace with correct URL
+    imageAlt: "Primotech Uniarch Dubai",
+    description:
+      description ?? "Primotech is an authorized distributor of Uniarch products in Dubai, U.A.E.",
+  }}
+  extend={{
+    meta: [
+      {
+        name: "keywords",
+        content:
+          "Primotech Uniarch distributor, Uniarch Dubai, UAE, surveillance, security" +
+          (keywords ? ", " + keywords : ""),
+      },
+      { name: "robots", content: "index, follow" },
+      { name: "language", content: "English" },
+      { name: "author", content: "Primotech Dubai" },
+      { name: "theme-color", content: "#00B4D8" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+      { name: "format-detection", content: "telephone=no" },
+    ],
+  }}
+/>
   </head>
 
   <body class="bg-white">
     <Navbar />
-    <main>
-      <slot />
-    </main>
+      <main>
+        <slot />
+      </main>
     <Footer />
   </body>
 </html>

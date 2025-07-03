@@ -4,9 +4,88 @@ import Whatsapp from "../components/Whatsapp.tsx";
 
 const title = "Partner - PrimoTech LLC";
 const description = "Join our partner network and grow your business with PrimoTech security solutions. Become an authorized distributor today.";
+
+// Canonical URL
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl,
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${Astro.site}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Partners",
+        "item": canonicalUrl
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Primotech - Uniarch Dubai",
+    "url": "https://primotechllc.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${Astro.url.origin}/log.png`,
+      "width": 1000,
+      "height": 375
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+971 52 879 6664",
+      "contactType": ["sales", "customer service", "partnership"],
+      "email": "partners@primotechllc.com",
+      "areaServed": ["AE"],
+      "availableLanguage": ["English", "Arabic"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "25th St - Naif - Dubai - United Arab Emirates",
+        "addressLocality": "Dubai",
+        "addressRegion": "Dubai",
+        "postalCode": "123241",
+        "addressCountry": "AE"
+      }
+    }
+  }
+};
+
+// Open Graph Metadata
+const openGraph = {
+  title: title,
+  description: description,
+  url: canonicalUrl,
+  siteName: "Primotech LLC",
+  images: [
+    {
+      url: `${Astro.url.origin}/images/partner-banner.jpg`,
+      width: 1200,
+      height: 630,
+      alt: "Primotech - Partner with Uniarch Camera Authorized Distributor in Dubai"
+    }
+  ],
+  locale: "en_US",
+  type: "website"
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description} 
+  structuredData={structuredData}
+  canonicalUrl={canonicalUrl}
+>
   <main class="min-h-screen">
     <!-- Hero Section -->
     <section class="relative h-[70vh] overflow-hidden partner-hero">
