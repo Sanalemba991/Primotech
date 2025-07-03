@@ -51,14 +51,14 @@ const Whatsapp = () => {
   };
 
   const handleWhatsApp = () => {
-    const phoneNumber = '+971552929644';
+    const phoneNumber = '+971528796664';
     const message = 'Hello PrimoTech! I would like to get in touch.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleCall = () => {
-    window.open('tel:+971552929644', '_self');
+    window.open('tel:+971528796664', '_self');
   };
 
   const handleEmail = () => {
