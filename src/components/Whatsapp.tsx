@@ -175,13 +175,6 @@ const Whatsapp = () => {
               <circle cx="12" cy="15.5" r="0.5" fill="currentColor"/>
             </svg>
           </div>
-          
-          {/* Notification Badge */}
-          {!isOpen && (
-            <div className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-[10px] sm:text-xs font-bold">3</span>
-            </div>
-          )}
         </button>
       </div>
 

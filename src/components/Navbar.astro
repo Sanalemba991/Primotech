@@ -218,7 +218,7 @@ const supportItems = [
     </div>
     <a 
       href="/contact" 
-      class={`hidden md:inline-block px-4 py-2 font-medium transition-colors duration-200 ${Astro.url.pathname.startsWith('/contact') ? 'contact-active text-teal-600 font-medium' : 'text-teal-700 hover:text-teal-500'}`}
+      class={`hidden md:inline-block px-4 py-2 font-medium transition-colors duration-200 ${Astro.url.pathname.startsWith('/contact') ? 'text-teal-600 font-medium' : 'text-teal-700 hover:text-teal-500'}`}
     >
       Contact Us
     </a>
@@ -376,38 +376,6 @@ const supportItems = [
         <div class="flex-1">
           <div class="font-medium">Video Tutorials</div>
           <div class="text-xs text-gray-500">Step-by-step visual guides</div>
-        </div>
-      </a>
-      
-      {/* Documentation Section */}
-      <a
-        href="/support/documentation"
-        class="flex items-center py-3 px-2 text-gray-700 hover:text-teal-600 border-b border-gray-50"
-      >
-        <div class="w-10 h-10 bg-cyan-50 rounded-lg mr-3 flex items-center justify-center">
-          <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <div class="font-medium">Documentation</div>
-          <div class="text-xs text-gray-500">Product manuals and guides</div>
-        </div>
-      </a>
-      
-      {/* Contact Support Section */}
-      <a
-        href="/support/contact"
-        class="flex items-center py-3 px-2 text-gray-700 hover:text-teal-600 border-b border-gray-50"
-      >
-        <div class="w-10 h-10 bg-cyan-50 rounded-lg mr-3 flex items-center justify-center">
-          <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <div class="font-medium">Contact Support</div>
-          <div class="text-xs text-gray-500">Get help from our team</div>
         </div>
       </a>
       
@@ -1124,18 +1092,6 @@ const supportItems = [
 /* Remove hover animation for active state */
 .nav-link.is-active:hover::before {
   width: 24px; /* Keep same width on hover */
-}
-
-.contact-active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 3px;
-  background: linear-gradient(90deg, rgba(20, 184, 166, 0.8) 0%, rgba(13, 148, 136, 1) 100%);
-  border-radius: 3px;
 }
 
 /* Mobile Active Link Styles */
