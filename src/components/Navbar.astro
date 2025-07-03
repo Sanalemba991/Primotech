@@ -222,9 +222,10 @@ const supportItems = [
     >
       Contact Us
     </a>
-    <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-500 hover:text-teal-500" aria-expanded="false">
-      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    <button id="mobile-menu-toggle" class="md:hidden p-2 text-teal-400 hover:text-teal-500" aria-expanded="false">
+      <svg id="mobile-menu-icon" class="h-6 w-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path id="mobile-menu-icon-bars" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        <path id="mobile-menu-icon-x" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" style="opacity:0;transform:scale(0.8);transition:opacity 0.25s,transform 0.25s"/>
       </svg>
     </button>
   </div>
@@ -789,11 +790,28 @@ const supportItems = [
     // Mobile menu toggle
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    if (mobileToggle && mobileMenu) {
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileMenuIconBars = document.getElementById('mobile-menu-icon-bars');
+    const mobileMenuIconX = document.getElementById('mobile-menu-icon-x');
+    if (mobileToggle && mobileMenu && mobileMenuIcon && mobileMenuIconBars && mobileMenuIconX) {
+      mobileToggle.classList.add('text-teal-400'); // Always active teal-400
       mobileToggle.addEventListener('click', () => {
         const isOpen = mobileMenu.classList.toggle('hidden') === false;
         mobileToggle.setAttribute('aria-expanded', isOpen.toString());
-        
+        // Animate X icon in/out, fade bars out/in
+        if (isOpen) {
+          mobileMenuIconBars.style.opacity = '0';
+          mobileMenuIconBars.style.transition = 'opacity 0.2s';
+          mobileMenuIconX.style.opacity = '1';
+          mobileMenuIconX.style.transform = 'scale(1)';
+          mobileMenuIconX.style.transition = 'opacity 0.25s,transform 0.25s';
+        } else {
+          mobileMenuIconBars.style.opacity = '1';
+          mobileMenuIconBars.style.transition = 'opacity 0.2s';
+          mobileMenuIconX.style.opacity = '0';
+          mobileMenuIconX.style.transform = 'scale(0.8)';
+          mobileMenuIconX.style.transition = 'opacity 0.2s,transform 0.2s';
+        }
         // Reset mobile navigation to main menu when closing
         if (!isOpen) {
           document.querySelectorAll('.mobile-menu-level').forEach(menu => {
@@ -1122,3 +1140,18 @@ const supportItems = [
     transform: translateY(0);
   }
 }
+
+/* Add spin animation for mobile menu icon */
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    .animate-spin {
+      animation: spin 0.6s linear infinite;
+    }
+
+    /* Animate X icon for mobile menu */
+    #mobile-menu-icon-x {
+      pointer-events: none;
+    }
+  </style>
