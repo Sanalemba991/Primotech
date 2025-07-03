@@ -17,6 +17,7 @@
   },
   "exclude": [
     "public/scripts/vendor/**/*",
-    "src/pages/tips/[...slug].astro"
+    "src/pages/tips/[...slug].astro",
+    "src/layouts/lay.astro"
   ]
 }

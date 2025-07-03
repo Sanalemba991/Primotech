@@ -7,9 +7,177 @@ const tips = await getCollection('tips');
 
 // Sort tips by date (newest first)
 const sortedTips = tips.sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime());
+
+// Page metadata
+const title = "Tips & Guides Collection | PrimoTech - Expert Security Technology Insights";
+const description = "Explore comprehensive technology tips, guides, and expert insights for security solutions. Professional advice from PrimoTech's security experts in Dubai, UAE.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://primotechllc.com/#organization",
+      "name": "PrimoTech LLC - Uniarch Dubai Distributor",
+      "url": "https://primotechllc.com",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${Astro.url.origin}/log.png`,
+        "url": `${Astro.url.origin}/log.png`,
+        "caption": "PrimoTech LLC - Uniarch Dubai Distributor",
+        "inLanguage": "en-US",
+        "width": 1000,
+        "height": 375
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/primotechllc/",
+        "https://www.facebook.com/primotechllc"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://primotechllc.com/#website",
+      "url": "https://primotechllc.com",
+      "name": "PrimoTech Security - Uniarch NVRs, XVRs, IP cameras, and network switches Dubai | Uniarch Dubai",
+      "description": "PrimoTech is a trusted distributor of Uniarch NVRs, XVRs, IP cameras, and network switches in Dubai and across the UAE.",
+      "publisher": {
+        "@id": "https://primotechllc.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://primotechllc.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl.toString(),
+      "name": title,
+      "description": description,
+      "isPartOf": {
+        "@id": "https://primotechllc.com/#website"
+      },
+      "about": {
+        "@id": "https://primotechllc.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "breadcrumb": {
+        "@id": `${canonicalUrl}#breadcrumb`
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://primotechllc.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tips & Guides",
+          "item": canonicalUrl.toString()
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": `${canonicalUrl}#collectionpage`,
+      "url": canonicalUrl.toString(),
+      "name": "Tips & Guides Collection - Security Technology Insights",
+      "description": description,
+      "isPartOf": {
+        "@id": `${canonicalUrl}#webpage`
+      },
+      "inLanguage": "en-US",
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": tips.length,
+        "itemListElement": tips.map((tip, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Article",
+            "@id": `https://primotechllc.com/tips/${tip.slug}`,
+            "url": `https://primotechllc.com/tips/${tip.slug}`,
+            "headline": tip.data.title,
+            "description": tip.data.subTitle,
+            "image": {
+              "@type": "ImageObject",
+              "url": `${Astro.url.origin}${tip.data.eventImage}`,
+              "caption": tip.data.eventImageAlt
+            },
+            "datePublished": tip.data.startDate,
+            "dateModified": tip.data.startDate,
+            "author": {
+              "@type": "Organization",
+              "@id": "https://primotechllc.com/#organization"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "@id": "https://primotechllc.com/#organization"
+            },
+            "inLanguage": "en-US",
+            "about": [
+              {
+                "@type": "Thing",
+                "name": "Security Technology"
+              },
+              {
+                "@type": "Thing",
+                "name": "Surveillance Systems"
+              },
+              {
+                "@type": "Thing",
+                "name": "Technical Guides"
+              }
+            ]
+          }
+        }))
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://primotechllc.com/#primotech-security-experts",
+      "name": "PrimoTech Security Technology Experts",
+      "url": "https://primotechllc.com",
+      "description": "Expert security technology consultants and Uniarch distributors providing comprehensive guides and tips for surveillance solutions in Dubai, UAE.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${Astro.url.origin}/log.png`,
+        "caption": "PrimoTech Security Experts Logo"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Dubai"
+        },
+        {
+          "@type": "Country",
+          "name": "United Arab Emirates"
+        }
+      ],
+      "knowsAbout": [
+        "Security Camera Systems",
+        "NVR Technology",
+        "XVR Systems",
+        "Network Switches",
+        "Surveillance Installation",
+        "Security Technology Consulting"
+      ]
+    }
+  ]
+};
 ---
 
-<Layout title="Tips & Guides Collection | Primotech" description="Explore our comprehensive collection of technology tips, guides, and insights for security solutions.">
+<Layout title={title} description={description} structuredData={structuredData} keywords="security technology, surveillance tips, Uniarch Dubai, security guides, PrimoTech LLC" canonical={canonicalUrl} canonicalURL={canonicalUrl}>
   <!-- Hero Banner Section -->
   <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden tips-hero">
     <!-- Background Image -->

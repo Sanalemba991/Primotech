@@ -67,15 +67,146 @@ const getISOString = (date: Date | string | undefined) => {
 };
 
 // SEO meta data
-const title = `${tip.data.title} | Primotech Tips`;
+const title = `${tip.data.title} | PrimoTech Tips`;
 const description =
   tip.data.subTitle ||
   tip.data.description ||
-  "Primotech security tips and guides";
+  "PrimoTech security tips and guides";
 const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://primotechllc.com/#organization",
+      "name": "PrimoTech LLC - Uniarch Dubai Distributor",
+      "url": "https://primotechllc.com",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${Astro.url.origin}/log.png`,
+        "url": `${Astro.url.origin}/log.png`,
+        "caption": "PrimoTech LLC - Uniarch Dubai Distributor",
+        "inLanguage": "en-US",
+        "width": 1000,
+        "height": 375
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/primotechllc/",
+        "https://www.facebook.com/primotechllc"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://primotechllc.com/#website",
+      "url": "https://primotechllc.com",
+      "name": "PrimoTech Security - Uniarch Dubai",
+      "publisher": {
+        "@id": "https://primotechllc.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      "name": title,
+      "description": description,
+      "isPartOf": {
+        "@id": "https://primotechllc.com/#website"
+      },
+      "inLanguage": "en-US",
+      "breadcrumb": {
+        "@id": `${canonicalUrl}#breadcrumb`
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://primotechllc.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tips & Guides",
+          "item": "https://primotechllc.com/tips/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": tip.data.title,
+          "item": canonicalUrl
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalUrl}#article`,
+      "headline": tip.data.title,
+      "description": description,
+      "isPartOf": {
+        "@id": `${canonicalUrl}#webpage`
+      },
+      "author": {
+        "@type": "Person",
+        "name": tip.data.name || "PrimoTech Security Expert"
+      },
+      "publisher": {
+        "@id": "https://primotechllc.com/#organization"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": `${Astro.url.origin}${tip.data.eventImage}`,
+        "caption": tip.data.eventImageAlt || tip.data.title,
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": {
+        "@id": `${canonicalUrl}#webpage`
+      },
+      "datePublished": getISOString(tip.data.startDate),
+      "dateModified": getISOString(tip.data.endDate || tip.data.startDate),
+      "articleBody": tip.data.description,
+      "keywords": tip.data.tags.join(", ")
+    }
+  ]
+};
+
+// Open Graph Metadata
+const openGraph = {
+  title: title,
+  description: description,
+  url: canonicalUrl,
+  siteName: "Primotech LLC",
+  images: [
+    {
+      url: `${Astro.url.origin}${tip.data.eventImage}`,
+      width: 1200,
+      height: 630,
+      alt: tip.data.eventImageAlt || tip.data.title
+    }
+  ],
+  locale: "en_US",
+  type: "article",
+  publishedTime: getISOString(tip.data.startDate),
+  modifiedTime: getISOString(tip.data.endDate || tip.data.startDate),
+  author: tip.data.name || "PrimoTech Security Expert",
+  tags: tip.data.tags
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description} 
+  structuredData={structuredData}
+  canonicalUrl={canonicalUrl}
+>
   <!-- Header Banner with Breadcrumbs - Smaller Version -->
   <section
     id="header-banner"
