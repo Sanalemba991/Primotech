@@ -48,7 +48,28 @@ const banners = [
   }
 ];
 ---
-
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": banners.map((banner, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "WebPage",
+      "name": banner.title,
+      "description": banner.description,
+      "url": banner.buttonLink,
+      "image": {
+        "@type": "ImageObject",
+        "url": banner.image,
+        "width": 1470,
+        "height": 980
+      }
+    }
+  }))
+})}
+</script>
 <section class="relative w-full h-[calc(100vh-3rem)] overflow-hidden bg-gray-900 group banner-container banner-animation" data-banner-reveal>
   <!-- Banner Container -->
   <div class="relative w-full h-full">

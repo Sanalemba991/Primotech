@@ -86,10 +86,68 @@ function renderSpecifications(specs) {
 }
 
 const specificationGroups = renderSpecifications(productData?.specifications);
+
+// Build canonical URL and structured data
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": productData?.title,
+    "description": productData?.description,
+    "image": productData?.images?.[0]?.url
+      ? new URL(productData.images[0].url, Astro.site).toString()
+      : (productData?.image ? new URL(productData.image, Astro.site).toString() : ""),
+    "productType": "Switch",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "AED",
+      "price": "0.00",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition"
+    },
+    "specification": productData?.specifications ?? undefined
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": new URL("/", Astro.site).toString()
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": new URL("/products", Astro.site).toString()
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Switch",
+        "item": new URL("/products/swit", Astro.site).toString()
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": productData?.title,
+        "item": canonicalURL.toString()
+      }
+    ]
+  }
+];
 ---
 
 
-<Layout>
+<Layout
+    title={`${productData?.title} - PrimoTech - Uniarc Dubai`}
+    structuredData={structuredData}
+    description={productData?.description}
+    canonical={canonicalURL.toString()}
+>
   <!-- Professional Header Banner - Cleaned: removed animation classes -->
   <section 
     id="header-banner"
@@ -110,8 +168,8 @@ const specificationGroups = renderSpecifications(productData?.specifications);
           <span class="breadcrumb-text">Products</span>
         </a>
         <span class="breadcrumb-separator">/</span>
-        <a href="/products/analog" class="breadcrumb-link hide-on-mobile">
-          <span class="breadcrumb-text">Analog</span>
+        <a href="/products/swit" class="breadcrumb-link hide-on-mobile">
+          <span class="breadcrumb-text">Network Switches</span>
         </a>
         <span class="breadcrumb-separator hide-on-mobile">/</span>
         <span class="breadcrumb-current truncate">{productData?.title}</span>

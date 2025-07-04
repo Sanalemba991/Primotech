@@ -33,8 +33,8 @@ const structuredData = {
       "url": "https://primotechllc.com",
       "logo": {
         "@type": "ImageObject",
-        "@id": `${Astro.url.origin}/log.png`,
-        "url": `${Astro.url.origin}/log.png`,
+        "@id": "https://primotechllc.com/logo.png",
+        "url": "https://primotechllc.com/logo.png",
         "caption": "PrimoTech LLC - Uniarch Dubai Distributor",
         "inLanguage": "en-US",
         "width": 1000,
@@ -42,8 +42,16 @@ const structuredData = {
       },
       "sameAs": [
         "https://www.linkedin.com/company/primotechllc/",
-        "https://www.facebook.com/primotechllc"
-      ]
+        "https://www.facebook.com/primotechllc",
+        "https://twitter.com/primotechllc",
+        "https://www.instagram.com/primotechllc/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971 52 879 6664",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Arabic"]
+      }
     },
     {
       "@type": "WebSite",
@@ -53,7 +61,12 @@ const structuredData = {
       "publisher": {
         "@id": "https://primotechllc.com/#organization"
       },
-      "inLanguage": "en-US"
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://primotechllc.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "WebPage",
@@ -68,6 +81,8 @@ const structuredData = {
         "@id": "https://primotechllc.com/#organization"
       },
       "inLanguage": "en-US",
+      "datePublished": "2023-01-01T12:00:00+00:00",
+      "dateModified": new Date().toISOString(),
       "breadcrumb": {
         "@id": `${canonicalUrl}#breadcrumb`
       }
@@ -91,33 +106,51 @@ const structuredData = {
       ]
     },
     {
-      "@type": "SupportPage",
-      "@id": `${canonicalUrl}#supportpage`,
-      "url": canonicalUrl,
-      "name": title,
-      "description": description,
-      "isPartOf": {
-        "@id": `${canonicalUrl}#webpage`
+      "@type": "Service",
+      "@id": `${canonicalUrl}#supportservice`,
+      "name": "PrimoTech Technical Support",
+      "description": "Professional technical support for Uniarch security products and solutions",
+      "provider": {
+        "@id": "https://primotechllc.com/#organization"
       },
-      "inLanguage": "en-US",
-      "mainEntity": [
-        {
-          "@type": "FAQPage",
-          "url": "https://primotechllc.com/support/faq",
-          "name": "FAQ"
-        },
-        {
-          "@type": "WebPage",
-          "url": "https://primotechllc.com/support/videos",
-          "name": "Video"
-        }
-      ]
+      "serviceType": "Technical Support",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Arab Emirates"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Support Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "FAQ Support",
+              "url": "https://primotechllc.com/support/faq"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Video Support",
+              "url": "https://primotechllc.com/support/videos"
+            }
+          }
+        ]
+      }
     }
-  ]
+  ],
 };
 ---
 
-<Layout title={title} description={description} structuredData={structuredData} canonicalUrl={canonicalUrl}>
+ <Layout 
+  title={title} 
+  description={description} 
+  structuredData={structuredData} 
+  canonicalUrl={canonicalUrl}
+>
   <main class="min-h-screen">
     <!-- Hero Section -->
     <section class="relative h-[60vh] lg:h-[70vh] overflow-hidden support-hero">
@@ -207,7 +240,7 @@ const structuredData = {
           <!-- Contact Button -->
           <div class="">
             <a 
-              href="mailto:info@primotechllc.com"
+              href="mailto:sales@primotechllc.com"
               class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-semibold text-base rounded-full transition-all duration-300 group"
             >
               Contact Us
