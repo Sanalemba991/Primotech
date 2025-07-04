@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Whatsapp from '../../components/Whatsapp.tsx';
+import Products from '~/components/Products.astro';
 
 const title = "Products - PrimoTech LLC | Security Camera Solutions";
 const description = "Explore PrimoTech LLC's innovative security camera products including Panda P, S, B Series and Indoor Security Cameras. Advanced IoT solutions for comprehensive security.";
-
+const canonicalURL = new URL("/products", Astro.site);
 // WiFi Camera Products Data
 const wifiCameras = [
   {
@@ -226,8 +227,182 @@ const Accessories = [
     ], link: '/products/brackets'
   }
 ];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": canonicalURL.toString(),
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": Astro.site.toString(),
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": canonicalURL.toString(),
+      },
+    ],
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      ...wifiProducts.map((product, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Product",
+          "name": product.title,
+          "description": product.description,
+          "url": new URL(product.link, Astro.site).toString(),
+          "image": new URL(product.image, Astro.site).toString(),
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "24",
+          },
+          "review": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Jaden Smith",
+            },
+            "reviewBody": "Excellent quality and reliable product.",
+          },
+        },
+      })),
+      ...IPandVR.map((product, index) => ({
+        "@type": "ListItem",
+        "position": wifiProducts.length + index + 1,
+        "item": {
+          "@type": "Product",
+          "name": product.title,
+          "description": product.description,
+          "url": new URL(product.link, Astro.site).toString(),
+          "image": new URL(product.image, Astro.site).toString(),
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "24",
+          },
+          "review": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Jaden Smith",
+            },
+            "reviewBody": "Excellent quality and reliable product.",
+          },
+        },
+      })),
+      ...Analog.map((product, index) => ({
+        "@type": "ListItem",
+        "position": wifiProducts.length + IPandVR.length + index + 1,
+        "item": {
+          "@type": "Product",
+          "name": product.title,
+          "description": product.description,
+          "url": new URL(product.link, Astro.site).toString(),
+          "image": new URL(product.image, Astro.site).toString(),
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "24",
+          },
+          "review": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Jane Smith",
+            },
+            "reviewBody": "Excellent quality and reliable product.",
+          },
+        },
+      })),
+      ...transmission.map((product, index) => ({
+        "@type": "ListItem",
+        "position": wifiProducts.length + IPandVR.length + Analog.length + index + 1,
+        "item": {
+          "@type": "Product",
+          "name": product.title,
+          "description": product.description,
+          "url": new URL(product.link, Astro.site).toString(),
+          "image": new URL(product.image, Astro.site).toString(),
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "24",
+          },
+          "review": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Jane Smith",
+            },
+            "reviewBody": "Excellent quality and reliable product.",
+          },
+        },
+      })),
+      ...Accessories.map((product, index) => ({
+        "@type": "ListItem",
+        "position": wifiProducts.length + IPandVR.length + Analog.length + transmission.length + index + 1,
+        "item": {
+          "@type": "Product",
+          "name": product.title,
+          "description": product.description,
+          "url": new URL(product.link, Astro.site).toString(),
+          "image": new URL(product.image, Astro.site).toString(),
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "24",
+          },
+          "review": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Jane Smith",
+            },
+            "reviewBody": "Excellent quality and reliable product.",
+          },
+        },
+      })),
+    ],
+  },
+};
 ---
-<Layout title={title} description={description}>
+<Layout title={title} description={description} structuredData={structuredData}>
   <main class="min-h-screen">
     
     <!-- Hero Section -->

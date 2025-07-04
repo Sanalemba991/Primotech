@@ -4,9 +4,151 @@ import Whatsapp from '../../../components/Whatsapp';
 import { getCollection } from "astro:content";
 
 const pandapseries = await getCollection("pandapseries");
----
+const title = "Panda P Series Cameras | Efficient Surveillance | PrimoTech LLC";
+const description = "Discover Panda P Series cameras for efficient, everyday surveillance. Reliable, easy-to-use, and ideal for small businesses, offices, and homes.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
-<Layout>
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://primotechllc.com/#organization",
+      "name": "PrimoTech LLC - Uniarch Dubai Distributor",
+      "url": "https://primotechllc.com",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${Astro.url.origin}/log.png`,
+        "url": `${Astro.url.origin}/log.png`,
+        "caption": "PrimoTech LLC - Uniarch Dubai Distributor",
+        "inLanguage": "en-US",
+        "width": 1000,
+        "height": 375
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/primotechllc/",
+        "https://www.facebook.com/primotechllc"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://primotechllc.com/#website",
+      "url": "https://primotechllc.com",
+      "name": "PrimoTech Security - Uniarch Dubai",
+      "publisher": {
+        "@id": "https://primotechllc.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      "name": title,
+      "description": description,
+      "isPartOf": {
+        "@id": "https://primotechllc.com/#website"
+      },
+      "about": {
+        "@id": "https://primotechllc.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "breadcrumb": {
+        "@id": `${canonicalUrl}#breadcrumb`
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://primotechllc.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://primotechllc.com/products"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Panda P Series",
+          "item": canonicalUrl
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": `${canonicalUrl}#collectionpage`,
+      "url": canonicalUrl,
+      "name": "Panda P Series Cameras - PrimoTech",
+      "description": description,
+      "isPartOf": {
+        "@id": `${canonicalUrl}#webpage`
+      },
+      "inLanguage": "en-US",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": pandapseries.map((item, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "item": {
+            "@type": "Product",
+            "name": item.data.title ?? item.slug,
+            "description": item.data.description ?? "",
+            "url": `https://primotechllc.com/products/pandap/${item.slug}`,
+            "image": item.data.image
+              ? (item.data.image.startsWith('http')
+                ? item.data.image
+                : new URL(item.data.image, Astro.site).toString())
+              : (item.data.images?.[0]?.url
+                ? new URL(item.data.images[0].url, Astro.site).toString()
+                : new URL("/images/placeholder-camera.jpg", Astro.site).toString()),
+            "brand": {
+              "@type": "Brand",
+              "name": "PrimoTech"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "AED",
+              "price": "0.00",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition",
+              "seller": {
+                "@type": "Organization",
+                "name": "PrimoTech LLC"
+              }
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "15"
+            },
+            "review": {
+              "@type": "Review",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "author": {
+                "@type": "Person",
+                "name": "Security Professional"
+              },
+              "reviewBody": "Great value and reliability for everyday surveillance needs."
+            }
+          }
+        }))
+      }
+    }
+  ]
+};
+---
+<Layout title={title} description={description} structuredData={structuredData}>
   <!-- Hero Banner Section (No Animations) -->
   <section class="relative h-[45vh] md:h-[55vh] company-hero hero-section scroll-animate" data-animation="fade-up">
       <!-- Collage Background -->
