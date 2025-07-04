@@ -549,6 +549,14 @@ const structuredData = {
     flex-grow: 1;
   }
 
+  /* Fix horizontal overflow forcefully for all devices */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+    width: 100%;
+  }
+
   /* Responsive Design - Enhanced */
   @media (max-width: 1024px) {
     .intro-content,
@@ -905,6 +913,31 @@ const structuredData = {
         link.closest('.product-card').style.boxShadow = '';
       });
     });
+    
+    // Force disable horizontal scroll during animations
+    function disableHorizontalScroll() {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+      
+      // For mobile browsers that might ignore the overflow property
+      document.addEventListener('touchmove', function(e) {
+        if (Math.abs(e.touches[0].clientX - e.touches[0].initialX) > 
+            Math.abs(e.touches[0].clientY - e.touches[0].initialY)) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    }
+    
+    // Call immediately and during all animations
+    disableHorizontalScroll();
+    
+    // Ensure it's enforced during animations
+    document.querySelectorAll('.section-animate').forEach(section => {
+      section.addEventListener('transitionstart', disableHorizontalScroll);
+    });
+    
+    // Re-enforce on resize
+    window.addEventListener('resize', disableHorizontalScroll);
   });
 </script>
 
@@ -1486,5 +1519,30 @@ const structuredData = {
         link.closest('.product-card').style.boxShadow = '';
       });
     });
+    
+    // Force disable horizontal scroll during animations
+    function disableHorizontalScroll() {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+      
+      // For mobile browsers that might ignore the overflow property
+      document.addEventListener('touchmove', function(e) {
+        if (Math.abs(e.touches[0].clientX - e.touches[0].initialX) > 
+            Math.abs(e.touches[0].clientY - e.touches[0].initialY)) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    }
+    
+    // Call immediately and during all animations
+    disableHorizontalScroll();
+    
+    // Ensure it's enforced during animations
+    document.querySelectorAll('.section-animate').forEach(section => {
+      section.addEventListener('transitionstart', disableHorizontalScroll);
+    });
+    
+    // Re-enforce on resize
+    window.addEventListener('resize', disableHorizontalScroll);
   });
 </script>
