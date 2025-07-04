@@ -1,10 +1,10 @@
 
 export const SITE = {
-	Title: "Top Wholesale Deals on UNV, Hikvision & Dahua Security Products",
+	Title: "Top Wholesale Deals on Uniarch Security Products",
 	baseURL:"https://lovosis.com" ,
 	canonical: "https://lovosis.com", 
 	description:
-		"Looking for wholesale prices on UNV, Hikvision, or Dahua security products? We offer top-rated surveillance equipment for businesses and resellers",
+		"Looking for wholesale prices on Uniarch products? We offer top-rated surveillance equipment for businesses and resellers",
 	type: "website",
 	image: {
 		url: "https://lovosis.com/social.png",
@@ -15,7 +15,7 @@ export const SITE = {
 	siteName: "Lovosis Technology U.A.E|Security system supplier",
 	openGraph: {
 		basic: {
-			title: "Top Wholesale Deals on UNV, Hikvision & Dahua Security Products",
+			title: "Top Wholesale Deals on Uniarch Security Products",
 			type: "Website",
 			image: {
 				url: "https://lovosis.com/social.png", 
@@ -27,7 +27,7 @@ export const SITE = {
 		optional: {
 			siteName: "lovosis.com",
 			description:
-				"Looking for wholesale prices on UNV, Hikvision, or Dahua security products? We offer top-rated surveillance equipment for businesses and resellers",
+				"Top Wholesale Deals on Uniarch Security Products",
 			video: {
 				url: "https://youtu.be/iXoD66f3-EI",
 				alt: "Lovosis Technology L.L.C U.A.E",
