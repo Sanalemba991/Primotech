@@ -317,7 +317,7 @@ const supportItems = [
       {categories.map((category, catIdx) => (
         <button 
           type="button"
-          class="mobile-nav-button flex items-center justify-between w-full py-3 px-2 text-gray-700 hover:text-cyan-600 border-b border-gray-50"
+          class="mobile-nav-button flex items-center justify-between w-full py-3 px-2 text-gray-700 hover:text-teal-600 border-b border-gray-50"
           data-target={`mobile-subcategory-${category.name.toLowerCase().replace(/\s+/g, '-')}`}
           data-category-name={category.name}
           style={`opacity:0;transform:translateY(20px);transition:opacity 0.4s,transform 0.4s;`}
@@ -343,7 +343,7 @@ const supportItems = [
       
       <a 
         href="/products"
-        class="block py-3 px-2 text-teal-400 hover:text-cyan-900 font-medium mt-4"
+        class="block py-3 px-2 text-teal-400 hover:text-teal-900 font-medium mt-4"
         style="opacity:0;transform:translateY(20px);transition:opacity 0.4s,transform 0.4s;"
         data-animate="mobile-link"
         data-delay={categories.length + 1}
@@ -373,7 +373,7 @@ const supportItems = [
         href="/support/faq"
         class="flex items-center py-3 px-2 text-gray-700 hover:text-teal-400 border-b border-gray-50"
       >
-        <div class="w-10 h-10 bg-cyan-50 rounded-lg mr-3 flex items-center justify-center">
+        <div class="w-10 h-10 bg-teal-50 rounded-lg mr-3 flex items-center justify-center">
           <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={supportItems[0].icon}/>
           </svg>
@@ -389,7 +389,7 @@ const supportItems = [
         href="/support/videos"
         class="flex items-center py-3 px-2 text-gray-700 hover:text-teal-600 border-b border-gray-50"
       >
-        <div class="w-10 h-10 bg-cyan-50 rounded-lg mr-3 flex items-center justify-center">
+        <div class="w-10 h-10 bg-teal-50 rounded-lg mr-3 flex items-center justify-center">
           <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={supportItems[1].icon}/>
           </svg>
@@ -613,7 +613,7 @@ const supportItems = [
       if (isSupportOpen) {
         isSupportOpen = false;
         hasUserHoveredSupport = false;
-        supportToggle.classList.remove('text-cyan-600');
+        supportToggle.classList.remove('text-teal-600');
         supportToggle.classList.add('text-gray-700');
         const arrow = supportToggle.querySelector('svg');
         if (arrow) arrow.style.transform = 'rotate(0deg)';
@@ -629,12 +629,12 @@ const supportItems = [
       
       btns.forEach((b, i) => {
         b.classList.remove(
-          'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+          'bg-gradient-to-r', 'from-teal-400', 'to-green-200',
           'text-white', 'font-semibold'
         );
         if (i === 0) {
           b.classList.add(
-            'bg-gradient-to-r', 'from-cyan-400', 'to-green-200',
+            'bg-gradient-to-r', 'from-teal-400', 'to-green-200',
             'text-white', 'font-semibold'
           );
         }
@@ -652,7 +652,7 @@ const supportItems = [
       if (isMenuOpen) {
         isMenuOpen = false;
         hasUserHoveredProducts = false;
-        productsToggle.classList.remove('text-cyan-600');
+        productsToggle.classList.remove('text-teal-600');
         productsToggle.classList.add('text-gray-700');
         megaMenu.classList.remove('opacity-100', 'visible');
         megaMenu.classList.add('opacity-0', 'pointer-events-none', 'invisible');

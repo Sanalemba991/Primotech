@@ -10,12 +10,11 @@ export async function getStaticPaths() {
     params: { slug: product.slug },
     props: { product },
   }));
-}
-
+}  
 const { slug } = Astro.params;
 const { product } = Astro.props;
 const productData = product?.data;
-
+ 
 const allProducts = await getCollection("xvr");
 const relatedProducts = allProducts.filter(p => p.slug !== slug).slice(0, 3);
 
