@@ -180,7 +180,11 @@ const structuredData = {
           </p>
         </div>
         <div class="intro-image">
-          <img src="/images/banner/panda banner (1).png" alt="Mounting Bracket Overview" loading="lazy" />
+          <img 
+            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80"
+            alt="Wall mounting bracket for security camera"
+            loading="lazy"
+          />
         </div>
       </div>
     </div>
@@ -191,7 +195,10 @@ const structuredData = {
     <div class="container">
       <div class="advantage-content">
         <div class="advantage-image">
-          <img src="/images/banner/panda banner (2).png" alt="Mounting Bracket Advantages" />
+          <img 
+            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80"
+            alt="Ceiling bracket and accessories for surveillance installation"
+          />
         </div>
         <div class="advantage-text">
           <h2>Why Choose Our Accessories?</h2>
@@ -280,6 +287,23 @@ const structuredData = {
     padding: 0 clamp(1rem, 5vw, 1.5rem);
   }
 
+  /* Fixed navbar styles - keeps navbar visible while scrolling */
+  :global(header), :global(nav), :global(.navbar), :global(.site-header) {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Add top padding to accommodate the fixed navbar */
+  :global(main), :global(.main-content) {
+    padding-top: 50px; /* Adjust this value to match your navbar height */
+  }
+  
   /* Hero Banner - No Animations */
   .company-hero {
     min-height: 300px;
