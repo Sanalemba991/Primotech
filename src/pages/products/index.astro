@@ -958,26 +958,15 @@ const structuredData = {
   }
   
   /* Gradient backgrounds for different categories */
-  #wifi-cameras .banner-inner {
-    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-  }
-  
-  #ip-vr .banner-inner {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  }
-  
-  #analog .banner-inner {
-    background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
-  }
-  
-  #transmission .banner-inner {
-    background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
-  }
-  
-  #accessories .banner-inner {
-    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-  }
-
+#wifi-cameras .banner-inner,
+#ip-vr .banner-inner,
+#analog .banner-inner,
+#transmission .banner-inner,
+#accessories .banner-inner {
+    background: 
+        linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Black/40 overlay */
+        linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%); /* Original teal gradient */
+}
   /* Product Grid Styles */
   .camera-showcase {
     width: 100%;
