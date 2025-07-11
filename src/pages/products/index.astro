@@ -233,6 +233,13 @@ const structuredData = {
   "name": title,
   "description": description,
   "url": canonicalURL.toString(),
+  "image": [
+    new URL("/images/Productimage/pandab.jpg", Astro.site).toString(),
+    new URL("/images/Productimage/dual.jpg", Astro.site).toString(),
+    new URL("/images/Productimage/analog.jpg", Astro.site).toString(),
+    new URL("/images/Productimage/transmission.jpg", Astro.site).toString(),
+    new URL("/images/Productimage/brackets.jpg", Astro.site).toString()
+  ],
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -449,7 +456,7 @@ const structuredData = {
       <div class="container mx-auto px-6 lg:px-8">
         <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
           <img 
-            src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" 
+            src="/images/Productimage/pandab.jpg" 
             alt="WiFi Security Camera Banner" 
             class="w-full h-96 object-cover banner-image"
           />
@@ -490,7 +497,7 @@ const structuredData = {
       <div class="container mx-auto px-6 lg:px-8">
         <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
           <img 
-            src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            src="/images/Productimage/dual.jpg" 
             alt="IP & VR Camera Banner" 
             class="w-full h-96 object-cover banner-image"
           />
@@ -531,9 +538,9 @@ const structuredData = {
       <div class="container mx-auto px-6 lg:px-8">
         <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
           <img 
-            src="https://images.unsplash.com/photo-1563770660941-10a63607739e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            src="/images/Productimage/analog.jpg" 
             alt="Analog Camera Banner" 
-            class="w-full h-96 object-cover banner-image"
+            class="w-full h-30 object-cover banner-image"
           />
           <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex items-center justify-center">
             <div class="text-center px-6 banner-content">
@@ -572,7 +579,7 @@ const structuredData = {
       <div class="container mx-auto px-6 lg:px-8">
         <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
           <img 
-            src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            src="/images/Productimage/transmission.jpg" 
             alt="Transmission Equipment Banner" 
             class="w-full h-96 object-cover banner-image"
           />
@@ -613,7 +620,7 @@ const structuredData = {
       <div class="container mx-auto px-6 lg:px-8">
         <div class="relative rounded-xl overflow-hidden shadow-lg banner-inner">
           <img 
-            src="https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+            src="/images/Productimage/brackets.jpg" 
             alt="Security Accessories Banner" 
             class="w-full h-96 object-cover banner-image"
           />
