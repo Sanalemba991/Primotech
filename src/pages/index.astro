@@ -116,10 +116,10 @@ const structuredData = {
       image: `${Astro.url.origin}/log.png`,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Your Street Address",
+        streetAddress: "Baghlaf Building, 26B St - Deira",
         addressLocality: "Dubai",
         addressRegion: "Dubai",
-        postalCode: "Your Postal Code",
+        postalCode: "00000", // Replace with actual postal code if available
         addressCountry: "AE",
       },
       geo: {
@@ -144,6 +144,22 @@ const structuredData = {
           closes: "18:00",
         },
       ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+971 52 879 6664",
+        contactType: ["sales", "customer service"],
+        email: "sales@primotech.com",
+        areaServed: ["AE"],
+        availableLanguage: ["English", "Arabic"],
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Baghlaf Building, 26B St - Deira",
+          addressLocality: "Dubai",
+          addressRegion: "Dubai",
+          postalCode: "123241",
+          addressCountry: "AE"
+        }
+      },
     },
     {
       "@type": "BreadcrumbList",

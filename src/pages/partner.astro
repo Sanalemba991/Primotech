@@ -27,7 +27,7 @@ const structuredData = {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Partners",
+        "name": "Lovosis & Spottive Partners",
         "item": canonicalUrl
       }
     ]
@@ -35,72 +35,37 @@ const structuredData = {
   "mainEntity": [
     {
       "@type": "Organization",
-      "name": "PrimoTech - Uniarch Dubai",
-      "url": "https://primotechllc.com",
+      "name": "Lovosis Technology",
+      "url": "https://lovosis.com/",
       "logo": {
         "@type": "ImageObject",
-        "url": `${Astro.url.origin}/log.png`,
-        "width": 1000,
-        "height": 375
+        "url": `${Astro.url.origin}/images/partner.png`
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+971 52 879 6664",
-        "contactType": ["sales", "customer service", "partnership"],
-        "email": "sales@primotechllc.com",
-        "areaServed": ["AE"],
-        "availableLanguage": ["English", "Arabic"],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "25th St - Naif - Dubai - United Arab Emirates",
-          "addressLocality": "Dubai",
-          "addressRegion": "Dubai",
-          "postalCode": "123241",
-          "addressCountry": "AE"
-        }
-      }
+        "telephone": "+971 50 916 2488",
+        "email": "sales@lovosis.com",
+        "contactType": "customer service",
+        "areaServed": "AE"
+      },
+      "description": "Lovosis Technology is a leading provider of innovative IT solutions and services, empowering businesses with cutting-edge technology."
     },
     {
       "@type": "Organization",
-      "name": "PT. Adsec Global Indonesia",
-      "url": "https://adsec.id/",
+      "name": "Spottive Technologies",
+      "url": "https://spottive.com/",
       "logo": {
         "@type": "ImageObject",
-        "url": `${Astro.url.origin}/images/company1.png`
+        "url": `${Astro.url.origin}/images/partner1.png`
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+62 (21) 6009855",
-        "email": "info@adsec.id",
+        "telephone": "+971 55 234 1712",
+        "email": "sales@spottive.com",
         "contactType": "customer service",
-        "areaServed": "ID"
+        "areaServed": "AE"
       },
-      "description": "Adsec who is a part of P.T. Pasifik Internusa, is a well known distribution partner for IT products in Indonesia."
-    },
-    {
-      "@type": "Organization",
-      "name": "Eltcrac System Sp. z o.o.",
-      "url": "https://sklep-ecsystem.pl/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${Astro.url.origin}/images/company2.png`
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+48 12 292 48 61",
-        "email": "esklep@ecsystem.pl",
-        "contactType": "customer service",
-        "areaServed": "PL",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "ul. Ruciana 3",
-          "addressLocality": "Kraków",
-          "addressRegion": "",
-          "postalCode": "30-803",
-          "addressCountry": "PL"
-        }
-      },
-      "description": "Eltcrac System is a leading technology distributor specializing in security and surveillance solutions across Poland and Central Europe."
+      "description": "Spottive Technologies specializes in smart solutions and digital transformation for enterprises across various industries."
     }
   ]
 };
@@ -208,36 +173,36 @@ const structuredData = {
       <div class="container mx-auto px-6 lg:px-8">
         <div class="grid gap-6 max-w-5xl mx-auto">
           
-          <!-- Partner 1: PT. Adsec Global Indonesia -->
+          <!-- Partner 1: Lovosis Technology -->
           <div class="bg-white rounded-lg shadow-none overflow-hidden partner-card partner-card-animate">
             <div class="flex flex-col md:flex-row">
               <!-- Logo Section -->
               <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6">
-                <img src="/images/company1.png" alt="Adsec Global Indonesia Logo" class="w-full h-32 object-contain">
+                <img src="/images/partner.png" alt="Lovosis Technology Logo" class="w-full h-32 object-contain">
               </div>
               
               <!-- Content Section -->
               <div class="flex-1 p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">PT. Adsec Global Indonesia</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Lovosis Technology</h3>
                 
                 <!-- Contact Information in Columns -->
                 <div class="space-y-3 mb-4">
                   <div class="flex items-start">
                     <span class="font-medium text-gray-600 w-24 text-sm">Tel :</span>
-                    <span class="text-gray-800">+62 (21) 6009855</span>
+                    <span class="text-gray-800">+971 50 916 2488</span>
                   </div>
                   
                   <div class="flex items-start">
                     <span class="font-medium text-gray-600 w-24 text-sm">Email :</span>
-                    <a href="mailto:info@adsec.id" class="text-blue-600 hover:text-blue-700 transition-colors">
-                      info@adsec.id
+                    <a href="mailto:sales@lovosis.com" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      sales@lovosis.com
                     </a>
                   </div>
                   
                   <div class="flex items-start">
                     <span class="font-medium text-gray-600 w-24 text-sm">Web site :</span>
-                    <a href="https://adsec.id/" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors">
-                      https://adsec.id/
+                    <a href="https://lovosis.com/" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      https://lovosis.com/
                     </a>
                   </div>
                 </div>
@@ -246,7 +211,7 @@ const structuredData = {
                 <div class="flex flex-col">
                   <span class="font-medium text-gray-600 mb-2 text-sm">Company Profile :</span>
                   <p class="text-gray-700 leading-relaxed text-sm">
-                    Adsec who is a part of P.T. Pasifik Internusa, is a well known distribution partner for IT products in Indonesia.
+                    Lovosis Technology is a leading provider of innovative IT solutions and services, empowering businesses with cutting-edge technology.
                   </p>
                 </div>
               </div>
@@ -255,52 +220,47 @@ const structuredData = {
 
           <hr class="my-8 border-gray-200">
 
-          <!-- Partner 2: Eltcrac System Sp. z o.o. -->
+          <!-- Partner 2: Spottive Technologies -->
           <div class="bg-white rounded-lg shadow-none overflow-hidden partner-card partner-card-animate">
             <div class="flex flex-col md:flex-row">
               <!-- Logo Section -->
               <div class="w-full md:w-72 bg-gray-50 flex items-center justify-center p-6">
-                <div class="w-full h-32 bg-white border border-gray-300 rounded flex items-center justify-center">
-                  <img src="/images/company2.png" alt="Eltcrac System Logo" class="max-w-full h-full object-contain">
-                </div>
+                <img src="/images/partner1.png" alt="Spottive Technologies Logo" class="w-full h-32 object-contain">
               </div>
               
               <!-- Content Section -->
               <div class="flex-1 p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Eltcrac System Sp. z o.o.</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Spottive Technologies</h3>
                 
                 <!-- Contact Information in Columns -->
                 <div class="space-y-3 mb-4">
                   <div class="flex items-start">
                     <span class="font-medium text-gray-600 w-32 text-sm">Tel :</span>
-                    <span class="text-gray-800">+48 12 292 48 61</span>
+                    <span class="text-gray-800">+971 55 234 1712</span>
                   </div>
                   
                   <div class="flex items-start">
                     <span class="font-medium text-gray-600 w-32 text-sm">Email :</span>
-                    <a href="mailto:esklep@ecsystem.pl" class="text-blue-600 hover:text-blue-700 transition-colors">
-                      esklep@ecsystem.pl
+                    <a href="mailto:sales@spottive.com" class="text-blue-600 hover:text-blue-700 transition-colors">
+                     sales@spottive.com
                     </a>
                   </div>
                   
                   <div class="flex items-start">
                     <span class="font-medium text-gray-600 w-32 text-sm">Web site :</span>
-                    <a href="https://sklep-ecsystem.pl/" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors">
-                      https://sklep-ecsystem.pl/
+                    <a href="https://spottive.com/" target="_blank" class="text-blue-600 hover:text-blue-700 transition-colors">
+                      https://spottive.com/
                     </a>
                   </div>
                   
-                  <div class="flex items-start">
-                    <span class="font-medium text-gray-600 w-32 text-sm">Company Address :</span>
-                    <span class="text-gray-800">ul. Ruciana 3, 30-803 Kraków</span>
-                  </div>
+                 
                 </div>
                 
                 <!-- Company Profile -->
                 <div class="flex flex-col">
                   <span class="font-medium text-gray-600 mb-2 text-sm">Company Profile :</span>
                   <p class="text-gray-700 leading-relaxed text-sm">
-                    Eltcrac System is a leading technology distributor specializing in security and surveillance solutions across Poland and Central Europe.
+                    Spottive Technologies specializes in smart solutions and digital transformation for enterprises across various industries.
                   </p>
                 </div>
               </div>

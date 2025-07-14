@@ -217,7 +217,44 @@ const structuredData = [
         "position": 4,
         "name": productData?.title,
         "item": canonicalURL.toString()
+      },
+       {
+      "@type": "LocalBusiness",
+      "@id": "https://primotechllc.com/#localbusiness",
+      "name": "PrimoTech LLC - Uniarch Authorized Distributor Dubai",
+      "image": `${Astro.url.origin}/log.png`,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Baghlaf Building, 26B St - Deira",
+        "addressLocality": "Dubai",
+        "addressRegion": "Dubai",
+        "postalCode": "123241",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.2048",
+        "longitude": "55.2708"
+      },
+      "telephone": "+971 52 879 6664",
+      "priceRange": "$$",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971 52 879 6664",
+        "contactType": ["sales", "customer service", "support"],
+        "email": "sales@primotech.com",
+        "areaServed": ["AE"],
+        "availableLanguage": ["English", "Arabic"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Baghlaf Building, 26B St - Deira",
+          "addressLocality": "Dubai",
+          "addressRegion": "Dubai",
+          "postalCode": "123241",
+          "addressCountry": "AE"
+        }
       }
+    }
     ]
   }
 ];
