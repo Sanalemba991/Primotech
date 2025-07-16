@@ -62,7 +62,7 @@ const Whatsapp = () => {
   };
 
   const handleEmail = () => {
-    const email = 'sales@primotech.com';
+    const email = 'info@primotech-llc.com';
     const subject = 'Inquiry from Website';
     const body = 'Hello PrimoTech Team,\n\nI would like to get in touch regarding...';
     const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
