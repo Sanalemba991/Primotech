@@ -14,9 +14,9 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://primotechllc.com/#organization",
+      "@id": "https://primotech-llc.com/#organization",
       "name": "PrimoTech LLC - Uniarch Authorized Distributor Dubai",
-      "url": "https://primotechllc.com",
+      "url": "https://primotech-llc.com",
       "logo": {
         "@type": "ImageObject",
         "@id": `${Astro.url.origin}/log.png`,
@@ -33,11 +33,11 @@ const structuredData = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://primotechllc.com/#website",
-      "url": "https://primotechllc.com",
+      "@id": "https://primotech-llc.com/#website",
+      "url": "https://primotech-llc.com",
       "name": "PrimoTech Security - Uniarch Authorized Distributor Dubai",
       "publisher": {
-        "@id": "https://primotechllc.com/#organization"
+        "@id": "https://primotech-llc.com/#organization"
       },
       "inLanguage": "en-US"
     },
@@ -48,10 +48,10 @@ const structuredData = {
       "name": title,
       "description": description,
       "isPartOf": {
-        "@id": "https://primotechllc.com/#website"
+        "@id": "https://primotech-llc.com/#website"
       },
       "about": {
-        "@id": "https://primotechllc.com/#organization"
+        "@id": "https://primotech-llc.com/#organization"
       },
       "inLanguage": "en-US",
       "breadcrumb": {
@@ -66,13 +66,13 @@ const structuredData = {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://primotechllc.com/"
+          "item": "https://primotech-llc.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Products",
-          "item": "https://primotechllc.com/products"
+          "item": "https://primotech-llc.com/products"
         },
         {
           "@type": "ListItem",
@@ -101,7 +101,7 @@ const structuredData = {
             "@type": "Product",
             "name": item.data.title ?? item.slug,
             "description": item.data.description ?? "",
-            "url": `https://primotechllc.com/products/pandas/${item.slug}`,
+            "url": `https://primotech-llc.com/products/pandas/${item.slug}`,
             "image": item.data.image
               ? (item.data.image.startsWith('http')
                 ? item.data.image
@@ -148,7 +148,7 @@ const structuredData = {
     },
      {
       "@type": "LocalBusiness",
-      "@id": "https://primotechllc.com/#localbusiness",
+      "@id": "https://primotech-llc.com/#localbusiness",
       "name": "PrimoTech LLC - Uniarch Authorized Distributor Dubai",
       "image": `${Astro.url.origin}/log.png`,
       "address": {

@@ -72,7 +72,7 @@ const description =
   tip.data.subTitle ||
   tip.data.description ||
   "PrimoTech security tips and guides";
-const canonicalUrl = `https://primotechllc.com/tips/${tip.slug}`;
+const canonicalUrl = `https://primotech-llc.com/tips/${tip.slug}`;
 
 // Structured Data
 const structuredData = {
@@ -80,9 +80,9 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://primotechllc.com/#organization",
+      "@id": "https://primotech-llc.com/#organization",
       "name": "PrimoTech LLC - Uniarch Authorized Distributor Dubai",
-      "url": "https://primotechllc.com",
+      "url": "https://primotech-llc.com",
       "logo": {
         "@type": "ImageObject",
         "@id": `${Astro.url.origin}/log.png`,
@@ -99,11 +99,11 @@ const structuredData = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://primotechllc.com/#website",
-      "url": "https://primotechllc.com",
+      "@id": "https://primotech-llc.com/#website",
+      "url": "https://primotech-llc.com",
       "name": "PrimoTech Security - Uniarch Authorized Distributor Dubai",
       "publisher": {
-        "@id": "https://primotechllc.com/#organization"
+        "@id": "https://primotech-llc.com/#organization"
       },
       "inLanguage": "en-US"
     },
@@ -114,7 +114,7 @@ const structuredData = {
       "name": title,
       "description": description,
       "isPartOf": {
-        "@id": "https://primotechllc.com/#website"
+        "@id": "https://primotech-llc.com/#website"
       },
       "inLanguage": "en-US",
       "breadcrumb": {
@@ -129,13 +129,13 @@ const structuredData = {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://primotechllc.com/"
+          "item": "https://primotech-llc.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Tips & Guides",
-          "item": "https://primotechllc.com/tips/"
+          "item": "https://primotech-llc.com/tips/"
         },
         {
           "@type": "ListItem",
@@ -158,7 +158,7 @@ const structuredData = {
         "name": tip.data.name || "PrimoTech Security Expert"
       },
       "publisher": {
-        "@id": "https://primotechllc.com/#organization"
+        "@id": "https://primotech-llc.com/#organization"
       },
       "image": {
         "@type": "ImageObject",
@@ -177,7 +177,7 @@ const structuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://primotechllc.com/#localbusiness",
+      "@id": "https://primotech-llc.com/#localbusiness",
       "name": "PrimoTech LLC - Uniarch Authorized Distributor Dubai",
       "image": `${Astro.url.origin}/log.png`,
       "address": {
