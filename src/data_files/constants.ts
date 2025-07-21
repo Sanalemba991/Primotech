@@ -1,13 +1,13 @@
 
 export const SITE = {
 	Title: "Top Wholesale Deals on Uniarch Security Products",
-	baseURL:"https://primotechllc.com" ,
-	canonical: "https://primotechllc.com", 
+	baseURL:"https://primotech-llc.com" ,
+	canonical: "https://primotech-llc.com", 
 	description:
 		"Looking for wholesale prices on Uniarch products? We offer top-rated surveillance equipment for businesses and resellers",
 	type: "website",
 	image: {
-		url: "https://primotechllc.com/social.png",
+		url: "https://primotech-llc.com/images/log.png",
     		alt: "PrimoTech LLC", 
 		width: 1200,
 		height: 630,
@@ -18,7 +18,7 @@ export const SITE = {
 			title: "Top Wholesale Deals on Uniarch Security Products",
 			type: "Website",
 			image: {
-				url: "https://primotechllc.com/social.png", 
+				url: "https://primotech-llc.com/images/log.png", 
 				alt: "PrimoTech LLC", 
 				width: 1200,
 				height: 630,
@@ -43,7 +43,7 @@ export const SITE = {
 
 	twitter: {
 		card: "summary_large_image",
-		site: "primotechllc.com",
+		site: "primotech-llc.com",
 		creator: "Digiimpact",
 		title: "Top Wholesale Deals on Uniarch Security Products",
 		description:
